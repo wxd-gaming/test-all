@@ -1,0 +1,20 @@
+server:
+  port: 18081
+
+spring:
+  web:
+    resources:
+      chain:
+        cache: false
+      static-locations: classpath:/public/
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+      enabled: true
+task:
+  pool:
+    corePoolSize: 3
+    maxPoolSize: 6
+    keepAliveSeconds: 300
+    queueCapacity: 50
