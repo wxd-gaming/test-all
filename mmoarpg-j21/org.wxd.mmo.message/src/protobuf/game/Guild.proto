@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package Proto.Login;
+//把文件拆分
+option java_multiple_files = true;
+//导出包名
+option java_package = "org.wxd.mmo.script.gamesr.guild.message";
+
+//公会列表
+message ReqGuildList {
+}
+
+//公会列表
+message ResGuildList {
+  string user                     = 1;//账号
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package Proto.Tips;
+//把文件拆分
+option java_multiple_files = true;
+//导出包名
+option java_package = "org.wxd.mmo.script.gamesr.tips.message";
+
+message ResTips {
+  sint32 type                     = 1;//0正常提示，1跑马灯，2错误提示
+  string lanCode                  = 2;//如果是纯数字表示是语言包，否者就直接显示
+  repeated string params          = 3;//需要的参数
+}

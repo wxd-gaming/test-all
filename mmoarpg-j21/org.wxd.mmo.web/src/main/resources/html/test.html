@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script charset="utf-8" type="text/javascript"
+            src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/js/com.wxd.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/style/com.wxd.css"/>
+    <script type="application/javascript">
+
+        var wsClient = new wxd.netty.WSClient();
+
+        var msgControllers = [];
+
+        function registerController(callBak) {
+            msgControllers.push(callBak);
+        }
+
+        $(() => {
+
+            wsClient.onRead = (msg) => {
+                wxd.message.console_append("recv：" + msg + "\n");
+                for (const msgController of msgControllers) {
+                    msgController(msg);
+                }
+            };
+
+            wsClient.onSource = (data) => {
+                wxd.message.console("链接成功：" + data + "\n");
+                setInterval(() => {
+                    wsClient.sendMsg("你好服务器");
+                }, 3000);
+            };
+            wsClient.connect("ws://192.168.50.80:17900");
+
+        });
+
+    </script>
+
+</head>
+<body>
+<object data="blog.html"></object>
+</body>
+</html>

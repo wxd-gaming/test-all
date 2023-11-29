@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package Proto.Login;
+//把文件拆分
+option java_multiple_files = true;
+//导出包名
+option java_package = "org.wxd.mmo.script.gamesr.login.message";
+
+//登录消息
+message ReqLogin {
+  string user                     = 1;//账号
+  string token                    = 2;//秘钥
+  string sdkType                  = 3;//平台
+  map<string, string> params      = 4;//参数
+}
+
+message UserBean {}
+
+//回复登录消息
+message ResLogin {
+  string user                     = 1;//账号
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @author: Troy.Chen(無心道, 15388152619) -->
+<wsFactoryConfig>
+
+    <webConfig>
+        <name>default</name>
+        <bindIp>*</bindIp>
+        <port>17900</port>
+        <sslProtocolType>TLSv1.2</sslProtocolType>
+        <jks>xiaw-jks/xiaw.net-2023-07-15.jks</jks>
+        <jksPwd>hwgyuvod</jksPwd>
+    </webConfig>
+
+</wsFactoryConfig>

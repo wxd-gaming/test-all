@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日志记录</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script charset="utf-8" type="text/javascript"
+            src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/js/com.wxd.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/style/com.wxd.css"/>
+    <script type="application/javascript">
+        $(() => {
+            window.top.registerController((msg) => {
+                console.log("战斗日志：" + msg);
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

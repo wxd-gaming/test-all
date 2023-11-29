@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @author: Troy.Chen(無心道, 15388152619) -->
+<post_Run_Config>
+   <urls serverId="1" name="本机" url="http://127.0.0.1:18800" pwd=""/>
+   <urls serverId="2" name="本机" url="https://127.0.0.1:18800" pwd=""/>
+   <urls serverId="3" name="神界中心服" url="http://center.xiaw.net:18800" pwd=""/>
+   <urls serverId="4" name="神界测试中心服" url="http://47.108.81.97:18800" pwd=""/>
+</post_Run_Config>

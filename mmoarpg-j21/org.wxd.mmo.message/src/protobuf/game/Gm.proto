@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package Proto.Gm;
+//把文件拆分
+option java_multiple_files = true;
+//导出包名
+option java_package = "org.wxd.mmo.script.gamesr.gm.message";
+
+//gm消息结构
+message ResGmList {
+  repeated GmGroup groups         = 1;//所有分组
+}
+
+message GmGroup {
+  string group                    = 1;//分组
+  repeated GmBean gms             = 2;//分组下所以命令
+}
+
+//gm命令详情
+message GmBean {
+  string name                     = 1;//gm名称
+  string comment                  = 2;//备注说明
+  string defaultValue             = 3;//默认参数
+}
+
+//请求执行gm命令--没有回复
+message ReqGm {
+  string name                     = 1;//gm名称
+  string params                   = 2;//参数
+}
