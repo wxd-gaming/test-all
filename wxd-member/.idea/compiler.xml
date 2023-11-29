@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="org.wxd.convert" />
+        <module name="org.wxd.actor" />
+        <module name="org.wxd.jscript" />
+        <module name="org.wxd.agent" />
+        <module name="wxd.member.server" />
+        <module name="org.wxd.ds" />
+        <module name="wxd.member.server-logic" />
+        <module name="org.wxd.jshell" />
+        <module name="org.wxd.boot" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="member-server" target="11" />
+      <module name="org.wxd.data-server" target="1.5" />
+      <module name="org.wxd.data-server (1) (org.wxd)" target="11" />
+      <module name="org.wxd.data-server (2) (wxd-member)" target="1.5" />
+      <module name="org.wxd.httpservice" target="11" />
+      <module name="wxd-member" target="11" />
+      <module name="wxd.member-server" target="1.5" />
+      <module name="wxd.member.logic" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="org.wxd" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.actor" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.agent" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.boot" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.convert" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.data-server" options="" />
+      <module name="org.wxd.data-server (1) (org.wxd)" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.ds" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.httpservice" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.jscript" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+      <module name="org.wxd.jshell" options="--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED" />
+    </option>
+  </component>
+</project>

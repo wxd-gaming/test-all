@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>会员管理</title>
+
+    <link rel="stylesheet" type="text/css" href="/style/com.wxd.css"/>
+    <link rel="stylesheet" type="text/css" href="/style/nav.css"/>
+
+    <script charset="utf-8" type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/js/com.wxd.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/style/nav.js"></script>
+
+</head>
+<body>
+<table class="nav">
+    <tr>
+        <td id="left" style="width: 220px;background-color: #3a4651;color: #9ca2a8;">
+            <div style="overflow-y: auto;vertical-align: top;text-align:left;width: 100%;height: 100%;">
+                <ul style="padding-top: 20px;padding-bottom: 30px;">
+                    <li><h1 style="width: 100%;text-align: center;">無心道会员</h1></li>
+                </ul>
+                <ul>
+                    <li class="lh">
+                        <label>会员</label>
+                        <a class="ra" href="#" onclick="show_nav(this, 'lc_2');return false;">▽</a>
+                    </li>
+                    <li id="lc_2" class="lc">
+                        <dt>
+                            <dl onclick="changeMenu(this, '/member.html');">会员管理</dl>
+                            <dl onclick="changeMenu(this, '/count/show?platforms=${row.url}')">消费查询</dl>
+                        </dt>
+                    </li>
+                </ul>
+            </div>
+        </td>
+        <td style="overflow: hidden;vertical-align: top;text-align:left;position: relative;">
+            <div style="position: absolute;background: #ffffff;left: 0;top: 0;right:0; bottom: 0;">
+                <div class="div_panel">
+                    <label style="" title="关闭或者打开导航栏" onclick="$('#left').slideToggle();">三</label>
+                </div>
+                <div id="top_td_menu" style="display: block;z-index: 9998;position: absolute;left: 0;top: 50px;right: 0;bottom: 0;border: 0;">
+                </div>
+                <div id="div_loading" style="display: none;position: absolute;left: 0;top: 0;right: 0;bottom: 0;z-index: 9999;background: rgba(69,68,68,0.2);">
+                    <img style="position: absolute;width: 60px;height: 24px;left: 50%;top: 50%;transform: translate(-50%,-50%)" src="/loading-0.gif">
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

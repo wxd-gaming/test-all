@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>上传</title>
+
+    <script charset="utf-8" type="text/javascript" src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/js/com.wxd.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/style/com.wxd.css"/>
+
+    <script type="application/javascript">
+        function uploadFile() {
+            let formData = new FormData();
+            let files = $('#upfile').prop('files');
+            wxd.netty.upload("/upload", formData, files, "#progressBar", (uploadRet) => {
+                if (!wxd.isNull(uploadRet)) {
+                    $("#pre_data").text("\n上传结果\n\n" + uploadRet);
+                    $("#div_data").show();
+                }
+            });
+        }
+    </script>
+    <style>
+        ul, li {border: 0px;list-style: none;box-sizing: border-box;}
+
+        ul {display: block;}
+
+        li {display: block;}
+    </style>
+</head>
+<body>
+<div class="upload_file_bg">
+    <div class="upload_file_box">
+        <strong>文件上传</strong>
+        <div class="upload_file_c">
+            <div class="upload_file_c_1">
+                <br>
+                <input id="wxd_upload_file" type="file" style="width: 400px;" value="上传配置" multiple/>
+                <br>
+                <br>
+                <div id="wxd_upload_progress_box">
+                    <span id="wxd_upload_progress_name"></span>
+                    <br>
+                    <progress id="wxd_upload_progress_bar" value="0" max="100" style="width: 450px;"></progress>&nbsp;&nbsp;<span id="wxd_p_b_v">0</span>%
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;大小：<span id="wxd_p_b_cur"></span> / <span id="wxd_p_b_max"></span>,&nbsp;&nbsp;&nbsp;&nbsp;速度：<span id="wxd_p_b_s"></span>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="upload_file_c_b">
+                <button onclick="wxd.netty.upFile()">上传</button>
+                <button onclick="$('.upload_file_bg').remove()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @author: Troy.Chen(無心道, 15388152619) -->
+<dbFacrtoyConfig>
+    <dbConfig>
+        <name>default</name>
+        <show_sql>false</show_sql>
+        <connectionPool>true</connectionPool>
+        <batchSizeThread>2</batchSizeThread>
+        <dbHost>192.168.50.73</dbHost>
+        <dbPort>27017</dbPort>
+        <dbBase>data_server</dbBase>
+        <dbUser>test</dbUser>
+        <dbPwd>test</dbPwd>
+    </dbConfig>
+</dbFacrtoyConfig>
