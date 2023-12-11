@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wxd.agent.loader.ClassDirLoader;
 import org.wxd.agent.loader.JavaCoderCompile;
-import org.wxd.agent.system.ReflectBuilder;
+import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.ioc.Ioc;
 import org.wxd.boot.system.JvmUtil;
 
@@ -47,7 +47,7 @@ public class WebAppMain {
     }
 
     public static void initScript(ClassLoader classLoader) {
-        ReflectBuilder reflectBuilder = ReflectBuilder.of(classLoader, "org.wxd.mmo.web.script");
+        ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(classLoader, "org.wxd.mmo.web.script");
         Ioc.createChildInjector(reflectBuilder.build());
     }
 

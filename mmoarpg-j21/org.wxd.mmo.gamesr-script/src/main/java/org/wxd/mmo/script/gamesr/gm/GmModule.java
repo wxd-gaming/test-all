@@ -2,10 +2,10 @@ package org.wxd.mmo.script.gamesr.gm;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.agent.system.AnnUtil;
 import org.wxd.boot.ioc.IocInjector;
 import org.wxd.boot.ioc.ann.Resource;
 import org.wxd.boot.ioc.i.IStart;
-import org.wxd.boot.system.AnnUtil;
 import org.wxd.mmo.script.gamesr.gm.message.GmBean;
 import org.wxd.mmo.script.gamesr.gm.message.GmGroup;
 import org.wxd.mmo.script.gamesr.gm.message.ResGmList;
@@ -36,7 +36,7 @@ public class GmModule implements IStart {
         for (IGm iGm : iGms) {
             Method[] methods = iGm.getClass().getMethods();
             for (Method method : methods) {
-                Gm gm = AnnUtil.annotation(method, Gm.class);
+                Gm gm = AnnUtil.ann(method, Gm.class);
                 if (gm == null) {
                     /*忽律字段*/
                     continue;

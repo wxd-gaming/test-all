@@ -4,13 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wxd.agent.loader.ClassDirLoader;
 import org.wxd.agent.loader.JavaCoderCompile;
-import org.wxd.agent.system.ReflectBuilder;
+import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.batis.mongodb.MongoDataHelper;
 import org.wxd.boot.ioc.Ioc;
-import org.wxd.boot.ioc.IocConfig;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.system.JvmUtil;
-import org.wxd.mmo.bean.config.ServerConfig;
 import org.wxd.mmo.game.BeanBase;
 
 import java.io.File;
@@ -62,8 +60,8 @@ public class GameSrAppMain {
 
     public static void initScript(ClassLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "org.wxd.mmo");
-        ReflectBuilder.ReflectContext scripts = ReflectBuilder.of(classLoader, "org.wxd.mmo.script.gamesr").build();
-        Ioc.createChildInjector(scripts);
+        ReflectContext.Builder scripts = ReflectContext.Builder.of(classLoader, "org.wxd.mmo.script.gamesr");
+        Ioc.createChildInjector(scripts.build());
     }
 
 }

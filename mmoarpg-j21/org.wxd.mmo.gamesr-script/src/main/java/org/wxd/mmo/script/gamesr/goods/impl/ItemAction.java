@@ -1,6 +1,6 @@
 package org.wxd.mmo.script.gamesr.goods.impl;
 
-import org.wxd.agent.system.ReflectBuilder;
+import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.collection.Table;
 import org.wxd.boot.ioc.IocInjector;
 import org.wxd.boot.ioc.ann.Resource;
@@ -29,8 +29,8 @@ public class ItemAction implements IBeanInit {
     private final Table<ItemGroup, ItemType, ItemChangeAction> addActionTable = new Table<>();
 
     @Override public void beanInit(IocInjector iocInjector) throws Exception {
-        ReflectBuilder reflectBuilder = ReflectBuilder.of(ItemModule.class.getClassLoader(), ItemModule.class.getPackageName());
-        ReflectBuilder.ReflectContext build = reflectBuilder.build();
+        ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(ItemModule.class.getClassLoader(), ItemModule.class.getPackageName());
+        ReflectContext build = reflectBuilder.build();
         build.classWithSuper(ItemCreateAction.class)
                 .forEach(c -> {
                     ItemCreateAction<? super Item> bean = (ItemCreateAction) iocInjector.getInstance(c);

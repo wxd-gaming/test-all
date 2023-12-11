@@ -1,7 +1,7 @@
 package test;
 
 import org.junit.Test;
-import org.wxd.agent.system.ReflectBuilder;
+import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.timer.ann.Scheduled;
 
 /**
@@ -12,7 +12,7 @@ public class Code {
 
     @Test
     public void c1() {
-        ReflectBuilder.ReflectContext context = ReflectBuilder.of("test").build();
+        ReflectContext context = ReflectContext.Builder.of("test").build();
         context.methodStream().forEach(System.out::println);
         System.out.println("====================================================================");
         context.methodsWithAnnotated(Test.class).forEach(System.out::println);

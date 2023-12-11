@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wxd.agent.loader.ClassDirLoader;
 import org.wxd.agent.loader.JavaCoderCompile;
-import org.wxd.agent.system.ReflectBuilder;
+import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.ioc.Ioc;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.system.JvmUtil;
@@ -62,8 +62,8 @@ public class RobotAppMain {
 
     public static void initScript(ClassLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "org.wxd.mmo");
-        ReflectBuilder.ReflectContext build = ReflectBuilder.of(classLoader, "org.wxd.mmo.robot.script").build();
-        Ioc.createChildInjector(build);
+        ReflectContext.Builder builder = ReflectContext.Builder.of(classLoader, "org.wxd.mmo.robot.script");
+        Ioc.createChildInjector(builder.build());
     }
 
 }
