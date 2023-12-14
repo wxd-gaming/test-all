@@ -3,7 +3,7 @@ package org.wxd.mmo.gamesr.cache.mail;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.agent.function.ConsumerE2;
+import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MongoService;

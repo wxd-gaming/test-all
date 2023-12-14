@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.agent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.agent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.mongodb/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.mongodb/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql.mysql/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql.mysql/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql.sqlite/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql.sqlite/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis.sql/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.batis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.httpclient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.httpclient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.jscript/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.jscript/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.net/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.net/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.starter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.starter/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../org.wxd.boot-j21/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.gamesr-script/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.gamesr-script/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.gamesr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.gamesr/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.loginsr-script/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.loginsr-script/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.loginsr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.loginsr/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.message/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.robotsr-script/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.robotsr-script/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.robotsr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.robotsr/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.web-script/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.web-script/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/org.wxd.mmo.web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

@@ -3,7 +3,7 @@ package org.wxd.mmo.script.gamesr.gm;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.agent.system.AnnUtil;
+import org.wxd.boot.agent.system.AnnUtil;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.i.IStart;
 import org.wxd.mmo.script.gamesr.gm.message.GmBean;

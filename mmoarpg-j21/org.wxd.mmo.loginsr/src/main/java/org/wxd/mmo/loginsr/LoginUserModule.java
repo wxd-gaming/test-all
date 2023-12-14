@@ -1,6 +1,6 @@
 package org.wxd.mmo.loginsr;
 
-import org.wxd.agent.system.ReflectContext;
+import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.starter.UserModule;
 import org.wxd.mmo.bean.config.ServerConfig;
 

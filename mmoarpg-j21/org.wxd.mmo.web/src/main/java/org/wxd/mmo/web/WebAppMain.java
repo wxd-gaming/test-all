@@ -2,9 +2,9 @@ package org.wxd.mmo.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wxd.agent.loader.ClassDirLoader;
-import org.wxd.agent.loader.JavaCoderCompile;
-import org.wxd.agent.system.ReflectContext;
+import org.wxd.boot.agent.loader.ClassDirLoader;
+import org.wxd.boot.agent.loader.JavaCoderCompile;
+import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.starter.Starter;
 import org.wxd.boot.system.JvmUtil;
 

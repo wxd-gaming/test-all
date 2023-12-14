@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.goods.impl;
 
 import com.google.inject.Singleton;
-import org.wxd.agent.system.ReflectContext;
+import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.collection.Table;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.i.IBeanInit;
