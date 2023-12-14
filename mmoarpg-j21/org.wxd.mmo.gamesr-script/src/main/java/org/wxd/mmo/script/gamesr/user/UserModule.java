@@ -1,7 +1,8 @@
 package org.wxd.mmo.script.gamesr.user;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.ioc.ann.Resource;
 import org.wxd.boot.system.MarkTimer;
 import org.wxd.boot.timer.ann.Scheduled;
 import org.wxd.mmo.bean.config.ServerConfig;
@@ -23,14 +24,14 @@ import org.wxd.mmo.gamesr.data.DataCenter;
  * @version: 2023-02-10 15:41
  **/
 @Slf4j
-@Resource
+@Singleton
 public class UserModule {
 
-    @Resource ServerConfig serverConfig;
-    @Resource AccountCache accountCache;
-    @Resource PlayerCache playerCache;
-    @Resource PlayerSnapCache playerSnapCache;
-    @Resource DataCenter dataCenter;
+    @Inject ServerConfig serverConfig;
+    @Inject AccountCache accountCache;
+    @Inject PlayerCache playerCache;
+    @Inject PlayerSnapCache playerSnapCache;
+    @Inject DataCenter dataCenter;
 
     Player userFirst = null;
 

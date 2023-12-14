@@ -3,8 +3,8 @@ package org.wxd.mmo.bean.data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.lang.bit.BitUtil;
-import org.wxd.boot.lang.save.ObjectSave;
 
 import java.util.concurrent.ConcurrentHashMap;
 

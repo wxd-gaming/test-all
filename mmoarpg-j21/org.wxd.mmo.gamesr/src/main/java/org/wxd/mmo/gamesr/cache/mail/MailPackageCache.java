@@ -1,13 +1,14 @@
 package org.wxd.mmo.gamesr.cache.mail;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.agent.function.ConsumerE2;
-import org.wxd.boot.batis.mongodb.MongoDataHelper;
-import org.wxd.boot.batis.redis.RedisDataHelper;
 import org.wxd.boot.cache.CachePack;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.RedisService;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
 import org.wxd.mmo.gamesr.bean.user.Player;
 
@@ -21,7 +22,7 @@ import java.util.function.Function;
  * @version: 2023-08-03 15:12
  **/
 @Slf4j
-@Resource
+@Singleton
 public class MailPackageCache extends CachePack<Long, MailPackage> implements IBeanInit {
 
     private static MailPackageCache instance = null;
@@ -30,8 +31,8 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
         return instance;
     }
 
-    @Resource MongoDataHelper mongoDataHelper;
-    @Resource RedisDataHelper redisDataHelper;
+    @Inject MongoService mongoService;
+    @Inject RedisService redisService;
 
     public MailPackageCache() {
 
@@ -41,7 +42,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
         this.loading = new Function<>() {
             @Override public MailPackage apply(Long aLong) {
-                MailPackage mailPackage = mongoDataHelper.queryEntity(MailPackage.class, aLong);
+                MailPackage mailPackage = mongoService.queryEntity(MailPackage.class, aLong);
                 if (mailPackage == null) {
                     log.info("数据库查询失败：{}", aLong);
                 } else {
@@ -58,7 +59,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
         this.heart = new Function<>() {
             @Override public Boolean apply(MailPackage mailPackage) {
                 if (mailPackage.checkSaveCode()) {
-                    mongoDataHelper.getBatchPool().replace(mailPackage);
+                    mongoService.getBatchPool().replace(mailPackage);
                 }
                 return null;
             }
@@ -66,24 +67,24 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
         this.unload = new ConsumerE2<>() {
             @Override public void accept(MailPackage mailPackage, String s) throws Exception {
-                mongoDataHelper.getBatchPool().replace(mailPackage);
+                mongoService.getBatchPool().replace(mailPackage);
                 log.info("缓存过期移除：{}, {}", mailPackage, s);
             }
         };
 
     }
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
     }
 
     public long accountDbSize() {
-        return mongoDataHelper.estimatedDocumentCount(Player.class);
+        return mongoService.estimatedDocumentCount(Player.class);
     }
 
     @Override public void addCache(Long aLong, MailPackage mailPackage) {
         super.addCache(aLong, mailPackage);
-        mongoDataHelper.getBatchPool().replace(mailPackage);
+        mongoService.getBatchPool().replace(mailPackage);
     }
 
 }

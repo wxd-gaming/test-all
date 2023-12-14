@@ -1,6 +1,6 @@
 package org.wxd.mmo.script.gamesr.goods.impl.create;
 
-import org.wxd.boot.ioc.ann.Resource;
+import com.google.inject.Singleton;
 import org.wxd.boot.lang.RandomUtils;
 import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
 import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
@@ -14,7 +14,7 @@ import org.wxd.mmo.script.gamesr.goods.impl.IAction;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-11-07 20:24
  **/
-@Resource
+@Singleton
 public class EquipCreateAction extends ItemCreateAction<Equip> implements IAction {
 
     @Override public ItemGroup itemGroup() {

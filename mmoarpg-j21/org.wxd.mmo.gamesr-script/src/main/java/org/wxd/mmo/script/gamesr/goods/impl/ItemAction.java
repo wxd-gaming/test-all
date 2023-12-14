@@ -1,10 +1,10 @@
 package org.wxd.mmo.script.gamesr.goods.impl;
 
+import com.google.inject.Singleton;
 import org.wxd.agent.system.ReflectContext;
 import org.wxd.boot.collection.Table;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
 import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
 import org.wxd.mmo.gamesr.bean.bag.ItemType;
@@ -22,18 +22,18 @@ import java.util.Optional;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-11-07 20:24
  **/
-@Resource
+@Singleton
 public class ItemAction implements IBeanInit {
 
     private final Table<ItemGroup, ItemType, ItemCreateAction<? super Item>> createActionTable = new Table<>();
-    private final Table<ItemGroup, ItemType, ItemChangeAction> addActionTable = new Table<>();
+    private final Table<ItemGroup, ItemType, ItemChangeAction<? super Item>> addActionTable = new Table<>();
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext context) throws Exception {
         ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(ItemModule.class.getClassLoader(), ItemModule.class.getPackageName());
         ReflectContext build = reflectBuilder.build();
         build.classWithSuper(ItemCreateAction.class)
                 .forEach(c -> {
-                    ItemCreateAction<? super Item> bean = (ItemCreateAction) iocInjector.getInstance(c);
+                    ItemCreateAction<? super Item> bean = (ItemCreateAction) context.getInstance(c);
                     ItemGroup itemGroup = bean.itemGroup();
                     ItemType itemType = bean.itemType();
                     createActionTable.put(itemGroup, itemType, bean);
@@ -41,7 +41,7 @@ public class ItemAction implements IBeanInit {
 
         build.classWithSuper(ItemCreateAction.class)
                 .forEach(c -> {
-                    ItemCreateAction<? super Item> bean = (ItemCreateAction) iocInjector.getInstance(c);
+                    ItemCreateAction<? super Item> bean = (ItemCreateAction) context.getInstance(c);
                     ItemGroup itemGroup = bean.itemGroup();
                     ItemType itemType = bean.itemType();
                     createActionTable.put(itemGroup, itemType, bean);
@@ -51,7 +51,7 @@ public class ItemAction implements IBeanInit {
     public final <R extends Item> R createItem(Player player, ItemCfg itemCfg) {
         int cfgId = itemCfg.getCfgId();
         ItemType itemType = ItemType.as(cfgId);
-        return createActionTable.optional(itemType.getItemGroup(), itemType)
+        return createActionTable.opt(itemType.getItemGroup(), itemType)
                 .or(() -> Optional.ofNullable(createActionTable.get(itemType.getItemGroup(), ItemType.None)))
                 .or(() -> Optional.ofNullable(createActionTable.get(ItemGroup.None, ItemType.None)))
                 .map(c -> (R) c.createItem(player, itemCfg))

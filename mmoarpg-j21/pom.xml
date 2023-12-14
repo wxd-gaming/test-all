@@ -25,7 +25,7 @@
     <properties>
         <encoding>UTF-8</encoding>
         <java.version>21</java.version>
-        <wxd.version>j21.0.01</wxd.version>
+        <wxd.version>wxd-j21-01</wxd.version>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <maven.compiler.encoding>${encoding}</maven.compiler.encoding>
@@ -60,17 +60,32 @@
     <dependencies>
         <dependency>
             <groupId>org.wxd</groupId>
-            <artifactId>org.wxd.jshell</artifactId>
-            <version>${wxd.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wxd</groupId>
-            <artifactId>org.wxd.agent</artifactId>
-            <version>${wxd.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.wxd</groupId>
             <artifactId>org.wxd.boot</artifactId>
+            <version>${wxd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wxd</groupId>
+            <artifactId>org.wxd.boot.agent</artifactId>
+            <version>${wxd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wxd</groupId>
+            <artifactId>org.wxd.boot.batis.sql.mysql</artifactId>
+            <version>${wxd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wxd</groupId>
+            <artifactId>org.wxd.boot.httpclient</artifactId>
+            <version>${wxd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wxd</groupId>
+            <artifactId>org.wxd.boot.net</artifactId>
+            <version>${wxd.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wxd</groupId>
+            <artifactId>org.wxd.boot.starter</artifactId>
             <version>${wxd.version}</version>
         </dependency>
         <dependency>

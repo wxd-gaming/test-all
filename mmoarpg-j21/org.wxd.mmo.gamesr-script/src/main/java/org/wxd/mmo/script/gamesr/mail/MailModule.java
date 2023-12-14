@@ -1,6 +1,6 @@
 package org.wxd.mmo.script.gamesr.mail;
 
-import org.wxd.boot.ioc.ann.Resource;
+import com.google.inject.Singleton;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
 import org.wxd.mmo.gamesr.bean.mail.impl.Mail;
 
@@ -11,7 +11,7 @@ import org.wxd.mmo.gamesr.bean.mail.impl.Mail;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-08-03 20:20
  **/
-@Resource
+@Singleton
 public class MailModule {
 
     public void addMail(MailPackage mailPackage, Mail mail) {

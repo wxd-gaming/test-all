@@ -1,13 +1,14 @@
 package org.wxd.mmo.gamesr.data;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.Setter;
-import org.wxd.boot.batis.mongodb.MongoDataHelper;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
 import org.wxd.boot.net.web.ws.WebSession;
 import org.wxd.boot.net.web.ws.WebSocketClient;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.bean.config.ServerConfig;
 import org.wxd.mmo.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.data.ServerData;
@@ -23,7 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
  **/
 @Getter
 @Setter
-@Resource
+@Singleton
 public class DataCenter implements IBeanInit {
 
     private static DataCenter instance = null;
@@ -32,7 +33,7 @@ public class DataCenter implements IBeanInit {
         return instance;
     }
 
-    @Resource MongoDataHelper mongoDataHelper;
+    @Inject MongoService mongoService;
 
     /** 全局的临时id，比如掉落物，怪物的唯一id */
     private final AtomicLong uidSeed = new AtomicLong();
@@ -46,7 +47,7 @@ public class DataCenter implements IBeanInit {
 
     }
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         DataCenter.instance = this;
     }
 

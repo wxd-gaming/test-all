@@ -1,7 +1,7 @@
 package org.wxd.mmo.gamesr.bean.task.impl;
 
 
-import org.wxd.boot.lang.save.ObjectSave;
+import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.lang.task.Condition;
 
 import java.util.ArrayList;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.lang.ObjectBase;
-import org.wxd.boot.timer.GameClock;
+import org.wxd.boot.timer.MyClock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ServerConfig extends ObjectBase {
     static {
         instance = new ServerConfig();
         instance.sid = (6001);
-        instance.openTime = GameClock.millis();
+        instance.openTime = MyClock.millis();
     }
 
     private int sid;

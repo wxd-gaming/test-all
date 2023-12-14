@@ -1,9 +1,8 @@
 package org.wxd.mmo.script.loginsr.event;
 
 
-import org.wxd.boot.ioc.EventBusBase;
-import org.wxd.boot.ioc.ann.Resource;
-
+import com.google.inject.Singleton;
+import org.wxd.boot.starter.EventBusBase;
 
 /**
  * 时间触发器
@@ -11,9 +10,8 @@ import org.wxd.boot.ioc.ann.Resource;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-02-02 16:26
  **/
-@Resource
-public class EventBus extends EventBusBase {
-
+@Singleton
+public class ScriptEventBus extends EventBusBase {
 
     public interface RegisterScript {}
 

@@ -1,7 +1,7 @@
 package org.wxd.mmo.common.cache.config;
 
+import com.google.inject.Singleton;
 import org.wxd.boot.batis.store.JsonDataRepository;
-import org.wxd.boot.ioc.ann.Resource;
 
 
 /**
@@ -10,7 +10,7 @@ import org.wxd.boot.ioc.ann.Resource;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-08-03 14:50
  **/
-@Resource
+@Singleton
 public class JsonConfigCache extends JsonDataRepository {
 
 }

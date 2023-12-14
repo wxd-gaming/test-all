@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.wxd.agent.loader.ClassDirLoader;
 import org.wxd.agent.loader.JavaCoderCompile;
 import org.wxd.agent.system.ReflectContext;
-import org.wxd.boot.ioc.Ioc;
+import org.wxd.boot.starter.Starter;
 import org.wxd.boot.system.JvmUtil;
 
 import java.io.File;
@@ -16,7 +16,7 @@ public class WebAppMain {
         try {
             init();
             initScript();
-            Ioc.start(true, 1, "mmo-login", "测试版");
+            Starter.start(true, 1, "mmo-login", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
@@ -28,7 +28,7 @@ public class WebAppMain {
         JvmUtil.setLogbackConfig();
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
-        Ioc.startBoot(WebAppMain.class);
+        Starter.startBoot(WebAppMain.class);
 
     }
 
@@ -48,7 +48,7 @@ public class WebAppMain {
 
     public static void initScript(ClassLoader classLoader) {
         ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(classLoader, "org.wxd.mmo.web.script");
-        Ioc.createChildInjector(reflectBuilder.build());
+        Starter.createChildInjector(reflectBuilder.build());
     }
 
 }

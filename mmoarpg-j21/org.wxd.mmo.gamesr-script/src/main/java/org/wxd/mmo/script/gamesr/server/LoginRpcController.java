@@ -1,16 +1,15 @@
 package org.wxd.mmo.script.gamesr.server;
 
+import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.collection.ObjMap;
-import org.wxd.boot.ioc.ActionTextController;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
 import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;
 import org.wxd.boot.net.web.ws.WebSession;
 import org.wxd.boot.net.web.ws.WebSocketClient;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.boot.timer.ann.Scheduled;
 import org.wxd.mmo.gamesr.data.DataCenter;
 
@@ -22,18 +21,15 @@ import org.wxd.mmo.gamesr.data.DataCenter;
  * @version: 2023-07-28 19:07
  **/
 @Slf4j
-@Resource
 @TextController(alligatorAutoRegister = true)
 public class LoginRpcController implements IBeanInit {
 
-    @Resource DataCenter dataCenter;
+    @Inject DataCenter dataCenter;
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         if (dataCenter.getLoginSocket() == null) {
             dataCenter.setLoginSocket(new WebSocketClient<>().setName("login-client").setHost("127.0.0.1").setPort(17900));
         }
-        /*把自己和链接控制器绑定*/
-        ActionTextController.bindCmd(dataCenter.getLoginSocket(), this);
     }
 
     @Scheduled("*/5")

@@ -1,17 +1,18 @@
 package org.wxd.mmo.common.cache.user;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.BsonInt32;
 import org.bson.BsonString;
 import org.bson.Document;
 import org.wxd.agent.function.ConsumerE2;
-import org.wxd.boot.batis.mongodb.MongoDataHelper;
-import org.wxd.boot.batis.redis.RedisDataHelper;
-import org.wxd.boot.cache.CachePack;
 import org.wxd.agent.function.SLFunction1;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
+import org.wxd.boot.cache.CachePack;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.RedisService;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.login.bean.user.Account;
 
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,7 @@ import java.util.function.Function;
  * @version: 2023-08-03 14:38
  **/
 @Slf4j
-@Resource
+@Singleton
 public class AccountCache extends CachePack<Long, Account> implements IBeanInit {
 
     private static AccountCache instance = null;
@@ -33,9 +34,8 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         return instance;
     }
 
-    @Resource(name = "mongo-login")
-    MongoDataHelper loginDataHelper;
-    @Resource RedisDataHelper redisDataHelper;
+    @Inject MongoService1 mongoService1;
+    @Inject RedisService redisService;
 
     public AccountCache() {
 
@@ -46,7 +46,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         loading = new Function<Long, Account>() {
 
             @Override public Account apply(Long aLong) {
-                Account account = loginDataHelper.queryEntity(Account.class, aLong);
+                Account account = mongoService1.queryEntity(Account.class, aLong);
                 if (account == null) {
                     log.info("从数据库读取失败：{}", aLong);
                 }
@@ -72,17 +72,17 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
 
     }
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
     }
 
     public long accountDbSize() {
-        return loginDataHelper.estimatedDocumentCount(Account.class);
+        return mongoService1.estimatedDocumentCount(Account.class);
     }
 
     @Override public void addCache(Long aLong, Account account) {
         super.addCache(aLong, account);
-        loginDataHelper.getBatchPool().replace(account);
+        mongoService1.getBatchPool().replace(account);
     }
 
     /** 这里所有的都会加载 ，包括跨服的数据 */
@@ -93,7 +93,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
 
         SLFunction1<Account, String> getAccount = Account::getAccountName;
         whereDocument.append(getAccount.ofMethodName(), new BsonString(accountName));
-        Account account = loginDataHelper.queryEntity(Account.class, whereDocument);
+        Account account = mongoService1.queryEntity(Account.class, whereDocument);
         if (account == null) {
             log.info("从数据库读取失败：{}, {}", sid, accountName);
         }

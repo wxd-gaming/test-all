@@ -11,7 +11,7 @@ import org.wxd.boot.batis.query.QueryWhere;
 import org.wxd.boot.batis.query.WhereEnum;
 import org.wxd.boot.batis.sql.mysql.MysqlDataHelper;
 import org.wxd.boot.system.MarkTimer;
-import org.wxd.boot.timer.GameClock;
+import org.wxd.boot.timer.MyClock;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -103,7 +103,7 @@ public class CheckOrder {
 //        queryBuilder.select("rmb", QueryEnum.Sum);
         queryBuilder.from("order");
         QueryWhere queryWhere = queryBuilder.newQueryWhere();
-        queryWhere.append("time", WhereEnum.Gte, GameClock.addDayOfTime(-300));
+        queryWhere.append("time", WhereEnum.Gte, MyClock.addDayOfTime(-300));
         queryBuilder.where(queryWhere);
         queryBuilder.group("order");
         AtomicLong atomicLong = new AtomicLong();

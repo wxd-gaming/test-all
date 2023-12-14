@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.goods.impl.create;
 
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.timer.GameClock;
+import com.google.inject.Singleton;
+import org.wxd.boot.timer.MyClock;
 import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
 import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
 import org.wxd.mmo.gamesr.bean.bag.ItemType;
@@ -16,7 +16,7 @@ import org.wxd.mmo.script.gamesr.goods.impl.IAction;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-11-07 20:24
  **/
-@Resource
+@Singleton
 public class ItemCreateAction<T extends Item> implements IAction {
 
     @Override public ItemGroup itemGroup() {
@@ -43,7 +43,7 @@ public class ItemCreateAction<T extends Item> implements IAction {
                 .setNum(itemCfg.getNum())
                 .setBind(itemCfg.isBind());
         if (itemCfg.getExpire() > 0) {
-            t.setExpireTime(GameClock.millis() + itemCfg.getExpire());
+            t.setExpireTime(MyClock.millis() + itemCfg.getExpire());
         }
     }
 

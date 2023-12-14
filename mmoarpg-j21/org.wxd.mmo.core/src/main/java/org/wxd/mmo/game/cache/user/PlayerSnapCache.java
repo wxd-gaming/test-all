@@ -1,12 +1,13 @@
 package org.wxd.mmo.game.cache.user;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.wxd.agent.function.ConsumerE2;
-import org.wxd.boot.batis.mongodb.MongoDataHelper;
-import org.wxd.boot.batis.redis.RedisDataHelper;
 import org.wxd.boot.cache.CachePack;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.RedisService;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.game.bean.user.PlayerSnap;
 
 import java.util.concurrent.TimeUnit;
@@ -18,7 +19,7 @@ import java.util.function.Function;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-08-03 14:54
  **/
-@Resource
+@Singleton
 public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBeanInit {
 
     private static PlayerSnapCache instance = null;
@@ -27,8 +28,8 @@ public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBea
         return instance;
     }
 
-    @Resource MongoDataHelper mongoDataHelper;
-    @Resource RedisDataHelper redisDataHelper;
+    @Inject MongoService1 mongoService1;
+    @Inject RedisService redisService;
 
     public PlayerSnapCache() {
 
@@ -62,17 +63,17 @@ public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBea
 
     }
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
     }
 
     public long accountDbSize() {
-        return mongoDataHelper.estimatedDocumentCount(PlayerSnap.class);
+        return mongoService1.estimatedDocumentCount(PlayerSnap.class);
     }
 
     @Override public void addCache(Long aLong, PlayerSnap playerSnap) {
         super.addCache(aLong, playerSnap);
-        mongoDataHelper.getBatchPool().replace(playerSnap);
+        mongoService1.getBatchPool().replace(playerSnap);
     }
 
 }

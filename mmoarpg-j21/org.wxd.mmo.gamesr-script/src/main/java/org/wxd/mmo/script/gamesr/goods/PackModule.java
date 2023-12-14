@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.goods;
 
+import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.ioc.ann.Resource;
 import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
 import org.wxd.mmo.gamesr.bean.bag.ItemPack;
 import org.wxd.mmo.gamesr.bean.bag.OptReason;
@@ -17,7 +17,7 @@ import java.util.Collection;
  * @version: 2023-02-02 20:29
  **/
 @Slf4j
-@Resource
+@Singleton
 public class PackModule {
 
     public void add(Player player, Collection<ItemCfg> items, OptReason optReason, String... logs) {

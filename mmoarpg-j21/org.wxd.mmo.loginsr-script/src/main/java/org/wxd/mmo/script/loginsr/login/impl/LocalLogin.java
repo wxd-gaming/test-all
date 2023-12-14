@@ -1,6 +1,6 @@
 package org.wxd.mmo.script.loginsr.login.impl;
 
-import org.wxd.boot.ioc.ann.Resource;
+import com.google.inject.Singleton;
 import org.wxd.boot.net.web.hs.HttpSession;
 import org.wxd.mmo.script.loginsr.login.ILogin;
 import org.wxd.mmo.loginsr.bean.type.Platforms;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-07-31 15:29
  **/
-@Resource
+@Singleton
 public class LocalLogin implements ILogin<HttpSession> {
 
 

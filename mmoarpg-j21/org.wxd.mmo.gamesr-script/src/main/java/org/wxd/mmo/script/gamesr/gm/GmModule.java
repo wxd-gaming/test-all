@@ -1,18 +1,17 @@
 package org.wxd.mmo.script.gamesr.gm;
 
+import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.agent.system.AnnUtil;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IStart;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.i.IStart;
 import org.wxd.mmo.script.gamesr.gm.message.GmBean;
 import org.wxd.mmo.script.gamesr.gm.message.GmGroup;
 import org.wxd.mmo.script.gamesr.gm.message.ResGmList;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
@@ -23,17 +22,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
  **/
 @Slf4j
 @Getter
-@Resource
+@Singleton
 public class GmModule implements IStart {
 
     private ConcurrentSkipListMap<String, GmMappingInfo> gmMap = new ConcurrentSkipListMap<>();
     private ResGmList resGmList;
 
-    @Override public void start(IocInjector iocInjector) throws Exception {
+    @Override public void start(IocContext context) throws Exception {
         ResGmList.Builder builder = ResGmList.newBuilder();
         HashMap<String, GmGroup.Builder> groupMap = new HashMap<>();
-        List<IGm> iGms = iocInjector.filterBean(IGm.class);
-        for (IGm iGm : iGms) {
+        context.forEachBean(IGm.class, iGm -> {
             Method[] methods = iGm.getClass().getMethods();
             for (Method method : methods) {
                 Gm gm = AnnUtil.ann(method, Gm.class);
@@ -55,7 +53,7 @@ public class GmModule implements IStart {
 
                 groupMap.computeIfAbsent(gm.group(), l -> GmGroup.newBuilder()).addGms(builder1);
             }
-        }
+        });
 
         for (GmGroup.Builder value : groupMap.values()) {
             builder.addGroups(value);

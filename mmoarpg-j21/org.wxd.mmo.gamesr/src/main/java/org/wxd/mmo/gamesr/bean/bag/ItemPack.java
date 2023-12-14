@@ -3,8 +3,8 @@ package org.wxd.mmo.gamesr.bean.bag;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.lang.LNum;
-import org.wxd.boot.lang.save.ObjectSave;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 
 import java.util.Collection;

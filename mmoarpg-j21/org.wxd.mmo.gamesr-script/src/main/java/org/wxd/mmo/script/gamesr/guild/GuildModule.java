@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.guild;
 
 
-import org.wxd.boot.ioc.ann.Resource;
+import com.google.inject.Singleton;
 
 /**
  * 公会模块
@@ -9,6 +9,6 @@ import org.wxd.boot.ioc.ann.Resource;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-07-31 16:04
  **/
-@Resource
+@Singleton
 public class GuildModule {
 }

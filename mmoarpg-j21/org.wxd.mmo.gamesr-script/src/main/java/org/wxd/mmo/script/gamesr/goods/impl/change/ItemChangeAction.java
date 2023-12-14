@@ -1,7 +1,8 @@
 package org.wxd.mmo.script.gamesr.goods.impl.change;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.ioc.ann.Resource;
 import org.wxd.mmo.gamesr.bean.bag.*;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.user.Player;
@@ -16,10 +17,10 @@ import org.wxd.mmo.script.gamesr.goods.impl.ItemAction;
  * @version: 2023-11-08 15:06
  **/
 @Slf4j
-@Resource
+@Singleton
 public class ItemChangeAction<T extends Item> implements IAction, IChange {
 
-    @Resource ItemAction itemAction;
+    @Inject ItemAction itemAction;
 
     @Override public ItemGroup itemGroup() {
         return ItemGroup.None;

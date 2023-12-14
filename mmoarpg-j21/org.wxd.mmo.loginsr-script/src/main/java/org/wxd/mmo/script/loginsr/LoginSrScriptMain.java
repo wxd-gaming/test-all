@@ -2,7 +2,7 @@ package org.wxd.mmo.script.loginsr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wxd.boot.ioc.Ioc;
+import org.wxd.boot.starter.Starter;
 import org.wxd.mmo.loginsr.LoginSrAppMain;
 
 /**
@@ -15,7 +15,7 @@ public class LoginSrScriptMain {
         try {
             LoginSrAppMain.init();
             LoginSrAppMain.initScript(LoginSrScriptMain.class.getClassLoader());
-            Ioc.start(true, 1, "传奇", "测试版");
+            Starter.start(true, 1, "传奇", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);

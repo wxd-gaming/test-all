@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.lang.LNum;
-import org.wxd.boot.timer.GameClock;
+import org.wxd.boot.timer.MyClock;
 
 /**
  * 普通道具
@@ -20,7 +20,7 @@ public class Item extends LNum {
     private long uid;
     private int cfgId;
     private boolean bind;
-    private long createTime = GameClock.millis();
+    private long createTime = MyClock.millis();
     /** 未来时间磋 */
     private long expireTime;
 

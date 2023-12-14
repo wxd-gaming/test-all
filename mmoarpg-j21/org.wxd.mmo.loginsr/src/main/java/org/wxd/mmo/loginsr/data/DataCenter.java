@@ -1,11 +1,12 @@
 package org.wxd.mmo.loginsr.data;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.batis.mongodb.MongoDataHelper;
-import org.wxd.boot.ioc.IocInjector;
-import org.wxd.boot.ioc.ann.Resource;
-import org.wxd.boot.ioc.i.IBeanInit;
+import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.loginsr.bean.data.ServerData;
 
 
@@ -17,19 +18,18 @@ import org.wxd.mmo.loginsr.bean.data.ServerData;
  **/
 @Slf4j
 @Getter
-@Resource
+@Singleton
 public class DataCenter implements IBeanInit {
 
     @Getter private static DataCenter instance = null;
 
-    @Resource(name = "mongo-login")
-    private MongoDataHelper loginDataHelper;
+    @Inject private MongoService loginMongoService;
 
     private ServerData serverData;
 
-    @Override public void beanInit(IocInjector iocInjector) throws Exception {
+    @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
-        serverData = loginDataHelper.queryEntity(ServerData.class, 1L);
+        serverData = loginMongoService.queryEntity(ServerData.class, 1L);
         if (serverData == null) {
             serverData = new ServerData();
             serverData.setUid(1L);

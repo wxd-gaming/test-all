@@ -3,9 +3,9 @@ package org.wxd.mmo.gamesr.bean.data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.batis.struct.DbColumn;
 import org.wxd.boot.batis.struct.DbTable;
-import org.wxd.boot.lang.save.ObjectSave;
 import org.wxd.mmo.bean.data.UidSeed;
 
 /**
