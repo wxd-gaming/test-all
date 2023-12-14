@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.iml" filepath="$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.iml" />
       <module fileurl="file://$PROJECT_DIR$/org.wxd.mmo.iml" filepath="$PROJECT_DIR$/org.wxd.mmo.iml" />
     </modules>
   </component>

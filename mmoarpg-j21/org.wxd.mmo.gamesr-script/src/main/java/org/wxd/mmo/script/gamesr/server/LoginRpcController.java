@@ -28,7 +28,7 @@ public class LoginRpcController implements IBeanInit {
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         if (dataCenter.getLoginSocket() == null) {
-            dataCenter.setLoginSocket(new WebSocketClient<>().setName("login-client").setHost("127.0.0.1").setPort(17900));
+            dataCenter.setLoginSocket(new WebSocketClient<>().setName("login-client").setHost("127.0.0.1").setPort(18100));
         }
     }
 
@@ -42,12 +42,12 @@ public class LoginRpcController implements IBeanInit {
         if (loginSession == null) return;
 
         loginSession.rpc(
-                "Rpc/syncHeart",
+                "/Rpc/syncHeart",
                 "1", 1
         ).send();
 
         loginSession.rpc(
-                "Rpc/syncGatePort",
+                "/Rpc/syncGatePort",
                 "1",
                 1
         ).async(rpcEvent -> {log.info(rpcEvent.getResJson());}, null, throwable -> log.info("", throwable));

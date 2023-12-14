@@ -17,6 +17,7 @@
         <module name="org.wxd.boot.batis" />
         <module name="org.wxd.boot" />
         <module name="org.wxd.mmo.robotsr" />
+        <module name="com.sjcq.center.scripts" />
         <module name="org.wxd.boot.batis.sql.mysql" />
         <module name="org.wxd.mmo.web" />
         <module name="org.wxd.boot.batis.redis" />
@@ -30,6 +31,7 @@
         <module name="org.wxd.mmo.robotsr-script" />
         <module name="org.wxd.mmo.gamesr" />
         <module name="org.wxd.boot.net" />
+        <module name="com.sjcq.center.server" />
       </profile>
     </annotationProcessing>
   </component>

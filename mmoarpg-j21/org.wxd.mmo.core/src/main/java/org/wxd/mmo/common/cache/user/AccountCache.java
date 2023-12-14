@@ -10,7 +10,7 @@ import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.agent.function.SLFunction1;
 import org.wxd.boot.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.MongoService;
 import org.wxd.boot.starter.batis.RedisService;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.login.bean.user.Account;
@@ -34,7 +34,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         return instance;
     }
 
-    @Inject MongoService1 mongoService1;
+    @Inject MongoService mongoService;
     @Inject RedisService redisService;
 
     public AccountCache() {
@@ -46,7 +46,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         loading = new Function<Long, Account>() {
 
             @Override public Account apply(Long aLong) {
-                Account account = mongoService1.queryEntity(Account.class, aLong);
+                Account account = mongoService.queryEntity(Account.class, aLong);
                 if (account == null) {
                     log.info("从数据库读取失败：{}", aLong);
                 }
@@ -77,12 +77,12 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
     }
 
     public long accountDbSize() {
-        return mongoService1.estimatedDocumentCount(Account.class);
+        return mongoService.estimatedDocumentCount(Account.class);
     }
 
     @Override public void addCache(Long aLong, Account account) {
         super.addCache(aLong, account);
-        mongoService1.getBatchPool().replace(account);
+        mongoService.getBatchPool().replace(account);
     }
 
     /** 这里所有的都会加载 ，包括跨服的数据 */
@@ -93,7 +93,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
 
         SLFunction1<Account, String> getAccount = Account::getAccountName;
         whereDocument.append(getAccount.ofMethodName(), new BsonString(accountName));
-        Account account = mongoService1.queryEntity(Account.class, whereDocument);
+        Account account = mongoService.queryEntity(Account.class, whereDocument);
         if (account == null) {
             log.info("从数据库读取失败：{}, {}", sid, accountName);
         }
