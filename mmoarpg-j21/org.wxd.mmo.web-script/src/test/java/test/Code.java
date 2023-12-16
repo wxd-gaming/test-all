@@ -13,11 +13,11 @@ public class Code {
     @Test
     public void c1() {
         ReflectContext context = ReflectContext.Builder.of("test").build();
-        context.methodStream().forEach(System.out::println);
+        context.getContentList().forEach(c -> c.methodStream().forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
         System.out.println("====================================================================");
-        context.methodsWithAnnotated(Test.class).forEach(System.out::println);
+        context.getContentList().forEach(c -> c.methodsWithAnnotated(Test.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
         System.out.println("====================================================================");
-        context.methodsWithAnnotated(Scheduled.class).forEach(System.out::println);
+        context.getContentList().forEach(c -> c.methodsWithAnnotated(Scheduled.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
     }
 
     @Scheduled
