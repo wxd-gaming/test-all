@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../work/sjcq-center-j21/com.sjcq.center.iml" filepath="$PROJECT_DIR$/../../../work/sjcq-center-j21/com.sjcq.center.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.iml" filepath="$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot/org.wxd.boot.iml" filepath="$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot/org.wxd.boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.net/org.wxd.boot.net.iml" filepath="$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.net/org.wxd.boot.net.iml" />
       <module fileurl="file://$PROJECT_DIR$/org.wxd.mmo.iml" filepath="$PROJECT_DIR$/org.wxd.mmo.iml" />
     </modules>
   </component>
