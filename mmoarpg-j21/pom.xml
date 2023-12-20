@@ -20,6 +20,7 @@
         <module>org.wxd.mmo.robotsr-script</module>
         <module>org.wxd.mmo.web</module>
         <module>org.wxd.mmo.web-script</module>
+        <module>org.wxd.boot.reactor</module>
     </modules>
 
     <properties>
