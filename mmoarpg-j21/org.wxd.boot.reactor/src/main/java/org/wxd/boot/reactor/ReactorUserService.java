@@ -6,6 +6,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 测试类
@@ -21,7 +22,10 @@ public class ReactorUserService {
         reactorUserService.getFavorites(3L).subscribe(v -> {
             log.debug("{}", v);
         });
-        System.out.println(1);
+        reactorUserService.getDetail(1L)
+                .filter(v -> Objects.equals(v, "1"))
+                .subscribe(string -> System.out.println(string));
+        System.out.println("exit");
     }
 
     /** 返回的是多个，即Flux */
