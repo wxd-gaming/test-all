@@ -26,8 +26,8 @@
         </filter>
         <!-- 日志记录器的滚动策略，按日期记录 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/logback/error-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
-            <maxHistory>20</maxHistory>
+            <fileNamePattern>${LOG_PATH}/logback/error-%d{yyyy-MM-dd}.log.tar.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
 
@@ -42,15 +42,10 @@
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{5}.%M\(\) Line:%-3L] - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
-        <!-- 便于修改时间记录日志 -->
-        <filter class="org.wxd.boot.logback.LogbackResetTimeFilter">
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
         <!--  这个狗东西必须放后面 否则不生效-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/logback/app-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
-            <maxHistory>20</maxHistory>
+            <fileNamePattern>${LOG_PATH}/logback/app-%d{yyyy-MM-dd}.log.tar.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
         </rollingPolicy>
     </appender>
 
@@ -62,9 +57,8 @@
         </encoder>
     </appender>
 
-    <logger name="io.netty" level="info" additivity="false"/>
-    <logger name="com.zaxxer.hikari" level="info" additivity="false"/>
-    <logger name="org.mongodb.driver" level="info" additivity="false"/>
+    <logger name="io.netty" level="INFO" additivity="false">
+    </logger>
 
     <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
     <root level="DEBUG"> <!-- ERROR, WARN, INFO, DEBUG -->

@@ -21,6 +21,7 @@
         <module>org.wxd.mmo.web</module>
         <module>org.wxd.mmo.web-script</module>
         <module>org.wxd.boot.reactor</module>
+        <module>org.wxd.httpservice</module>
     </modules>
 
     <properties>

@@ -1,0 +1,28 @@
+<assembly>
+    <!-- 项目打成Zip包的Id -->
+    <id>main-bin</id>
+    <formats>
+        <!-- 包的后缀 -->
+        <format>jar</format>
+    </formats>
+
+    <!-- 不需要主文件夹-->
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>target/classes</directory>
+            <outputDirectory>.</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <!-- 默认的配置 -->
+        <dependencySet>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>.</outputDirectory>
+            <unpack>true</unpack>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>
