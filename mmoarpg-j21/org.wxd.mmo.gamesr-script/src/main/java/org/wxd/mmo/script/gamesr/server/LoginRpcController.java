@@ -50,7 +50,7 @@ public class LoginRpcController implements IBeanInit {
                 "/Rpc/syncGatePort",
                 "1",
                 1
-        ).async(rpcEvent -> {log.info(rpcEvent.getResJson());}, null, throwable -> log.info("", throwable));
+        ).async(rpcEvent -> {log.info(rpcEvent.getResJson());});
 
     }
 
