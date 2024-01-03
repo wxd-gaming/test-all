@@ -6,14 +6,7 @@ import java.lang.annotation.*;
  * gm方法注解
  */
 @Documented
-@Target(
-        {
-                ElementType.TYPE,           /*类*/
-                ElementType.FIELD,          /*字段*/
-                ElementType.METHOD,         /*方法*/
-                ElementType.LOCAL_VARIABLE  /*局部变量*/
-        }
-)
+@Target({ElementType.METHOD/*方法*/})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Gm {
 
