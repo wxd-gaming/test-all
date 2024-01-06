@@ -21,28 +21,26 @@ public class ReadLog {
     @Test
     public void main() {
 
+        ConcurrentHashSet<String> reportSpOrderIds = new ConcurrentHashSet<>();
+
         ConcurrentSkipListMap<Long, ObjMap> logs = new ConcurrentSkipListMap<>();
 
         ConcurrentSkipListMap<Long, Integer> ids = new ConcurrentSkipListMap<>();
 
 
-        FileReadUtil.readLine(new File("E:\\out\\2.log"), StandardCharsets.UTF_8, line -> {
+        FileReadUtil.readLine(new File("E:\\out\\3.log"), StandardCharsets.UTF_8, line -> {
 
             int index = line.indexOf("：{");
             String substring = line.substring(index + 1);
             ObjMap objMap = FastJsonUtil.parseObjMap(substring);
+            String spOrder = objMap.getString("spOrder");
+            if (!reportSpOrderIds.add(spOrder)) return;
             long serid = objMap.getLongValue("serid");
-            while (true) {
-                if (ids.getOrDefault(serid, 0) > 0) {
-                    serid = objMap.getLongValue("time");
-                } else {
-                    break;
-                }
-            }
+            serid = objMap.getLongValue("time");
             objMap.put("serid", serid);
             Integer merge = ids.merge(serid, 1, Math::addExact);
             if (merge > 1) {
-                System.out.println(merge + " - " + objMap.getString("spOrder"));
+                System.out.println(merge + " - " + spOrder);
             } else {
                 logs.put(serid, objMap);
             }
