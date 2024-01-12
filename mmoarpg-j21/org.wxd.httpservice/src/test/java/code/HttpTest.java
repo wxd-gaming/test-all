@@ -10,5 +10,7 @@ public class HttpTest {
     public void t1() {
         String s = HttpBuilder.postText("http://127.0.0.1:19000/test/ok").paramJson(new ObjMap().append("ddd", "dd\ndd").toJson()).request().bodyUnicodeDecodeString();
         System.out.println(ObjMap.parse(s).getString("ddd"));
+
+     HttpBuilder.postText("http://127.0.0.1:19000/test/ok").paramText(new ObjMap().append("ddd", "dd\ndd").toJson()).request().systemOut();
     }
 }
