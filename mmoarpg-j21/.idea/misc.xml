@@ -9,6 +9,11 @@
         <option value="$PROJECT_DIR$/../../../work/sjcq-center-j21/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/../../org.wxd.boot-j21/org.wxd.boot.net.http2service/pom.xml" />
+      </set>
+    </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="21" project-jdk-type="JavaSDK" />
