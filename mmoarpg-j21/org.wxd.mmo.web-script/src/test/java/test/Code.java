@@ -13,11 +13,13 @@ public class Code {
     @Test
     public void c1() {
         ReflectContext context = ReflectContext.Builder.of("test").build();
-        context.getContentList().forEach(c -> c.methodStream().forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
+        context.classWithSuper(I1.class).forEach(c -> System.out.println(c));
         System.out.println("====================================================================");
-        context.getContentList().forEach(c -> c.methodsWithAnnotated(Test.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
+        context.stream().forEach(c -> c.methodStream().forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
         System.out.println("====================================================================");
-        context.getContentList().forEach(c -> c.methodsWithAnnotated(Scheduled.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
+        context.stream().forEach(c -> c.methodsWithAnnotated(Test.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
+        System.out.println("====================================================================");
+        context.stream().forEach(c -> c.methodsWithAnnotated(Scheduled.class).forEach(method -> System.out.println(method.getDeclaringClass() + " " + method)));
     }
 
     @Scheduled
@@ -31,6 +33,10 @@ public class Code {
     }
 
     public static class C1 implements I1 {
+
+    }
+
+    public static class C2 implements I1 {
 
     }
 
