@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
-import org.wxd.boot.lang.LNum;
+import org.wxd.boot.core.lang.LNum;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 
 import java.util.Collection;

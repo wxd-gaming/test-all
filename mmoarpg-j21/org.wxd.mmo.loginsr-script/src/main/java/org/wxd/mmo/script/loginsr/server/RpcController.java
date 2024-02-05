@@ -1,8 +1,8 @@
 package org.wxd.mmo.script.loginsr.server;
 
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.collection.ObjMap;
-import org.wxd.boot.lang.RunResult;
+import org.wxd.boot.core.collection.ObjMap;
+import org.wxd.boot.core.lang.RunResult;
 import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;

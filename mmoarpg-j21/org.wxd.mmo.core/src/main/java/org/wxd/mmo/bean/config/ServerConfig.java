@@ -3,8 +3,8 @@ package org.wxd.mmo.bean.config;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.wxd.boot.lang.ObjectBase;
-import org.wxd.boot.timer.MyClock;
+import org.wxd.boot.core.lang.ObjectBase;
+import org.wxd.boot.core.timer.MyClock;
 
 import java.util.ArrayList;
 import java.util.List;

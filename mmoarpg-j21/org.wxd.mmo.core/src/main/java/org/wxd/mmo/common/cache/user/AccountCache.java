@@ -8,7 +8,7 @@ import org.bson.BsonString;
 import org.bson.Document;
 import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.agent.function.SLFunction1;
-import org.wxd.boot.cache.CachePack;
+import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MongoService;
 import org.wxd.boot.starter.batis.RedisService;

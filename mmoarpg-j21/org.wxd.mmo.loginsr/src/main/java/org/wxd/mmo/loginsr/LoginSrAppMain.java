@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.wxd.boot.agent.loader.ClassDirLoader;
 import org.wxd.boot.agent.loader.JavaCoderCompile;
 import org.wxd.boot.agent.system.ReflectContext;
+import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.starter.Starter;
-import org.wxd.boot.system.JvmUtil;
 import org.wxd.mmo.login.BeanBase;
 
 import java.io.File;

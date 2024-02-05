@@ -1,6 +1,6 @@
 package org.wxd.httpservice;
 
-import org.wxd.boot.collection.ObjMap;
+import org.wxd.boot.core.collection.ObjMap;
 import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;
 import org.wxd.boot.net.web.hs.HttpSession;

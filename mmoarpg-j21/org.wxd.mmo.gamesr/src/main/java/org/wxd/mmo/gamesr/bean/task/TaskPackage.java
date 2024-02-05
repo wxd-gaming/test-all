@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
-import org.wxd.boot.collection.Table;
-import org.wxd.boot.lang.task.Condition;
+import org.wxd.boot.core.collection.Table;
+import org.wxd.boot.core.lang.task.Condition;
 import org.wxd.mmo.gamesr.bean.task.impl.TaskInfo;
 import org.wxd.mmo.gamesr.bean.task.impl.TaskType;
 

@@ -3,8 +3,8 @@ package org.wxd.mmo.gamesr.bean.bag.goods;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.wxd.boot.lang.LNum;
-import org.wxd.boot.timer.MyClock;
+import org.wxd.boot.core.lang.LNum;
+import org.wxd.boot.core.timer.MyClock;
 
 /**
  * 普通道具

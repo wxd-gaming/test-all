@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.struct.DbTable;
-import org.wxd.boot.lang.bit.BitUtil;
+import org.wxd.boot.core.lang.bit.BitUtil;
 import org.wxd.mmo.GameBase;
 
 import java.util.concurrent.atomic.AtomicLong;

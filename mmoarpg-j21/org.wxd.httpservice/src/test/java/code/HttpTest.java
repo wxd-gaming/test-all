@@ -1,8 +1,8 @@
 package code;
 
 import org.junit.Test;
-import org.wxd.boot.collection.ObjMap;
-import org.wxd.boot.httpclient.url.HttpBuilder;
+import org.wxd.boot.core.collection.ObjMap;
+import org.wxd.boot.net.http.client.url.HttpBuilder;
 
 public class HttpTest {
 

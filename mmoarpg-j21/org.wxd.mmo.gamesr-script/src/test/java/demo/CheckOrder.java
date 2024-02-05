@@ -10,8 +10,8 @@ import org.wxd.boot.batis.mongodb.MongoQueryBuilder;
 import org.wxd.boot.batis.query.QueryWhere;
 import org.wxd.boot.batis.query.WhereEnum;
 import org.wxd.boot.batis.sql.mysql.MysqlDataHelper;
-import org.wxd.boot.system.MarkTimer;
-import org.wxd.boot.timer.MyClock;
+import org.wxd.boot.core.system.MarkTimer;
+import org.wxd.boot.core.timer.MyClock;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;

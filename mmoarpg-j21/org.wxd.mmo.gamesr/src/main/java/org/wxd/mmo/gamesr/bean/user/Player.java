@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.struct.DbTable;
-import org.wxd.boot.lang.LNum;
+import org.wxd.boot.core.lang.LNum;
 import org.wxd.mmo.GameBase;
 import org.wxd.mmo.game.bean.user.PlayerSnap;
 import org.wxd.mmo.game.cache.user.PlayerSnapCache;

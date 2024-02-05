@@ -2,7 +2,7 @@ package code;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.wxd.boot.lang.ObjectBase;
+import org.wxd.boot.core.lang.ObjectBase;
 
 /**
  * @author: Troy.Chen(無心道, 15388152619)

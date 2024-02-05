@@ -1,8 +1,8 @@
 package org.wxd.mmo.loginsr.bean.type;
 
 
-import org.wxd.boot.collection.OfMap;
-import org.wxd.boot.lang.IEnum;
+import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
 

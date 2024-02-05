@@ -4,11 +4,11 @@ import io.netty.handler.codec.http.HttpHeaderNames;
 import org.junit.Test;
 import org.wxd.boot.agent.io.FileReadUtil;
 import org.wxd.boot.agent.io.FileWriteUtil;
-import org.wxd.boot.collection.ObjMap;
-import org.wxd.boot.collection.concurrent.ConcurrentHashSet;
-import org.wxd.boot.httpclient.url.HttpBuilder;
-import org.wxd.boot.str.json.FastJsonUtil;
-import org.wxd.boot.threading.Executors;
+import org.wxd.boot.core.collection.ObjMap;
+import org.wxd.boot.core.collection.concurrent.ConcurrentHashSet;
+import org.wxd.boot.core.str.json.FastJsonUtil;
+import org.wxd.boot.core.threading.Executors;
+import org.wxd.boot.net.http.client.url.HttpBuilder;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

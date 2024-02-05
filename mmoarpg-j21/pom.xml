@@ -27,7 +27,7 @@
     <properties>
         <encoding>UTF-8</encoding>
         <java.version>21</java.version>
-        <wxd.version>wxd-j21-01</wxd.version>
+        <wxd.version>wxd-j21-02</wxd.version>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
         <maven.compiler.encoding>${encoding}</maven.compiler.encoding>
@@ -62,7 +62,7 @@
     <dependencies>
         <dependency>
             <groupId>org.wxd</groupId>
-            <artifactId>org.wxd.boot</artifactId>
+            <artifactId>org.wxd.boot.core</artifactId>
             <version>${wxd.version}</version>
         </dependency>
         <dependency>
@@ -77,7 +77,7 @@
         </dependency>
         <dependency>
             <groupId>org.wxd</groupId>
-            <artifactId>org.wxd.boot.http</artifactId>
+            <artifactId>org.wxd.boot.net.http</artifactId>
             <version>${wxd.version}</version>
         </dependency>
         <dependency>

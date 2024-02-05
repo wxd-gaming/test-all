@@ -3,7 +3,7 @@ package org.wxd.mmo.script.gamesr.gm.controller;
 import com.alibaba.fastjson2.JSONArray;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.collection.OfList;
+import org.wxd.boot.core.collection.OfList;
 import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.IController;
 import org.wxd.boot.net.controller.ann.ProtoController;

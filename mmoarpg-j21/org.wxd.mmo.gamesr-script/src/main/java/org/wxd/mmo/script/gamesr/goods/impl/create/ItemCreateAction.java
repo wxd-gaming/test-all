@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.goods.impl.create;
 
 import com.google.inject.Singleton;
-import org.wxd.boot.timer.MyClock;
+import org.wxd.boot.core.timer.MyClock;
 import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
 import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
 import org.wxd.mmo.gamesr.bean.bag.ItemType;

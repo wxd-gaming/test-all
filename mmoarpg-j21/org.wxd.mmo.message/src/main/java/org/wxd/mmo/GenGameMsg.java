@@ -1,9 +1,9 @@
 package org.wxd.mmo;
 
 
+import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.controller.ProtoBufCreateController;
 import org.wxd.boot.net.web.ws.WebSocketServer;
-import org.wxd.boot.system.JvmUtil;
 
 public class GenGameMsg {
     public static void main(String[] args) throws Exception {

@@ -1,7 +1,7 @@
 package demo;
 
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.lang.RandomUtils;
+import org.wxd.boot.core.lang.RandomUtils;
 
 /**
  * 收益计算

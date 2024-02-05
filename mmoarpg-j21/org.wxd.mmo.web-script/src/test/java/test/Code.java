@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Test;
 import org.wxd.boot.agent.system.ReflectContext;
-import org.wxd.boot.timer.ann.Scheduled;
+import org.wxd.boot.core.timer.ann.Scheduled;
 
 /**
  * @author: Troy.Chen(無心道, 15388152619)

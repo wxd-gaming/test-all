@@ -3,11 +3,11 @@ package org.wxd.mmo.script.loginsr.server;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.i.IShutdownBefore;
 import org.wxd.boot.starter.i.IShutdownEnd;
 import org.wxd.boot.starter.i.IStart;
-import org.wxd.boot.timer.ann.Scheduled;
 import org.wxd.mmo.loginsr.data.DataCenter;
 
 
