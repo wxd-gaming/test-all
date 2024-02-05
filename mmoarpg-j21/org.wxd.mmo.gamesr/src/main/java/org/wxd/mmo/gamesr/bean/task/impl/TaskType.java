@@ -1,6 +1,6 @@
 package org.wxd.mmo.gamesr.bean.task.impl;
 
-import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ public enum TaskType implements IEnum {
     Branch(2, "支线"),
     ;
 
-    private static final Map<Integer, TaskType> static_map = OfMap.asMap(TaskType::getCode, TaskType.values());
+    private static final Map<Integer, TaskType> static_map = MapOf.asMap(TaskType::getCode, TaskType.values());
 
     public static TaskType as(int value) {
         return static_map.get(value);

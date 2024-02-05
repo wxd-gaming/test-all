@@ -1,7 +1,7 @@
 package org.wxd.mmo.gamesr.bean.bag;
 
 
-import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public enum OptReason implements IEnum {
     None(0, "默认值"),
     ;
 
-    private static final Map<Integer, OptReason> static_map = OfMap.asMap(OptReason::getCode, OptReason.values());
+    private static final Map<Integer, OptReason> static_map = MapOf.asMap(OptReason::getCode, OptReason.values());
 
     public static OptReason as(int value) {
         return static_map.get(value);

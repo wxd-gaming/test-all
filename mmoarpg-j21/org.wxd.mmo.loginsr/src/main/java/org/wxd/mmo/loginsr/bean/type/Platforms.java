@@ -1,7 +1,7 @@
 package org.wxd.mmo.loginsr.bean.type;
 
 
-import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ public enum Platforms implements IEnum {
     Local(1, "本地渠道"),
     ;
 
-    private static final Map<Integer, Platforms> static_map = OfMap.asMap(Platforms::getCode, Platforms.values());
+    private static final Map<Integer, Platforms> static_map = MapOf.asMap(Platforms::getCode, Platforms.values());
 
     public static Platforms as(int value) {
         return static_map.get(value);

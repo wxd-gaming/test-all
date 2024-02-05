@@ -1,7 +1,7 @@
 package org.wxd.mmo.gamesr.bean.bag;
 
 
-import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
@@ -22,7 +22,7 @@ public enum ItemType implements IEnum {
     Equip_Helmet(101, ItemGroup.EQUIP, "头盔"),
     ;
 
-    private static final Map<Integer, ItemType> static_map = OfMap.asMap(ItemType::getCode, ItemType.values());
+    private static final Map<Integer, ItemType> static_map = MapOf.asMap(ItemType::getCode, ItemType.values());
 
     public static ItemType as(int value) {
         return static_map.get(value);

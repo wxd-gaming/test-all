@@ -3,7 +3,7 @@ package org.wxd.mmo.script.gamesr.gm.controller;
 import com.alibaba.fastjson2.JSONArray;
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.boot.core.collection.OfList;
+import org.wxd.boot.core.collection.ListOf;
 import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.IController;
 import org.wxd.boot.net.controller.ann.ProtoController;
@@ -45,7 +45,7 @@ public final class ReqGmController implements IController {
 
         try {
             JSONArray jsonArray = new JSONArray();
-            OfList.asList(jsonArray, reqMessage.getParams().split(",|，"));
+            ListOf.asList(jsonArray, reqMessage.getParams().split(",|，"));
             gmMappingInfo.getMethod().invoke(gmMappingInfo.getInstance(), player, jsonArray);
         } catch (Throwable throwable) {
             log.error("执行gm命令：" + player.playerSnap().logName() + " - " + reqMessage.getName() + " - " + reqMessage.getParams(), throwable);

@@ -1,7 +1,7 @@
 package org.wxd.mmo.gamesr.bean.bag;
 
 
-import org.wxd.boot.core.collection.OfMap;
+import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public enum ItemGroup implements IEnum {
     CURRENCY(2, "货币"),
     EQUIP(3, "装备");
 
-    private static final Map<Integer, ItemGroup> static_map = OfMap.asMap(ItemGroup::getCode, ItemGroup.values());
+    private static final Map<Integer, ItemGroup> static_map = MapOf.asMap(ItemGroup::getCode, ItemGroup.values());
 
     public static ItemGroup as(int value) {
         return static_map.get(value);
