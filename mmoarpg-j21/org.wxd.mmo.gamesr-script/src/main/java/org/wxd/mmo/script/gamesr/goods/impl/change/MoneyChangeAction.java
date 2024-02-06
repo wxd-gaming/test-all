@@ -25,45 +25,12 @@ public class MoneyChangeAction<T extends Item> extends ItemChangeAction<T> {
         return ItemType.None;
     }
 
-    @Override public void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-
-    }
-
-
-    protected void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-
+    @Override protected void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         itemPack.getMoneys().merge(itemCfg.getCfgId(), itemCfg.getNum(), Math::addExact);
-
-        log.info("{} {} 获得：{}, 变更：{}, 现有数量：{}, 原因：{}{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getCfgId(),
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
-
     }
 
-    @Override public void remove(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-
-    }
-
-    protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-
+    @Override protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), Math::addExact);
-
-        log.info("{} {} 扣除：{}, 变更：{}, 现有数量：{}, 原因：{}{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getCfgId(),
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
-
     }
 
     protected long itemNum(Player player, PackType packType, int cfg) {

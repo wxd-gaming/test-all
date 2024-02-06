@@ -19,4 +19,5 @@ public class ItemModule implements IBeanInit {
     @Override public void beanInit(IocContext iocContext) throws Exception {
 
     }
+
 }

@@ -30,7 +30,7 @@ public class ItemChangeAction<T extends Item> implements IAction, IChange {
         return ItemType.None;
     }
 
-    @Override public void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
+    @Override public final void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         add0(player, itemPack, itemCfg, optReason, logs);
         log.info("{} {} 获得：{}-{}({}), 变更：{}, 现有数量：{}, 原因：{}{}",
                 player,
@@ -50,10 +50,13 @@ public class ItemChangeAction<T extends Item> implements IAction, IChange {
         add(player, itemPack, item, optReason, logs);
     }
 
-    @Override public void add(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
-        itemPack.getItems().put(item.getUid(), item);
+    @Override public final void add(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        add0(player, itemPack, item, optReason, logs);
     }
 
+    public void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        itemPack.getItems().put(item.getUid(), item);
+    }
 
     @Override public void remove(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         remove0(player, itemPack, itemCfg, optReason, logs);
