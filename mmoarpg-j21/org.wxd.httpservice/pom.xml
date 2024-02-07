@@ -12,6 +12,14 @@
     <name>httpservice</name>
     <artifactId>org.wxd.httpservice</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.external</groupId>
+            <artifactId>opendmk_jdmkrt_jar</artifactId>
+            <version>1.0-b01-ea</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>service</finalName>
         <plugins>
