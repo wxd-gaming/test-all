@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.wxd.mmo.gamesr.bean.bag.*;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.user.Player;
-import org.wxd.mmo.script.gamesr.goods.impl.IAction;
 
 
 /**
@@ -16,7 +15,7 @@ import org.wxd.mmo.script.gamesr.goods.impl.IAction;
  **/
 @Slf4j
 @Singleton
-public class ExpChangeAction extends ItemChangeAction<Item> implements IAction, IChange {
+public class ExpChangeAction extends ItemChangeAction<Item> {
 
     @Override public ItemGroup itemGroup() {
         return ItemGroup.ITEM;
@@ -26,43 +25,28 @@ public class ExpChangeAction extends ItemChangeAction<Item> implements IAction, 
         return ItemType.Exp;
     }
 
+    @Override protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        player.getExp().add(item.getNum());
+    }
+
     @Override public void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        itemPack.getMoneys().merge(itemCfg.getCfgId(), itemCfg.getNum(), Math::addExact);
+        player.getExp().add(itemCfg.getNum());
+    }
 
-        log.info("{} {} 获得：{}, 变更：{}, 现有数量：{}, 原因：{}{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getCfgId(),
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
-
+    @Override protected void remove0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        player.getExp().sub(item.getNum());
     }
 
     @Override public void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-
-        itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), Math::addExact);
-
-        log.info("{} {} 扣除：{}, 变更：{}, 现有数量：{}, 原因：{}{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getCfgId(),
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
-
+        player.getExp().sub(itemCfg.getNum());
     }
 
     protected long itemNum(Player player, PackType packType, int cfg) {
-        return itemNum(player, player.getItemPackMap().get(packType), cfg);
+        return player.getExp().getNum();
     }
 
     protected long itemNum(Player player, ItemPack itemPack, int cfg) {
-        return 0;
+        return player.getExp().getNum();
     }
 
 }

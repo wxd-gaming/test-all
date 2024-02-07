@@ -19,7 +19,7 @@ public class GameBase extends ObjectSave {
 
     /** 唯一id */
     @DbColumn(key = true)
-    private long uid;
+    protected long uid;
 
     public GameBase() {
     }
@@ -28,4 +28,11 @@ public class GameBase extends ObjectSave {
         this.uid = uid;
     }
 
+    @Override public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(this.getClass().getSimpleName()).append("{");
+        sb.append("uid=").append(uid);
+        sb.append('}');
+        return sb.toString();
+    }
 }

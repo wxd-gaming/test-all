@@ -29,8 +29,16 @@ public class MoneyChangeAction<T extends Item> extends ItemChangeAction<T> {
         itemPack.getMoneys().merge(itemCfg.getCfgId(), itemCfg.getNum(), Math::addExact);
     }
 
+    @Override protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        itemPack.getMoneys().merge(item.getCfgId(), item.getNum(), Math::addExact);
+    }
+
+    @Override protected void remove0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
+        itemPack.getMoneys().merge(item.getCfgId(), -item.getNum(), (n1, n2) -> Math.max(0, Math.addExact(n1, n2)));
+    }
+
     @Override protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), Math::addExact);
+        itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), (n1, n2) -> Math.max(0, Math.addExact(n1, n2)));
     }
 
     protected long itemNum(Player player, PackType packType, int cfg) {

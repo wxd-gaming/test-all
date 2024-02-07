@@ -3,6 +3,7 @@ package org.wxd.mmo.script.gamesr.user;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.str.StringUtil;
 import org.wxd.boot.core.system.MarkTimer;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.mmo.bean.config.ServerConfig;
@@ -10,11 +11,13 @@ import org.wxd.mmo.bean.data.UidSeed;
 import org.wxd.mmo.common.cache.user.AccountCache;
 import org.wxd.mmo.game.bean.user.PlayerSnap;
 import org.wxd.mmo.game.cache.user.PlayerSnapCache;
-import org.wxd.mmo.gamesr.bean.bag.ItemPack;
-import org.wxd.mmo.gamesr.bean.bag.PackType;
+import org.wxd.mmo.gamesr.bean.bag.*;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.gamesr.cache.user.PlayerCache;
 import org.wxd.mmo.gamesr.data.DataCenter;
+import org.wxd.mmo.script.gamesr.goods.PackModule;
+
+import java.util.List;
 
 
 /**
@@ -30,6 +33,7 @@ public class UserModule {
     @Inject ServerConfig serverConfig;
     @Inject AccountCache accountCache;
     @Inject PlayerCache playerCache;
+    @Inject PackModule packModule;
     @Inject PlayerSnapCache playerSnapCache;
     @Inject DataCenter dataCenter;
 
@@ -50,16 +54,44 @@ public class UserModule {
             int f = 10;
             for (int i = 0; i < f; i++) {
 
-                Player player = new Player();
-                player.setUid(dataCenter.newUid(UidSeed.Type.Player));
-                player.getItemPackMap().computeIfAbsent(PackType.BAG, b -> new ItemPack().setInitSize(100));
-                player.getItemPackMap().computeIfAbsent(PackType.STORE, b -> new ItemPack().setInitSize(100));
-                playerCache.addCache(player.getUid(), player);
+                Player player = createPlayer();
+                player.setName(StringUtil.uuid32(12));
+                player.setLevel(1);
 
-                PlayerSnap playerSnap = new PlayerSnap();
-                playerSnap.setUid(player.getUid());
-                playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
+                {
+                    List<ItemCfg> build = List.of(
+                            ItemCfg.builder().setCfgId(ItemType.Gold.getCode()).setNum(3).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Gold.getCode()).setNum(3).build(),
 
+                            ItemCfg.builder().setCfgId(ItemType.Money.getCode()).setNum(1).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Money.getCode()).setNum(10).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(1000).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(100000).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build()
+                    );
+
+                    packModule.add(player, build, OptReason.None, "GM测试");
+                }
+                {
+                    List<ItemCfg> build = List.of(
+                            ItemCfg.builder().setCfgId(ItemType.Gold.getCode()).setNum(1).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Money.getCode()).setNum(1).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(1000).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
+
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build()
+                    );
+                    packModule.remove(player, build, OptReason.None, "GM测试");
+                }
                 if (userFirst == null) {
                     userFirst = player;
                 }
@@ -74,6 +106,19 @@ public class UserModule {
         log.info("读取一条数据{} {}", markTimer.execTime2String(), Player.toJson());
         log.info("读取一条数据{} {}", markTimer.execTime2String(), Player.toJsonWriteType());
         return Player;
+    }
+
+    public Player createPlayer() {
+        Player player = new Player();
+        player.setUid(dataCenter.newUid(UidSeed.Type.Player));
+        player.getItemPackMap().computeIfAbsent(PackType.BAG, b -> new ItemPack(PackType.BAG, 100));
+        player.getItemPackMap().computeIfAbsent(PackType.STORE, b -> new ItemPack(PackType.STORE, 100));
+        playerCache.addCache(player.getUid(), player);
+
+        PlayerSnap playerSnap = new PlayerSnap();
+        playerSnap.setUid(player.getUid());
+        playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
+        return player;
     }
 
 }

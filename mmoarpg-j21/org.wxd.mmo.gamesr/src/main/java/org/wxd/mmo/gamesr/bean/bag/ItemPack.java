@@ -1,5 +1,6 @@
 package org.wxd.mmo.gamesr.bean.bag;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -8,8 +9,10 @@ import org.wxd.boot.core.lang.LNum;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * 道具容器
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Accessors(chain = true)
+@AllArgsConstructor
 public class ItemPack extends ObjectSave {
 
     /** 容器类型 */
@@ -35,12 +39,21 @@ public class ItemPack extends ObjectSave {
     /** 道具 */
     private final ConcurrentSkipListMap<Long, Item> items = new ConcurrentSkipListMap<>();
 
-    public Collection<Item> items(int cfgId) {
-        return items.values().stream().filter(v -> v.getCfgId() == cfgId).collect(Collectors.toList());
+    public ItemPack(PackType packType, int initSize) {
+        this.packType = packType;
+        this.initSize = initSize;
     }
 
-    public long itemNum(int cfgId) {
-        return items.values().stream().filter(v -> v.getCfgId() == cfgId).mapToLong(LNum::getNum).sum();
+    public Optional<Item> item(long uid) {
+        return Optional.ofNullable(items.get(uid));
+    }
+
+    public Stream<Item> stream(int cfgId) {
+        return items.values().stream().filter(v -> v.getCfgId() == cfgId);
+    }
+
+    public Collection<Item> items(int cfgId) {
+        return stream(cfgId).collect(Collectors.toList());
     }
 
     public int bagSize() {

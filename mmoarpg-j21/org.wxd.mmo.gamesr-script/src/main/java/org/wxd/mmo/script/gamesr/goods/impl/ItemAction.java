@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ItemAction implements IBeanInit {
 
     private final Table<ItemGroup, ItemType, ItemCreateAction<? super Item>> createActionTable = new Table<>();
-    private final Table<ItemGroup, ItemType, ItemChangeAction<? super Item>> addActionTable = new Table<>();
+    private final Table<ItemGroup, ItemType, ItemChangeAction<? super Item>> changeActionTable = new Table<>();
 
     @Override public void beanInit(IocContext context) throws Exception {
         ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(ItemModule.class.getClassLoader(), ItemModule.class.getPackageName());
@@ -39,24 +39,33 @@ public class ItemAction implements IBeanInit {
                     createActionTable.put(itemGroup, itemType, bean);
                 });
 
-        build.classWithSuper(ItemCreateAction.class)
+        build.classWithSuper(ItemChangeAction.class)
                 .forEach(c -> {
-                    ItemCreateAction<? super Item> bean = (ItemCreateAction) context.getInstance(c);
+                    ItemChangeAction<? super Item> bean = (ItemChangeAction) context.getInstance(c);
                     ItemGroup itemGroup = bean.itemGroup();
                     ItemType itemType = bean.itemType();
-                    createActionTable.put(itemGroup, itemType, bean);
+                    changeActionTable.put(itemGroup, itemType, bean);
                 });
     }
 
     public final <R extends Item> R createItem(Player player, ItemCfg itemCfg) {
         int cfgId = itemCfg.getCfgId();
         ItemType itemType = ItemType.as(cfgId);
+        return (R) createAction(itemType).createItem(player, itemCfg);
+    }
+
+    public ItemCreateAction<? super Item> createAction(ItemType itemType) {
         return createActionTable.opt(itemType.getItemGroup(), itemType)
                 .or(() -> Optional.ofNullable(createActionTable.get(itemType.getItemGroup(), ItemType.None)))
                 .or(() -> Optional.ofNullable(createActionTable.get(ItemGroup.None, ItemType.None)))
-                .map(c -> (R) c.createItem(player, itemCfg))
-                .orElseThrow(() -> new RuntimeException("创建道具失败 " + itemCfg.toString()));
+                .orElseThrow(() -> new RuntimeException("item change action 查找失败 " + itemType.toString()));
     }
 
+    public ItemChangeAction<? super Item> changeAction(ItemType itemType) {
+        return changeActionTable.opt(itemType.getItemGroup(), itemType)
+                .or(() -> Optional.ofNullable(changeActionTable.get(itemType.getItemGroup(), ItemType.None)))
+                .or(() -> Optional.ofNullable(changeActionTable.get(ItemGroup.None, ItemType.None)))
+                .orElseThrow(() -> new RuntimeException("item change action 查找失败 " + itemType.toString()));
+    }
 
 }

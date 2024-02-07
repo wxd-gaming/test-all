@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.core.lang.LNum;
 import org.wxd.boot.core.timer.MyClock;
+import org.wxd.mmo.gamesr.bean.bag.ItemType;
 
 /**
  * 普通道具
@@ -24,8 +25,23 @@ public class Item extends LNum {
     /** 未来时间磋 */
     private long expireTime;
 
+    public ItemType itemType() {
+        return ItemType.as(cfgId);
+    }
+
     @Override public Item setNum(long num) {
         super.setNum(num);
         return this;
+    }
+
+    @Override public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(this.getClass().getSimpleName()).append("{");
+        sb.append("uid=").append(uid);
+        sb.append(", cfgId=").append(cfgId);
+        sb.append(", bind=").append(bind);
+        sb.append(", num=").append(getNum());
+        sb.append('}');
+        return sb.toString();
     }
 }

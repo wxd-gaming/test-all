@@ -1,5 +1,6 @@
 package org.wxd.mmo.gamesr.bean.bag;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.wxd.boot.core.lang.ObjectBase;
@@ -9,7 +10,8 @@ import org.wxd.boot.core.lang.ObjectBase;
  * @version: 2023-11-07 20:55
  **/
 @Getter
-@Builder(setterPrefix = "set")
+@AllArgsConstructor
+@Builder(setterPrefix = "set", toBuilder = true)
 public class ItemCfg extends ObjectBase {
 
     protected long uid;
@@ -18,5 +20,9 @@ public class ItemCfg extends ObjectBase {
     protected boolean bind;
     /** 持续时间 毫秒 */
     protected long expire;
+
+    public ItemType itemType() {
+        return ItemType.as(cfgId);
+    }
 
 }

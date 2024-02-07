@@ -15,7 +15,7 @@ public class GameSrScriptMain {
         try {
             GameSrAppMain.init();
             GameSrAppMain.initScript(GameSrScriptMain.class.getClassLoader());
-            Starter.start(true, 1, "传奇", "测试版");
+            Starter.start(true, 1, "mmo-arpg", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
