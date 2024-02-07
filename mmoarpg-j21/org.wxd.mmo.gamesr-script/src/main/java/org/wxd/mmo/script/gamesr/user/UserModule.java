@@ -3,6 +3,7 @@ package org.wxd.mmo.script.gamesr.user;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.lang.RandomUtils;
 import org.wxd.boot.core.str.StringUtil;
 import org.wxd.boot.core.system.MarkTimer;
 import org.wxd.boot.core.timer.ann.Scheduled;
@@ -16,6 +17,7 @@ import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.gamesr.cache.user.PlayerCache;
 import org.wxd.mmo.gamesr.data.DataCenter;
 import org.wxd.mmo.script.gamesr.goods.PackModule;
+import org.wxd.mmo.script.gamesr.rank.RankModule;
 
 import java.util.List;
 
@@ -34,6 +36,7 @@ public class UserModule {
     @Inject AccountCache accountCache;
     @Inject PlayerCache playerCache;
     @Inject PackModule packModule;
+    @Inject RankModule rankModule;
     @Inject PlayerSnapCache playerSnapCache;
     @Inject DataCenter dataCenter;
 
@@ -55,8 +58,7 @@ public class UserModule {
             for (int i = 0; i < f; i++) {
 
                 Player player = createPlayer();
-                player.setName(StringUtil.uuid32(12));
-                player.setLevel(1);
+
 
                 {
                     List<ItemCfg> build = List.of(
@@ -92,6 +94,9 @@ public class UserModule {
                     );
                     packModule.remove(player, build, OptReason.None, "GM测试");
                 }
+                {
+                    rankModule.update(player);
+                }
                 if (userFirst == null) {
                     userFirst = player;
                 }
@@ -111,12 +116,20 @@ public class UserModule {
     public Player createPlayer() {
         Player player = new Player();
         player.setUid(dataCenter.newUid(UidSeed.Type.Player));
+
+        player.setName(StringUtil.uuid32(12));
+        player.setLevel(RandomUtils.random(10, 100));
+        player.setPower(RandomUtils.random(10000, 10000000));
+
         player.getItemPackMap().computeIfAbsent(PackType.BAG, b -> new ItemPack(PackType.BAG, 100));
         player.getItemPackMap().computeIfAbsent(PackType.STORE, b -> new ItemPack(PackType.STORE, 100));
         playerCache.addCache(player.getUid(), player);
 
         PlayerSnap playerSnap = new PlayerSnap();
         playerSnap.setUid(player.getUid());
+        playerSnap.setName(player.getName());
+        playerSnap.setLv(player.getLevel());
+        playerSnap.setPower(player.getPower());
         playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
         return player;
     }

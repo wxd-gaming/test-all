@@ -8,14 +8,14 @@ import org.wxd.mmo.gamesr.bean.user.Player;
 
 
 /**
- * 添加道具进道具容器
+ * 货币变更处理
  *
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2023-11-08 15:06
  **/
 @Slf4j
 @Singleton
-public class MoneyChangeAction<T extends Item> extends ItemChangeAction<T> {
+public class CurrencyChangeAction<T extends Item> extends ItemChangeAction<T> {
 
     @Override public ItemGroup itemGroup() {
         return ItemGroup.CURRENCY;

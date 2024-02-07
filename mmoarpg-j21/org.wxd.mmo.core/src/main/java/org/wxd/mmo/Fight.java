@@ -20,6 +20,8 @@ public class Fight extends GameBase {
     protected int model;
     /** 当前等级 */
     protected int level;
+    /** 战力 */
+    protected long power;
     /** 当前经验 */
     protected LNum exp = new LNum();
 

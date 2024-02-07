@@ -39,9 +39,10 @@ public class PlayerSnap extends GameBase {
     private int gmLv = 0;
     private int sex;
     private int job;
-    private short lv;
+    private int lv;
+    private long power;
     private long exp;
-    private short vipLv;
+    private int vipLv;
     private long vipExp;
 
     public Account account() {

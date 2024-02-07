@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.Setter;
+import org.wxd.boot.core.lang.rank.RankMap;
+import org.wxd.boot.core.lang.rank.RankScore;
 import org.wxd.boot.net.web.ws.WebSession;
 import org.wxd.boot.net.web.ws.WebSocketClient;
 import org.wxd.boot.starter.IocContext;
@@ -12,8 +14,10 @@ import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.bean.config.ServerConfig;
 import org.wxd.mmo.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.data.ServerData;
+import org.wxd.mmo.gamesr.bean.rank.RankType;
 
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -27,11 +31,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Singleton
 public class DataCenter implements IBeanInit {
 
-    private static DataCenter instance = null;
-
-    public static DataCenter getInstance() {
-        return instance;
-    }
+    @Getter private static DataCenter instance = null;
 
     @Inject MongoService mongoService;
 
@@ -43,9 +43,7 @@ public class DataCenter implements IBeanInit {
     /** 全局数据 */
     private TreeMap<Integer, ServerData> serverDataMap = new TreeMap<>();
 
-    public DataCenter() {
-
-    }
+    private ConcurrentHashMap<RankType, RankMap<Long, RankScore<Long>>> ranks = new ConcurrentHashMap<>();
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         DataCenter.instance = this;
