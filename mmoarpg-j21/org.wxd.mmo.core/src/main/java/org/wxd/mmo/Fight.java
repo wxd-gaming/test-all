@@ -35,9 +35,9 @@ public class Fight extends GameBase {
     @Override public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append(this.getClass().getSimpleName()).append("{");
-        sb.append(", uid='").append(uid).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", level=").append(level);
+        sb.append("uid=").append(uid);
+        sb.append(", name=").append(name);
+        sb.append(", lv=").append(level);
         sb.append('}');
         return sb.toString();
     }
