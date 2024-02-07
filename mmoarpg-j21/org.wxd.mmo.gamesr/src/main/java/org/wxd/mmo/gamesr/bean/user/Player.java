@@ -5,7 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.struct.DbTable;
 import org.wxd.boot.core.lang.LNum;
-import org.wxd.mmo.Fight;
+import org.wxd.mmo.game.bean.fight.Fight;
 import org.wxd.mmo.game.bean.user.PlayerSnap;
 import org.wxd.mmo.game.cache.user.PlayerSnapCache;
 import org.wxd.mmo.gamesr.bean.bag.ItemPack;

@@ -1,9 +1,10 @@
-package org.wxd.mmo;
+package org.wxd.mmo.game.bean.fight;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.core.lang.LNum;
+import org.wxd.mmo.GameBase;
 
 /**
  * 战斗对象
@@ -21,7 +22,7 @@ public class Fight extends GameBase {
     /** 当前等级 */
     protected int level;
     /** 战力 */
-    protected long power;
+    protected long fightPower;
     /** 当前经验 */
     protected LNum exp = new LNum();
 

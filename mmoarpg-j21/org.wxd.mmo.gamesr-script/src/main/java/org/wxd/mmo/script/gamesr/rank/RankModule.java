@@ -44,7 +44,7 @@ public class RankModule implements IShutdown {
         }
         {
             RankMap<Long, ? extends RankScore<Long>> powerRankMap = rankMap(RankType.Power);
-            powerRankMap.setScore(player.getUid(), player.getPower());
+            powerRankMap.setScore(player.getUid(), player.getFightPower());
 
             Collection<? extends RankScore<Long>> powerRange = powerRankMap.getRange(0, 10);
             if (powerRange.size() == 10) {

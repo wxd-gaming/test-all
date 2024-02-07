@@ -119,7 +119,7 @@ public class UserModule {
 
         player.setName(StringUtil.uuid32(12));
         player.setLevel(RandomUtils.random(10, 100));
-        player.setPower(RandomUtils.random(10000, 10000000));
+        player.setFightPower(RandomUtils.random(10000, 10000000));
 
         player.getItemPackMap().computeIfAbsent(PackType.BAG, b -> new ItemPack(PackType.BAG, 100));
         player.getItemPackMap().computeIfAbsent(PackType.STORE, b -> new ItemPack(PackType.STORE, 100));
@@ -129,7 +129,7 @@ public class UserModule {
         playerSnap.setUid(player.getUid());
         playerSnap.setName(player.getName());
         playerSnap.setLv(player.getLevel());
-        playerSnap.setPower(player.getPower());
+        playerSnap.setPower(player.getFightPower());
         playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
         return player;
     }

@@ -158,11 +158,11 @@ public class ItemChangeAction<T extends Item> implements IAction {
     }
 
 
-    protected long itemNum(Player player, PackType packType, int cfg) {
+    public long itemNum(Player player, PackType packType, int cfg) {
         return itemNum(player, player.getItemPackMap().get(packType), cfg);
     }
 
-    protected long itemNum(Player player, ItemPack itemPack, int cfg) {
+    public long itemNum(Player player, ItemPack itemPack, int cfg) {
         return itemPack.stream(cfg).mapToLong(LNum::getNum).sum();
     }
 

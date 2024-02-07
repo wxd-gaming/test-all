@@ -22,8 +22,14 @@ public class PackModule {
     @Inject ItemAction itemAction;
 
     /** 判定背包是否足够 */
-    public boolean isEnough(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        return false;
+    public boolean isEnough(Player player, ItemPack itemPack, ItemCfg itemCfg) {
+        return isEnough(player, itemPack, itemCfg.getCfgId(), itemCfg.getNum());
+    }
+
+    public boolean isEnough(Player player, ItemPack itemPack, int cfgId, long needNum) {
+        ItemType itemType = ItemType.as(cfgId);
+        long num = itemAction.changeAction(itemType).itemNum(player, itemPack, cfgId);
+        return num >= needNum;
     }
 
     public void add(Player player, Collection<ItemCfg> items, OptReason optReason, String... logs) {
