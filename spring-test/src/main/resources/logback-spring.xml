@@ -39,11 +39,6 @@
             <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{5}.%M\(\) Line:%-3L] - %msg%n</pattern>
             <charset>utf-8</charset>
         </encoder>
-        <!-- 便于修改时间记录日志 -->
-        <filter class="org.wxd.boot.logback.LogbackResetTimeFilter">
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
         <!--  这个狗东西必须放后面 否则不生效-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/logback/app-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
