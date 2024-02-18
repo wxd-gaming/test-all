@@ -8,6 +8,8 @@ import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.goods.impl.ItemAction;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 背包模块
@@ -20,6 +22,20 @@ import java.util.Collection;
 public class PackModule {
 
     @Inject ItemAction itemAction;
+
+    /** 判定背包是否足够 */
+    public boolean isEnough(Player player, ItemPack itemPack, Collection<ItemCfg> cfgs) {
+        HashMap<Integer, Long> idNums = new HashMap<>();
+        for (ItemCfg cfg : cfgs) {
+            idNums.merge(cfg.getCfgId(), cfg.getNum(), Math::addExact);
+        }
+        for (Map.Entry<Integer, Long> entry : idNums.entrySet()) {
+            if (!isEnough(player, itemPack, entry.getKey(), entry.getValue())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /** 判定背包是否足够 */
     public boolean isEnough(Player player, ItemPack itemPack, ItemCfg itemCfg) {
