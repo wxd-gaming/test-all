@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import scripts.TestApi;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class Main {
 
     static ConfigurableApplicationContext applicationContext;
-    static ConfigurableApplicationContext childContainer;
+    static AnnotationConfigApplicationContext childContainer;
 
     public static void main(String[] args) throws IOException {
 
