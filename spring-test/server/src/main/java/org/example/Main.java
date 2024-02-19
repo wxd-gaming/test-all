@@ -5,12 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.wxd.boot.agent.loader.ClassDirLoader;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
 
 @EnableAsync
 @ConfigurationPropertiesScan
@@ -23,10 +20,10 @@ public class Main {
 
         applicationContext = SpringApplication.run(Main.class, args);
 
-        URLClassLoader urlClassLoader = new URLClassLoader(new URL[]{new File("scripts/target/classes").toURI().toURL()}, Main.class.getClassLoader());
-        Class<?> aClass = urlClassLoader.loadClass("scripts.ScriptMain");
-        Method scriptInit = aClass.getMethod("scriptInit", ConfigurableApplicationContext.class);
-        scriptInit.invoke(null, applicationContext);
+        ClassDirLoader classDirLoader = new ClassDirLoader("scripts/target/classes", Main.class.getClassLoader());
+        Class<?> aClass = classDirLoader.loadClass("scripts.ScriptMain");
+        Method scriptInit = aClass.getMethod("scriptInit", ConfigurableApplicationContext.class, ClassDirLoader.class);
+        scriptInit.invoke(null, applicationContext, classDirLoader);
     }
 
 }

@@ -9,16 +9,17 @@ import org.springframework.web.servlet.DispatcherServlet;
 @Configuration
 public class ScriptConfig {
 
-    @Bean
-    public ServletRegistrationBean resourceServlet(ApplicationContext applicationContext) {
-        DispatcherServlet dispatcherServlet = new DispatcherServlet();
-        dispatcherServlet.setApplicationContext(applicationContext);
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet);
-        //指定urlmapping
-        servletRegistrationBean.addUrlMappings("/test");
-        servletRegistrationBean.setLoadOnStartup(1);
-        servletRegistrationBean.setName("resource");
-        return servletRegistrationBean;
-    }
+//    @Bean
+//    public ServletRegistrationBean resourceServlet(ApplicationContext applicationContext) {
+//        System.out.println("init resourceServlet");
+//        DispatcherServlet dispatcherServlet = new DispatcherServlet();
+//        dispatcherServlet.setApplicationContext(applicationContext);
+//        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet);
+//        //指定urlmapping
+//        servletRegistrationBean.addUrlMappings("/test");
+//        servletRegistrationBean.setLoadOnStartup(1);
+//        servletRegistrationBean.setName("resource");
+//        return servletRegistrationBean;
+//    }
 
 }
