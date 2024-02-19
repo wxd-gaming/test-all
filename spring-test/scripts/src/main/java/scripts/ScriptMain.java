@@ -16,7 +16,6 @@ public class ScriptMain {
         //子容器
         childContainer = new AnnotationConfigApplicationContext("scripts");
         childContainer.setParent(context);
-        childContainer.setApplicationStartup(context.getApplicationStartup());
         //从子容器中获取父容器中的Bean
         HelloController parentService = childContainer.getBean(HelloController.class);
         LoggerFactory.getLogger(Main.class).info("{}", parentService);

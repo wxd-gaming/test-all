@@ -21,7 +21,6 @@ public class IocContext implements ApplicationContextAware {
      * 获取applicationContext
      */
     public static ApplicationContext getApplicationContext() {
-        applicationContext.getAutowireCapableBeanFactory()
         return IocContext.applicationContext;
     }
 
