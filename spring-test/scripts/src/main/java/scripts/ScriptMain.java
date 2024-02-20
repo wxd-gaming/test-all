@@ -27,7 +27,7 @@ public class ScriptMain {
 
         childContainer.scan(ScriptMain.class.getPackageName());
         childContainer.refresh();
-
+        childContainer.start();
 //        scriptInit0(context, classDirLoader);
 
         //从子容器中获取父容器中的Bean
