@@ -11,7 +11,6 @@ import org.wxd.mmo.script.gamesr.goods.impl.IAction;
 import org.wxd.mmo.script.gamesr.goods.impl.ItemAction;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 
 /**
@@ -129,31 +128,31 @@ public class ItemChangeAction<T extends Item> implements IAction {
         if (itemCfgNum.getNum() <= 0)
             throw new UnsupportedOperationException(itemCfg.getCfgId() + " 扣除道具 数量 " + itemCfgNum + " 异常");
 
-        Consumer<Item> action = (item) -> {
-            if (item.getNum() > itemCfgNum.getNum()) {
-                /*扣除部分道具*/
-                item.sub(itemCfgNum.getNum(), 0L);
-                itemCfgNum.setNum(0);
-            } else {
-                itemCfgNum.sub(item.getNum());
-                /*这里是需要扣除全部这个时候不去重设数量直接删除*/
-                Item remove = itemPack.getItems().remove(item.getUid());
-                if (remove == null) throw new RuntimeException("移除道具移除：" + item.getUid());
-            }
-        };
-
         if (itemCfg.getUid() > 0) {
             Item item = itemPack.getItems().get(itemCfg.getUid());
             if (item != null) {
-                action.accept(item);
+                action(itemPack, item, itemCfgNum);
             }
         }
 
         if (itemCfgNum.getNum() > 0) {
             List<Item> collect = itemPack.stream(itemCfg.getCfgId()).toList();
             for (Item item : collect) {
-                action.accept(item);
+                action(itemPack, item, itemCfgNum);
             }
+        }
+    }
+
+    protected void action(ItemPack itemPack, Item item, LNum itemCfgNum) {
+        if (item.getNum() > itemCfgNum.getNum()) {
+            /*扣除部分道具*/
+            item.sub(itemCfgNum.getNum(), 0L);
+            itemCfgNum.setNum(0);
+        } else {
+            itemCfgNum.sub(item.getNum());
+            /*这里是需要扣除全部这个时候不去重设数量直接删除*/
+            Item remove = itemPack.getItems().remove(item.getUid());
+            if (remove == null) throw new RuntimeException("移除道具移除：" + item.getUid());
         }
     }
 

@@ -41,11 +41,11 @@ public class ExpChangeAction extends ItemChangeAction<Item> {
         player.getExp().sub(itemCfg.getNum());
     }
 
-    protected long itemNum(Player player, PackType packType, int cfg) {
+    public long itemNum(Player player, PackType packType, int cfg) {
         return player.getExp().getNum();
     }
 
-    protected long itemNum(Player player, ItemPack itemPack, int cfg) {
+    public long itemNum(Player player, ItemPack itemPack, int cfg) {
         return player.getExp().getNum();
     }
 

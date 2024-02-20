@@ -41,11 +41,11 @@ public class CurrencyChangeAction<T extends Item> extends ItemChangeAction<T> {
         itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), (n1, n2) -> Math.max(0, Math.addExact(n1, n2)));
     }
 
-    protected long itemNum(Player player, PackType packType, int cfg) {
+    public long itemNum(Player player, PackType packType, int cfg) {
         return itemNum(player, player.getItemPackMap().get(packType), cfg);
     }
 
-    protected long itemNum(Player player, ItemPack itemPack, int cfg) {
+    public long itemNum(Player player, ItemPack itemPack, int cfg) {
         return itemPack.getMoneys().getOrDefault(cfg, 0L);
     }
 

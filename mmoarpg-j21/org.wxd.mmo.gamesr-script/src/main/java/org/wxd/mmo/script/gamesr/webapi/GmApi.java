@@ -1,4 +1,4 @@
-package org.wxd.mmo.script.gamesr.gm;
+package org.wxd.mmo.script.gamesr.webapi;
 
 import org.wxd.boot.core.collection.ObjMap;
 import org.wxd.boot.core.str.StringUtil;
@@ -7,6 +7,7 @@ import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;
 import org.wxd.boot.net.web.hs.HttpSession;
 import org.wxd.boot.net.web.hs.controller.cmd.HttpFtp;
+import org.wxd.boot.net.web.hs.controller.cmd.HttpSignCheck;
 import org.wxd.boot.starter.net.controller.RunCode;
 import org.wxd.mmo.gamesr.GameSrAppMain;
 
@@ -15,7 +16,7 @@ import org.wxd.mmo.gamesr.GameSrAppMain;
  * @version: 2023-02-02 16:38
  **/
 @TextController(url = "gm")
-public class GmComment implements HttpFtp, RunCode {
+public class GmApi implements HttpSignCheck, HttpFtp, RunCode {
 
     @TextMapping
     public String index() throws Exception {

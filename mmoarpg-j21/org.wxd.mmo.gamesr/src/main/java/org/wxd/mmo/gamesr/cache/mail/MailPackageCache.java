@@ -2,6 +2,7 @@ package org.wxd.mmo.gamesr.cache.mail;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.core.cache.CachePack;
@@ -25,11 +26,7 @@ import java.util.function.Function;
 @Singleton
 public class MailPackageCache extends CachePack<Long, MailPackage> implements IBeanInit {
 
-    private static MailPackageCache instance = null;
-
-    public static MailPackageCache getInstance() {
-        return instance;
-    }
+    @Getter private static MailPackageCache instance = null;
 
     @Inject MongoService mongoService;
     @Inject RedisService redisService;
@@ -58,7 +55,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
         this.heart = new Function<>() {
             @Override public Boolean apply(MailPackage mailPackage) {
-                if (mailPackage.checkSaveCode()) {
+                if (mailPackage.checkSaveCode()) {/*判定异常是否需要存储*/
                     mongoService.getBatchPool().replace(mailPackage);
                 }
                 return null;

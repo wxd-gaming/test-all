@@ -23,7 +23,7 @@ public class PackModule {
 
     @Inject ItemAction itemAction;
 
-    /** 判定背包是否足够 */
+    /** 扣除道具前判定背包是否足够 */
     public boolean isEnough(Player player, ItemPack itemPack, Collection<ItemCfg> cfgs) {
         HashMap<Integer, Long> idNums = new HashMap<>();
         for (ItemCfg cfg : cfgs) {
@@ -37,11 +37,12 @@ public class PackModule {
         return true;
     }
 
-    /** 判定背包是否足够 */
+    /** 扣除道具前判定背包是否足够 */
     public boolean isEnough(Player player, ItemPack itemPack, ItemCfg itemCfg) {
         return isEnough(player, itemPack, itemCfg.getCfgId(), itemCfg.getNum());
     }
 
+    /** 扣除道具前判定背包是否足够 */
     public boolean isEnough(Player player, ItemPack itemPack, int cfgId, long needNum) {
         ItemType itemType = ItemType.as(cfgId);
         long num = itemAction.changeAction(itemType).itemNum(player, itemPack, cfgId);
