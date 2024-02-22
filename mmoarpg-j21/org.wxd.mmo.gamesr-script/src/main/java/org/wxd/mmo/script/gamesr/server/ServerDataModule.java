@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.i.IShutdownBefore;
 import org.wxd.boot.starter.i.IShutdownEnd;
 import org.wxd.boot.starter.i.IStart;
@@ -24,11 +24,11 @@ import java.util.List;
 @Singleton
 public class ServerDataModule implements IStart, IShutdownBefore, IShutdownEnd {
 
-    @Inject MongoService mongoService;
+    @Inject MysqlService gameDb;
     @Inject DataCenter dataCenter;
 
     @Override public void start(IocContext iocInjector) throws Exception {
-        List<ServerData> serverData = mongoService.queryEntities(ServerData.class);
+        List<ServerData> serverData = gameDb.queryEntities(ServerData.class);
         for (ServerData serverDatum : serverData) {
             dataCenter.getServerDataMap().put(serverDatum.getSid(), serverDatum);
         }
@@ -36,17 +36,17 @@ public class ServerDataModule implements IStart, IShutdownBefore, IShutdownEnd {
 
     @Scheduled("*/5")
     public void save() throws Exception {
-        dataCenter.getServerDataMap().values().forEach(mongoService.getBatchPool()::replace);
+        dataCenter.getServerDataMap().values().forEach(gameDb.getBatchPool()::replace);
     }
 
     @Override public void shutdownBefore() throws Exception {
         log.info("准备关服，开始保存全局数据");
-        dataCenter.getServerDataMap().values().forEach(mongoService::replace);
+        dataCenter.getServerDataMap().values().forEach(gameDb::replace);
     }
 
     @Override public void shutdownEnd() throws Exception {
         log.info("停服完成，开始关闭数据库");
-        mongoService.close();
+        gameDb.close();
     }
 
 

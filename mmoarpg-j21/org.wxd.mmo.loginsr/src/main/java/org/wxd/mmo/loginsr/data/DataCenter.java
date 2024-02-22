@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.loginsr.bean.data.ServerData;
 
@@ -23,13 +23,13 @@ public class DataCenter implements IBeanInit {
 
     @Getter private static DataCenter instance = null;
 
-    @Inject private MongoService loginMongoService;
+    @Inject private MysqlService1 loginDb;
 
     private ServerData serverData;
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
-        serverData = loginMongoService.queryEntity(ServerData.class, 1L);
+        serverData = loginDb.queryEntity(ServerData.class, 1L);
         if (serverData == null) {
             serverData = new ServerData();
             serverData.setUid(1L);

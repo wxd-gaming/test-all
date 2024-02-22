@@ -40,7 +40,7 @@ public class CheckOrder {
         {
             DbConfig dbConfig = new DbConfig();
             dbConfig
-                    .setDbHost("192.168.50.73").setDbPort(27017)
+                    .setDbHost("127.0.0.1").setDbPort(27017)
                     .setDbUser("test")
                     .setDbPwd("test")
                     .setCreateDbBase(true)

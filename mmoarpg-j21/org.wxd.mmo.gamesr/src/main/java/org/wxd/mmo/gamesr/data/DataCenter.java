@@ -10,6 +10,9 @@ import org.wxd.boot.net.web.ws.WebSession;
 import org.wxd.boot.net.web.ws.WebSocketClient;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.MysqlService;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.bean.config.ServerConfig;
 import org.wxd.mmo.core.bean.data.UidSeed;
@@ -33,7 +36,8 @@ public class DataCenter implements IBeanInit {
 
     @Getter private static DataCenter instance = null;
 
-    @Inject MongoService mongoService;
+    @Inject MysqlService gameDb;
+    @Inject MysqlService1 loginDb;
 
     /** 全局的临时id，比如掉落物，怪物的唯一id */
     private final AtomicLong uidSeed = new AtomicLong();

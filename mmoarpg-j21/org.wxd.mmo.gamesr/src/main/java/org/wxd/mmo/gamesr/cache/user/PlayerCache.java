@@ -2,11 +2,12 @@ package org.wxd.mmo.gamesr.cache.user;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.batis.RedisService;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.gamesr.bean.user.Player;
@@ -24,13 +25,9 @@ import java.util.function.Function;
 @Singleton
 public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
 
-    private static PlayerCache instance = null;
+    @Getter private static PlayerCache instance = null;
 
-    public static PlayerCache getInstance() {
-        return instance;
-    }
-
-    @Inject MongoService mongoService;
+    @Inject MysqlService gameDb;
     @Inject RedisService redisService;
 
     public PlayerCache() {
@@ -41,7 +38,7 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
 
         this.loading = new Function<>() {
             @Override public Player apply(Long aLong) {
-                Player player = mongoService.queryEntity(Player.class, aLong);
+                Player player = gameDb.queryEntity(Player.class, aLong);
                 if (player == null) {
                     log.info("数据库查询失败：{}", aLong);
                 } else {
@@ -59,7 +56,7 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
 
             @Override public Boolean apply(Player player) {
                 if (player.checkSaveCode()) {
-                    mongoService.getBatchPool().replace(player);
+                    gameDb.getBatchPool().replace(player);
                 }
                 return !player.online();
             }
@@ -68,7 +65,7 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
 
         this.unload = new ConsumerE2<>() {
             @Override public void accept(Player player, String s) throws Exception {
-                mongoService.getBatchPool().replace(player);
+                gameDb.getBatchPool().replace(player);
                 log.info("缓存过期移除：{}, {}", player, s);
             }
         };
@@ -80,11 +77,11 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
     }
 
     public long accountDbSize() {
-        return mongoService.estimatedDocumentCount(Player.class);
+        return gameDb.rowCount(Player.class);
     }
 
     @Override public void addCache(Long aLong, Player player) {
         super.addCache(aLong, player);
-        mongoService.getBatchPool().replace(player);
+        gameDb.getBatchPool().replace(player);
     }
 }

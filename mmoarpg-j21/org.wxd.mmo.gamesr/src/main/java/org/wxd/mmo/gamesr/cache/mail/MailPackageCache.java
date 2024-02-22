@@ -7,7 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.batis.RedisService;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
@@ -28,7 +29,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
     @Getter private static MailPackageCache instance = null;
 
-    @Inject MongoService mongoService;
+    @Inject MysqlService gameDb;
     @Inject RedisService redisService;
 
     public MailPackageCache() {
@@ -39,7 +40,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
         this.loading = new Function<>() {
             @Override public MailPackage apply(Long aLong) {
-                MailPackage mailPackage = mongoService.queryEntity(MailPackage.class, aLong);
+                MailPackage mailPackage = gameDb.queryEntity(MailPackage.class, aLong);
                 if (mailPackage == null) {
                     log.info("数据库查询失败：{}", aLong);
                 } else {
@@ -56,7 +57,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
         this.heart = new Function<>() {
             @Override public Boolean apply(MailPackage mailPackage) {
                 if (mailPackage.checkSaveCode()) {/*判定异常是否需要存储*/
-                    mongoService.getBatchPool().replace(mailPackage);
+                    gameDb.getBatchPool().replace(mailPackage);
                 }
                 return null;
             }
@@ -64,7 +65,7 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
 
         this.unload = new ConsumerE2<>() {
             @Override public void accept(MailPackage mailPackage, String s) throws Exception {
-                mongoService.getBatchPool().replace(mailPackage);
+                gameDb.getBatchPool().replace(mailPackage);
                 log.info("缓存过期移除：{}, {}", mailPackage, s);
             }
         };
@@ -76,12 +77,12 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
     }
 
     public long accountDbSize() {
-        return mongoService.estimatedDocumentCount(Player.class);
+        return gameDb.rowCount(Player.class);
     }
 
     @Override public void addCache(Long aLong, MailPackage mailPackage) {
         super.addCache(aLong, mailPackage);
-        mongoService.getBatchPool().replace(mailPackage);
+        gameDb.getBatchPool().replace(mailPackage);
     }
 
 }

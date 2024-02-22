@@ -6,6 +6,7 @@ import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.batis.RedisService;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.game.bean.user.PlayerSnap;
@@ -28,7 +29,7 @@ public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBea
         return instance;
     }
 
-    @Inject MongoService1 mongoService1;
+    @Inject MysqlService1 loginDb;
     @Inject RedisService redisService;
 
     public PlayerSnapCache() {
@@ -65,15 +66,16 @@ public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBea
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
+        loginDb.createTable(PlayerSnap.class);
     }
 
     public long accountDbSize() {
-        return mongoService1.estimatedDocumentCount(PlayerSnap.class);
+        return loginDb.rowCount(PlayerSnap.class);
     }
 
     @Override public void addCache(Long aLong, PlayerSnap playerSnap) {
         super.addCache(aLong, playerSnap);
-        mongoService1.getBatchPool().replace(playerSnap);
+        loginDb.getBatchPool().replace(playerSnap);
     }
 
 }

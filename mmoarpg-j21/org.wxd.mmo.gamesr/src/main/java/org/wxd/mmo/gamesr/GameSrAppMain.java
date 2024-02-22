@@ -9,6 +9,8 @@ import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.starter.Starter;
 import org.wxd.boot.starter.batis.MongoService;
+import org.wxd.boot.starter.batis.MysqlService;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.mmo.core.common.cache.BeanBase;
 
 import java.io.File;
@@ -38,8 +40,10 @@ public class GameSrAppMain {
                 BeanBase.class
         );
 
-        MongoService bean = Starter.curIocInjector().getInstance(MongoService.class);
-        bean.checkDataBase("org.wxd.mmo.gamesr");
+        MysqlService gameDb = Starter.curIocInjector().getInstance(MysqlService.class);
+        gameDb.checkDataBase("org.wxd.mmo.gamesr");
+
+        MysqlService1 loginDb = Starter.curIocInjector().getInstance(MysqlService1.class);
 
     }
 

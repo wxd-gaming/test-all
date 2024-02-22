@@ -2,6 +2,7 @@ package org.wxd.mmo.core.common.cache.user;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.BsonInt32;
 import org.bson.BsonString;
@@ -10,8 +11,8 @@ import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.agent.function.SLFunction1;
 import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
-import org.wxd.boot.starter.batis.RedisService;
+import org.wxd.boot.starter.batis.MongoService1;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.login.bean.user.Account;
 
@@ -28,14 +29,9 @@ import java.util.function.Function;
 @Singleton
 public class AccountCache extends CachePack<Long, Account> implements IBeanInit {
 
-    private static AccountCache instance = null;
+    @Getter private static AccountCache instance = null;
 
-    public static AccountCache getInstance() {
-        return instance;
-    }
-
-    @Inject MongoService mongoService;
-    @Inject RedisService redisService;
+    @Inject MysqlService1 loginDb;
 
     public AccountCache() {
 
@@ -46,7 +42,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         loading = new Function<Long, Account>() {
 
             @Override public Account apply(Long aLong) {
-                Account account = mongoService.queryEntity(Account.class, aLong);
+                Account account = loginDb.queryEntity(Account.class, aLong);
                 if (account == null) {
                     log.info("从数据库读取失败：{}", aLong);
                 }
@@ -74,15 +70,16 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         instance = this;
+        loginDb.createTable(Account.class);
     }
 
     public long accountDbSize() {
-        return mongoService.estimatedDocumentCount(Account.class);
+        return loginDb.rowCount(Account.class);
     }
 
     @Override public void addCache(Long aLong, Account account) {
         super.addCache(aLong, account);
-        mongoService.getBatchPool().replace(account);
+        loginDb.getBatchPool().replace(account);
     }
 
     /** 这里所有的都会加载 ，包括跨服的数据 */
@@ -93,7 +90,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
 
         SLFunction1<Account, String> getAccount = Account::getAccountName;
         whereDocument.append(getAccount.ofMethodName(), new BsonString(accountName));
-        Account account = mongoService.queryEntity(Account.class, whereDocument);
+        Account account = loginDb.queryEntity(Account.class, whereDocument);
         if (account == null) {
             log.info("从数据库读取失败：{}, {}", sid, accountName);
         }

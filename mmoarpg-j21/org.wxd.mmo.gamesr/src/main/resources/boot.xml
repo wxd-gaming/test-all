@@ -36,48 +36,31 @@
         </headers>
     </http>
     <mysql>
-        <name>default</name>
+        <name>game-db</name>
         <show_sql>true</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
-        <dbHost>192.168.50.73</dbHost>
+        <dbHost>127.0.0.1</dbHost>
         <dbPort>3306</dbPort>
-        <dbBase>test3</dbBase>
+        <dbBase>test-game</dbBase>
         <dbUser>root</dbUser>
         <dbPwd>test</dbPwd>
     </mysql>
-    <mongodb>
-        <name>default</name>
-        <show_sql>false</show_sql>
+    <mysql1>
+        <name>game-db</name>
+        <show_sql>true</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
-        <dbHost>192.168.50.73</dbHost>
-        <dbPort>27017</dbPort>
-        <dbBase>mmo-6003</dbBase>
-        <dbUser>test</dbUser>
+        <dbHost>127.0.0.1</dbHost>
+        <dbPort>3306</dbPort>
+        <dbBase>test-login</dbBase>
+        <dbUser>root</dbUser>
         <dbPwd>test</dbPwd>
-    </mongodb>
-    <mongodb1>
-        <name>mongo-login</name>
-        <show_sql>false</show_sql>
-        <connectionPool>true</connectionPool>
-        <batchSizeThread>2</batchSizeThread>
-        <dbHost>192.168.50.73</dbHost>
-        <dbPort>27017</dbPort>
-        <dbBase>mmo-login</dbBase>
-        <dbUser>test</dbUser>
-        <dbPwd>test</dbPwd>
-    </mongodb1>
+    </mysql1>
     <redis>
         <name>数据源1</name>
-        <dbHost>192.168.50.73</dbHost>
+        <dbHost>127.0.0.1</dbHost>
         <dbPort>6379</dbPort>
         <dbPwd>test</dbPwd>
     </redis>
-    <redis2>
-        <name>数据源2</name>
-        <dbHost>192.168.50.73</dbHost>
-        <dbPort>6379</dbPort>
-        <dbPwd>test</dbPwd>
-    </redis2>
 </bootConfig>
