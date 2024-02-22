@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.batis.struct.DbColumn;
 import org.wxd.boot.batis.struct.DbTable;
-import org.wxd.mmo.bean.data.UidSeed;
+import org.wxd.mmo.core.bean.data.UidSeed;
 
 /**
  * 全局数据

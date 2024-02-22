@@ -2,7 +2,7 @@ package org.wxd.mmo.loginsr;
 
 import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.starter.UserModule;
-import org.wxd.mmo.bean.config.ServerConfig;
+import org.wxd.mmo.core.bean.config.ServerConfig;
 
 public class LoginUserModule extends UserModule {
 

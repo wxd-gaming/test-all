@@ -5,14 +5,14 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.struct.DbTable;
 import org.wxd.boot.core.lang.LNum;
-import org.wxd.mmo.game.bean.fight.Fight;
-import org.wxd.mmo.game.bean.user.PlayerSnap;
-import org.wxd.mmo.game.cache.user.PlayerSnapCache;
+import org.wxd.mmo.core.game.bean.fight.Fight;
+import org.wxd.mmo.core.game.bean.user.PlayerSnap;
+import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
 import org.wxd.mmo.gamesr.bean.bag.ItemPack;
 import org.wxd.mmo.gamesr.bean.bag.PackType;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
 import org.wxd.mmo.gamesr.cache.mail.MailPackageCache;
-import org.wxd.mmo.login.bean.user.Account;
+import org.wxd.mmo.core.login.bean.user.Account;
 
 import java.util.concurrent.ConcurrentHashMap;
 

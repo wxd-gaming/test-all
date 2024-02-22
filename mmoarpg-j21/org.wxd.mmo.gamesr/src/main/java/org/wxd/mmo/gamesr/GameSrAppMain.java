@@ -9,7 +9,7 @@ import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.starter.Starter;
 import org.wxd.boot.starter.batis.MongoService;
-import org.wxd.mmo.game.BeanBase;
+import org.wxd.mmo.core.common.cache.BeanBase;
 
 import java.io.File;
 
@@ -34,8 +34,8 @@ public class GameSrAppMain {
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
         Starter.startBoot(
                 GameSrAppMain.class,
-                BeanBase.class,
-                org.wxd.mmo.common.cache.BeanBase.class
+                org.wxd.mmo.core.game.BeanBase.class,
+                BeanBase.class
         );
 
         MongoService bean = Starter.curIocInjector().getInstance(MongoService.class);

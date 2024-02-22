@@ -5,10 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.wxd.mmo.GameBase;
+import org.wxd.mmo.core.GameBase;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

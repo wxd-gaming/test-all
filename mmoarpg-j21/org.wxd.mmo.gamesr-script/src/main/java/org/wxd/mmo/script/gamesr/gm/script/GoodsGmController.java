@@ -2,7 +2,7 @@ package org.wxd.mmo.script.gamesr.gm.script;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.google.inject.Singleton;
-import org.wxd.mmo.login.bean.user.Account;
+import org.wxd.mmo.core.login.bean.user.Account;
 import org.wxd.mmo.script.gamesr.gm.Gm;
 import org.wxd.mmo.script.gamesr.gm.IGm;
 

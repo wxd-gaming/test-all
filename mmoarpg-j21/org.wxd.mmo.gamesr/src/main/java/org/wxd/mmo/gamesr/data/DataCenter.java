@@ -11,8 +11,8 @@ import org.wxd.boot.net.web.ws.WebSocketClient;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MongoService;
 import org.wxd.boot.starter.i.IBeanInit;
-import org.wxd.mmo.bean.config.ServerConfig;
-import org.wxd.mmo.bean.data.UidSeed;
+import org.wxd.mmo.core.bean.config.ServerConfig;
+import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.data.ServerData;
 import org.wxd.mmo.gamesr.bean.rank.RankType;
 

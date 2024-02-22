@@ -2,7 +2,7 @@ package org.wxd.mmo.script.gamesr.mail;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import org.wxd.mmo.bean.data.UidSeed;
+import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
 import org.wxd.mmo.gamesr.bean.mail.impl.Mail;
