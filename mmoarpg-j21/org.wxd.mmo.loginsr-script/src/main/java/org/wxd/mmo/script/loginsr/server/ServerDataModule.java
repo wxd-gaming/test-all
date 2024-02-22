@@ -28,17 +28,17 @@ public class ServerDataModule implements IStart, IShutdownBefore, IShutdownEnd {
 
     @Scheduled("*/5")
     public void save() throws Exception {
-        dataCenter.getLoginMongoService().getBatchPool().replace(dataCenter.getServerData());
+        dataCenter.getLoginDb().getBatchPool().replace(dataCenter.getServerData());
     }
 
     @Override public void shutdownBefore() throws Exception {
         log.info("准备关服，开始保存全局数据");
-        dataCenter.getLoginMongoService().replace(dataCenter.getServerData());
+        dataCenter.getLoginDb().replace(dataCenter.getServerData());
     }
 
     @Override public void shutdownEnd() throws Exception {
         log.info("停服完成，开始关闭数据库");
-        dataCenter.getLoginMongoService().close();
+        dataCenter.getLoginDb().close();
     }
 
 
