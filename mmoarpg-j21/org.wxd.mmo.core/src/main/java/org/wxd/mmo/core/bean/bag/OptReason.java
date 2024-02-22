@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag;
+package org.wxd.mmo.core.bean.bag;
 
 
 import org.wxd.boot.core.collection.MapOf;
@@ -7,27 +7,25 @@ import org.wxd.boot.core.lang.IEnum;
 import java.util.Map;
 
 /**
- * 道具类型
+ * 操作原因
  *
  * @author: Troy.Chen(無心道, 15388152619)
- * @version: 2023-11-07 20:16
+ * @version: 2023-11-08 15:14
  **/
-public enum ItemGroup implements IEnum {
+public enum OptReason implements IEnum {
     None(0, "默认值"),
-    ITEM(1, "普通道具"),
-    CURRENCY(2, "货币"),
-    EQUIP(3, "装备");
+    ;
 
-    private static final Map<Integer, ItemGroup> static_map = MapOf.asMap(ItemGroup::getCode, ItemGroup.values());
+    private static final Map<Integer, OptReason> static_map = MapOf.asMap(OptReason::getCode, OptReason.values());
 
-    public static ItemGroup as(int value) {
+    public static OptReason as(int value) {
         return static_map.get(value);
     }
 
     private final int code;
     private final String comment;
 
-    ItemGroup(int code, String comment) {
+    OptReason(int code, String comment) {
         this.code = code;
         this.comment = comment;
     }

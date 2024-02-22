@@ -1,7 +1,7 @@
 package org.wxd.mmo.script.gamesr.goods.impl;
 
-import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
-import org.wxd.mmo.gamesr.bean.bag.ItemType;
+import org.wxd.mmo.core.bean.bag.ItemGroup;
+import org.wxd.mmo.core.bean.bag.ItemType;
 
 /**
  * 控制器

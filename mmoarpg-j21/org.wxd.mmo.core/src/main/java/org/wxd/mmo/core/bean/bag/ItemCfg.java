@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag;
+package org.wxd.mmo.core.bean.bag;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.i.IBeanInit;
-import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
+import org.wxd.mmo.core.bean.bag.ItemCfg;
 
 import java.util.ArrayList;
 import java.util.Collection;

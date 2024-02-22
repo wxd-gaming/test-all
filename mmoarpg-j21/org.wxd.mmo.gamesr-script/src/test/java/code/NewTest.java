@@ -1,14 +1,13 @@
 package code;
 
 import com.alibaba.fastjson.annotation.JSONCreator;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.junit.Test;
 import org.wxd.boot.core.lang.ObjectBase;
 import org.wxd.boot.core.str.json.FastJsonUtil;
-import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
+import org.wxd.mmo.core.bean.bag.ItemCfg;
 
 /**
  * @author: Troy.Chen(無心道, 15388152619)

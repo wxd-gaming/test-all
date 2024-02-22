@@ -1,11 +1,11 @@
-package org.wxd.mmo.gamesr.bean.bag.goods;
+package org.wxd.mmo.core.bean.bag.goods;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.core.lang.LNum;
 import org.wxd.boot.core.timer.MyClock;
-import org.wxd.mmo.gamesr.bean.bag.ItemType;
+import org.wxd.mmo.core.bean.bag.ItemType;
 
 /**
  * 普通道具

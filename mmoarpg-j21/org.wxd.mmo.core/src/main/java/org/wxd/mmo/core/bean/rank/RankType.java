@@ -1,5 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag;
-
+package org.wxd.mmo.core.bean.rank;
 
 import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
@@ -7,25 +6,27 @@ import org.wxd.boot.core.lang.IEnum;
 import java.util.Map;
 
 /**
- * 操作原因
+ * 排行榜类型
  *
  * @author: Troy.Chen(無心道, 15388152619)
- * @version: 2023-11-08 15:14
+ * @version: 2024-02-07 20:30
  **/
-public enum OptReason implements IEnum {
+public enum RankType implements IEnum {
     None(0, "默认值"),
+    Power(1, "战力"),
+    Level(2, "等级"),
     ;
 
-    private static final Map<Integer, OptReason> static_map = MapOf.asMap(OptReason::getCode, OptReason.values());
+    private static final Map<Integer, RankType> static_map = MapOf.asMap(RankType::getCode, RankType.values());
 
-    public static OptReason as(int value) {
+    public static RankType as(int value) {
         return static_map.get(value);
     }
 
     private final int code;
     private final String comment;
 
-    OptReason(int code, String comment) {
+    RankType(int code, String comment) {
         this.code = code;
         this.comment = comment;
     }

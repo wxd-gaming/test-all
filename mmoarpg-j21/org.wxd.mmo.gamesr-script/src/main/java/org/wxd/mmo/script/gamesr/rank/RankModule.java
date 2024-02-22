@@ -5,11 +5,10 @@ import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.core.lang.rank.RankMap;
 import org.wxd.boot.core.lang.rank.RankScore;
-import org.wxd.boot.starter.batis.MongoService;
 import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.i.IShutdown;
 import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
-import org.wxd.mmo.gamesr.bean.rank.RankType;
+import org.wxd.mmo.core.bean.rank.RankType;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.gamesr.data.DataCenter;
 

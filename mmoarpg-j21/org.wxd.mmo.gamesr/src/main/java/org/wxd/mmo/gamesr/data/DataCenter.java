@@ -9,15 +9,13 @@ import org.wxd.boot.core.lang.rank.RankScore;
 import org.wxd.boot.net.web.ws.WebSession;
 import org.wxd.boot.net.web.ws.WebSocketClient;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService;
-import org.wxd.boot.starter.batis.MongoService1;
 import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.bean.config.ServerConfig;
 import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.data.ServerData;
-import org.wxd.mmo.gamesr.bean.rank.RankType;
+import org.wxd.mmo.core.bean.rank.RankType;
 
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;

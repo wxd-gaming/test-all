@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag;
+package org.wxd.mmo.core.bean.bag;
 
 
 import org.wxd.boot.core.collection.MapOf;

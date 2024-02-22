@@ -1,12 +1,11 @@
-package org.wxd.mmo.gamesr.bean.bag;
+package org.wxd.mmo.core.bean.bag;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
-import org.wxd.boot.core.lang.LNum;
-import org.wxd.mmo.gamesr.bean.bag.goods.Item;
+import org.wxd.mmo.core.bean.bag.goods.Item;
 
 import java.util.Collection;
 import java.util.Optional;

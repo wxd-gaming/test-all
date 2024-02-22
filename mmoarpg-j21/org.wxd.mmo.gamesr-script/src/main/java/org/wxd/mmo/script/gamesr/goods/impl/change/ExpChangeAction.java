@@ -2,8 +2,9 @@ package org.wxd.mmo.script.gamesr.goods.impl.change;
 
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.mmo.core.bean.bag.*;
 import org.wxd.mmo.gamesr.bean.bag.*;
-import org.wxd.mmo.gamesr.bean.bag.goods.Item;
+import org.wxd.mmo.core.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.user.Player;
 
 

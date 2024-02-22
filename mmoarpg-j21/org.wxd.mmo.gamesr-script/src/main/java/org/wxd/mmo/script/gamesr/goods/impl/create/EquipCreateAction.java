@@ -2,10 +2,10 @@ package org.wxd.mmo.script.gamesr.goods.impl.create;
 
 import com.google.inject.Singleton;
 import org.wxd.boot.core.lang.RandomUtils;
-import org.wxd.mmo.gamesr.bean.bag.ItemCfg;
-import org.wxd.mmo.gamesr.bean.bag.ItemGroup;
-import org.wxd.mmo.gamesr.bean.bag.ItemType;
-import org.wxd.mmo.gamesr.bean.bag.goods.Equip;
+import org.wxd.mmo.core.bean.bag.ItemCfg;
+import org.wxd.mmo.core.bean.bag.ItemGroup;
+import org.wxd.mmo.core.bean.bag.ItemType;
+import org.wxd.mmo.core.bean.bag.goods.Equip;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.goods.impl.IAction;
 

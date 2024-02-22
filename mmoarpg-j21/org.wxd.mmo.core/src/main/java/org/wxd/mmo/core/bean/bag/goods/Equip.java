@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag.goods;
+package org.wxd.mmo.core.bean.bag.goods;
 
 import lombok.Getter;
 import lombok.Setter;

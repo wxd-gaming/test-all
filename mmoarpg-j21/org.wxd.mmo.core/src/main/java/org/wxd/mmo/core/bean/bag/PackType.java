@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.bag;
+package org.wxd.mmo.core.bean.bag;
 
 import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
@@ -14,7 +14,9 @@ import java.util.Map;
 public enum PackType implements IEnum {
     None(0, "默认值"),
     BAG(1, "随身背包"),
-    STORE(2, "仓库"),
+    STORE(2, "随身仓库"),
+    NPC_STORE(2, "NPC仓库"),
+    GUILD(10, "公会"),
     ;
 
     private static final Map<Integer, PackType> static_map = MapOf.asMap(PackType::getCode, PackType.values());
