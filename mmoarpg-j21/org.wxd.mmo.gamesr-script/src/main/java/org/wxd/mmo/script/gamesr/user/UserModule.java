@@ -13,7 +13,6 @@ import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.core.common.cache.user.AccountCache;
 import org.wxd.mmo.core.game.bean.user.PlayerSnap;
 import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
-import org.wxd.mmo.gamesr.bean.bag.*;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.gamesr.cache.user.PlayerCache;
 import org.wxd.mmo.gamesr.data.DataCenter;
