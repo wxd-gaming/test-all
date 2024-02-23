@@ -15,7 +15,7 @@ public enum PackType implements IEnum {
     None(0, "默认值"),
     BAG(1, "随身背包"),
     STORE(2, "随身仓库"),
-    NPC_STORE(2, "NPC仓库"),
+    NPC_STORE(3, "NPC仓库"),
     GUILD(10, "公会"),
     ;
 

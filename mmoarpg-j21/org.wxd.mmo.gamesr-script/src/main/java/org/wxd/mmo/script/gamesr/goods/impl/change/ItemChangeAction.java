@@ -76,8 +76,10 @@ public class ItemChangeAction<T extends Item> implements IAction {
     }
 
     protected void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        Item item = itemAction.createItem(player, itemCfg);
-        add0(player, itemPack, item, optReason, logs);
+        List<Item> items = itemAction.createItem(player, itemCfg);
+        for (Item item : items) {
+            add0(player, itemPack, item, optReason, logs);
+        }
     }
 
     protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {

@@ -9,6 +9,9 @@ import org.wxd.mmo.core.bean.bag.goods.Equip;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.goods.impl.IAction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * @author: Troy.Chen(無心道, 15388152619)
@@ -22,16 +25,27 @@ public class EquipCreateAction extends ItemCreateAction<Equip> implements IActio
     }
 
     @Override public ItemType itemType() {
-        return ItemType.None;
+        return super.itemType();
+    }
+
+    @Override public List<Equip> createItem(Player player, ItemCfg itemCfg) {
+        List<Equip> equips = new ArrayList<>();
+        for (int i = 0; i < itemCfg.getNum(); i++) {
+            Equip equip = newInstance();
+            initItem(equip, itemCfg.getCfgId(), 1, itemCfg.isBind(), itemCfg.getExpire());
+            equips.add(equip);
+        }
+        return List.copyOf(equips);
     }
 
     @Override protected Equip newInstance() {
         return new Equip();
     }
 
-    @Override protected void initItem(Player player, Equip equip, ItemCfg itemCfg) {
-        super.initItem(player, equip, itemCfg);
+    @Override protected void initItem(Equip equip, int cfgId, long num, boolean bind, long expire) {
+        super.initItem(equip, cfgId, num, bind, expire);
         /*模拟战斗力*/
         equip.setFightPower(RandomUtils.random(33, 99999));
     }
+
 }

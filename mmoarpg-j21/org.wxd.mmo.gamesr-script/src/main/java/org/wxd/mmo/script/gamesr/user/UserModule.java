@@ -71,11 +71,11 @@ public class UserModule {
                             ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(1000).build(),
                             ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(100000).build(),
 
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(10).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(10).build(),
 
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build(),
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build()
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(10).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(10).build()
                     );
 
                     packModule.add(player, build, OptReason.None, "GM测试");
@@ -88,9 +88,9 @@ public class UserModule {
 
                             ItemCfg.builder().setCfgId(ItemType.Exp.getCode()).setNum(1000).build(),
 
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(1).build(),
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Weapon.getCode()).setNum(2).build(),
 
-                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(1).build()
+                            ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(2).build()
                     );
                     packModule.remove(player, build, OptReason.None, "GM测试");
                 }

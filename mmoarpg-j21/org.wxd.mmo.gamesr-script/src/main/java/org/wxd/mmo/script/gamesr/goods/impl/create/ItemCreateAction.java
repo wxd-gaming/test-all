@@ -3,14 +3,16 @@ package org.wxd.mmo.script.gamesr.goods.impl.create;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.wxd.boot.core.timer.MyClock;
-import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.core.bean.bag.ItemCfg;
 import org.wxd.mmo.core.bean.bag.ItemGroup;
 import org.wxd.mmo.core.bean.bag.ItemType;
 import org.wxd.mmo.core.bean.bag.goods.Item;
+import org.wxd.mmo.core.bean.data.UidSeed;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.gamesr.data.DataCenter;
 import org.wxd.mmo.script.gamesr.goods.impl.IAction;
+
+import java.util.List;
 
 
 /**
@@ -32,26 +34,26 @@ public class ItemCreateAction<T extends Item> implements IAction {
         return ItemType.None;
     }
 
-    public T createItem(Player player, ItemCfg itemCfg) {
+    public List<T> createItem(Player player, ItemCfg itemCfg) {
         T t = newInstance();
-        initItem(player, t, itemCfg);
-        return t;
+        initItem(t, itemCfg.getCfgId(), itemCfg.getNum(), itemCfg.isBind(), itemCfg.getExpire());
+        return List.of(t);
     }
 
     protected T newInstance() {
         return (T) new Item();
     }
 
-    protected void initItem(Player player, T t, ItemCfg itemCfg) {
-        if (itemCfg.getNum() <= 0)
-            throw new UnsupportedOperationException(itemCfg.getCfgId() + " 生成道具数量 " + itemCfg.getNum() + " 异常");
+    protected void initItem(T t, int cfgId, long num, boolean bind, long expire) {
+        if (num <= 0)
+            throw new UnsupportedOperationException(cfgId + " 生成道具数量 " + num + " 异常");
         t
                 .setUid(dataCenter.newUid(UidSeed.Type.Goods))
-                .setCfgId(itemCfg.getCfgId())
-                .setNum(itemCfg.getNum())
-                .setBind(itemCfg.isBind());
-        if (itemCfg.getExpire() > 0) {
-            t.setExpireTime(MyClock.millis() + itemCfg.getExpire());
+                .setCfgId(cfgId)
+                .setNum(num)
+                .setBind(bind);
+        if (expire > 0) {
+            t.setExpireTime(MyClock.millis() + expire);
         }
     }
 
