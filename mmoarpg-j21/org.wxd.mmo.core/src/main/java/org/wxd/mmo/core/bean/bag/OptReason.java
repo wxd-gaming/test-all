@@ -14,6 +14,10 @@ import java.util.Map;
  **/
 public enum OptReason implements IEnum {
     None(0, "默认值"),
+    INIT_PLAYER(1, "角色初始化"),
+    USE(2, "使用"),
+    TASK_ACCEPT(3, "接取任务"),
+    TASK_FINISH(4, "完成任务"),
     ;
 
     private static final Map<Integer, OptReason> static_map = MapOf.asMap(OptReason::getCode, OptReason.values());

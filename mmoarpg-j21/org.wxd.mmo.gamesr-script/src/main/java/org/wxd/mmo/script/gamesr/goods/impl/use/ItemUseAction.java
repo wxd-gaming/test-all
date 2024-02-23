@@ -2,6 +2,7 @@ package org.wxd.mmo.script.gamesr.goods.impl.use;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
 import org.wxd.mmo.core.bean.bag.ItemGroup;
 import org.wxd.mmo.core.bean.bag.ItemPack;
 import org.wxd.mmo.core.bean.bag.ItemType;
@@ -20,6 +21,7 @@ import java.util.Collection;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2024-02-23 11:31
  **/
+@Slf4j
 @Singleton
 public class ItemUseAction<T extends Item> implements IAction {
 
@@ -39,10 +41,13 @@ public class ItemUseAction<T extends Item> implements IAction {
         for (Item item : items) {
             if (item.getNum() >= num) {
                 packModule.removeItem(player, itemPack, item, num, optReason, logs);
+                num = 0;
             } else {
                 num -= item.getNum();
                 packModule.removeItem(player, itemPack, item, item.getNum(), optReason, logs);
             }
+            if (num <= 0)
+                break;
         }
     }
 

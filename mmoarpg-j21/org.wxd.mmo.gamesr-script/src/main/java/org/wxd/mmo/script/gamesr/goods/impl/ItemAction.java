@@ -49,6 +49,14 @@ public class ItemAction implements IBeanInit {
                     ItemType itemType = bean.itemType();
                     changeActionTable.put(itemGroup, itemType, bean);
                 });
+
+        build.classWithSuper(ItemUseAction.class)
+                .forEach(c -> {
+                    ItemUseAction<? super Item> bean = (ItemUseAction) context.getInstance(c);
+                    ItemGroup itemGroup = bean.itemGroup();
+                    ItemType itemType = bean.itemType();
+                    useActionTable.put(itemGroup, itemType, bean);
+                });
     }
 
     public final <R extends Item> List<R> createItem(Player player, ItemCfg itemCfg) {
@@ -76,7 +84,7 @@ public class ItemAction implements IBeanInit {
         return useActionTable.opt(itemType.getItemGroup(), itemType)
                 .or(() -> Optional.ofNullable(useActionTable.get(itemType.getItemGroup(), ItemType.None)))
                 .or(() -> Optional.ofNullable(useActionTable.get(ItemGroup.None, ItemType.None)))
-                .orElseThrow(() -> new RuntimeException("item change action 查找失败 " + itemType.toString()));
+                .orElseThrow(() -> new RuntimeException("item use action 查找失败 " + itemType.toString()));
     }
 
 }

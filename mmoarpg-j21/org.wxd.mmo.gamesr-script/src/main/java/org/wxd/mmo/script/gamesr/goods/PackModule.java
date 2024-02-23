@@ -144,6 +144,15 @@ public class PackModule {
     }
 
     /** 使用道具 */
+    public void use(Player player, int cfgId, long num, OptReason optReason, String... logs) {
+        use(player, PackType.BAG, cfgId, num, optReason, logs);
+    }
+
+    public void use(Player player, PackType packType, int cfgId, long num, OptReason optReason, String... logs) {
+        use(player, player.itemPack(packType), cfgId, num, optReason, logs);
+    }
+
+    /** 使用道具 */
     public void use(Player player, ItemPack itemPack, int cfgId, long num, OptReason optReason, String... logs) {
         ItemType itemType = ItemType.as(cfgId);
         itemAction

@@ -44,7 +44,7 @@ public class ItemChangeAction<T extends Item> implements IAction {
     public final void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
         add0(player, itemPack, itemCfg, optReason, logs);
-        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, new：{}, 原因：{}{}",
+        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, new：{}, 原因：{}-{}",
                 player,
                 itemPack.getPackType().getComment(),
                 itemCfg.getUid(),
@@ -89,18 +89,18 @@ public class ItemChangeAction<T extends Item> implements IAction {
     public final void remove(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
         remove0(player, itemPack, itemCfg, optReason, logs);
-        log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getUid(),
-                itemCfg.getCfgId(),
-                itemCfg.itemType().getComment(),
-                oldNum,
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
+        //log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}-{}",
+        //        player,
+        //        itemPack.getPackType().getComment(),
+        //        itemCfg.getUid(),
+        //        itemCfg.getCfgId(),
+        //        itemCfg.itemType().getComment(),
+        //        oldNum,
+        //        itemCfg.getNum(),
+        //        itemNum(player, itemPack, itemCfg.getCfgId()),
+        //        optReason.getComment(),
+        //        String.join(",", logs)
+        //);
     }
 
     protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
@@ -111,14 +111,15 @@ public class ItemChangeAction<T extends Item> implements IAction {
         if (itemCfg.getUid() > 0) {
             Item item = itemPack.getItems().get(itemCfg.getUid());
             if (item != null) {
-                remove0(player, itemPack, item, itemCfgNum, optReason, logs);
+                remove(player, itemPack, item, itemCfgNum, optReason, logs);
             }
         }
 
         if (itemCfgNum.getNum() > 0) {
             List<Item> collect = itemPack.stream(itemCfg.getCfgId()).toList();
             for (Item item : collect) {
-                remove0(player, itemPack, item, itemCfgNum, optReason, logs);
+                remove(player, itemPack, item, itemCfgNum, optReason, logs);
+                if (itemCfgNum.getNum() <= 0) break;
             }
         }
     }
@@ -128,17 +129,22 @@ public class ItemChangeAction<T extends Item> implements IAction {
     }
 
     public final void remove(Player player, ItemPack itemPack, Item item, long changeNum, OptReason optReason, String... logs) {
+        final LNum lNum = new LNum(changeNum);
+        remove(player, itemPack, item, lNum, optReason, logs);
+    }
+
+    public final void remove(Player player, ItemPack itemPack, Item item, LNum changeNum, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, item.getCfgId());
-        final LNum itemCfgNum = new LNum(changeNum);
-        remove0(player, itemPack, item, itemCfgNum, optReason, logs);
-        log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}{}",
+        final long needChangeNum = changeNum.getNum();
+        remove0(player, itemPack, item, changeNum, optReason, logs);
+        log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}-{}",
                 player,
                 itemPack.getPackType().getComment(),
                 item.getUid(),
                 item.getCfgId(),
                 item.itemType().getComment(),
                 oldNum,
-                changeNum,
+                needChangeNum - changeNum.getNum(),
                 itemNum(player, itemPack, item.getCfgId()),
                 optReason.getComment(),
                 String.join(",", logs)
