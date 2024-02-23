@@ -2,6 +2,7 @@ package org.wxd.mmo.script.gamesr.goods.impl.change;
 
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.lang.LNum;
 import org.wxd.mmo.core.bean.bag.*;
 import org.wxd.mmo.core.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.user.Player;
@@ -33,12 +34,28 @@ public class CurrencyChangeAction<T extends Item> extends ItemChangeAction<T> {
         itemPack.getMoneys().merge(item.getCfgId(), item.getNum(), Math::addExact);
     }
 
-    @Override protected void remove0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
-        itemPack.getMoneys().merge(item.getCfgId(), -item.getNum(), (n1, n2) -> Math.max(0, Math.addExact(n1, n2)));
+    @Override public void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
+        Long aLong = itemPack.getMoneys().get(itemCfg.getCfgId());
+        if (aLong != null) {
+            if (aLong >= itemCfg.getNum()) {
+                itemPack.getMoneys().put(itemCfg.getCfgId(), aLong - itemCfg.getNum());
+            } else {
+                itemPack.getMoneys().put(itemCfg.getCfgId(), 0L);
+            }
+        }
     }
 
-    @Override protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        itemPack.getMoneys().merge(itemCfg.getCfgId(), -itemCfg.getNum(), (n1, n2) -> Math.max(0, Math.addExact(n1, n2)));
+    @Override protected void remove0(Player player, ItemPack itemPack, Item item, LNum itemCfgNum, OptReason optReason, String... logs) {
+        Long aLong = itemPack.getMoneys().get(item.getCfgId());
+        if (aLong != null) {
+            if (aLong >= itemCfgNum.getNum()) {
+                itemPack.getMoneys().put(item.getCfgId(), aLong - itemCfgNum.getNum());
+                itemCfgNum.setNum(0);
+            } else {
+                itemCfgNum.sub(aLong);
+                itemPack.getMoneys().put(item.getCfgId(), 0L);
+            }
+        }
     }
 
     public long itemNum(Player player, PackType packType, int cfg) {

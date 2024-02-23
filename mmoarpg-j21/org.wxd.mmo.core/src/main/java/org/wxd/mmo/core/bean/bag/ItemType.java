@@ -18,6 +18,7 @@ public enum ItemType implements IEnum {
     Gold(1, ItemGroup.CURRENCY, "钻石"),
     Money(2, ItemGroup.CURRENCY, "游戏金币"),
     Exp(3, ItemGroup.ITEM, "经验值"),
+    LV(4, ItemGroup.ITEM, "等级丹"),
     Equip_Weapon(100, ItemGroup.EQUIP, "武器"),
     Equip_Helmet(101, ItemGroup.EQUIP, "头盔"),
     ;

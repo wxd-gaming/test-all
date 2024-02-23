@@ -13,6 +13,7 @@ import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.goods.ItemModule;
 import org.wxd.mmo.script.gamesr.goods.impl.change.ItemChangeAction;
 import org.wxd.mmo.script.gamesr.goods.impl.create.ItemCreateAction;
+import org.wxd.mmo.script.gamesr.goods.impl.use.ItemUseAction;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class ItemAction implements IBeanInit {
 
     private final Table<ItemGroup, ItemType, ItemCreateAction> createActionTable = new Table<>();
     private final Table<ItemGroup, ItemType, ItemChangeAction> changeActionTable = new Table<>();
+    private final Table<ItemGroup, ItemType, ItemUseAction> useActionTable = new Table<>();
 
     @Override public void beanInit(IocContext context) throws Exception {
         ReflectContext.Builder reflectBuilder = ReflectContext.Builder.of(ItemModule.class.getClassLoader(), ItemModule.class.getPackageName());
@@ -67,6 +69,13 @@ public class ItemAction implements IBeanInit {
         return changeActionTable.opt(itemType.getItemGroup(), itemType)
                 .or(() -> Optional.ofNullable(changeActionTable.get(itemType.getItemGroup(), ItemType.None)))
                 .or(() -> Optional.ofNullable(changeActionTable.get(ItemGroup.None, ItemType.None)))
+                .orElseThrow(() -> new RuntimeException("item change action 查找失败 " + itemType.toString()));
+    }
+
+    public <R extends Item> ItemUseAction<R> useAction(ItemType itemType) {
+        return useActionTable.opt(itemType.getItemGroup(), itemType)
+                .or(() -> Optional.ofNullable(useActionTable.get(itemType.getItemGroup(), ItemType.None)))
+                .or(() -> Optional.ofNullable(useActionTable.get(ItemGroup.None, ItemType.None)))
                 .orElseThrow(() -> new RuntimeException("item change action 查找失败 " + itemType.toString()));
     }
 
