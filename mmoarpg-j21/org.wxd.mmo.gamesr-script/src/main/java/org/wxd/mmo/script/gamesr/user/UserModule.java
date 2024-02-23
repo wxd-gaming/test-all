@@ -92,7 +92,7 @@ public class UserModule {
 
                             ItemCfg.builder().setCfgId(ItemType.Equip_Helmet.getCode()).setNum(2).build()
                     );
-                    
+
                     packModule.remove(player, build, OptReason.TASK_ACCEPT, "cfg=10001");
 
                     packModule.add(player, List.of(ItemCfg.builder().setCfgId(ItemType.Gold.getCode()).setNum(3).build()), OptReason.TASK_FINISH, "cfg=10001");

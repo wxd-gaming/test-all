@@ -1,4 +1,4 @@
-package org.wxd.mmo.gamesr.bean.task.impl;
+package org.wxd.mmo.core.bean.task;
 
 import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
@@ -12,6 +12,7 @@ import java.util.Map;
  * @version: 2023-07-31 17:25
  **/
 public enum TaskType implements IEnum {
+
     None(0, "默认值"),
     Main(1, "主线"),
     Branch(2, "支线"),

@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
-import org.wxd.boot.core.collection.Table;
-import org.wxd.boot.core.lang.task.Condition;
-import org.wxd.mmo.gamesr.bean.task.impl.TaskInfo;
-import org.wxd.mmo.gamesr.bean.task.impl.TaskType;
+import org.wxd.boot.core.collection.concurrent.ConcurrentListTable;
+import org.wxd.mmo.core.bean.task.AchieveInfo;
+import org.wxd.mmo.core.bean.task.AchieveType;
+import org.wxd.mmo.core.bean.task.TaskInfo;
+import org.wxd.mmo.core.bean.task.TaskType;
 
-import java.util.ArrayList;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * 任务容器
@@ -23,8 +24,26 @@ import java.util.ArrayList;
 public class TaskPackage extends ObjectSave {
 
     /** 成就 */
-    private ArrayList<Condition> achieves = new ArrayList<>();
+    private final ConcurrentSkipListMap<AchieveType, AchieveInfo> achieves = new ConcurrentSkipListMap<>();
     /** 任务集合 */
-    private final Table<TaskType, Integer, TaskInfo> tasks = new Table<>();
+    private final ConcurrentListTable<TaskType, Integer, TaskInfo> tasks = new ConcurrentListTable<>();
+
+    public void change(int k1, int k2, int k3, long progress) {
+
+        achieves.values().forEach(condition -> {
+            boolean change = condition.change(k1, k2, k3, progress);
+            if (change) {
+                /*通知客户端变更*/
+            }
+        });
+
+        tasks.forEach(taskInfo -> {
+            boolean change = taskInfo.change(k1, k2, k3, progress);
+            if (change) {
+                /*通知客户端变更*/
+            }
+        });
+
+    }
 
 }

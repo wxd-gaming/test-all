@@ -44,7 +44,7 @@ public class ItemChangeAction<T extends Item> implements IAction {
     public final void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
         add0(player, itemPack, itemCfg, optReason, logs);
-        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, new：{}, 原因：{}-{}",
+        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, now：{}, 原因：{}-{}",
                 player,
                 itemPack.getPackType().getComment(),
                 itemCfg.getUid(),
@@ -61,7 +61,7 @@ public class ItemChangeAction<T extends Item> implements IAction {
     public final void add(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, item.getCfgId());
         add0(player, itemPack, item, optReason, logs);
-        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, new：{}, 原因：{} - {}",
+        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, now：{}, 原因：{} - {}",
                 player,
                 itemPack.getPackType().getComment(),
                 item.getUid(),
@@ -89,7 +89,7 @@ public class ItemChangeAction<T extends Item> implements IAction {
     public final void remove(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
         remove0(player, itemPack, itemCfg, optReason, logs);
-        //log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}-{}",
+        //log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, now：{}, 原因：{}-{}",
         //        player,
         //        itemPack.getPackType().getComment(),
         //        itemCfg.getUid(),
@@ -137,7 +137,7 @@ public class ItemChangeAction<T extends Item> implements IAction {
         final long oldNum = itemNum(player, itemPack, item.getCfgId());
         final long needChangeNum = changeNum.getNum();
         remove0(player, itemPack, item, changeNum, optReason, logs);
-        log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, new：{}, 原因：{}-{}",
+        log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, now：{}, 原因：{}-{}",
                 player,
                 itemPack.getPackType().getComment(),
                 item.getUid(),

@@ -11,6 +11,7 @@ import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
 import org.wxd.mmo.core.bean.bag.ItemPack;
 import org.wxd.mmo.core.bean.bag.PackType;
 import org.wxd.mmo.gamesr.bean.mail.MailPackage;
+import org.wxd.mmo.gamesr.bean.task.TaskPackage;
 import org.wxd.mmo.gamesr.cache.mail.MailPackageCache;
 import org.wxd.mmo.core.login.bean.user.Account;
 
@@ -32,6 +33,7 @@ public class Player extends Fight {
     private final ConcurrentHashMap<PackType, ItemPack> itemPackMap = new ConcurrentHashMap<>();
     /** 在线时间，秒 */
     private LNum onlineSce = new LNum();
+    private TaskPackage taskPackage = new TaskPackage();
 
     public Player() {
     }
