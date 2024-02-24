@@ -6,32 +6,28 @@ import org.wxd.boot.core.lang.IEnum;
 import java.util.Map;
 
 /**
- * 任务类型
+ * 完成条件
  *
  * @author: Troy.Chen(無心道, 15388152619)
- * @version: 2023-07-31 17:25
+ * @version: 2024-02-24 18:00
  **/
-public enum TaskType implements IEnum {
+public enum ConditionType implements IEnum {
 
     None(0, "默认值"),
-    Main(1, "主线"),
-    Branch1(2, "支线"),
-    Branch2(3, "支线"),
-    Branch3(4, "支线"),
-    Branch4(5, "支线"),
-    Guild(6, "公会"),
+    LoginCount(1, "累计登录"),
+    LoginDayCount(1, "累计登录"),
     ;
 
-    private static final Map<Integer, TaskType> static_map = MapOf.asMap(TaskType::getCode, TaskType.values());
+    private static final Map<Integer, ConditionType> static_map = MapOf.asMap(ConditionType::getCode, ConditionType.values());
 
-    public static TaskType as(int value) {
+    public static ConditionType as(int value) {
         return static_map.get(value);
     }
 
     private final int code;
     private final String comment;
 
-    TaskType(int code, String comment) {
+    ConditionType(int code, String comment) {
         this.code = code;
         this.comment = comment;
     }

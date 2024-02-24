@@ -28,22 +28,4 @@ public class TaskPackage extends ObjectSave {
     /** 任务集合 */
     private final ConcurrentListTable<TaskType, Integer, TaskInfo> tasks = new ConcurrentListTable<>();
 
-    public void change(int k1, int k2, int k3, long progress) {
-
-        achieves.values().forEach(condition -> {
-            boolean change = condition.change(k1, k2, k3, progress);
-            if (change) {
-                /*通知客户端变更*/
-            }
-        });
-
-        tasks.forEach(taskInfo -> {
-            boolean change = taskInfo.change(k1, k2, k3, progress);
-            if (change) {
-                /*通知客户端变更*/
-            }
-        });
-
-    }
-
 }

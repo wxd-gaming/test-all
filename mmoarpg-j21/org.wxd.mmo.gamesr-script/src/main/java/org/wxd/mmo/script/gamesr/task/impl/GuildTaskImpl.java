@@ -18,7 +18,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Singleton
-public class MainTaskImpl implements ITaskImpl, EventBus.PlayerLoginBefore {
+public class GuildTaskImpl implements ITaskImpl, EventBus.PlayerLoginBefore {
 
     @Override public TaskType taskType() {
         return TaskType.Main;
@@ -43,4 +43,5 @@ public class MainTaskImpl implements ITaskImpl, EventBus.PlayerLoginBefore {
     @Override public boolean finishTask(Player player, int cfgId) {
         return false;
     }
+
 }
