@@ -100,11 +100,6 @@
 
     <build>
         <plugins>
-            <!--            <plugin>-->
-            <!--                <groupId>io.protostuff</groupId>-->
-            <!--                <artifactId>protostuff-maven-plugin</artifactId>-->
-            <!--                <version>3.1.40</version>-->
-            <!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -112,6 +107,8 @@
                 <configuration>
                     <skip>true</skip>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <!-- 定义文件编码，否则nacos配置文件中存在中文会报错 -->
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
             <plugin>
@@ -200,6 +197,41 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>src/main/resources/jks</exclude>
+                </excludes>
+            </resource>
+        </resources>
     </build>
+
+    <profiles>
+        <profile>
+            <id>test-local</id>
+            <activation>
+                <jdk>21</jdk>
+            </activation>
+            <properties>
+
+                <mysql-game-db-host>127.0.0.1</mysql-game-db-host>
+                <mysql-game-db-port>3306</mysql-game-db-port>
+                <mysql-game-db-user>root</mysql-game-db-user>
+                <mysql-game-db-pwd>test</mysql-game-db-pwd>
+
+                <mysql-login-db-host>127.0.0.1</mysql-login-db-host>
+                <mysql-login-db-port>3306</mysql-login-db-port>
+                <mysql-login-db-user>root</mysql-login-db-user>
+                <mysql-login-db-pwd>test</mysql-login-db-pwd>
+
+                <redis-rank-host>127.0.0.1</redis-rank-host>
+                <redis-rank-port>6379</redis-rank-port>
+                <redis-rank-pwd>test</redis-rank-pwd>
+
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

@@ -7,8 +7,8 @@
         <wanIp>127.0.0.1</wanIp>
         <port>18100</port>
         <sslProtocolType>TLSv1.2</sslProtocolType>
-        <jks>jks/xiaw.net.jks</jks>
-        <jksPwd>jks/xiaw.net.jks.pwd</jksPwd>
+        <jks></jks>
+        <jksPwd></jksPwd>
         <headers/>
     </wsserver>
     <http>
@@ -17,8 +17,8 @@
         <wanIp>127.0.0.1</wanIp>
         <port>19100</port>
         <sslProtocolType>TLSv1.2</sslProtocolType>
-        <jks>jks/xiaw.net.jks</jks>
-        <jksPwd>jks/xiaw.net.jks.pwd</jksPwd>
+        <jks></jks>
+        <jksPwd></jksPwd>
         <resourcesPath></resourcesPath>
         <threadCoreSize>100</threadCoreSize>
         <threadMaxSize>200</threadMaxSize>
@@ -40,27 +40,27 @@
         <show_sql>true</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
-        <dbHost>127.0.0.1</dbHost>
-        <dbPort>3306</dbPort>
+        <dbHost>${mysql-game-db-host}</dbHost>
+        <dbPort>${mysql-game-db-port}</dbPort>
         <dbBase>test-game</dbBase>
-        <dbUser>root</dbUser>
-        <dbPwd>test</dbPwd>
+        <dbUser>${mysql-game-db-user}</dbUser>
+        <dbPwd>${mysql-game-db-pwd}</dbPwd>
     </mysql>
     <mysql1>
-        <name>game-db</name>
+        <name>login-db</name>
         <show_sql>true</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
-        <dbHost>127.0.0.1</dbHost>
-        <dbPort>3306</dbPort>
+        <dbHost>${mysql-login-db-host}</dbHost>
+        <dbPort>${mysql-login-db-port}</dbPort>
         <dbBase>test-login</dbBase>
-        <dbUser>root</dbUser>
-        <dbPwd>test</dbPwd>
+        <dbUser>${mysql-login-db-user}</dbUser>
+        <dbPwd>${mysql-login-db-pwd}</dbPwd>
     </mysql1>
     <redis>
-        <name>数据源1</name>
-        <dbHost>127.0.0.1</dbHost>
-        <dbPort>6379</dbPort>
-        <dbPwd>test</dbPwd>
+        <name>redis-rank</name>
+        <dbHost>${redis-rank-host}</dbHost>
+        <dbPort>${redis-rank-port}</dbPort>
+        <dbPwd>${redis-rank-pwd}</dbPwd>
     </redis>
 </bootConfig>

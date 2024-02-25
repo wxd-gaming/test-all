@@ -79,20 +79,31 @@
         </headers>
     </http1>
     <mysql>
-        <name>default</name>
+        <name>game-db</name>
         <show_sql>true</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
-        <dbHost>127.0.0.1</dbHost>
-        <dbPort>3306</dbPort>
-        <dbBase>test3</dbBase>
-        <dbUser>root</dbUser>
-        <dbPwd>test</dbPwd>
+        <dbHost>${mysql-game-db-host}</dbHost>
+        <dbPort>${mysql-game-db-port}</dbPort>
+        <dbBase>test-game</dbBase>
+        <dbUser>${mysql-game-db-user}</dbUser>
+        <dbPwd>${mysql-game-db-pwd}</dbPwd>
     </mysql>
+    <mysql1>
+        <name>login-db</name>
+        <show_sql>true</show_sql>
+        <connectionPool>true</connectionPool>
+        <batchSizeThread>2</batchSizeThread>
+        <dbHost>${mysql-login-db-host}</dbHost>
+        <dbPort>${mysql-login-db-port}</dbPort>
+        <dbBase>test-login</dbBase>
+        <dbUser>${mysql-login-db-user}</dbUser>
+        <dbPwd>${mysql-login-db-pwd}</dbPwd>
+    </mysql1>
     <redis>
-        <name>数据源1</name>
-        <dbHost>127.0.0.1</dbHost>
-        <dbPort>6379</dbPort>
-        <dbPwd>test</dbPwd>
+        <name>redis-rank</name>
+        <dbHost>${redis-rank-host}</dbHost>
+        <dbPort>${redis-rank-port}</dbPort>
+        <dbPwd>${redis-rank-pwd}</dbPwd>
     </redis>
 </bootConfig>
