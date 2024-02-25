@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.wxd.mmo.core.bean.task.TaskInfo;
 import org.wxd.mmo.core.bean.task.TaskType;
 import org.wxd.mmo.gamesr.bean.user.Player;
-import org.wxd.mmo.script.gamesr.event.EventBus;
+import org.wxd.mmo.script.gamesr.event.ScriptEventBus;
 import org.wxd.mmo.script.gamesr.task.ITaskImpl;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
  **/
 @Slf4j
 @Singleton
-public class GuildTaskImpl implements ITaskImpl, EventBus.PlayerLoginBefore {
+public class GuildTaskImpl implements ITaskImpl, ScriptEventBus.PlayerLoginBefore {
 
     @Override public TaskType taskType() {
         return TaskType.Main;

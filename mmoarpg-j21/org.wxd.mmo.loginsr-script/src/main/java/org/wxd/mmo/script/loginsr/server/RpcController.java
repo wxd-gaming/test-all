@@ -31,7 +31,7 @@ public class RpcController implements IBeanInit {
     @TextMapping
     public String syncGatePort(SocketSession session, ObjMap putData) {
         log.debug("{}", putData);
-        return RunResult.ok1().setData("回调").toJson();
+        return RunResult.ok().data("回调").toJson();
     }
 
 

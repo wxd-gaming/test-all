@@ -11,7 +11,7 @@ import org.wxd.mmo.gamesr.bean.user.Player;
  * @version: 2023-02-02 16:26
  **/
 @Singleton
-public class EventBus extends EventBusBase {
+public class ScriptEventBus extends EventBusBase {
 
 
     public interface RegisterScript {}

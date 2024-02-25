@@ -7,7 +7,7 @@ import org.wxd.boot.net.controller.IController;
 import org.wxd.boot.net.controller.ann.ProtoController;
 import org.wxd.boot.net.controller.ann.ProtoMapping;
 import org.wxd.mmo.gamesr.bean.user.Player;
-import org.wxd.mmo.script.gamesr.event.EventBus;
+import org.wxd.mmo.script.gamesr.event.ScriptEventBus;
 import org.wxd.mmo.script.gamesr.login.message.ReqLogin;
 import org.wxd.mmo.script.gamesr.login.message.ResLogin;
 
@@ -21,7 +21,7 @@ import org.wxd.mmo.script.gamesr.login.message.ResLogin;
 @ProtoController(service = "org.wxd.boot.net.web.ws.WebSocketServer")
 public final class ReqLoginController implements IController {
 
-    @Inject EventBus eventBus;
+    @Inject ScriptEventBus eventBus;
 
     /** 登录消息 ReqLogin */
     @ProtoMapping(remarks = "登录消息")
@@ -31,14 +31,14 @@ public final class ReqLoginController implements IController {
 
         Player player = null;
 
-        eventBus.forEachBean(EventBus.PlayerLoginBefore.class, eventBean -> {
+        eventBus.forEachBean(ScriptEventBus.PlayerLoginBefore.class, eventBean -> {
             /*todo 登录之前事件抛出，比如这里可以做家长数据，上线前的检测，跨天等操作*/
             eventBean.onLoginBefore(player);
         });
 
         /*todo 做其他事情*/
 
-        eventBus.forEachBean(EventBus.PlayerLoginAfter.class, eventBean -> {
+        eventBus.forEachBean(ScriptEventBus.PlayerLoginAfter.class, eventBean -> {
             /*todo 抛出登录完成事件*/
             eventBean.onLoginAfter(player);
         });

@@ -3,11 +3,14 @@ package org.wxd.mmo.script.loginsr.server;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.ann.Sort;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.boot.starter.i.IShutdownBefore;
 import org.wxd.boot.starter.i.IShutdownEnd;
 import org.wxd.boot.starter.i.IStart;
+import org.wxd.mmo.loginsr.bean.data.ServerData;
 import org.wxd.mmo.loginsr.data.DataCenter;
 
 
@@ -23,7 +26,15 @@ public class ServerDataModule implements IStart, IShutdownBefore, IShutdownEnd {
 
     @Inject DataCenter dataCenter;
 
+    /**
+     * bean初始化调用的，特别注意热更新是不调用，优先调用的是{@link IBeanInit#beanInit(IocContext)}
+     */
+    @Sort(0)
     @Override public void start(IocContext iocContext) throws Exception {
+        dataCenter.setServerData(dataCenter.getLoginDb().queryEntity(ServerData.class, 1L));
+        if (dataCenter.getServerData() == null) {
+            dataCenter.setServerData(new ServerData().setUid(1));
+        }
     }
 
     @Scheduled("*/5")

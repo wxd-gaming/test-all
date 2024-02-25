@@ -29,4 +29,8 @@ public class ServerData extends GameBase {
         return BitUtil.merge64(hexId, merge);
     }
 
+    @Override public ServerData setUid(long uid) {
+        super.setUid(uid);
+        return this;
+    }
 }

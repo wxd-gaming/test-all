@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.wxd.mmo.core.bean.task.ConditionType;
 import org.wxd.mmo.core.bean.task.TaskType;
 import org.wxd.mmo.gamesr.bean.user.Player;
-import org.wxd.mmo.script.gamesr.event.EventBus;
+import org.wxd.mmo.script.gamesr.event.ScriptEventBus;
 
 /**
  * 任务模块
@@ -16,9 +16,9 @@ import org.wxd.mmo.script.gamesr.event.EventBus;
  **/
 @Slf4j
 @Singleton
-public class TaskModule implements EventBus.PlayerLoginAfter, EventBus.PlayerDayEnd {
+public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventBus.PlayerDayEnd {
 
-    @Inject EventBus eventBus;
+    @Inject ScriptEventBus eventBus;
 
     /**
      * 登录完成之后

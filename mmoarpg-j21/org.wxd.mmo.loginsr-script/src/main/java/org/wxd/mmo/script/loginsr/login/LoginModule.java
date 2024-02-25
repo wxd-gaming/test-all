@@ -10,10 +10,9 @@ import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.bean.config.ServerConfig;
 import org.wxd.mmo.core.common.cache.user.AccountCache;
 import org.wxd.mmo.core.login.bean.user.Account;
+import org.wxd.mmo.core.bean.type.Platforms;
 import org.wxd.mmo.loginsr.data.DataCenter;
-
-import java.io.Serializable;
-import java.util.concurrent.ConcurrentHashMap;
+import org.wxd.mmo.script.loginsr.event.ScriptEventBus;
 
 /**
  * 登录模块
@@ -28,15 +27,10 @@ public class LoginModule implements IBeanInit {
     @Inject ServerConfig serverConfig;
     @Inject AccountCache accountCache;
     @Inject DataCenter dataCenter;
-    private ConcurrentHashMap<Serializable, ILogin> loginScriptMap = new ConcurrentHashMap<>();
+    @Inject ScriptEventBus scriptEventBus;
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
-        iocContext.forEachBean(ILogin.class, iLogin -> {
-            if (loginScriptMap.containsKey(iLogin.scriptKey())) {
-                throw new RuntimeException("登录sdk重复：" + iLogin.scriptKey());
-            }
-            loginScriptMap.put(iLogin.scriptKey(), iLogin);
-        });
+        ILogin script = scriptEventBus.getScript(ILogin.class, Platforms.Local);
     }
 
     Account userFirst = null;

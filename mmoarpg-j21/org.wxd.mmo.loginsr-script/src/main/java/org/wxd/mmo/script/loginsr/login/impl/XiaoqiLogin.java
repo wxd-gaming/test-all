@@ -12,10 +12,10 @@ import org.wxd.mmo.script.loginsr.login.ILogin;
  * @version: 2023-07-31 15:29
  **/
 @Singleton
-public class LocalLogin implements ILogin {
+public class XiaoqiLogin implements ILogin {
 
     @Override public SdkType scriptKey() {
-        return SdkType.Local;
+        return SdkType.Xiaoqi;
     }
 
     @Override public RunResult login(String channel, String account, String token, Object... objects) {

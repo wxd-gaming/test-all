@@ -1,5 +1,4 @@
-package org.wxd.mmo.loginsr.bean.type;
-
+package org.wxd.mmo.core.bean.type;
 
 import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
@@ -7,26 +6,28 @@ import org.wxd.boot.core.lang.IEnum;
 import java.util.Map;
 
 /**
- * 渠道枚举
+ * sdk 类型
  *
  * @author: Troy.Chen(無心道, 15388152619)
- * @version: 2023-07-31 15:59
+ * @version: 2024-02-25 12:24
  **/
-public enum Platforms implements IEnum {
+public enum SdkType implements IEnum {
     None(0, "默认值"),
-    Local(1, "本地渠道"),
+    All(1, "默认值"),
+    Local(2, "本地渠道"),
+    Xiaoqi(3, "小七"),
     ;
 
-    private static final Map<Integer, Platforms> static_map = MapOf.asMap(Platforms::getCode, Platforms.values());
+    private static final Map<Integer, SdkType> static_map = MapOf.asMap(SdkType::getCode, SdkType.values());
 
-    public static Platforms as(int value) {
+    public static SdkType as(int value) {
         return static_map.get(value);
     }
 
     private final int code;
     private final String comment;
 
-    Platforms(int code, String comment) {
+    SdkType(int code, String comment) {
         this.code = code;
         this.comment = comment;
     }
