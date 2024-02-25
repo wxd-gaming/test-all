@@ -216,15 +216,18 @@
             </activation>
             <properties>
 
+
                 <mysql-game-db-host>127.0.0.1</mysql-game-db-host>
                 <mysql-game-db-port>3306</mysql-game-db-port>
                 <mysql-game-db-user>root</mysql-game-db-user>
                 <mysql-game-db-pwd>test</mysql-game-db-pwd>
+                <mysql-game-db-showsql>false</mysql-game-db-showsql>
 
                 <mysql-login-db-host>127.0.0.1</mysql-login-db-host>
                 <mysql-login-db-port>3306</mysql-login-db-port>
                 <mysql-login-db-user>root</mysql-login-db-user>
                 <mysql-login-db-pwd>test</mysql-login-db-pwd>
+                <mysql-login-db-showsql>false</mysql-login-db-showsql>
 
                 <redis-rank-host>127.0.0.1</redis-rank-host>
                 <redis-rank-port>6379</redis-rank-port>

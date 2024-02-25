@@ -71,7 +71,7 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
     /** 接取任务 */
     public void acceptTask(Player player, TaskType taskType, int cfgId) {
 
-        eventBus.script(ITaskImpl.class, taskType, script -> {
+        eventBus.scripts(ITaskImpl.class, taskType, script -> {
             script.acceptTask(player, cfgId);
         });
 
@@ -80,7 +80,7 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
     /** 完成任务 */
     public void finishTask(Player player, TaskType taskType, int cfgId) {
 
-        eventBus.script(ITaskImpl.class, taskType, script -> {
+        eventBus.scripts(ITaskImpl.class, taskType, script -> {
             script.finishTask(player, cfgId);
         });
 

@@ -20,7 +20,7 @@ import java.util.Map;
 @Singleton
 public class GuildTaskImpl implements ITaskImpl, ScriptEventBus.PlayerLoginBefore {
 
-    @Override public TaskType taskType() {
+    @Override public TaskType scriptKey() {
         return TaskType.Main;
     }
 
@@ -30,7 +30,7 @@ public class GuildTaskImpl implements ITaskImpl, ScriptEventBus.PlayerLoginBefor
      * @param player
      */
     @Override public void onLoginBefore(Player player) {
-        Map<Integer, TaskInfo> integerTaskInfoMap = player.getTaskPackage().getTasks().get(taskType());
+        Map<Integer, TaskInfo> integerTaskInfoMap = player.getTaskPackage().getTasks().get(scriptKey());
         if (integerTaskInfoMap.isEmpty()) {
             /*todo 初始化公会任务*/
         }

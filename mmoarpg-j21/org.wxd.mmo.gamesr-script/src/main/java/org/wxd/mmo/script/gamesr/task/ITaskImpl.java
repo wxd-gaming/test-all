@@ -12,13 +12,7 @@ import java.io.Serializable;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2024-02-23 19:40
  **/
-public interface ITaskImpl extends EventBusBase.IScript {
-
-    @Override default Serializable scriptKey() {
-        return taskType();
-    }
-
-    TaskType taskType();
+public interface ITaskImpl extends EventBusBase.IScript<TaskType> {
 
     default boolean acceptTask(Player player, int cfgId) {return false;}
 

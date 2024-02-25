@@ -12,7 +12,6 @@ import java.util.Map;
  * @version: 2024-02-25 12:24
  **/
 public enum SdkType implements IEnum {
-    None(0, "默认值"),
     All(1, "默认值"),
     Local(2, "本地渠道"),
     Xiaoqi(3, "小七"),

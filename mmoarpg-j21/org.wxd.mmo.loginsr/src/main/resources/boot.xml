@@ -37,7 +37,7 @@
     </http>
     <mysql>
         <name>game-db</name>
-        <show_sql>true</show_sql>
+        <show_sql>${mysql-game-db-show-sql}</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
         <dbHost>${mysql-game-db-host}</dbHost>
@@ -48,7 +48,7 @@
     </mysql>
     <mysql1>
         <name>login-db</name>
-        <show_sql>true</show_sql>
+        <show_sql>${mysql-login-db-show-sql}</show_sql>
         <connectionPool>true</connectionPool>
         <batchSizeThread>2</batchSizeThread>
         <dbHost>${mysql-login-db-host}</dbHost>
