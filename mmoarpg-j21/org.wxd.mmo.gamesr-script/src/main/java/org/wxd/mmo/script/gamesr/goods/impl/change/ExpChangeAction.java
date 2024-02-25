@@ -26,20 +26,8 @@ public class ExpChangeAction extends ItemChangeAction<Item> {
         return ItemType.Exp;
     }
 
-    @Override public void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        player.getExp().add(itemCfg.getNum());
-    }
-
     @Override protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
         player.getExp().add(item.getNum());
-    }
-
-    @Override public void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        if (player.getExp().getNum() >= itemCfg.getNum()) {
-            player.getExp().sub(itemCfg.getNum());
-        } else {
-            player.getExp().setNum(0);
-        }
     }
 
     @Override protected void remove0(Player player, ItemPack itemPack, Item item, LNum itemCfgNum, OptReason optReason, String... logs) {

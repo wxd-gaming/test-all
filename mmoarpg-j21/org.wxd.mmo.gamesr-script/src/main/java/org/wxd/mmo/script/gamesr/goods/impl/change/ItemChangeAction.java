@@ -35,6 +35,8 @@ public class ItemChangeAction<T extends Item> implements IAction {
 
 
     /**
+     * 添加奖励
+     *
      * @param player    玩家
      * @param itemPack  背包
      * @param itemCfg   要添加的道具配置，例如任务奖励
@@ -42,22 +44,21 @@ public class ItemChangeAction<T extends Item> implements IAction {
      * @param logs      日志项
      */
     public final void add(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
-        add0(player, itemPack, itemCfg, optReason, logs);
-        log.info("{} {} 获得：{}-{}({}), old：{}, change：{}, now：{}, 原因：{}-{}",
-                player,
-                itemPack.getPackType().getComment(),
-                itemCfg.getUid(),
-                itemCfg.getCfgId(),
-                itemCfg.itemType().getComment(),
-                oldNum,
-                itemCfg.getNum(),
-                itemNum(player, itemPack, itemCfg.getCfgId()),
-                optReason.getComment(),
-                String.join(",", logs)
-        );
+        List<Item> items = itemAction.createItem(player, itemCfg);
+        for (Item item : items) {
+            add(player, itemPack, item, optReason, logs);
+        }
     }
 
+    /**
+     * 添加奖励
+     *
+     * @param player    玩家
+     * @param itemPack  背包
+     * @param item      要添加的道具
+     * @param optReason 操作来源
+     * @param logs      日志项
+     */
     public final void add(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
         final long oldNum = itemNum(player, itemPack, item.getCfgId());
         add0(player, itemPack, item, optReason, logs);
@@ -75,35 +76,11 @@ public class ItemChangeAction<T extends Item> implements IAction {
         );
     }
 
-    protected void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        List<Item> items = itemAction.createItem(player, itemCfg);
-        for (Item item : items) {
-            add0(player, itemPack, item, optReason, logs);
-        }
-    }
-
     protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
         itemPack.getItems().put(item.getUid(), item);
     }
 
     public final void remove(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        final long oldNum = itemNum(player, itemPack, itemCfg.getCfgId());
-        remove0(player, itemPack, itemCfg, optReason, logs);
-        //log.info("{} {} 扣除：{}-{}({}), old：{}, change：-{}, now：{}, 原因：{}-{}",
-        //        player,
-        //        itemPack.getPackType().getComment(),
-        //        itemCfg.getUid(),
-        //        itemCfg.getCfgId(),
-        //        itemCfg.itemType().getComment(),
-        //        oldNum,
-        //        itemCfg.getNum(),
-        //        itemNum(player, itemPack, itemCfg.getCfgId()),
-        //        optReason.getComment(),
-        //        String.join(",", logs)
-        //);
-    }
-
-    protected void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
         final LNum itemCfgNum = new LNum(itemCfg.getNum());
         if (itemCfgNum.getNum() <= 0)
             throw new UnsupportedOperationException(itemCfg.getCfgId() + " 扣除道具 数量 " + itemCfgNum + " 异常");

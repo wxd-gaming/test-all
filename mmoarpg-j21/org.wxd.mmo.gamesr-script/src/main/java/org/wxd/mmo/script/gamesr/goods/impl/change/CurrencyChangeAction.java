@@ -4,6 +4,7 @@ import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.core.lang.LNum;
 import org.wxd.mmo.core.bean.bag.*;
+import org.wxd.mmo.core.bean.bag.goods.Currency;
 import org.wxd.mmo.core.bean.bag.goods.Item;
 import org.wxd.mmo.gamesr.bean.user.Player;
 
@@ -16,7 +17,7 @@ import org.wxd.mmo.gamesr.bean.user.Player;
  **/
 @Slf4j
 @Singleton
-public class CurrencyChangeAction<T extends Item> extends ItemChangeAction<T> {
+public class CurrencyChangeAction<T extends Currency> extends ItemChangeAction<T> {
 
     @Override public ItemGroup itemGroup() {
         return ItemGroup.CURRENCY;
@@ -26,23 +27,8 @@ public class CurrencyChangeAction<T extends Item> extends ItemChangeAction<T> {
         return ItemType.None;
     }
 
-    @Override protected void add0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        itemPack.getMoneys().merge(itemCfg.getCfgId(), itemCfg.getNum(), Math::addExact);
-    }
-
     @Override protected void add0(Player player, ItemPack itemPack, Item item, OptReason optReason, String... logs) {
         itemPack.getMoneys().merge(item.getCfgId(), item.getNum(), Math::addExact);
-    }
-
-    @Override public void remove0(Player player, ItemPack itemPack, ItemCfg itemCfg, OptReason optReason, String... logs) {
-        Long aLong = itemPack.getMoneys().get(itemCfg.getCfgId());
-        if (aLong != null) {
-            if (aLong >= itemCfg.getNum()) {
-                itemPack.getMoneys().put(itemCfg.getCfgId(), aLong - itemCfg.getNum());
-            } else {
-                itemPack.getMoneys().put(itemCfg.getCfgId(), 0L);
-            }
-        }
     }
 
     @Override protected void remove0(Player player, ItemPack itemPack, Item item, LNum itemCfgNum, OptReason optReason, String... logs) {
