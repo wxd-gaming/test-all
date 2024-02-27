@@ -1,8 +1,11 @@
 package org.wxd.mmo.script.loginsr.login;
 
 
+import com.alibaba.fastjson.JSONObject;
+import org.wxd.boot.core.collection.ObjMap;
 import org.wxd.boot.core.lang.RunResult;
 import org.wxd.boot.starter.EventBusBase;
+import org.wxd.mmo.core.bean.type.Platforms;
 import org.wxd.mmo.core.bean.type.SdkType;
 
 /**
@@ -13,6 +16,8 @@ import org.wxd.mmo.core.bean.type.SdkType;
  **/
 public interface ILogin extends EventBusBase.IScript<SdkType> {
 
-    RunResult login(String channel, String account, String token, Object... objects);
+    static final String TOKEN_MD5_SIGN = "ddddd";
+
+    RunResult login(Platforms platforms, String channel, String channelAccount, String token, ObjMap extMap);
 
 }

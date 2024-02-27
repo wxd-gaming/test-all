@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.wxd.boot.core.collection.ObjMap;
 import org.wxd.boot.core.lang.RunResult;
+import org.wxd.boot.core.system.GlobalUtil;
+import org.wxd.boot.core.threading.Async;
 import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;
@@ -41,20 +43,27 @@ public class RpcController implements IBeanInit {
         return RunResult.ok().data("回调").toJson();
     }
 
+    @Async(vt = true/*虚拟线程执行*/)
     @TextMapping
     public String syncLogin(SocketSession session, ObjMap putData) {
-
         int platform = putData.getIntValue("platform");
         int sdk = putData.getIntValue("sdk");
         final String channel = putData.getString("channel");
         final String account = putData.getString("account");
         String token = putData.getString("token");
+        ObjMap ext_param = putData.getObjMap("ext_param");
         Platforms platforms = Platforms.as(platform);
         final SdkType sdkType = SdkType.as(sdk);
-        ILogin script = eventBus.script(ILogin.class, sdkType);
-        script.login(channel, account, token);
-
-        return RunResult.ok().data("回调").toJson();
+        if (!platforms.getSdkTypes().contains(SdkType.All) && !platforms.getSdkTypes().contains(sdkType)) {
+            return RunResult.error(99, "不允许使用sdk【" + sdkType + "】登录").toJson();
+        }
+        try {
+            ILogin script = eventBus.script(ILogin.class, sdkType);
+            return script.login(platforms, channel, account, token, ext_param).toJson();
+        } catch (Exception e) {
+            GlobalUtil.exception("platform=【" + platforms + "】, sdk【" + sdkType + "】 登录异常 " + putData.toString(), e);
+        }
+        return RunResult.error("内部异常").toJson();
     }
 
 }

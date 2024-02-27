@@ -3,11 +3,16 @@ package org.wxd.mmo.script.loginsr.login;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import org.wxd.boot.core.collection.ObjMap;
+import org.wxd.boot.core.lang.RunResult;
+import org.wxd.boot.core.str.Md5Util;
 import org.wxd.boot.core.system.MarkTimer;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.IocContext;
+import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.bean.config.ServerConfig;
+import org.wxd.mmo.core.bean.type.Platforms;
 import org.wxd.mmo.core.bean.type.SdkType;
 import org.wxd.mmo.core.common.cache.user.AccountCache;
 import org.wxd.mmo.core.login.bean.user.Account;
@@ -16,6 +21,7 @@ import org.wxd.mmo.script.loginsr.event.ScriptEventBus;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +34,7 @@ import java.util.stream.Collectors;
 @Singleton
 public class LoginModule implements IBeanInit {
 
+    @Inject private MysqlService1 loginDb;
     @Inject DataCenter dataCenter;
     @Inject ServerConfig serverConfig;
     @Inject AccountCache accountCache;
@@ -62,23 +69,46 @@ public class LoginModule implements IBeanInit {
             MarkTimer markTimer = MarkTimer.build();
             log.info("当前账号总数：{}, 缓存数：{} {}", accountCache.accountDbSize(), accountCache.cacheSize(), markTimer.execTime2String());
         }
-        {
-            MarkTimer markTimer = MarkTimer.build();
-            int f = 10;
-            for (int i = 0; i < f; i++) {
-                Account account = new Account();
-                account.setUid(dataCenter.getServerData().newAccountUid(serverConfig.getSid()));
-                account.setAccountName("test1");
-                account.setChannel("local");
-                account.setLoginChannel("local");
-                accountCache.addCache(account.getUid(), account);
+    }
 
-                if (userFirst == null) {
-                    userFirst = account;
-                }
-            }
-            log.info("创建 {} 条数据{}", f, markTimer.execTime2String());
+    /**
+     * 登录
+     *
+     * @param channel        渠道
+     * @param channelAccount 渠道账号
+     * @param accountName    自己的账号体系对于
+     * @param token          秘钥
+     * @param extMap         扩展参数
+     * @return
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-02-27 10:00
+     */
+    public RunResult login(Platforms platforms, SdkType sdkType, String channel, String channelAccount, String accountName, String token, ObjMap extMap) {
+        //synchronized (accountName.intern()) {/*虚拟线程会死锁，后续考虑怎么处理*/
+        Account account = accountCache.cache(accountName, true);
+        if (account == null) {
+            /*不存在就直接创建*/
+            account = new Account();
+            account.setUid(dataCenter.getServerData().newAccountUid(serverConfig.getSid()));
+            account.setAccountName(accountName);
+            account.setToken(token);
+            account.setChannelAccountName(channelAccount);
+            /*存储*/
+            accountCache.addCache(account.getAccountName(), account);
         }
+
+        if (!Objects.equals(account.getToken(), token)) {
+            return RunResult.error("密码错误");
+        }
+
+        return RunResult
+                .ok()
+                .append("uid", account.getUid())
+                .append("accountName", account.getAccountName())
+                .append("channelAccountName", account.getChannelAccountName())
+                .append("token", Md5Util.md5DigestEncode(platforms.name(), accountName, channelAccount, ILogin.TOKEN_MD5_SIGN))/*内部分布式token*/
+                ;
+        //}
     }
 
 }

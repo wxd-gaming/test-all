@@ -24,9 +24,10 @@ public class Account extends ObjectSave {
     /** 我们自己生成的账号 */
     @DbColumn(index = true)
     private String accountName;
+    private String token;
     /** 平台传递的账号 */
     @DbColumn(index = true)
-    private String platformAccountName;
+    private String channelAccountName;
     /** 我们定义的平台 */
     @DbColumn(index = true)
     private String channel;

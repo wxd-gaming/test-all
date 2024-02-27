@@ -4,14 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.BsonInt32;
-import org.bson.BsonString;
-import org.bson.Document;
 import org.wxd.boot.agent.function.ConsumerE2;
 import org.wxd.boot.agent.function.SLFunction1;
 import org.wxd.boot.core.cache.CachePack;
 import org.wxd.boot.starter.IocContext;
-import org.wxd.boot.starter.batis.MongoService1;
 import org.wxd.boot.starter.batis.MysqlService1;
 import org.wxd.boot.starter.i.IBeanInit;
 import org.wxd.mmo.core.login.bean.user.Account;
@@ -27,7 +23,7 @@ import java.util.function.Function;
  **/
 @Slf4j
 @Singleton
-public class AccountCache extends CachePack<Long, Account> implements IBeanInit {
+public class AccountCache extends CachePack<String, Account> implements IBeanInit {
 
     @Getter private static AccountCache instance = null;
 
@@ -39,17 +35,7 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
         setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
 
-        loading = new Function<Long, Account>() {
-
-            @Override public Account apply(Long aLong) {
-                Account account = loginDb.queryEntity(Account.class, aLong);
-                if (account == null) {
-                    log.info("从数据库读取失败：{}", aLong);
-                }
-                return account;
-            }
-
-        };
+        loading = this::load;
 
         unload = new ConsumerE2<Account, String>() {
             @Override public void accept(Account account, String s) throws Exception {
@@ -77,22 +63,17 @@ public class AccountCache extends CachePack<Long, Account> implements IBeanInit 
         return loginDb.rowCount(Account.class);
     }
 
-    @Override public void addCache(Long aLong, Account account) {
-        super.addCache(aLong, account);
+    @Override public void addCache(String accountName, Account account) {
+        super.addCache(accountName, account);
         loginDb.getBatchPool().replace(account);
     }
 
     /** 这里所有的都会加载 ，包括跨服的数据 */
-    public Account load(int sid, String accountName) {
-        final Document whereDocument = new Document();
-        SLFunction1<Account, Integer> getSId = Account::getSid;
-        whereDocument.append(getSId.ofMethodName(), new BsonInt32(sid));
-
+    public Account load(String accountName) {
         SLFunction1<Account, String> getAccount = Account::getAccountName;
-        whereDocument.append(getAccount.ofMethodName(), new BsonString(accountName));
-        Account account = loginDb.queryEntity(Account.class, whereDocument);
+        Account account = loginDb.queryEntityByWhere(Account.class, getAccount.ofMethodName() + "=?", accountName);
         if (account == null) {
-            log.info("从数据库读取失败：{}, {}", sid, accountName);
+            log.info("从数据库读取失败：{}", accountName);
         }
         return account;
     }

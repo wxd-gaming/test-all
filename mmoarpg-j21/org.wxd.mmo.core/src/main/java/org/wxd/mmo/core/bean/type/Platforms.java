@@ -6,6 +6,7 @@ import org.wxd.boot.core.collection.MapOf;
 import org.wxd.boot.core.lang.IEnum;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 渠道枚举
@@ -28,12 +29,12 @@ public enum Platforms implements IEnum {
 
     private final int code;
     private final String comment;
-    private final SdkType[] sdkTypes;
+    private final Set<SdkType> sdkTypes;
 
     Platforms(int code, String comment, SdkType... sdkTypes) {
         this.code = code;
         this.comment = comment;
-        this.sdkTypes = sdkTypes;
+        this.sdkTypes = Set.of(sdkTypes);
     }
 
 }
