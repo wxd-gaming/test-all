@@ -46,7 +46,7 @@ public class PlayerSnap extends GameBase {
     private long vipExp;
 
     public Account account() {
-        return AccountCache.getInstance().cache(this.getAccountId());
+        return AccountCache.getInstance().cache(this.getAccountName());
     }
 
     public String logName() {

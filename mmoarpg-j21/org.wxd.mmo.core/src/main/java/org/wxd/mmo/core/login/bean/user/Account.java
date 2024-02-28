@@ -6,6 +6,8 @@ import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.batis.struct.DbColumn;
 import org.wxd.boot.batis.struct.DbTable;
+import org.wxd.mmo.core.bean.type.Platforms;
+import org.wxd.mmo.core.bean.type.SdkType;
 
 /**
  * 玩家账号
@@ -34,9 +36,14 @@ public class Account extends ObjectSave {
     /** 我们定义的平台--本次登录的平台 */
     @DbColumn(index = true)
     private String loginChannel;
-    /** 账号注册的服务器Id */
     @DbColumn(index = true)
-    private int sid;
+    private long createTime;
+    @DbColumn(index = true)
+    private long lastLoginTime;
+    @DbColumn(index = true)
+    private Platforms platforms;
+    @DbColumn(index = true)
+    private SdkType sdkType;
 
     public String logName() {
         StringBuilder sb = new StringBuilder();

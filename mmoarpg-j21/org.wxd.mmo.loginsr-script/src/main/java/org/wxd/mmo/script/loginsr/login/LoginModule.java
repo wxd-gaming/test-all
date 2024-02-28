@@ -7,6 +7,7 @@ import org.wxd.boot.core.collection.ObjMap;
 import org.wxd.boot.core.lang.RunResult;
 import org.wxd.boot.core.str.Md5Util;
 import org.wxd.boot.core.system.MarkTimer;
+import org.wxd.boot.core.timer.MyClock;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.batis.MysqlService1;
@@ -92,7 +93,9 @@ public class LoginModule implements IBeanInit {
             account.setUid(dataCenter.getServerData().newAccountUid(serverConfig.getSid()));
             account.setAccountName(accountName);
             account.setToken(token);
+            account.setChannel(channel);
             account.setChannelAccountName(channelAccount);
+            account.setCreateTime(MyClock.millis());
             /*存储*/
             accountCache.addCache(account.getAccountName(), account);
         }
@@ -100,6 +103,9 @@ public class LoginModule implements IBeanInit {
         if (!Objects.equals(account.getToken(), token)) {
             return RunResult.error("密码错误");
         }
+
+        account.setLastLoginTime(MyClock.millis());
+        account.setLoginChannel(channel);
 
         return RunResult
                 .ok()
