@@ -43,13 +43,14 @@ public final class Login {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Login.proto\022\013Proto.Login\"\232\001\n\010ReqLogin\022" +
-      "\014\n\004user\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\022\017\n\007sdkType\030" +
-      "\003 \001(\t\0221\n\006params\030\004 \003(\0132!.Proto.Login.ReqL" +
-      "ogin.ParamsEntry\032-\n\013ParamsEntry\022\013\n\003key\030\001" +
-      " \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001\"\n\n\010UserBean\"\030\n\010R" +
-      "esLogin\022\014\n\004user\030\001 \001(\tB+\n\'org.wxd.mmo.scr" +
-      "ipt.gamesr.login.messageP\001b\006proto3"
+      "\n\013Login.proto\022\013Proto.Login\"\260\001\n\010ReqLogin\022" +
+      "\014\n\004user\030\001 \001(\t\022\r\n\005token\030\002 \001(\t\022\024\n\014platform" +
+      "Type\030\003 \001(\t\022\017\n\007sdkType\030\004 \001(\t\0221\n\006params\030\005 " +
+      "\003(\0132!.Proto.Login.ReqLogin.ParamsEntry\032-" +
+      "\n\013ParamsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
+      "\t:\0028\001\"\n\n\010UserBean\"\030\n\010ResLogin\022\014\n\004user\030\001 " +
+      "\001(\tB+\n\'org.wxd.mmo.script.gamesr.login.m" +
+      "essageP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -60,7 +61,7 @@ public final class Login {
     internal_static_Proto_Login_ReqLogin_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Proto_Login_ReqLogin_descriptor,
-        new java.lang.String[] { "User", "Token", "SdkType", "Params", });
+        new java.lang.String[] { "User", "Token", "PlatformType", "SdkType", "Params", });
     internal_static_Proto_Login_ReqLogin_ParamsEntry_descriptor =
       internal_static_Proto_Login_ReqLogin_descriptor.getNestedTypes().get(0);
     internal_static_Proto_Login_ReqLogin_ParamsEntry_fieldAccessorTable = new

@@ -10,8 +10,9 @@ option java_package = "org.wxd.mmo.script.gamesr.login.message";
 message ReqLogin {
   string user                     = 1;//账号
   string token                    = 2;//秘钥
-  string sdkType                  = 3;//平台
-  map<string, string> params      = 4;//参数
+  string platformType             = 3;//平台
+  string sdkType                  = 4;//sdk
+  map<string, string> params      = 5;//参数
 }
 
 message UserBean {}

@@ -22,6 +22,7 @@ private static final long serialVersionUID = 0L;
   private ReqLogin() {
     user_ = "";
     token_ = "";
+    platformType_ = "";
     sdkType_ = "";
   }
 
@@ -71,10 +72,16 @@ private static final long serialVersionUID = 0L;
           case 26: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            sdkType_ = s;
+            platformType_ = s;
             break;
           }
           case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            sdkType_ = s;
+            break;
+          }
+          case 42: {
             if (!((mutable_bitField0_ & 0x00000001) != 0)) {
               params_ = com.google.protobuf.MapField.newMapField(
                   ParamsDefaultEntryHolder.defaultEntry);
@@ -118,7 +125,7 @@ private static final long serialVersionUID = 0L;
   protected com.google.protobuf.MapField internalGetMapField(
       int number) {
     switch (number) {
-      case 4:
+      case 5:
         return internalGetParams();
       default:
         throw new RuntimeException(
@@ -225,14 +232,60 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int SDKTYPE_FIELD_NUMBER = 3;
-  private volatile java.lang.Object sdkType_;
+  public static final int PLATFORMTYPE_FIELD_NUMBER = 3;
+  private volatile java.lang.Object platformType_;
   /**
    * <pre>
    *平台
    * </pre>
    *
-   * <code>string sdkType = 3;</code>
+   * <code>string platformType = 3;</code>
+   * @return The platformType.
+   */
+  @java.lang.Override
+  public java.lang.String getPlatformType() {
+    java.lang.Object ref = platformType_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      platformType_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   *平台
+   * </pre>
+   *
+   * <code>string platformType = 3;</code>
+   * @return The bytes for platformType.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getPlatformTypeBytes() {
+    java.lang.Object ref = platformType_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      platformType_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int SDKTYPE_FIELD_NUMBER = 4;
+  private volatile java.lang.Object sdkType_;
+  /**
+   * <pre>
+   *sdk
+   * </pre>
+   *
+   * <code>string sdkType = 4;</code>
    * @return The sdkType.
    */
   @java.lang.Override
@@ -250,10 +303,10 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   *平台
+   *sdk
    * </pre>
    *
-   * <code>string sdkType = 3;</code>
+   * <code>string sdkType = 4;</code>
    * @return The bytes for sdkType.
    */
   @java.lang.Override
@@ -271,7 +324,7 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int PARAMS_FIELD_NUMBER = 4;
+  public static final int PARAMS_FIELD_NUMBER = 5;
   private static final class ParamsDefaultEntryHolder {
     static final com.google.protobuf.MapEntry<
         java.lang.String, java.lang.String> defaultEntry =
@@ -302,7 +355,7 @@ private static final long serialVersionUID = 0L;
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
 
   @java.lang.Override
@@ -324,7 +377,7 @@ private static final long serialVersionUID = 0L;
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   @java.lang.Override
 
@@ -336,7 +389,7 @@ private static final long serialVersionUID = 0L;
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   @java.lang.Override
 
@@ -353,7 +406,7 @@ private static final long serialVersionUID = 0L;
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   @java.lang.Override
 
@@ -388,15 +441,18 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, token_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(platformType_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, platformType_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sdkType_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, sdkType_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, sdkType_);
     }
     com.google.protobuf.GeneratedMessageV3
       .serializeStringMapTo(
         output,
         internalGetParams(),
         ParamsDefaultEntryHolder.defaultEntry,
-        4);
+        5);
     unknownFields.writeTo(output);
   }
 
@@ -412,8 +468,11 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(token_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, token_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(platformType_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, platformType_);
+    }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sdkType_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, sdkType_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, sdkType_);
     }
     for (java.util.Map.Entry<java.lang.String, java.lang.String> entry
          : internalGetParams().getMap().entrySet()) {
@@ -423,7 +482,7 @@ private static final long serialVersionUID = 0L;
           .setValue(entry.getValue())
           .build();
       size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, params__);
+          .computeMessageSize(5, params__);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -444,6 +503,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getUser())) return false;
     if (!getToken()
         .equals(other.getToken())) return false;
+    if (!getPlatformType()
+        .equals(other.getPlatformType())) return false;
     if (!getSdkType()
         .equals(other.getSdkType())) return false;
     if (!internalGetParams().equals(
@@ -463,6 +524,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getUser().hashCode();
     hash = (37 * hash) + TOKEN_FIELD_NUMBER;
     hash = (53 * hash) + getToken().hashCode();
+    hash = (37 * hash) + PLATFORMTYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getPlatformType().hashCode();
     hash = (37 * hash) + SDKTYPE_FIELD_NUMBER;
     hash = (53 * hash) + getSdkType().hashCode();
     if (!internalGetParams().getMap().isEmpty()) {
@@ -584,7 +647,7 @@ private static final long serialVersionUID = 0L;
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 4:
+        case 5:
           return internalGetParams();
         default:
           throw new RuntimeException(
@@ -595,7 +658,7 @@ private static final long serialVersionUID = 0L;
     protected com.google.protobuf.MapField internalGetMutableMapField(
         int number) {
       switch (number) {
-        case 4:
+        case 5:
           return internalGetMutableParams();
         default:
           throw new RuntimeException(
@@ -632,6 +695,8 @@ private static final long serialVersionUID = 0L;
 
       token_ = "";
 
+      platformType_ = "";
+
       sdkType_ = "";
 
       internalGetMutableParams().clear();
@@ -664,6 +729,7 @@ private static final long serialVersionUID = 0L;
       int from_bitField0_ = bitField0_;
       result.user_ = user_;
       result.token_ = token_;
+      result.platformType_ = platformType_;
       result.sdkType_ = sdkType_;
       result.params_ = internalGetParams();
       result.params_.makeImmutable();
@@ -721,6 +787,10 @@ private static final long serialVersionUID = 0L;
       }
       if (!other.getToken().isEmpty()) {
         token_ = other.token_;
+        onChanged();
+      }
+      if (!other.getPlatformType().isEmpty()) {
+        platformType_ = other.platformType_;
         onChanged();
       }
       if (!other.getSdkType().isEmpty()) {
@@ -951,13 +1021,109 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object sdkType_ = "";
+    private java.lang.Object platformType_ = "";
     /**
      * <pre>
      *平台
      * </pre>
      *
-     * <code>string sdkType = 3;</code>
+     * <code>string platformType = 3;</code>
+     * @return The platformType.
+     */
+    public java.lang.String getPlatformType() {
+      java.lang.Object ref = platformType_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        platformType_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <pre>
+     *平台
+     * </pre>
+     *
+     * <code>string platformType = 3;</code>
+     * @return The bytes for platformType.
+     */
+    public com.google.protobuf.ByteString
+        getPlatformTypeBytes() {
+      java.lang.Object ref = platformType_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        platformType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     *平台
+     * </pre>
+     *
+     * <code>string platformType = 3;</code>
+     * @param value The platformType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlatformType(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      platformType_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *平台
+     * </pre>
+     *
+     * <code>string platformType = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearPlatformType() {
+      
+      platformType_ = getDefaultInstance().getPlatformType();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *平台
+     * </pre>
+     *
+     * <code>string platformType = 3;</code>
+     * @param value The bytes for platformType to set.
+     * @return This builder for chaining.
+     */
+    public Builder setPlatformTypeBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      platformType_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object sdkType_ = "";
+    /**
+     * <pre>
+     *sdk
+     * </pre>
+     *
+     * <code>string sdkType = 4;</code>
      * @return The sdkType.
      */
     public java.lang.String getSdkType() {
@@ -974,10 +1140,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *平台
+     *sdk
      * </pre>
      *
-     * <code>string sdkType = 3;</code>
+     * <code>string sdkType = 4;</code>
      * @return The bytes for sdkType.
      */
     public com.google.protobuf.ByteString
@@ -995,10 +1161,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *平台
+     *sdk
      * </pre>
      *
-     * <code>string sdkType = 3;</code>
+     * <code>string sdkType = 4;</code>
      * @param value The sdkType to set.
      * @return This builder for chaining.
      */
@@ -1014,10 +1180,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *平台
+     *sdk
      * </pre>
      *
-     * <code>string sdkType = 3;</code>
+     * <code>string sdkType = 4;</code>
      * @return This builder for chaining.
      */
     public Builder clearSdkType() {
@@ -1028,10 +1194,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *平台
+     *sdk
      * </pre>
      *
-     * <code>string sdkType = 3;</code>
+     * <code>string sdkType = 4;</code>
      * @param value The bytes for sdkType to set.
      * @return This builder for chaining.
      */
@@ -1078,7 +1244,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
 
     @java.lang.Override
@@ -1100,7 +1266,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
     @java.lang.Override
 
@@ -1112,7 +1278,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
     @java.lang.Override
 
@@ -1129,7 +1295,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
     @java.lang.Override
 
@@ -1154,7 +1320,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
 
     public Builder removeParams(
@@ -1177,7 +1343,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
     public Builder putParams(
         java.lang.String key,
@@ -1196,7 +1362,7 @@ private static final long serialVersionUID = 0L;
      *参数
      * </pre>
      *
-     * <code>map&lt;string, string&gt; params = 4;</code>
+     * <code>map&lt;string, string&gt; params = 5;</code>
      */
 
     public Builder putAllParams(

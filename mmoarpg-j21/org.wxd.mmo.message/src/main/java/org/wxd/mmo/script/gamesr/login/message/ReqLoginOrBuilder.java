@@ -52,16 +52,36 @@ public interface ReqLoginOrBuilder extends
    *平台
    * </pre>
    *
-   * <code>string sdkType = 3;</code>
-   * @return The sdkType.
+   * <code>string platformType = 3;</code>
+   * @return The platformType.
    */
-  java.lang.String getSdkType();
+  java.lang.String getPlatformType();
   /**
    * <pre>
    *平台
    * </pre>
    *
-   * <code>string sdkType = 3;</code>
+   * <code>string platformType = 3;</code>
+   * @return The bytes for platformType.
+   */
+  com.google.protobuf.ByteString
+      getPlatformTypeBytes();
+
+  /**
+   * <pre>
+   *sdk
+   * </pre>
+   *
+   * <code>string sdkType = 4;</code>
+   * @return The sdkType.
+   */
+  java.lang.String getSdkType();
+  /**
+   * <pre>
+   *sdk
+   * </pre>
+   *
+   * <code>string sdkType = 4;</code>
    * @return The bytes for sdkType.
    */
   com.google.protobuf.ByteString
@@ -72,7 +92,7 @@ public interface ReqLoginOrBuilder extends
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   int getParamsCount();
   /**
@@ -80,7 +100,7 @@ public interface ReqLoginOrBuilder extends
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   boolean containsParams(
       java.lang.String key);
@@ -95,7 +115,7 @@ public interface ReqLoginOrBuilder extends
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
   java.util.Map<java.lang.String, java.lang.String>
   getParamsMap();
@@ -104,7 +124,7 @@ public interface ReqLoginOrBuilder extends
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
 
   /* nullable */
@@ -117,7 +137,7 @@ java.lang.String defaultValue);
    *参数
    * </pre>
    *
-   * <code>map&lt;string, string&gt; params = 4;</code>
+   * <code>map&lt;string, string&gt; params = 5;</code>
    */
 
   java.lang.String getParamsOrThrow(

@@ -1,9 +1,12 @@
 package org.wxd.mmo;
 
 
+import org.wxd.boot.core.str.json.FastJsonUtil;
 import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.controller.ProtoBufCreateController;
 import org.wxd.boot.net.web.ws.WebSocketServer;
+
+import java.util.TreeMap;
 
 public class GenGameMsg {
     public static void main(String[] args) throws Exception {
@@ -15,8 +18,8 @@ public class GenGameMsg {
 
         protoBufCreateController.buildProtobufToJava("org.wxd.mmo.message/src/protobuf/win64/protoc.exe");
 
-        protoBufCreateController.createMessageId("Req|Res");
-        System.out.println();
+        TreeMap<String, Integer> messageId = protoBufCreateController.createMessageId("Req|Res");
+        System.out.println(FastJsonUtil.toJsonFmt(messageId));
 
 
         protoBufCreateController.setCodeOutPath("org.wxd.mmo.gamesr-script/src/main/java/");
