@@ -1,6 +1,6 @@
 package org.wxd.mmo.gamesr.tick;
 
-import org.wxd.mmo.core.struct.ServerInfo;
+import org.wxd.mmo.core.bean.config.ServerConfig;
 
 /**
  * 服务器心跳
@@ -10,6 +10,6 @@ import org.wxd.mmo.core.struct.ServerInfo;
  **/
 public interface IServerHourTick {
 
-    void onServerHour(ServerInfo serverInfo);
+    void onServerHour(ServerConfig serverInfo);
 
 }

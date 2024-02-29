@@ -1,7 +1,6 @@
 package org.wxd.mmo.gamesr.tick;
 
-import org.wxd.mmo.core.struct.ServerInfo;
-import org.wxd.mmo.gamesr.bean.data.ServerData;
+import org.wxd.mmo.core.bean.config.ServerConfig;
 
 /**
  * 服务器心跳
@@ -11,6 +10,6 @@ import org.wxd.mmo.gamesr.bean.data.ServerData;
  **/
 public interface IServerSecondTick {
 
-    void onServerSecond(ServerInfo serverInfo);
+    void onServerSecond(ServerConfig serverInfo);
 
 }

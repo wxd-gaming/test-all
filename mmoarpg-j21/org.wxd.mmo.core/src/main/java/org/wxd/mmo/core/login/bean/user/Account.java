@@ -3,6 +3,7 @@ package org.wxd.mmo.core.login.bean.user;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.wxd.boot.batis.enums.ColumnType;
 import org.wxd.boot.batis.save.ObjectSave;
 import org.wxd.boot.batis.struct.DbColumn;
 import org.wxd.boot.batis.struct.DbTable;
@@ -40,9 +41,9 @@ public class Account extends ObjectSave {
     private long createTime;
     @DbColumn(index = true)
     private long lastLoginTime;
-    @DbColumn(index = true)
+    @DbColumn(index = true, columnType = ColumnType.Varchar, length = 64)
     private Platforms platforms;
-    @DbColumn(index = true)
+    @DbColumn(index = true, columnType = ColumnType.Varchar, length = 64)
     private SdkType sdkType;
 
     public String logName() {

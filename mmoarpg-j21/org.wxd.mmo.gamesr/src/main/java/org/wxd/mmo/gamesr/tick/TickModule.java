@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 import org.wxd.boot.core.threading.Async;
 import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.boot.starter.Starter;
-import org.wxd.mmo.core.struct.ServerInfo;
+import org.wxd.mmo.core.bean.config.ServerConfig;
 
 /**
  * 心跳模块
@@ -16,13 +16,13 @@ import org.wxd.mmo.core.struct.ServerInfo;
 @Singleton
 public class TickModule {
 
-    @Inject ServerInfo serverInfo;
+    @Inject ServerConfig serverConfig;
 
     @Scheduled("*")
     @Async(vt = true)
     public void serverSecondTick() {
         Starter.curIocInjector().forEachBean(IServerSecondTick.class, tick -> {
-            tick.onServerSecond(serverInfo);
+            tick.onServerSecond(serverConfig);
         });
     }
 
@@ -30,7 +30,7 @@ public class TickModule {
     @Async(vt = true)
     public void serverMinuteTick() {
         Starter.curIocInjector().forEachBean(IServerMinuteTick.class, tick -> {
-            tick.onServerMinute(serverInfo);
+            tick.onServerMinute(serverConfig);
         });
     }
 
@@ -38,7 +38,7 @@ public class TickModule {
     @Async(vt = true)
     public void serverHourTick() {
         Starter.curIocInjector().forEachBean(IServerHourTick.class, tick -> {
-            tick.onServerHour(serverInfo);
+            tick.onServerHour(serverConfig);
         });
     }
 
@@ -46,7 +46,7 @@ public class TickModule {
     @Async(vt = true)
     public void serverDayTick() {
         Starter.curIocInjector().forEachBean(IServerDayTick.class, tick -> {
-            tick.onServerDay(serverInfo);
+            tick.onServerDay(serverConfig);
         });
     }
 
