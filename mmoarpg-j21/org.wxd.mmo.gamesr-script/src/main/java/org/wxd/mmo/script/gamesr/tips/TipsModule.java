@@ -3,6 +3,7 @@ package org.wxd.mmo.script.gamesr.tips;
 import com.google.inject.Singleton;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.tips.message.ResTips;
+import org.wxd.mmo.script.gamesr.tips.message.TipsType;
 
 
 /**
@@ -15,7 +16,7 @@ import org.wxd.mmo.script.gamesr.tips.message.ResTips;
 public class TipsModule {
 
     public void sendTips(Player player, String content) {
-        ResTips build = ResTips.newBuilder().setType(2).setLanCode(content).build();
+        ResTips build = ResTips.newBuilder().setType(TipsType.normal).setLanCode(content).build();
         player.getSocketSession().writeFlush(build);
     }
 
@@ -29,7 +30,7 @@ public class TipsModule {
      */
     public void sendError(Player player, String content, int resId) {
         ResTips build = ResTips.newBuilder()
-                .setType(2)
+                .setType(TipsType.error)
                 .setLanCode(content)
                 .setResId(resId)
                 .build();

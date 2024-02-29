@@ -12,10 +12,19 @@ public interface ResTipsOrBuilder extends
    *0正常提示，1跑马灯，2错误提示
    * </pre>
    *
-   * <code>sint32 type = 1;</code>
+   * <code>.Proto.Tips.TipsType type = 1;</code>
+   * @return The enum numeric value on the wire for type.
+   */
+  int getTypeValue();
+  /**
+   * <pre>
+   *0正常提示，1跑马灯，2错误提示
+   * </pre>
+   *
+   * <code>.Proto.Tips.TipsType type = 1;</code>
    * @return The type.
    */
-  int getType();
+  org.wxd.mmo.script.gamesr.tips.message.TipsType getType();
 
   /**
    * <pre>

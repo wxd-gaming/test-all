@@ -16,6 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ResTips() {
+    type_ = 0;
     lanCode_ = "";
     params_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
@@ -52,8 +53,9 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 8: {
+            int rawValue = input.readEnum();
 
-            type_ = input.readSInt32();
+            type_ = rawValue;
             break;
           }
           case 18: {
@@ -120,12 +122,24 @@ private static final long serialVersionUID = 0L;
    *0正常提示，1跑马灯，2错误提示
    * </pre>
    *
-   * <code>sint32 type = 1;</code>
+   * <code>.Proto.Tips.TipsType type = 1;</code>
+   * @return The enum numeric value on the wire for type.
+   */
+  @java.lang.Override public int getTypeValue() {
+    return type_;
+  }
+  /**
+   * <pre>
+   *0正常提示，1跑马灯，2错误提示
+   * </pre>
+   *
+   * <code>.Proto.Tips.TipsType type = 1;</code>
    * @return The type.
    */
-  @java.lang.Override
-  public int getType() {
-    return type_;
+  @java.lang.Override public org.wxd.mmo.script.gamesr.tips.message.TipsType getType() {
+    @SuppressWarnings("deprecation")
+    org.wxd.mmo.script.gamesr.tips.message.TipsType result = org.wxd.mmo.script.gamesr.tips.message.TipsType.valueOf(type_);
+    return result == null ? org.wxd.mmo.script.gamesr.tips.message.TipsType.UNRECOGNIZED : result;
   }
 
   public static final int LANCODE_FIELD_NUMBER = 2;
@@ -254,8 +268,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (type_ != 0) {
-      output.writeSInt32(1, type_);
+    if (type_ != org.wxd.mmo.script.gamesr.tips.message.TipsType.normal.getNumber()) {
+      output.writeEnum(1, type_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lanCode_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, lanCode_);
@@ -275,9 +289,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (type_ != 0) {
+    if (type_ != org.wxd.mmo.script.gamesr.tips.message.TipsType.normal.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
-        .computeSInt32Size(1, type_);
+        .computeEnumSize(1, type_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lanCode_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, lanCode_);
@@ -309,8 +323,7 @@ private static final long serialVersionUID = 0L;
     }
     org.wxd.mmo.script.gamesr.tips.message.ResTips other = (org.wxd.mmo.script.gamesr.tips.message.ResTips) obj;
 
-    if (getType()
-        != other.getType()) return false;
+    if (type_ != other.type_) return false;
     if (!getLanCode()
         .equals(other.getLanCode())) return false;
     if (!getParamsList()
@@ -329,7 +342,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + TYPE_FIELD_NUMBER;
-    hash = (53 * hash) + getType();
+    hash = (53 * hash) + type_;
     hash = (37 * hash) + LANCODE_FIELD_NUMBER;
     hash = (53 * hash) + getLanCode().hashCode();
     if (getParamsCount() > 0) {
@@ -562,8 +575,8 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.wxd.mmo.script.gamesr.tips.message.ResTips other) {
       if (other == org.wxd.mmo.script.gamesr.tips.message.ResTips.getDefaultInstance()) return this;
-      if (other.getType() != 0) {
-        setType(other.getType());
+      if (other.type_ != 0) {
+        setTypeValue(other.getTypeValue());
       }
       if (!other.getLanCode().isEmpty()) {
         lanCode_ = other.lanCode_;
@@ -612,17 +625,16 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int type_ ;
+    private int type_ = 0;
     /**
      * <pre>
      *0正常提示，1跑马灯，2错误提示
      * </pre>
      *
-     * <code>sint32 type = 1;</code>
-     * @return The type.
+     * <code>.Proto.Tips.TipsType type = 1;</code>
+     * @return The enum numeric value on the wire for type.
      */
-    @java.lang.Override
-    public int getType() {
+    @java.lang.Override public int getTypeValue() {
       return type_;
     }
     /**
@@ -630,11 +642,11 @@ private static final long serialVersionUID = 0L;
      *0正常提示，1跑马灯，2错误提示
      * </pre>
      *
-     * <code>sint32 type = 1;</code>
-     * @param value The type to set.
+     * <code>.Proto.Tips.TipsType type = 1;</code>
+     * @param value The enum numeric value on the wire for type to set.
      * @return This builder for chaining.
      */
-    public Builder setType(int value) {
+    public Builder setTypeValue(int value) {
       
       type_ = value;
       onChanged();
@@ -645,7 +657,39 @@ private static final long serialVersionUID = 0L;
      *0正常提示，1跑马灯，2错误提示
      * </pre>
      *
-     * <code>sint32 type = 1;</code>
+     * <code>.Proto.Tips.TipsType type = 1;</code>
+     * @return The type.
+     */
+    @java.lang.Override
+    public org.wxd.mmo.script.gamesr.tips.message.TipsType getType() {
+      @SuppressWarnings("deprecation")
+      org.wxd.mmo.script.gamesr.tips.message.TipsType result = org.wxd.mmo.script.gamesr.tips.message.TipsType.valueOf(type_);
+      return result == null ? org.wxd.mmo.script.gamesr.tips.message.TipsType.UNRECOGNIZED : result;
+    }
+    /**
+     * <pre>
+     *0正常提示，1跑马灯，2错误提示
+     * </pre>
+     *
+     * <code>.Proto.Tips.TipsType type = 1;</code>
+     * @param value The type to set.
+     * @return This builder for chaining.
+     */
+    public Builder setType(org.wxd.mmo.script.gamesr.tips.message.TipsType value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      
+      type_ = value.getNumber();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *0正常提示，1跑马灯，2错误提示
+     * </pre>
+     *
+     * <code>.Proto.Tips.TipsType type = 1;</code>
      * @return This builder for chaining.
      */
     public Builder clearType() {
