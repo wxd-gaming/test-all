@@ -41,11 +41,13 @@ public class LoginRpcController implements IBeanInit {
         WebSession loginSession = loginSocket.idleSession();
         if (loginSession == null) return;
 
+        /* rpc调用示例，和 登录服务器同步心跳 */
         loginSession.rpc(
                 "/Rpc/syncHeart",
                 "1", 1
         ).send();
 
+        /*rpc调用示例，向登录服务器获取网关监听结果 */
         loginSession.rpc(
                 "/Rpc/syncGatePort",
                 "1",

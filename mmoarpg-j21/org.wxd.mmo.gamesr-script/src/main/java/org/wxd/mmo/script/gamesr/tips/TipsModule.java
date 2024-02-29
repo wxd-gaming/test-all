@@ -16,7 +16,7 @@ public class TipsModule {
 
     public void sendTips(Player player, String content) {
         ResTips build = ResTips.newBuilder().setType(2).setLanCode(content).build();
-
+        player.getSocketSession().writeFlush(build);
     }
 
 }

@@ -9,7 +9,7 @@ import org.wxd.boot.net.web.hs.controller.cmd.HttpSignCheck;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2024-02-20 11:15
  **/
-@TextController(url = "gm")
+@TextController(url = "backend")
 public class BackendApi implements HttpSignCheck {
 
 }

@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.struct.DbTable;
 import org.wxd.boot.core.lang.LNum;
+import org.wxd.boot.net.SocketSession;
 import org.wxd.mmo.core.game.bean.fight.Fight;
 import org.wxd.mmo.core.game.bean.user.PlayerSnap;
 import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
@@ -34,6 +35,8 @@ public class Player extends Fight {
     /** 在线时间，秒 */
     private LNum onlineSce = new LNum();
     private TaskPackage taskPackage = new TaskPackage();
+
+    private transient SocketSession socketSession;
 
     public Player() {
     }
