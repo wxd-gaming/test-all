@@ -71,6 +71,11 @@ private static final long serialVersionUID = 0L;
             params_.add(s);
             break;
           }
+          case 32: {
+
+            resId_ = input.readSInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -220,6 +225,21 @@ private static final long serialVersionUID = 0L;
     return params_.getByteString(index);
   }
 
+  public static final int RESID_FIELD_NUMBER = 4;
+  private int resId_;
+  /**
+   * <pre>
+   *告诉客户端回传消息id，可以取消监听了
+   * </pre>
+   *
+   * <code>sint32 resId = 4;</code>
+   * @return The resId.
+   */
+  @java.lang.Override
+  public int getResId() {
+    return resId_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -242,6 +262,9 @@ private static final long serialVersionUID = 0L;
     }
     for (int i = 0; i < params_.size(); i++) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, params_.getRaw(i));
+    }
+    if (resId_ != 0) {
+      output.writeSInt32(4, resId_);
     }
     unknownFields.writeTo(output);
   }
@@ -267,6 +290,10 @@ private static final long serialVersionUID = 0L;
       size += dataSize;
       size += 1 * getParamsList().size();
     }
+    if (resId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeSInt32Size(4, resId_);
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
@@ -288,6 +315,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getLanCode())) return false;
     if (!getParamsList()
         .equals(other.getParamsList())) return false;
+    if (getResId()
+        != other.getResId()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -307,6 +336,8 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + PARAMS_FIELD_NUMBER;
       hash = (53 * hash) + getParamsList().hashCode();
     }
+    hash = (37 * hash) + RESID_FIELD_NUMBER;
+    hash = (53 * hash) + getResId();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -446,6 +477,8 @@ private static final long serialVersionUID = 0L;
 
       params_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       bitField0_ = (bitField0_ & ~0x00000001);
+      resId_ = 0;
+
       return this;
     }
 
@@ -480,6 +513,7 @@ private static final long serialVersionUID = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.params_ = params_;
+      result.resId_ = resId_;
       onBuilt();
       return result;
     }
@@ -544,6 +578,9 @@ private static final long serialVersionUID = 0L;
           params_.addAll(other.params_);
         }
         onChanged();
+      }
+      if (other.getResId() != 0) {
+        setResId(other.getResId());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -856,6 +893,49 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       ensureParamsIsMutable();
       params_.add(value);
+      onChanged();
+      return this;
+    }
+
+    private int resId_ ;
+    /**
+     * <pre>
+     *告诉客户端回传消息id，可以取消监听了
+     * </pre>
+     *
+     * <code>sint32 resId = 4;</code>
+     * @return The resId.
+     */
+    @java.lang.Override
+    public int getResId() {
+      return resId_;
+    }
+    /**
+     * <pre>
+     *告诉客户端回传消息id，可以取消监听了
+     * </pre>
+     *
+     * <code>sint32 resId = 4;</code>
+     * @param value The resId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setResId(int value) {
+      
+      resId_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *告诉客户端回传消息id，可以取消监听了
+     * </pre>
+     *
+     * <code>sint32 resId = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearResId() {
+      
+      resId_ = 0;
       onChanged();
       return this;
     }

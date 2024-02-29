@@ -19,4 +19,21 @@ public class TipsModule {
         player.getSocketSession().writeFlush(build);
     }
 
+    /***
+     * 通知客户端异常了
+     * @param player
+     * @param content 提示内容
+     * @param resId 客户端当前正在监听等待返回的消息id
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-02-29 20:48
+     */
+    public void sendError(Player player, String content, int resId) {
+        ResTips build = ResTips.newBuilder()
+                .setType(2)
+                .setLanCode(content)
+                .setResId(resId)
+                .build();
+        player.getSocketSession().writeFlush(build);
+    }
+
 }

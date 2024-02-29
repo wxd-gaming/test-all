@@ -77,4 +77,14 @@ public interface ResTipsOrBuilder extends
    */
   com.google.protobuf.ByteString
       getParamsBytes(int index);
+
+  /**
+   * <pre>
+   *告诉客户端回传消息id，可以取消监听了
+   * </pre>
+   *
+   * <code>sint32 resId = 4;</code>
+   * @return The resId.
+   */
+  int getResId();
 }
