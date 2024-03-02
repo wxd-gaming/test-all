@@ -1,5 +1,11 @@
 # 应用软件项目框架落地
 
+## 更新仓库地址
+
+github https://github.com/orgs/wxd-gaming/repositories<br>
+gitee  &nbsp;&nbsp;&nbsp;https://gitee.com/wxd-gaming<br>
+博客首页 https://www.cnblogs.com/wxd-gameing<br>
+
 ## 简介
 
 本模块是应用框架的落地项目，是可以启动的具体实现功能；
@@ -17,4 +23,5 @@
 |                | 其余几个项目只是简单测试忽略不计                        |
 
 ## 说明
+
 pom.xml 文件 profile 数据库相关配置
