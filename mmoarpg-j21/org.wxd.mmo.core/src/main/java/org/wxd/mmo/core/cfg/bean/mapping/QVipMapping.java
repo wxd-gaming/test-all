@@ -27,11 +27,14 @@ public abstract class QVipMapping extends ObjectBase implements DataChecked, Ser
     /** vip等级 */
     @DbColumn(name = "id", key = true, comment = "vip等级")
     protected int id;
+    /** vip升级所需要的经验 */
+    @DbColumn(name = "exp", comment = "vip升级所需要的经验")
+    protected int exp;
     /** vip名字 */
     @DbColumn(name = "vip_name", comment = "vip名字")
     protected String vipName;
     /** 解锁后获得奖励 */
-    @DbColumn(name = "shop_item", comment = "解锁后获得奖励")
-    protected int[][] shopItem;
+    @DbColumn(name = "rewards", comment = "解锁后获得奖励")
+    protected int[][] rewards;
 
 }

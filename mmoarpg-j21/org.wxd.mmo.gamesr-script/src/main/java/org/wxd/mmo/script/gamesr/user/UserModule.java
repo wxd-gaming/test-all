@@ -10,6 +10,8 @@ import org.wxd.boot.core.timer.ann.Scheduled;
 import org.wxd.mmo.core.bean.bag.*;
 import org.wxd.mmo.core.bean.config.ServerConfig;
 import org.wxd.mmo.core.bean.data.UidSeed;
+import org.wxd.mmo.core.cfg.factory.QVipFactory;
+import org.wxd.mmo.core.common.cache.cfg.JsonConfigCache;
 import org.wxd.mmo.core.common.cache.user.AccountCache;
 import org.wxd.mmo.core.game.bean.user.PlayerSnap;
 import org.wxd.mmo.core.game.cache.user.PlayerSnapCache;
@@ -39,6 +41,7 @@ public class UserModule {
     @Inject RankModule rankModule;
     @Inject PlayerSnapCache playerSnapCache;
     @Inject DataCenter dataCenter;
+    @Inject JsonConfigCache jsonConfigCache;
 
     Player userFirst = null;
 
@@ -122,7 +125,6 @@ public class UserModule {
     public Player createPlayer() {
         Player player = new Player();
         player.setUid(dataCenter.newUid(UidSeed.Type.Player));
-
         player.setName(StringUtil.uuid32(12));
         player.setLevel(RandomUtils.random(10, 100));
         player.setFightPower(RandomUtils.random(10000, 10000000));
@@ -136,6 +138,11 @@ public class UserModule {
         playerSnap.setName(player.getName());
         playerSnap.setLv(player.getLevel());
         playerSnap.setPower(player.getFightPower());
+
+        QVipFactory vipFactory = jsonConfigCache.getDbBean(QVipFactory.class);
+        int maxLv = vipFactory.getMaxLv();
+        playerSnap.setVipLv(RandomUtils.random(0, maxLv));
+
         playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
         return player;
     }

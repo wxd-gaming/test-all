@@ -17,12 +17,16 @@ namespace Org.Wxd.Mmo.Core.Cfg.Bean.Mapping
         /// </summary>
         public int Id { get; set; }
         /// <summary>
+        /// vip升级所需要的经验
+        /// </summary>
+        public int Exp { get; set; }
+        /// <summary>
         /// vip名字
         /// </summary>
         public String VipName { get; set; }
         /// <summary>
         /// 解锁后获得奖励
         /// </summary>
-        public int[][] ShopItem { get; set; }
+        public int[][] Rewards { get; set; }
     }
 }

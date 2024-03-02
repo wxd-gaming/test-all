@@ -4,6 +4,7 @@ package org.wxd.mmo.core.cfg.factory;
 import lombok.Getter;
 import org.wxd.boot.batis.struct.DbBean;
 import org.wxd.mmo.core.cfg.bean.QVipBean;
+import org.wxd.mmo.core.cfg.bean.mapping.QVipMapping;
 
 import java.io.Serializable;
 
@@ -17,9 +18,11 @@ import java.io.Serializable;
 @Getter
 public class QVipFactory extends DbBean<QVipBean> implements Serializable {
 
+    private int maxLv;
+
     @Override public void initDb() {
         /*todo 实现一些数据分组*/
-
+        maxLv = getModelList().stream().mapToInt(QVipMapping::getId).max().orElse(0);
     }
 
 }
