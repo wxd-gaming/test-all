@@ -3,7 +3,7 @@
 ## 更新仓库地址
 
 github https://github.com/orgs/wxd-gaming/repositories<br>
-gitee  &nbsp;&nbsp;&nbsp;https://gitee.com/wxd-gaming<br>
+gitee &nbsp;&nbsp;&nbsp;https://gitee.com/wxd-gaming<br>
 博客首页 https://www.cnblogs.com/wxd-gameing<br>
 
 ## 简介
@@ -25,3 +25,14 @@ gitee  &nbsp;&nbsp;&nbsp;https://gitee.com/wxd-gaming<br>
 ## 说明
 
 pom.xml 文件 profile 数据库相关配置
+
+## cfg结构说明
+
+通过core项目的test目录里面Excel2Json类执行导出<br>
+根据自定义配置输出，excel文件导出目录中<br>
+
+| 目录结构    | 说明                                          |
+|---------|---------------------------------------------|
+| mapping | 实际和excel配置表关联的字段解析不要改动它每次生成都会覆盖             |
+| bean    | 目录里面的类只会生成一次，可以增加对单条数据的解析，比如复杂的道具奖励配置，预解析处理 |
+| factory | 目录为某个配置的数据仓储也就是集合，比如。vip的集合 list<vip> beans | 
