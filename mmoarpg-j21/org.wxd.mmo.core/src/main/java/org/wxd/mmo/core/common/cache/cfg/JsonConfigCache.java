@@ -24,6 +24,10 @@ public class JsonConfigCache extends JsonDataRepository implements IBeanInit {
         setPath("cfg-json");
     }
 
+    public JsonConfigCache(String jsonPath) {
+        setPath(jsonPath);
+    }
+
     /**
      * bean初始化调用的，即便是热更新也会调用，会优先处理ioc注入
      *
