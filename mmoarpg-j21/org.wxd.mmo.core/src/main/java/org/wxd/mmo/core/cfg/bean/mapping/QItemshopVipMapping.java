@@ -16,12 +16,12 @@ import java.util.Set;
 
 
 /**
- * excel 构建 Vip礼包.xlsx - q_itemshop_vip - vip礼包
+ * excel 构建 Vip.xlsx - q_itemshop_vip - vip礼包
  **/
 @Getter
 @Setter
 @Accessors(chain = true)
-@DbTable(mappedSuperclass = true, name = "q_itemshop_vip", comment = "Vip礼包.xlsx - q_itemshop_vip - vip礼包")
+@DbTable(mappedSuperclass = true, name = "q_itemshop_vip", comment = "Vip.xlsx - q_itemshop_vip - vip礼包")
 public abstract class QItemshopVipMapping extends ObjectBase implements DataChecked, Serializable {
 
     /** 主键id */

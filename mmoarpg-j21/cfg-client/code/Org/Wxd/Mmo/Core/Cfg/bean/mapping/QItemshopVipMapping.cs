@@ -8,7 +8,7 @@ namespace Org.Wxd.Mmo.Core.Cfg.Bean.Mapping
 {
 
     /// <summary>
-    /// excel 构建 Vip礼包.xlsx - q_itemshop_vip - vip礼包
+    /// excel 构建 Vip.xlsx - q_itemshop_vip - vip礼包
     /// </summary>
     public class QItemshopVipMapping
     {

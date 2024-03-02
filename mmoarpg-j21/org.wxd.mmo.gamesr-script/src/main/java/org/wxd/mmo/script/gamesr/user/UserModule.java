@@ -42,7 +42,7 @@ public class UserModule {
 
     Player userFirst = null;
 
-    @Scheduled("*/5")
+    @Scheduled("0")
     public void test() {
         {
             MarkTimer markTimer = MarkTimer.build();
