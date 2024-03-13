@@ -2,6 +2,7 @@ package org.wxd.mmo.robotsr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wxd.boot.agent.LogbackUtil;
 import org.wxd.boot.agent.loader.ClassDirLoader;
 import org.wxd.boot.agent.loader.JavaCoderCompile;
 import org.wxd.boot.agent.system.ReflectContext;
@@ -35,7 +36,7 @@ public class RobotAppMain {
 
     public static void init() throws Exception {
 
-        JvmUtil.setLogbackConfig();
+        LogbackUtil.setLogbackConfig();
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
         Starter.startBoot(

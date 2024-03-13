@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.wxd.boot.batis.save.ObjectSave;
-import org.wxd.boot.core.collection.concurrent.ConcurrentListTable;
+import org.wxd.boot.core.collection.concurrent.ConcurrentSkipTable;
 import org.wxd.mmo.core.bean.task.AchieveInfo;
 import org.wxd.mmo.core.bean.task.AchieveType;
 import org.wxd.mmo.core.bean.task.TaskInfo;
@@ -26,6 +26,6 @@ public class TaskPackage extends ObjectSave {
     /** 成就 */
     private final ConcurrentSkipListMap<AchieveType, AchieveInfo> achieves = new ConcurrentSkipListMap<>();
     /** 任务集合 */
-    private final ConcurrentListTable<TaskType, Integer, TaskInfo> tasks = new ConcurrentListTable<>();
+    private final ConcurrentSkipTable<TaskType, Integer, TaskInfo> tasks = new ConcurrentSkipTable<>();
 
 }
