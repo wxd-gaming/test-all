@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package Proto.Chat;
+//把文件拆分
+option java_multiple_files = true;
+//导出包名
+option java_package = "org.wxd.mmo.script.gamesr.chat.message";
+
+enum ChatType {
+  normal                          = 0;//普通聊天
+}
+
+//请求发送聊天
+message ReqChat {
+    ChatType type                 = 1;//聊天类型
+    string msg                    = 2;//消息内容
+}
+
+//聊天消息转发
+message ResChat {
+  ChatType type                 = 1;//聊天类型
+  string msg                    = 2;//消息内容
+  int64 sendUid                 = 3;//发送者id；
+  string sendName               = 4;//发送者名字
+}

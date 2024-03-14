@@ -19,8 +19,9 @@ public class GenGameMsg {
         protoBufCreateController.buildProtobufToJava("org.wxd.mmo.message/src/protobuf/win64/protoc.exe");
 
         TreeMap<String, Integer> messageId = protoBufCreateController.createMessageId("Req|Res");
+        System.out.println("所有的消息ID");
         System.out.println(FastJsonUtil.toJsonFmt(messageId));
-
+        System.out.println("");
 
         protoBufCreateController.setCodeOutPath("org.wxd.mmo.gamesr-script/src/main/java/");
 
