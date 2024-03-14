@@ -11,6 +11,8 @@ import org.wxd.boot.net.controller.ann.TextController;
 import org.wxd.boot.net.controller.ann.TextMapping;
 import org.wxd.boot.starter.IocContext;
 import org.wxd.boot.starter.i.IBeanInit;
+import org.wxd.boot.starter.service.HsService;
+import org.wxd.boot.starter.service.WsService;
 import org.wxd.mmo.core.bean.type.Platforms;
 import org.wxd.mmo.core.bean.type.SdkType;
 import org.wxd.mmo.script.loginsr.event.ScriptEventBus;
@@ -23,7 +25,7 @@ import org.wxd.mmo.script.loginsr.login.ILogin;
  * @version: 2023-07-28 19:07
  **/
 @Slf4j
-@TextController
+@TextController(service = WsService.class)
 public class RpcController implements IBeanInit {
 
     @Inject ScriptEventBus eventBus;

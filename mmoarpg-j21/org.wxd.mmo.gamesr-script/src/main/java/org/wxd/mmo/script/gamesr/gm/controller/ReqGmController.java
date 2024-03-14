@@ -8,6 +8,7 @@ import org.wxd.boot.net.SocketSession;
 import org.wxd.boot.net.controller.IController;
 import org.wxd.boot.net.controller.ann.ProtoController;
 import org.wxd.boot.net.controller.ann.ProtoMapping;
+import org.wxd.boot.starter.service.WsService;
 import org.wxd.mmo.gamesr.bean.user.Player;
 import org.wxd.mmo.script.gamesr.gm.GmMappingInfo;
 import org.wxd.mmo.script.gamesr.gm.GmModule;
@@ -22,7 +23,7 @@ import org.wxd.mmo.script.gamesr.tips.TipsModule;
  * @version: 2023/02/10 15:03:58
  */
 @Slf4j
-@ProtoController(service = "org.wxd.boot.net.web.ws.WebSocketServer")
+@ProtoController(service = WsService.class)
 public final class ReqGmController implements IController {
 
     @Inject GmModule gmModule;

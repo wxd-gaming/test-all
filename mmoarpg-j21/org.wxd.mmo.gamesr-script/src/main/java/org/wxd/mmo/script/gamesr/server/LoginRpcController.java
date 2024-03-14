@@ -21,7 +21,7 @@ import org.wxd.mmo.gamesr.data.DataCenter;
  * @version: 2023-07-28 19:07
  **/
 @Slf4j
-@TextController(alligatorAutoRegister = true)
+@TextController()
 public class LoginRpcController implements IBeanInit {
 
     @Inject DataCenter dataCenter;

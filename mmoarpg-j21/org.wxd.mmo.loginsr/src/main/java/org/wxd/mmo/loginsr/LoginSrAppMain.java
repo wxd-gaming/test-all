@@ -9,6 +9,7 @@ import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.starter.Starter;
+import org.wxd.mmo.core.GameBase;
 import org.wxd.mmo.core.common.cache.BeanBase;
 
 import java.io.File;
@@ -35,8 +36,7 @@ public class LoginSrAppMain {
 
         Starter.startBoot(
                 LoginSrAppMain.class,
-                org.wxd.mmo.core.login.BeanBase.class,
-                BeanBase.class
+                GameBase.class
         );
 
     }

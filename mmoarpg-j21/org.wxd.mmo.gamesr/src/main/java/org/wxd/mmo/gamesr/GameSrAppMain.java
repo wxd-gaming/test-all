@@ -9,10 +9,9 @@ import org.wxd.boot.agent.system.ReflectContext;
 import org.wxd.boot.core.system.JvmUtil;
 import org.wxd.boot.net.message.MessagePackage;
 import org.wxd.boot.starter.Starter;
-import org.wxd.boot.starter.batis.MongoService;
 import org.wxd.boot.starter.batis.MysqlService;
 import org.wxd.boot.starter.batis.MysqlService1;
-import org.wxd.mmo.core.common.cache.BeanBase;
+import org.wxd.mmo.core.GameBase;
 
 import java.io.File;
 
@@ -37,12 +36,11 @@ public class GameSrAppMain {
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
         Starter.startBoot(
                 GameSrAppMain.class,
-                org.wxd.mmo.core.game.BeanBase.class,
-                BeanBase.class
+                GameBase.class
         );
 
         MysqlService gameDb = Starter.curIocInjector().getInstance(MysqlService.class);
-        gameDb.checkDataBase("org.wxd.mmo.gamesr");
+        gameDb.checkDataBase("org.wxd.mmo");
 
         MysqlService1 loginDb = Starter.curIocInjector().getInstance(MysqlService1.class);
 
