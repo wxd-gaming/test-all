@@ -9,9 +9,9 @@ namespace Org.Wxd.Mmo.Core.Cfg.Bean
 {
 
     /// <summary>
-    /// Vip.xlsx - q_vip - vip等级
+    /// Vip.xlsx - q_itemshop_vip - vip礼包
     /// </summary>
-    public class QVipBean : QVipMapping
+    public class QItemshopVipRow : QItemshopVipMapping
     {
 
     }

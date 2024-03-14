@@ -3,8 +3,7 @@ package code;
 import org.junit.Test;
 import org.wxd.boot.batis.code.CodeLan;
 import org.wxd.boot.batis.excel.ExcelRead2Json;
-import org.wxd.mmo.core.cfg.factory.QVipFactory;
-import org.wxd.mmo.core.common.cache.cfg.JsonConfigCache;
+import org.wxd.mmo.core.cfg.CfgCache;
 
 /**
  * excel 转化 json 文件
@@ -27,10 +26,10 @@ public class Excel2Json {
                 .saveData("../cfg-client/json")
                 .createCode(CodeLan.CSharp, "../cfg-client/code", "Org.Wxd.Mmo.Core.Cfg")
         ;
-        JsonConfigCache jsonConfigCache = new JsonConfigCache("../cfg-json");
-        jsonConfigCache.beanInit(null);
+        CfgCache cfgCache = new CfgCache("../cfg-json");
+        cfgCache.beanInit(null);
         /*展示一下配置表*/
-        System.out.println(jsonConfigCache.getDbBean(QVipFactory.class).toDataString());
+        //System.out.println(jsonConfigCache.getDbBean(QVipFactory.class).toDataString());
     }
 
 }
