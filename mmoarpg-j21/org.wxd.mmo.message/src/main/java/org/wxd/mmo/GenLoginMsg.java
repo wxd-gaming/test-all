@@ -23,9 +23,7 @@ public class GenLoginMsg {
 
         protoBufCreateController.createController(
                 "Req",
-                WebSocketServer.class.getName(),
-                "org.wxd.mmo.game.server.bean.user.Player",
-                "Player"
+                ""
         );
 
     }

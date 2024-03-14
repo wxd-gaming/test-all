@@ -25,10 +25,9 @@ public class GenGameMsg {
         protoBufCreateController.setCodeOutPath("org.wxd.mmo.gamesr-script/src/main/java/");
 
         protoBufCreateController.createController(
+                "proto-controller.ftl",
                 "Req",
-                WebSocketServer.class.getName(),
-                "org.wxd.mmo.game.server.bean.user.Player",
-                "Player"
+                ""
         );
 
     }

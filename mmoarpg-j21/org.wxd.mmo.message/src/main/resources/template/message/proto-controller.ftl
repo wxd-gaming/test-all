@@ -3,6 +3,7 @@ package ${savePack};
 <#list imports as row>
 import ${row};
 </#list>
+import org.wxd.mmo.gamesr.bean.user.Player;
 
 /**
  * ${comment} file=${filePath}
@@ -16,8 +17,8 @@ public final class ${saveClassName} implements IController {
 
     /** ${comment} ${messageName} */
     @ProtoMapping(remarks = "${comment}")
-    public void exec(SocketSession session, ${messageName} reqMessage) throws Exception {
-        ${userInfo}
+    public void exec(SocketSession session, ${messageName} req) throws Exception {
+        Player player = session.attr("player");
         ${res}
     }
 }

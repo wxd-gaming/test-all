@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ResGuildList() {
-    user_ = "";
+    name_ = "";
   }
 
   @java.lang.Override
@@ -43,6 +43,7 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
+    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -53,10 +54,28 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
+          case 8: {
+
+            uid_ = input.readInt64();
+            break;
+          }
+          case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            user_ = s;
+            name_ = s;
+            break;
+          }
+          case 26: {
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              moneys_ = com.google.protobuf.MapField.newMapField(
+                  MoneysDefaultEntryHolder.defaultEntry);
+              mutable_bitField0_ |= 0x00000001;
+            }
+            com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+            moneys__ = input.readMessage(
+                MoneysDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+            moneys_.getMutableMap().put(
+                moneys__.getKey(), moneys__.getValue());
             break;
           }
           default: {
@@ -85,6 +104,18 @@ private static final long serialVersionUID = 0L;
     return org.wxd.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_descriptor;
   }
 
+  @SuppressWarnings({"rawtypes"})
+  @java.lang.Override
+  protected com.google.protobuf.MapField internalGetMapField(
+      int number) {
+    switch (number) {
+      case 3:
+        return internalGetMoneys();
+      default:
+        throw new RuntimeException(
+            "Invalid map field number: " + number);
+    }
+  }
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
@@ -93,50 +124,162 @@ private static final long serialVersionUID = 0L;
             org.wxd.mmo.script.gamesr.guild.message.ResGuildList.class, org.wxd.mmo.script.gamesr.guild.message.ResGuildList.Builder.class);
   }
 
-  public static final int USER_FIELD_NUMBER = 1;
-  private volatile java.lang.Object user_;
+  public static final int UID_FIELD_NUMBER = 1;
+  private long uid_;
   /**
    * <pre>
-   *账号
+   *工会唯一ID
    * </pre>
    *
-   * <code>string user = 1;</code>
-   * @return The user.
+   * <code>int64 uid = 1;</code>
+   * @return The uid.
    */
   @java.lang.Override
-  public java.lang.String getUser() {
-    java.lang.Object ref = user_;
+  public long getUid() {
+    return uid_;
+  }
+
+  public static final int NAME_FIELD_NUMBER = 2;
+  private volatile java.lang.Object name_;
+  /**
+   * <pre>
+   *工会的名字
+   * </pre>
+   *
+   * <code>string name = 2;</code>
+   * @return The name.
+   */
+  @java.lang.Override
+  public java.lang.String getName() {
+    java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      user_ = s;
+      name_ = s;
       return s;
     }
   }
   /**
    * <pre>
-   *账号
+   *工会的名字
    * </pre>
    *
-   * <code>string user = 1;</code>
-   * @return The bytes for user.
+   * <code>string name = 2;</code>
+   * @return The bytes for name.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getUserBytes() {
-    java.lang.Object ref = user_;
+      getNameBytes() {
+    java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      user_ = b;
+      name_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
+  }
+
+  public static final int MONEYS_FIELD_NUMBER = 3;
+  private static final class MoneysDefaultEntryHolder {
+    static final com.google.protobuf.MapEntry<
+        java.lang.Integer, java.lang.Long> defaultEntry =
+            com.google.protobuf.MapEntry
+            .<java.lang.Integer, java.lang.Long>newDefaultInstance(
+                org.wxd.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_MoneysEntry_descriptor, 
+                com.google.protobuf.WireFormat.FieldType.INT32,
+                0,
+                com.google.protobuf.WireFormat.FieldType.INT64,
+                0L);
+  }
+  private com.google.protobuf.MapField<
+      java.lang.Integer, java.lang.Long> moneys_;
+  private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+  internalGetMoneys() {
+    if (moneys_ == null) {
+      return com.google.protobuf.MapField.emptyMapField(
+          MoneysDefaultEntryHolder.defaultEntry);
+    }
+    return moneys_;
+  }
+
+  public int getMoneysCount() {
+    return internalGetMoneys().getMap().size();
+  }
+  /**
+   * <pre>
+   *工会资金
+   * </pre>
+   *
+   * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+   */
+
+  @java.lang.Override
+  public boolean containsMoneys(
+      int key) {
+    
+    return internalGetMoneys().getMap().containsKey(key);
+  }
+  /**
+   * Use {@link #getMoneysMap()} instead.
+   */
+  @java.lang.Override
+  @java.lang.Deprecated
+  public java.util.Map<java.lang.Integer, java.lang.Long> getMoneys() {
+    return getMoneysMap();
+  }
+  /**
+   * <pre>
+   *工会资金
+   * </pre>
+   *
+   * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+   */
+  @java.lang.Override
+
+  public java.util.Map<java.lang.Integer, java.lang.Long> getMoneysMap() {
+    return internalGetMoneys().getMap();
+  }
+  /**
+   * <pre>
+   *工会资金
+   * </pre>
+   *
+   * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+   */
+  @java.lang.Override
+
+  public long getMoneysOrDefault(
+      int key,
+      long defaultValue) {
+    
+    java.util.Map<java.lang.Integer, java.lang.Long> map =
+        internalGetMoneys().getMap();
+    return map.containsKey(key) ? map.get(key) : defaultValue;
+  }
+  /**
+   * <pre>
+   *工会资金
+   * </pre>
+   *
+   * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+   */
+  @java.lang.Override
+
+  public long getMoneysOrThrow(
+      int key) {
+    
+    java.util.Map<java.lang.Integer, java.lang.Long> map =
+        internalGetMoneys().getMap();
+    if (!map.containsKey(key)) {
+      throw new java.lang.IllegalArgumentException();
+    }
+    return map.get(key);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -153,9 +296,18 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(user_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, user_);
+    if (uid_ != 0L) {
+      output.writeInt64(1, uid_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+    }
+    com.google.protobuf.GeneratedMessageV3
+      .serializeIntegerMapTo(
+        output,
+        internalGetMoneys(),
+        MoneysDefaultEntryHolder.defaultEntry,
+        3);
     unknownFields.writeTo(output);
   }
 
@@ -165,8 +317,22 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(user_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, user_);
+    if (uid_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(1, uid_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+    }
+    for (java.util.Map.Entry<java.lang.Integer, java.lang.Long> entry
+         : internalGetMoneys().getMap().entrySet()) {
+      com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Long>
+      moneys__ = MoneysDefaultEntryHolder.defaultEntry.newBuilderForType()
+          .setKey(entry.getKey())
+          .setValue(entry.getValue())
+          .build();
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, moneys__);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -183,8 +349,12 @@ private static final long serialVersionUID = 0L;
     }
     org.wxd.mmo.script.gamesr.guild.message.ResGuildList other = (org.wxd.mmo.script.gamesr.guild.message.ResGuildList) obj;
 
-    if (!getUser()
-        .equals(other.getUser())) return false;
+    if (getUid()
+        != other.getUid()) return false;
+    if (!getName()
+        .equals(other.getName())) return false;
+    if (!internalGetMoneys().equals(
+        other.internalGetMoneys())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -196,8 +366,15 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + USER_FIELD_NUMBER;
-    hash = (53 * hash) + getUser().hashCode();
+    hash = (37 * hash) + UID_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getUid());
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
+    if (!internalGetMoneys().getMap().isEmpty()) {
+      hash = (37 * hash) + MONEYS_FIELD_NUMBER;
+      hash = (53 * hash) + internalGetMoneys().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -309,6 +486,28 @@ private static final long serialVersionUID = 0L;
       return org.wxd.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_descriptor;
     }
 
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMapField(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetMoneys();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
+    @SuppressWarnings({"rawtypes"})
+    protected com.google.protobuf.MapField internalGetMutableMapField(
+        int number) {
+      switch (number) {
+        case 3:
+          return internalGetMutableMoneys();
+        default:
+          throw new RuntimeException(
+              "Invalid map field number: " + number);
+      }
+    }
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
@@ -335,8 +534,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      user_ = "";
+      uid_ = 0L;
 
+      name_ = "";
+
+      internalGetMutableMoneys().clear();
       return this;
     }
 
@@ -363,7 +565,11 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.wxd.mmo.script.gamesr.guild.message.ResGuildList buildPartial() {
       org.wxd.mmo.script.gamesr.guild.message.ResGuildList result = new org.wxd.mmo.script.gamesr.guild.message.ResGuildList(this);
-      result.user_ = user_;
+      int from_bitField0_ = bitField0_;
+      result.uid_ = uid_;
+      result.name_ = name_;
+      result.moneys_ = internalGetMoneys();
+      result.moneys_.makeImmutable();
       onBuilt();
       return result;
     }
@@ -412,10 +618,15 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(org.wxd.mmo.script.gamesr.guild.message.ResGuildList other) {
       if (other == org.wxd.mmo.script.gamesr.guild.message.ResGuildList.getDefaultInstance()) return this;
-      if (!other.getUser().isEmpty()) {
-        user_ = other.user_;
+      if (other.getUid() != 0L) {
+        setUid(other.getUid());
+      }
+      if (!other.getName().isEmpty()) {
+        name_ = other.name_;
         onChanged();
       }
+      internalGetMutableMoneys().mergeFrom(
+          other.internalGetMoneys());
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -444,23 +655,67 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
-    private java.lang.Object user_ = "";
+    private long uid_ ;
     /**
      * <pre>
-     *账号
+     *工会唯一ID
      * </pre>
      *
-     * <code>string user = 1;</code>
-     * @return The user.
+     * <code>int64 uid = 1;</code>
+     * @return The uid.
      */
-    public java.lang.String getUser() {
-      java.lang.Object ref = user_;
+    @java.lang.Override
+    public long getUid() {
+      return uid_;
+    }
+    /**
+     * <pre>
+     *工会唯一ID
+     * </pre>
+     *
+     * <code>int64 uid = 1;</code>
+     * @param value The uid to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUid(long value) {
+      
+      uid_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     *工会唯一ID
+     * </pre>
+     *
+     * <code>int64 uid = 1;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUid() {
+      
+      uid_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object name_ = "";
+    /**
+     * <pre>
+     *工会的名字
+     * </pre>
+     *
+     * <code>string name = 2;</code>
+     * @return The name.
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        user_ = s;
+        name_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
@@ -468,20 +723,20 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *账号
+     *工会的名字
      * </pre>
      *
-     * <code>string user = 1;</code>
-     * @return The bytes for user.
+     * <code>string name = 2;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
-        getUserBytes() {
-      java.lang.Object ref = user_;
+        getNameBytes() {
+      java.lang.Object ref = name_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        user_ = b;
+        name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -489,55 +744,211 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <pre>
-     *账号
+     *工会的名字
      * </pre>
      *
-     * <code>string user = 1;</code>
-     * @param value The user to set.
+     * <code>string name = 2;</code>
+     * @param value The name to set.
      * @return This builder for chaining.
      */
-    public Builder setUser(
+    public Builder setName(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      user_ = value;
+      name_ = value;
       onChanged();
       return this;
     }
     /**
      * <pre>
-     *账号
+     *工会的名字
      * </pre>
      *
-     * <code>string user = 1;</code>
+     * <code>string name = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearUser() {
+    public Builder clearName() {
       
-      user_ = getDefaultInstance().getUser();
+      name_ = getDefaultInstance().getName();
       onChanged();
       return this;
     }
     /**
      * <pre>
-     *账号
+     *工会的名字
      * </pre>
      *
-     * <code>string user = 1;</code>
-     * @param value The bytes for user to set.
+     * <code>string name = 2;</code>
+     * @param value The bytes for name to set.
      * @return This builder for chaining.
      */
-    public Builder setUserBytes(
+    public Builder setNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      user_ = value;
+      name_ = value;
       onChanged();
+      return this;
+    }
+
+    private com.google.protobuf.MapField<
+        java.lang.Integer, java.lang.Long> moneys_;
+    private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+    internalGetMoneys() {
+      if (moneys_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            MoneysDefaultEntryHolder.defaultEntry);
+      }
+      return moneys_;
+    }
+    private com.google.protobuf.MapField<java.lang.Integer, java.lang.Long>
+    internalGetMutableMoneys() {
+      onChanged();;
+      if (moneys_ == null) {
+        moneys_ = com.google.protobuf.MapField.newMapField(
+            MoneysDefaultEntryHolder.defaultEntry);
+      }
+      if (!moneys_.isMutable()) {
+        moneys_ = moneys_.copy();
+      }
+      return moneys_;
+    }
+
+    public int getMoneysCount() {
+      return internalGetMoneys().getMap().size();
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+
+    @java.lang.Override
+    public boolean containsMoneys(
+        int key) {
+      
+      return internalGetMoneys().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getMoneysMap()} instead.
+     */
+    @java.lang.Override
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, java.lang.Long> getMoneys() {
+      return getMoneysMap();
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+    @java.lang.Override
+
+    public java.util.Map<java.lang.Integer, java.lang.Long> getMoneysMap() {
+      return internalGetMoneys().getMap();
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+    @java.lang.Override
+
+    public long getMoneysOrDefault(
+        int key,
+        long defaultValue) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetMoneys().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+    @java.lang.Override
+
+    public long getMoneysOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Long> map =
+          internalGetMoneys().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
+    public Builder clearMoneys() {
+      internalGetMutableMoneys().getMutableMap()
+          .clear();
+      return this;
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+
+    public Builder removeMoneys(
+        int key) {
+      
+      internalGetMutableMoneys().getMutableMap()
+          .remove(key);
+      return this;
+    }
+    /**
+     * Use alternate mutation accessors instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, java.lang.Long>
+    getMutableMoneys() {
+      return internalGetMutableMoneys().getMutableMap();
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+    public Builder putMoneys(
+        int key,
+        long value) {
+      
+      
+      internalGetMutableMoneys().getMutableMap()
+          .put(key, value);
+      return this;
+    }
+    /**
+     * <pre>
+     *工会资金
+     * </pre>
+     *
+     * <code>map&lt;int32, int64&gt; moneys = 3;</code>
+     */
+
+    public Builder putAllMoneys(
+        java.util.Map<java.lang.Integer, java.lang.Long> values) {
+      internalGetMutableMoneys().getMutableMap()
+          .putAll(values);
       return this;
     }
     @java.lang.Override

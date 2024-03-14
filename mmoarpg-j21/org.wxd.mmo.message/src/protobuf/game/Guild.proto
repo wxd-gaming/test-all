@@ -12,5 +12,7 @@ message ReqGuildList {
 
 //公会列表
 message ResGuildList {
-  string user                     = 1;//账号
+  int64 uid                     = 1;//工会唯一ID
+  string name                   = 2;//工会的名字
+  map<int32, int64> moneys      = 3;//工会资金
 }

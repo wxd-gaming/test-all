@@ -32,7 +32,7 @@ public final class ReqGmController implements IController {
     /** 请求执行gm命令--没有回复 ReqGm */
     @ProtoMapping(remarks = "请求执行gm命令--没有回复")
     public void exec(SocketSession session, ReqGm reqMessage) throws Exception {
-        Player player = (Player) session.attr("player");
+        Player player = session.attr("player");
 
         GmMappingInfo gmMappingInfo = gmModule.getGmMap().get(reqMessage.getName());
         if (gmMappingInfo == null) {
