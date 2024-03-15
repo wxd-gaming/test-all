@@ -1,13 +1,5 @@
 [
     {"conditions_viplv":true,"gift_name":"VIP0级礼包","id":1,"limit_num":1.0,"name_1":"VIP0级礼包","price":[1,101011001,200],"shop_item":[[2,102010001,1],[2,102112503,2],[2,102011001,2],[2,102011005,2]]},
     {"conditions_viplv":false,"gift_name":"VIP1级礼包","id":2,"limit_num":1.0,"name_1":"VIP1级礼包","price":[1,101011001,500],"shop_item":[[2,102010001,1],[2,102111011,1],[2,102011001,5],[2,102011005,5]]},
-    {"conditions_viplv":true,"gift_name":"VIP2级礼包","id":3,"limit_num":1.0,"name_1":"VIP2级礼包","price":[1,101011001,1000],"shop_item":[[2,102010001,2],[2,102111011,2],[2,102112503,4],[2,102011103,2]]},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null},
-    {"conditions_viplv":false,"gift_name":"","id":0,"limit_num":0.0,"name_1":"","price":null,"shop_item":null}
+    {"conditions_viplv":true,"gift_name":"VIP2级礼包","id":3,"limit_num":1.0,"name_1":"VIP2级礼包","price":[1,101011001,1000],"shop_item":[[2,102010001,2],[2,102111011,2],[2,102112503,4],[2,102011103,2]]}
 ]

@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.wxd.boot.batis.code.CodeLan;
 import org.wxd.boot.batis.excel.ExcelRead2Json;
 import org.wxd.mmo.core.cfg.CfgCache;
+import org.wxd.mmo.core.cfg.table.QVipTable;
 
 /**
  * excel 转化 json 文件
@@ -29,7 +30,10 @@ public class Excel2Json {
         CfgCache cfgCache = new CfgCache("../cfg-json");
         cfgCache.beanInit(null);
         /*展示一下配置表*/
-        //System.out.println(jsonConfigCache.getDbBean(QVipFactory.class).toDataString());
+        QVipTable dbBean = cfgCache.getDbBean(QVipTable.class);
+        System.out.println(dbBean.toDataString());
+        System.out.println(dbBean.get(1));
+        System.out.println(dbBean.get("1#100"));
     }
 
 }

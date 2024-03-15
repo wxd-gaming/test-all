@@ -3,6 +3,7 @@ package org.wxd.mmo.core.cfg.table;
 
 import lombok.Getter;
 import org.wxd.boot.batis.store.DataRepository;
+import org.wxd.boot.batis.store.ann.Keys;
 import org.wxd.boot.batis.struct.DbBean;
 import org.wxd.mmo.core.cfg.bean.QVipRow;
 import org.wxd.mmo.core.cfg.bean.mapping.QVipMapping;
@@ -17,6 +18,7 @@ import java.io.Serializable;
  * @version: 2024-03-14 09:48:44
  **/
 @Getter
+@Keys({"id#exp"})
 public class QVipTable extends DbBean<QVipRow> implements Serializable {
 
     private int maxLv = 0;
