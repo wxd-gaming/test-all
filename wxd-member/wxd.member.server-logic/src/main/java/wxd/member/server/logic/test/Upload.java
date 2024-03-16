@@ -1,7 +1,8 @@
 package wxd.member.server.logic.test;
 
-import org.wxd.net.controller.ann.TextController;
-import org.wxd.net.web.hs.controller.cmd.HttpUpload;
+
+import wxdgaming.boot.net.controller.ann.TextController;
+import wxdgaming.boot.net.web.hs.controller.cmd.HttpUpload;
 
 /**
  * @author: Troy.Chen(無心道, 15388152619)

@@ -1,7 +1,7 @@
 package code;
 
 import org.junit.Test;
-import org.wxd.agent.io.FileUtil;
+import wxdgaming.boot.agent.io.FileUtil;
 
 import java.io.File;
 import java.util.Objects;

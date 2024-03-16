@@ -1,9 +1,9 @@
 package wxd.member.server.logic.member;
 
 import lombok.extern.slf4j.Slf4j;
-import org.wxd.agent.io.FileReadUtil;
-import org.wxd.net.controller.ann.TextController;
-import org.wxd.net.controller.ann.TextMapping;
+import wxdgaming.boot.agent.io.FileReadUtil;
+import wxdgaming.boot.net.controller.ann.TextController;
+import wxdgaming.boot.net.controller.ann.TextMapping;
 
 /**
  * 会员管理

@@ -2,8 +2,8 @@ package wxd.member.server.bean.member;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.wxd.batis.struct.DbColumn;
-import org.wxd.lang.save.ObjectSave;
+import wxdgaming.boot.batis.save.ObjectSave;
+import wxdgaming.boot.batis.struct.DbColumn;
 
 /**
  * 会员信息

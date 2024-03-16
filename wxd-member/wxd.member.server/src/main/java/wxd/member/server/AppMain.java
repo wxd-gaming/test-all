@@ -1,11 +1,12 @@
 package wxd.member.server;
 
 import org.slf4j.LoggerFactory;
-import org.wxd.agent.loader.ClassDirLoader;
-import org.wxd.agent.loader.JavaCoderCompile;
-import org.wxd.ioc.Ioc;
-import org.wxd.system.ClassUtil;
-import org.wxd.system.JvmUtil;
+import wxdgaming.boot.agent.LogbackUtil;
+import wxdgaming.boot.agent.loader.ClassDirLoader;
+import wxdgaming.boot.agent.loader.JavaCoderCompile;
+import wxdgaming.boot.agent.system.ReflectContext;
+import wxdgaming.boot.core.system.JvmUtil;
+import wxdgaming.boot.starter.Starter;
 
 import java.io.File;
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class AppMain {
 
     public static void main(String[] args) throws Exception {
         try {
-            JvmUtil.setLogbackConfig();
+            LogbackUtil.setLogbackConfig();
 
             JvmUtil.setProperty(JvmUtil.Netty_Boss_Thread_Size, 2);
             JvmUtil.setProperty(JvmUtil.Netty_Work_Thread_Size, 6);
@@ -33,12 +34,11 @@ public class AppMain {
             JvmUtil.setProperty(JvmUtil.Netty_Idle_Time_Http_Server, 20);
 
             /*html*/
-            Ioc.initBoot(AppMain.class);
+            Starter.startBoot(AppMain.class);
             loadLogic();
-            Ioc.start(true, 1, "1", "1.0.2");
+            Starter.start(true, 1, "1", "1.0.2");
         } catch (Throwable throwable) {
             LoggerFactory.getLogger(AppMain.class).error("启动失败", throwable);
-            Ioc.printFail();
             System.exit(1);
         }
     }
@@ -56,9 +56,8 @@ public class AppMain {
                     .builderClassLoader();
             classDirLoader.addURL("wxd.member.server-logic/src/main/resources");
         }
-
-        Collection<Class> scripts = ClassUtil.getClasses(classDirLoader, "wxd.member.server.logic");
-        Ioc.iocInitBean(scripts);
+        ReflectContext.Builder scripts = ReflectContext.Builder.of(classDirLoader, "wxd.member.server.logic");
+        Starter.createChildInjector(scripts.build());
 
     }
 
