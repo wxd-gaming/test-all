@@ -2,6 +2,7 @@ package org.wxd.mmo.core.cfg.table;
 
 
 import lombok.Getter;
+import org.wxd.boot.batis.store.DataRepository;
 import org.wxd.boot.batis.struct.DbBean;
 import org.wxd.mmo.core.cfg.bean.QItemshopVipRow;
 
@@ -22,4 +23,11 @@ public class QItemshopVipTable extends DbBean<QItemshopVipRow> implements Serial
 
     }
 
+    @Override public void checkDb(DataRepository dataRepository) {
+        QVipTable dbBean = (QVipTable) dataRepository.getDbBean(QVipTable.class);
+        for (QItemshopVipRow qItemshopVipRow : this.getModelList()) {
+            if (dbBean.get(qItemshopVipRow.getShowViplv()) == null)
+                throw new RuntimeException("缺少vip对应等级 " + qItemshopVipRow.getShowViplv());
+        }
+    }
 }

@@ -34,6 +34,7 @@ public class CfgCache extends JsonDataRepository implements IBeanInit {
      */
     @Override public void beanInit(IocContext iocContext) throws Exception {
         load(false,CfgCache.class.getClassLoader(), this.getClass().getPackageName());
+
         //ReflectContext context = ReflectContext.Builder.of(CfgCache.class.getClassLoader(), this.getClass().getPackageName()).build();
         //context.withSuper(DbBean.class).forEach(factroy -> {
         //    DbBean dbBean = getDbBean(factroy.getCls());

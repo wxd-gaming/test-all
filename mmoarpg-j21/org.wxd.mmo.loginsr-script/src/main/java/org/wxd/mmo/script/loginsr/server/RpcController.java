@@ -25,7 +25,8 @@ import org.wxd.mmo.script.loginsr.login.ILogin;
  * @version: 2023-07-28 19:07
  **/
 @Slf4j
-@TextController(service = WsService.class)
+@TextController(service = HsService.class)
+@TextController(service = WsService.class, url = "gm")
 public class RpcController implements IBeanInit {
 
     @Inject ScriptEventBus eventBus;

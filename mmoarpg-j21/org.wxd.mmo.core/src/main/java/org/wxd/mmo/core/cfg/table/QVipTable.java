@@ -29,5 +29,6 @@ public class QVipTable extends DbBean<QVipRow> implements Serializable {
     }
 
     @Override public void checkDb(DataRepository dataRepository) {
+
     }
 }
