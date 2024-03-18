@@ -38,8 +38,8 @@ public final class Chat {
       " \001(\t\"]\n\007ResChat\022\"\n\004type\030\001 \001(\0162\024.Proto.Ch" +
       "at.ChatType\022\013\n\003msg\030\002 \001(\t\022\017\n\007sendUid\030\003 \001(" +
       "\003\022\020\n\010sendName\030\004 \001(\t*\026\n\010ChatType\022\n\n\006norma" +
-      "l\020\000B*\n&wxdgaming.mmo.script.gamesr.chat.me" +
-      "ssageP\001b\006proto3"
+      "l\020\000B,\n(wxdgaming.mmo.script.gamesr.chat." +
+      "messageP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

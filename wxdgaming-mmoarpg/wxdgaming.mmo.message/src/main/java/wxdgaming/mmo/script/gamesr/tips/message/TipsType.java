@@ -135,7 +135,7 @@ public enum TipsType
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return Tips.getDescriptor().getEnumTypes().get(0);
+    return wxdgaming.mmo.script.gamesr.tips.message.Tips.getDescriptor().getEnumTypes().get(0);
   }
 
   private static final TipsType[] VALUES = values();

@@ -14,7 +14,7 @@ public interface ResGmListOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmGroup groups = 1;</code>
    */
-  java.util.List<GmGroup>
+  java.util.List<wxdgaming.mmo.script.gamesr.gm.message.GmGroup> 
       getGroupsList();
   /**
    * <pre>
@@ -23,7 +23,7 @@ public interface ResGmListOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmGroup groups = 1;</code>
    */
-  GmGroup getGroups(int index);
+  wxdgaming.mmo.script.gamesr.gm.message.GmGroup getGroups(int index);
   /**
    * <pre>
    *所有分组
@@ -39,7 +39,7 @@ public interface ResGmListOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmGroup groups = 1;</code>
    */
-  java.util.List<? extends GmGroupOrBuilder>
+  java.util.List<? extends wxdgaming.mmo.script.gamesr.gm.message.GmGroupOrBuilder> 
       getGroupsOrBuilderList();
   /**
    * <pre>
@@ -48,6 +48,6 @@ public interface ResGmListOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmGroup groups = 1;</code>
    */
-  GmGroupOrBuilder getGroupsOrBuilder(
+  wxdgaming.mmo.script.gamesr.gm.message.GmGroupOrBuilder getGroupsOrBuilder(
       int index);
 }

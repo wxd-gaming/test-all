@@ -101,7 +101,7 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Guild.internal_static_Proto_Login_ResGuildList_descriptor;
+    return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_descriptor;
   }
 
   @SuppressWarnings({"rawtypes"})
@@ -119,9 +119,9 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Guild.internal_static_Proto_Login_ResGuildList_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ResGuildList.class, ResGuildList.Builder.class);
+            wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.class, wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.Builder.class);
   }
 
   public static final int UID_FIELD_NUMBER = 1;
@@ -191,7 +191,7 @@ private static final long serialVersionUID = 0L;
         java.lang.Integer, java.lang.Long> defaultEntry =
             com.google.protobuf.MapEntry
             .<java.lang.Integer, java.lang.Long>newDefaultInstance(
-                Guild.internal_static_Proto_Login_ResGuildList_MoneysEntry_descriptor,
+                wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_MoneysEntry_descriptor, 
                 com.google.protobuf.WireFormat.FieldType.INT32,
                 0,
                 com.google.protobuf.WireFormat.FieldType.INT64,
@@ -344,10 +344,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ResGuildList)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.guild.message.ResGuildList)) {
       return super.equals(obj);
     }
-    ResGuildList other = (ResGuildList) obj;
+    wxdgaming.mmo.script.gamesr.guild.message.ResGuildList other = (wxdgaming.mmo.script.gamesr.guild.message.ResGuildList) obj;
 
     if (getUid()
         != other.getUid()) return false;
@@ -380,69 +380,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResGuildList parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResGuildList parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResGuildList parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ResGuildList parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -455,7 +455,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ResGuildList prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.guild.message.ResGuildList prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -480,10 +480,10 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Login.ResGuildList)
-          ResGuildListOrBuilder {
+      wxdgaming.mmo.script.gamesr.guild.message.ResGuildListOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Guild.internal_static_Proto_Login_ResGuildList_descriptor;
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_descriptor;
     }
 
     @SuppressWarnings({"rawtypes"})
@@ -511,9 +511,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Guild.internal_static_Proto_Login_ResGuildList_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ResGuildList.class, ResGuildList.Builder.class);
+              wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.class, wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.newBuilder()
@@ -545,17 +545,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Guild.internal_static_Proto_Login_ResGuildList_descriptor;
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ResGuildList_descriptor;
     }
 
     @java.lang.Override
-    public ResGuildList getDefaultInstanceForType() {
-      return ResGuildList.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.guild.message.ResGuildList getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ResGuildList build() {
-      ResGuildList result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.guild.message.ResGuildList build() {
+      wxdgaming.mmo.script.gamesr.guild.message.ResGuildList result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -563,8 +563,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ResGuildList buildPartial() {
-      ResGuildList result = new ResGuildList(this);
+    public wxdgaming.mmo.script.gamesr.guild.message.ResGuildList buildPartial() {
+      wxdgaming.mmo.script.gamesr.guild.message.ResGuildList result = new wxdgaming.mmo.script.gamesr.guild.message.ResGuildList(this);
       int from_bitField0_ = bitField0_;
       result.uid_ = uid_;
       result.name_ = name_;
@@ -608,16 +608,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ResGuildList) {
-        return mergeFrom((ResGuildList)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.guild.message.ResGuildList) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.guild.message.ResGuildList)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ResGuildList other) {
-      if (other == ResGuildList.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.guild.message.ResGuildList other) {
+      if (other == wxdgaming.mmo.script.gamesr.guild.message.ResGuildList.getDefaultInstance()) return this;
       if (other.getUid() != 0L) {
         setUid(other.getUid());
       }
@@ -642,11 +642,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ResGuildList parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.guild.message.ResGuildList parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ResGuildList) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.guild.message.ResGuildList) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -968,12 +968,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Login.ResGuildList)
-  private static final ResGuildList DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.guild.message.ResGuildList DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ResGuildList();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.guild.message.ResGuildList();
   }
 
-  public static ResGuildList getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.guild.message.ResGuildList getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -998,7 +998,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ResGuildList getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.guild.message.ResGuildList getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

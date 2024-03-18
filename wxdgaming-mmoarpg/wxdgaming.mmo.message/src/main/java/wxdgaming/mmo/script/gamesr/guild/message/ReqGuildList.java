@@ -75,15 +75,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
+    return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Guild.internal_static_Proto_Login_ReqGuildList_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ReqGuildList_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ReqGuildList.class, ReqGuildList.Builder.class);
+            wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.class, wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.Builder.class);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -119,10 +119,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ReqGuildList)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList)) {
       return super.equals(obj);
     }
-    ReqGuildList other = (ReqGuildList) obj;
+    wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList other = (wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList) obj;
 
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -140,69 +140,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGuildList parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGuildList parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqGuildList parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ReqGuildList parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqGuildList parseFrom(
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -215,7 +215,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ReqGuildList prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -240,18 +240,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Login.ReqGuildList)
-          ReqGuildListOrBuilder {
+      wxdgaming.mmo.script.gamesr.guild.message.ReqGuildListOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Guild.internal_static_Proto_Login_ReqGuildList_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ReqGuildList_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ReqGuildList.class, ReqGuildList.Builder.class);
+              wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.class, wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.newBuilder()
@@ -278,17 +278,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
+      return wxdgaming.mmo.script.gamesr.guild.message.Guild.internal_static_Proto_Login_ReqGuildList_descriptor;
     }
 
     @java.lang.Override
-    public ReqGuildList getDefaultInstanceForType() {
-      return ReqGuildList.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ReqGuildList build() {
-      ReqGuildList result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList build() {
+      wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -296,8 +296,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ReqGuildList buildPartial() {
-      ReqGuildList result = new ReqGuildList(this);
+    public wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList buildPartial() {
+      wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList result = new wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList(this);
       onBuilt();
       return result;
     }
@@ -336,16 +336,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ReqGuildList) {
-        return mergeFrom((ReqGuildList)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ReqGuildList other) {
-      if (other == ReqGuildList.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList other) {
+      if (other == wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList.getDefaultInstance()) return this;
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -361,11 +361,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ReqGuildList parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ReqGuildList) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -391,12 +391,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Login.ReqGuildList)
-  private static final ReqGuildList DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ReqGuildList();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList();
   }
 
-  public static ReqGuildList getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -421,7 +421,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ReqGuildList getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.guild.message.ReqGuildList getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

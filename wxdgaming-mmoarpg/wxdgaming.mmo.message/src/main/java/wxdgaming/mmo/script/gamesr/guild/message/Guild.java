@@ -42,9 +42,9 @@ public final class Guild {
       "st\"\217\001\n\014ResGuildList\022\013\n\003uid\030\001 \001(\003\022\014\n\004name" +
       "\030\002 \001(\t\0225\n\006moneys\030\003 \003(\0132%.Proto.Login.Res" +
       "GuildList.MoneysEntry\032-\n\013MoneysEntry\022\013\n\003" +
-      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\003:\0028\001B+\n\'org.wxd." +
-      "mmo.script.gamesr.guild.messageP\001b\006proto" +
-      "3"
+      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\003:\0028\001B-\n)wxdgamin" +
+      "g.mmo.script.gamesr.guild.messageP\001b\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

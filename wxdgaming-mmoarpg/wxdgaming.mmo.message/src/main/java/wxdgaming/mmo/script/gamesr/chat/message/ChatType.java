@@ -84,7 +84,7 @@ public enum ChatType
   }
   public static final com.google.protobuf.Descriptors.EnumDescriptor
       getDescriptor() {
-    return Chat.getDescriptor().getEnumTypes().get(0);
+    return wxdgaming.mmo.script.gamesr.chat.message.Chat.getDescriptor().getEnumTypes().get(0);
   }
 
   private static final ChatType[] VALUES = values();

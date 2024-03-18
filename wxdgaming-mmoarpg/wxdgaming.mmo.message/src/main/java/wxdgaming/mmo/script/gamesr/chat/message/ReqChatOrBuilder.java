@@ -24,7 +24,7 @@ public interface ReqChatOrBuilder extends
    * <code>.Proto.Chat.ChatType type = 1;</code>
    * @return The type.
    */
-  ChatType getType();
+  wxdgaming.mmo.script.gamesr.chat.message.ChatType getType();
 
   /**
    * <pre>

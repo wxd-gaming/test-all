@@ -104,15 +104,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Tips.internal_static_Proto_Tips_ResTips_descriptor;
+    return wxdgaming.mmo.script.gamesr.tips.message.Tips.internal_static_Proto_Tips_ResTips_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Tips.internal_static_Proto_Tips_ResTips_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.tips.message.Tips.internal_static_Proto_Tips_ResTips_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ResTips.class, ResTips.Builder.class);
+            wxdgaming.mmo.script.gamesr.tips.message.ResTips.class, wxdgaming.mmo.script.gamesr.tips.message.ResTips.Builder.class);
   }
 
   public static final int TYPE_FIELD_NUMBER = 1;
@@ -136,10 +136,10 @@ private static final long serialVersionUID = 0L;
    * <code>.Proto.Tips.TipsType type = 1;</code>
    * @return The type.
    */
-  @java.lang.Override public TipsType getType() {
+  @java.lang.Override public wxdgaming.mmo.script.gamesr.tips.message.TipsType getType() {
     @SuppressWarnings("deprecation")
-    TipsType result = TipsType.valueOf(type_);
-    return result == null ? TipsType.UNRECOGNIZED : result;
+    wxdgaming.mmo.script.gamesr.tips.message.TipsType result = wxdgaming.mmo.script.gamesr.tips.message.TipsType.valueOf(type_);
+    return result == null ? wxdgaming.mmo.script.gamesr.tips.message.TipsType.UNRECOGNIZED : result;
   }
 
   public static final int LANCODE_FIELD_NUMBER = 2;
@@ -268,7 +268,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (type_ != TipsType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.tips.message.TipsType.normal.getNumber()) {
       output.writeEnum(1, type_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(lanCode_)) {
@@ -289,7 +289,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (type_ != TipsType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.tips.message.TipsType.normal.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, type_);
     }
@@ -318,10 +318,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ResTips)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.tips.message.ResTips)) {
       return super.equals(obj);
     }
-    ResTips other = (ResTips) obj;
+    wxdgaming.mmo.script.gamesr.tips.message.ResTips other = (wxdgaming.mmo.script.gamesr.tips.message.ResTips) obj;
 
     if (type_ != other.type_) return false;
     if (!getLanCode()
@@ -356,69 +356,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResTips parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResTips parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResTips parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ResTips parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResTips parseFrom(
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -431,7 +431,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ResTips prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.tips.message.ResTips prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -452,18 +452,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Tips.ResTips)
-          ResTipsOrBuilder {
+      wxdgaming.mmo.script.gamesr.tips.message.ResTipsOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Tips.internal_static_Proto_Tips_ResTips_descriptor;
+      return wxdgaming.mmo.script.gamesr.tips.message.Tips.internal_static_Proto_Tips_ResTips_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Tips.internal_static_Proto_Tips_ResTips_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.tips.message.Tips.internal_static_Proto_Tips_ResTips_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ResTips.class, ResTips.Builder.class);
+              wxdgaming.mmo.script.gamesr.tips.message.ResTips.class, wxdgaming.mmo.script.gamesr.tips.message.ResTips.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.tips.message.ResTips.newBuilder()
@@ -498,17 +498,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Tips.internal_static_Proto_Tips_ResTips_descriptor;
+      return wxdgaming.mmo.script.gamesr.tips.message.Tips.internal_static_Proto_Tips_ResTips_descriptor;
     }
 
     @java.lang.Override
-    public ResTips getDefaultInstanceForType() {
-      return ResTips.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.tips.message.ResTips getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.tips.message.ResTips.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ResTips build() {
-      ResTips result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.tips.message.ResTips build() {
+      wxdgaming.mmo.script.gamesr.tips.message.ResTips result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -516,8 +516,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ResTips buildPartial() {
-      ResTips result = new ResTips(this);
+    public wxdgaming.mmo.script.gamesr.tips.message.ResTips buildPartial() {
+      wxdgaming.mmo.script.gamesr.tips.message.ResTips result = new wxdgaming.mmo.script.gamesr.tips.message.ResTips(this);
       int from_bitField0_ = bitField0_;
       result.type_ = type_;
       result.lanCode_ = lanCode_;
@@ -565,16 +565,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ResTips) {
-        return mergeFrom((ResTips)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.tips.message.ResTips) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.tips.message.ResTips)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ResTips other) {
-      if (other == ResTips.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.tips.message.ResTips other) {
+      if (other == wxdgaming.mmo.script.gamesr.tips.message.ResTips.getDefaultInstance()) return this;
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
       }
@@ -610,11 +610,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ResTips parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.tips.message.ResTips parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ResTips) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.tips.message.ResTips) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -661,10 +661,10 @@ private static final long serialVersionUID = 0L;
      * @return The type.
      */
     @java.lang.Override
-    public TipsType getType() {
+    public wxdgaming.mmo.script.gamesr.tips.message.TipsType getType() {
       @SuppressWarnings("deprecation")
-      TipsType result = TipsType.valueOf(type_);
-      return result == null ? TipsType.UNRECOGNIZED : result;
+      wxdgaming.mmo.script.gamesr.tips.message.TipsType result = wxdgaming.mmo.script.gamesr.tips.message.TipsType.valueOf(type_);
+      return result == null ? wxdgaming.mmo.script.gamesr.tips.message.TipsType.UNRECOGNIZED : result;
     }
     /**
      * <pre>
@@ -675,7 +675,7 @@ private static final long serialVersionUID = 0L;
      * @param value The type to set.
      * @return This builder for chaining.
      */
-    public Builder setType(TipsType value) {
+    public Builder setType(wxdgaming.mmo.script.gamesr.tips.message.TipsType value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -1000,12 +1000,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Tips.ResTips)
-  private static final ResTips DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.tips.message.ResTips DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ResTips();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.tips.message.ResTips();
   }
 
-  public static ResTips getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.tips.message.ResTips getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -1030,7 +1030,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ResTips getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.tips.message.ResTips getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

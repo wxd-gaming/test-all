@@ -49,8 +49,8 @@ public final class Login {
       "\003(\0132!.Proto.Login.ReqLogin.ParamsEntry\032-" +
       "\n\013ParamsEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
       "\t:\0028\001\"\n\n\010UserBean\"\030\n\010ResLogin\022\014\n\004user\030\001 " +
-      "\001(\tB+\n\'wxdgaming.mmo.script.gamesr.login.m" +
-      "essageP\001b\006proto3"
+      "\001(\tB-\n)wxdgaming.mmo.script.gamesr.login" +
+      ".messageP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

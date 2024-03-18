@@ -34,7 +34,7 @@ public interface GmGroupOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmBean gms = 2;</code>
    */
-  java.util.List<GmBean>
+  java.util.List<wxdgaming.mmo.script.gamesr.gm.message.GmBean> 
       getGmsList();
   /**
    * <pre>
@@ -43,7 +43,7 @@ public interface GmGroupOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmBean gms = 2;</code>
    */
-  GmBean getGms(int index);
+  wxdgaming.mmo.script.gamesr.gm.message.GmBean getGms(int index);
   /**
    * <pre>
    *分组下所以命令
@@ -59,7 +59,7 @@ public interface GmGroupOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmBean gms = 2;</code>
    */
-  java.util.List<? extends GmBeanOrBuilder>
+  java.util.List<? extends wxdgaming.mmo.script.gamesr.gm.message.GmBeanOrBuilder> 
       getGmsOrBuilderList();
   /**
    * <pre>
@@ -68,6 +68,6 @@ public interface GmGroupOrBuilder extends
    *
    * <code>repeated .Proto.Gm.GmBean gms = 2;</code>
    */
-  GmBeanOrBuilder getGmsOrBuilder(
+  wxdgaming.mmo.script.gamesr.gm.message.GmBeanOrBuilder getGmsOrBuilder(
       int index);
 }

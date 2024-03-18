@@ -24,7 +24,7 @@ public interface ResTipsOrBuilder extends
    * <code>.Proto.Tips.TipsType type = 1;</code>
    * @return The type.
    */
-  TipsType getType();
+  wxdgaming.mmo.script.gamesr.tips.message.TipsType getType();
 
   /**
    * <pre>

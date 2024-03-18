@@ -32,8 +32,8 @@ public final class Tips {
       "ype\030\001 \001(\0162\024.Proto.Tips.TipsType\022\017\n\007lanCo" +
       "de\030\002 \001(\t\022\016\n\006params\030\003 \003(\t\022\r\n\005resId\030\004 \001(\021*" +
       "4\n\010TipsType\022\n\n\006normal\020\000\022\007\n\003top\020\001\022\010\n\004chat" +
-      "\020\002\022\t\n\005error\020\003B*\n&wxdgaming.mmo.script.game" +
-      "sr.tips.messageP\001b\006proto3"
+      "\020\002\022\t\n\005error\020\003B,\n(wxdgaming.mmo.script.ga" +
+      "mesr.tips.messageP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

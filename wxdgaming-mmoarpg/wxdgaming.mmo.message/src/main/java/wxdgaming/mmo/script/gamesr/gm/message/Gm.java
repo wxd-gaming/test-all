@@ -48,8 +48,8 @@ public final class Gm {
       "\r\n\005group\030\001 \001(\t\022\035\n\003gms\030\002 \003(\0132\020.Proto.Gm.G" +
       "mBean\"=\n\006GmBean\022\014\n\004name\030\001 \001(\t\022\017\n\007comment" +
       "\030\002 \001(\t\022\024\n\014defaultValue\030\003 \001(\t\"%\n\005ReqGm\022\014\n" +
-      "\004name\030\001 \001(\t\022\016\n\006params\030\002 \001(\tB(\n$org.wxd.m" +
-      "mo.script.gamesr.gm.messageP\001b\006proto3"
+      "\004name\030\001 \001(\t\022\016\n\006params\030\002 \001(\tB*\n&wxdgaming" +
+      ".mmo.script.gamesr.gm.messageP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -89,15 +89,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Chat.internal_static_Proto_Chat_ReqChat_descriptor;
+    return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ReqChat_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Chat.internal_static_Proto_Chat_ReqChat_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ReqChat_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ReqChat.class, ReqChat.Builder.class);
+            wxdgaming.mmo.script.gamesr.chat.message.ReqChat.class, wxdgaming.mmo.script.gamesr.chat.message.ReqChat.Builder.class);
   }
 
   public static final int TYPE_FIELD_NUMBER = 1;
@@ -121,10 +121,10 @@ private static final long serialVersionUID = 0L;
    * <code>.Proto.Chat.ChatType type = 1;</code>
    * @return The type.
    */
-  @java.lang.Override public ChatType getType() {
+  @java.lang.Override public wxdgaming.mmo.script.gamesr.chat.message.ChatType getType() {
     @SuppressWarnings("deprecation")
-    ChatType result = ChatType.valueOf(type_);
-    return result == null ? ChatType.UNRECOGNIZED : result;
+    wxdgaming.mmo.script.gamesr.chat.message.ChatType result = wxdgaming.mmo.script.gamesr.chat.message.ChatType.valueOf(type_);
+    return result == null ? wxdgaming.mmo.script.gamesr.chat.message.ChatType.UNRECOGNIZED : result;
   }
 
   public static final int MSG_FIELD_NUMBER = 2;
@@ -187,7 +187,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (type_ != ChatType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.chat.message.ChatType.normal.getNumber()) {
       output.writeEnum(1, type_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
@@ -202,7 +202,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (type_ != ChatType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.chat.message.ChatType.normal.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, type_);
     }
@@ -219,10 +219,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ReqChat)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.chat.message.ReqChat)) {
       return super.equals(obj);
     }
-    ReqChat other = (ReqChat) obj;
+    wxdgaming.mmo.script.gamesr.chat.message.ReqChat other = (wxdgaming.mmo.script.gamesr.chat.message.ReqChat) obj;
 
     if (type_ != other.type_) return false;
     if (!getMsg()
@@ -247,69 +247,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqChat parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqChat parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqChat parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ReqChat parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -322,7 +322,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ReqChat prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.chat.message.ReqChat prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -347,18 +347,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Chat.ReqChat)
-          ReqChatOrBuilder {
+      wxdgaming.mmo.script.gamesr.chat.message.ReqChatOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Chat.internal_static_Proto_Chat_ReqChat_descriptor;
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ReqChat_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Chat.internal_static_Proto_Chat_ReqChat_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ReqChat_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ReqChat.class, ReqChat.Builder.class);
+              wxdgaming.mmo.script.gamesr.chat.message.ReqChat.class, wxdgaming.mmo.script.gamesr.chat.message.ReqChat.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.chat.message.ReqChat.newBuilder()
@@ -389,17 +389,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Chat.internal_static_Proto_Chat_ReqChat_descriptor;
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ReqChat_descriptor;
     }
 
     @java.lang.Override
-    public ReqChat getDefaultInstanceForType() {
-      return ReqChat.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.chat.message.ReqChat getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.chat.message.ReqChat.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ReqChat build() {
-      ReqChat result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.chat.message.ReqChat build() {
+      wxdgaming.mmo.script.gamesr.chat.message.ReqChat result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -407,8 +407,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ReqChat buildPartial() {
-      ReqChat result = new ReqChat(this);
+    public wxdgaming.mmo.script.gamesr.chat.message.ReqChat buildPartial() {
+      wxdgaming.mmo.script.gamesr.chat.message.ReqChat result = new wxdgaming.mmo.script.gamesr.chat.message.ReqChat(this);
       result.type_ = type_;
       result.msg_ = msg_;
       onBuilt();
@@ -449,16 +449,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ReqChat) {
-        return mergeFrom((ReqChat)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.chat.message.ReqChat) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.chat.message.ReqChat)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ReqChat other) {
-      if (other == ReqChat.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.chat.message.ReqChat other) {
+      if (other == wxdgaming.mmo.script.gamesr.chat.message.ReqChat.getDefaultInstance()) return this;
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
       }
@@ -481,11 +481,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ReqChat parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.chat.message.ReqChat parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ReqChat) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.chat.message.ReqChat) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -531,10 +531,10 @@ private static final long serialVersionUID = 0L;
      * @return The type.
      */
     @java.lang.Override
-    public ChatType getType() {
+    public wxdgaming.mmo.script.gamesr.chat.message.ChatType getType() {
       @SuppressWarnings("deprecation")
-      ChatType result = ChatType.valueOf(type_);
-      return result == null ? ChatType.UNRECOGNIZED : result;
+      wxdgaming.mmo.script.gamesr.chat.message.ChatType result = wxdgaming.mmo.script.gamesr.chat.message.ChatType.valueOf(type_);
+      return result == null ? wxdgaming.mmo.script.gamesr.chat.message.ChatType.UNRECOGNIZED : result;
     }
     /**
      * <pre>
@@ -545,7 +545,7 @@ private static final long serialVersionUID = 0L;
      * @param value The type to set.
      * @return This builder for chaining.
      */
-    public Builder setType(ChatType value) {
+    public Builder setType(wxdgaming.mmo.script.gamesr.chat.message.ChatType value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -681,12 +681,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Chat.ReqChat)
-  private static final ReqChat DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.chat.message.ReqChat DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ReqChat();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.chat.message.ReqChat();
   }
 
-  public static ReqChat getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.chat.message.ReqChat getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -711,7 +711,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ReqChat getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.chat.message.ReqChat getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

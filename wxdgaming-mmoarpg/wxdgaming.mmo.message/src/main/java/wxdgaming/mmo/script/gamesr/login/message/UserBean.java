@@ -71,15 +71,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Login.internal_static_Proto_Login_UserBean_descriptor;
+    return wxdgaming.mmo.script.gamesr.login.message.Login.internal_static_Proto_Login_UserBean_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Login.internal_static_Proto_Login_UserBean_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.login.message.Login.internal_static_Proto_Login_UserBean_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            UserBean.class, UserBean.Builder.class);
+            wxdgaming.mmo.script.gamesr.login.message.UserBean.class, wxdgaming.mmo.script.gamesr.login.message.UserBean.Builder.class);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -115,10 +115,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof UserBean)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.login.message.UserBean)) {
       return super.equals(obj);
     }
-    UserBean other = (UserBean) obj;
+    wxdgaming.mmo.script.gamesr.login.message.UserBean other = (wxdgaming.mmo.script.gamesr.login.message.UserBean) obj;
 
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -136,69 +136,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static UserBean parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static UserBean parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static UserBean parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static UserBean parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static UserBean parseFrom(
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -211,7 +211,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(UserBean prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.login.message.UserBean prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -232,18 +232,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Login.UserBean)
-          UserBeanOrBuilder {
+      wxdgaming.mmo.script.gamesr.login.message.UserBeanOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Login.internal_static_Proto_Login_UserBean_descriptor;
+      return wxdgaming.mmo.script.gamesr.login.message.Login.internal_static_Proto_Login_UserBean_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Login.internal_static_Proto_Login_UserBean_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.login.message.Login.internal_static_Proto_Login_UserBean_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              UserBean.class, UserBean.Builder.class);
+              wxdgaming.mmo.script.gamesr.login.message.UserBean.class, wxdgaming.mmo.script.gamesr.login.message.UserBean.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.login.message.UserBean.newBuilder()
@@ -270,17 +270,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Login.internal_static_Proto_Login_UserBean_descriptor;
+      return wxdgaming.mmo.script.gamesr.login.message.Login.internal_static_Proto_Login_UserBean_descriptor;
     }
 
     @java.lang.Override
-    public UserBean getDefaultInstanceForType() {
-      return UserBean.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.login.message.UserBean getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.login.message.UserBean.getDefaultInstance();
     }
 
     @java.lang.Override
-    public UserBean build() {
-      UserBean result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.login.message.UserBean build() {
+      wxdgaming.mmo.script.gamesr.login.message.UserBean result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -288,8 +288,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public UserBean buildPartial() {
-      UserBean result = new UserBean(this);
+    public wxdgaming.mmo.script.gamesr.login.message.UserBean buildPartial() {
+      wxdgaming.mmo.script.gamesr.login.message.UserBean result = new wxdgaming.mmo.script.gamesr.login.message.UserBean(this);
       onBuilt();
       return result;
     }
@@ -328,16 +328,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof UserBean) {
-        return mergeFrom((UserBean)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.login.message.UserBean) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.login.message.UserBean)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(UserBean other) {
-      if (other == UserBean.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.login.message.UserBean other) {
+      if (other == wxdgaming.mmo.script.gamesr.login.message.UserBean.getDefaultInstance()) return this;
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
@@ -353,11 +353,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      UserBean parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.login.message.UserBean parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (UserBean) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.login.message.UserBean) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -383,12 +383,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Login.UserBean)
-  private static final UserBean DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.login.message.UserBean DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new UserBean();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.login.message.UserBean();
   }
 
-  public static UserBean getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.login.message.UserBean getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -413,7 +413,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public UserBean getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.login.message.UserBean getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

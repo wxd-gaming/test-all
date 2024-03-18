@@ -89,15 +89,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Gm.internal_static_Proto_Gm_ReqGm_descriptor;
+    return wxdgaming.mmo.script.gamesr.gm.message.Gm.internal_static_Proto_Gm_ReqGm_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Gm.internal_static_Proto_Gm_ReqGm_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.gm.message.Gm.internal_static_Proto_Gm_ReqGm_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ReqGm.class, ReqGm.Builder.class);
+            wxdgaming.mmo.script.gamesr.gm.message.ReqGm.class, wxdgaming.mmo.script.gamesr.gm.message.ReqGm.Builder.class);
   }
 
   public static final int NAME_FIELD_NUMBER = 1;
@@ -237,10 +237,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ReqGm)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.gm.message.ReqGm)) {
       return super.equals(obj);
     }
-    ReqGm other = (ReqGm) obj;
+    wxdgaming.mmo.script.gamesr.gm.message.ReqGm other = (wxdgaming.mmo.script.gamesr.gm.message.ReqGm) obj;
 
     if (!getName()
         .equals(other.getName())) return false;
@@ -266,69 +266,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGm parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ReqGm parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqGm parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ReqGm parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ReqGm parseFrom(
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -341,7 +341,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ReqGm prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.gm.message.ReqGm prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -366,18 +366,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Gm.ReqGm)
-          ReqGmOrBuilder {
+      wxdgaming.mmo.script.gamesr.gm.message.ReqGmOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Gm.internal_static_Proto_Gm_ReqGm_descriptor;
+      return wxdgaming.mmo.script.gamesr.gm.message.Gm.internal_static_Proto_Gm_ReqGm_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Gm.internal_static_Proto_Gm_ReqGm_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.gm.message.Gm.internal_static_Proto_Gm_ReqGm_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ReqGm.class, ReqGm.Builder.class);
+              wxdgaming.mmo.script.gamesr.gm.message.ReqGm.class, wxdgaming.mmo.script.gamesr.gm.message.ReqGm.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.gm.message.ReqGm.newBuilder()
@@ -408,17 +408,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Gm.internal_static_Proto_Gm_ReqGm_descriptor;
+      return wxdgaming.mmo.script.gamesr.gm.message.Gm.internal_static_Proto_Gm_ReqGm_descriptor;
     }
 
     @java.lang.Override
-    public ReqGm getDefaultInstanceForType() {
-      return ReqGm.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.gm.message.ReqGm getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.gm.message.ReqGm.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ReqGm build() {
-      ReqGm result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.gm.message.ReqGm build() {
+      wxdgaming.mmo.script.gamesr.gm.message.ReqGm result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -426,8 +426,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ReqGm buildPartial() {
-      ReqGm result = new ReqGm(this);
+    public wxdgaming.mmo.script.gamesr.gm.message.ReqGm buildPartial() {
+      wxdgaming.mmo.script.gamesr.gm.message.ReqGm result = new wxdgaming.mmo.script.gamesr.gm.message.ReqGm(this);
       result.name_ = name_;
       result.params_ = params_;
       onBuilt();
@@ -468,16 +468,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ReqGm) {
-        return mergeFrom((ReqGm)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.gm.message.ReqGm) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.gm.message.ReqGm)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ReqGm other) {
-      if (other == ReqGm.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.gm.message.ReqGm other) {
+      if (other == wxdgaming.mmo.script.gamesr.gm.message.ReqGm.getDefaultInstance()) return this;
       if (!other.getName().isEmpty()) {
         name_ = other.name_;
         onChanged();
@@ -501,11 +501,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ReqGm parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.gm.message.ReqGm parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ReqGm) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.gm.message.ReqGm) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -723,12 +723,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Gm.ReqGm)
-  private static final ReqGm DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.gm.message.ReqGm DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ReqGm();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.gm.message.ReqGm();
   }
 
-  public static ReqGm getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.gm.message.ReqGm getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -753,7 +753,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ReqGm getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.gm.message.ReqGm getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -101,15 +101,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return Chat.internal_static_Proto_Chat_ResChat_descriptor;
+    return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ResChat_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return Chat.internal_static_Proto_Chat_ResChat_fieldAccessorTable
+    return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ResChat_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            ResChat.class, ResChat.Builder.class);
+            wxdgaming.mmo.script.gamesr.chat.message.ResChat.class, wxdgaming.mmo.script.gamesr.chat.message.ResChat.Builder.class);
   }
 
   public static final int TYPE_FIELD_NUMBER = 1;
@@ -133,10 +133,10 @@ private static final long serialVersionUID = 0L;
    * <code>.Proto.Chat.ChatType type = 1;</code>
    * @return The type.
    */
-  @java.lang.Override public ChatType getType() {
+  @java.lang.Override public wxdgaming.mmo.script.gamesr.chat.message.ChatType getType() {
     @SuppressWarnings("deprecation")
-    ChatType result = ChatType.valueOf(type_);
-    return result == null ? ChatType.UNRECOGNIZED : result;
+    wxdgaming.mmo.script.gamesr.chat.message.ChatType result = wxdgaming.mmo.script.gamesr.chat.message.ChatType.valueOf(type_);
+    return result == null ? wxdgaming.mmo.script.gamesr.chat.message.ChatType.UNRECOGNIZED : result;
   }
 
   public static final int MSG_FIELD_NUMBER = 2;
@@ -260,7 +260,7 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (type_ != ChatType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.chat.message.ChatType.normal.getNumber()) {
       output.writeEnum(1, type_);
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(msg_)) {
@@ -281,7 +281,7 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (type_ != ChatType.normal.getNumber()) {
+    if (type_ != wxdgaming.mmo.script.gamesr.chat.message.ChatType.normal.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
         .computeEnumSize(1, type_);
     }
@@ -305,10 +305,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof ResChat)) {
+    if (!(obj instanceof wxdgaming.mmo.script.gamesr.chat.message.ResChat)) {
       return super.equals(obj);
     }
-    ResChat other = (ResChat) obj;
+    wxdgaming.mmo.script.gamesr.chat.message.ResChat other = (wxdgaming.mmo.script.gamesr.chat.message.ResChat) obj;
 
     if (type_ != other.type_) return false;
     if (!getMsg()
@@ -342,69 +342,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResChat parseFrom(byte[] data)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static ResChat parseFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResChat parseDelimitedFrom(java.io.InputStream input)
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static ResChat parseDelimitedFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static ResChat parseFrom(
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -417,7 +417,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(ResChat prototype) {
+  public static Builder newBuilder(wxdgaming.mmo.script.gamesr.chat.message.ResChat prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -442,18 +442,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:Proto.Chat.ResChat)
-          ResChatOrBuilder {
+      wxdgaming.mmo.script.gamesr.chat.message.ResChatOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return Chat.internal_static_Proto_Chat_ResChat_descriptor;
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ResChat_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return Chat.internal_static_Proto_Chat_ResChat_fieldAccessorTable
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ResChat_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              ResChat.class, ResChat.Builder.class);
+              wxdgaming.mmo.script.gamesr.chat.message.ResChat.class, wxdgaming.mmo.script.gamesr.chat.message.ResChat.Builder.class);
     }
 
     // Construct using wxdgaming.mmo.script.gamesr.chat.message.ResChat.newBuilder()
@@ -488,17 +488,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return Chat.internal_static_Proto_Chat_ResChat_descriptor;
+      return wxdgaming.mmo.script.gamesr.chat.message.Chat.internal_static_Proto_Chat_ResChat_descriptor;
     }
 
     @java.lang.Override
-    public ResChat getDefaultInstanceForType() {
-      return ResChat.getDefaultInstance();
+    public wxdgaming.mmo.script.gamesr.chat.message.ResChat getDefaultInstanceForType() {
+      return wxdgaming.mmo.script.gamesr.chat.message.ResChat.getDefaultInstance();
     }
 
     @java.lang.Override
-    public ResChat build() {
-      ResChat result = buildPartial();
+    public wxdgaming.mmo.script.gamesr.chat.message.ResChat build() {
+      wxdgaming.mmo.script.gamesr.chat.message.ResChat result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -506,8 +506,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public ResChat buildPartial() {
-      ResChat result = new ResChat(this);
+    public wxdgaming.mmo.script.gamesr.chat.message.ResChat buildPartial() {
+      wxdgaming.mmo.script.gamesr.chat.message.ResChat result = new wxdgaming.mmo.script.gamesr.chat.message.ResChat(this);
       result.type_ = type_;
       result.msg_ = msg_;
       result.sendUid_ = sendUid_;
@@ -550,16 +550,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof ResChat) {
-        return mergeFrom((ResChat)other);
+      if (other instanceof wxdgaming.mmo.script.gamesr.chat.message.ResChat) {
+        return mergeFrom((wxdgaming.mmo.script.gamesr.chat.message.ResChat)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(ResChat other) {
-      if (other == ResChat.getDefaultInstance()) return this;
+    public Builder mergeFrom(wxdgaming.mmo.script.gamesr.chat.message.ResChat other) {
+      if (other == wxdgaming.mmo.script.gamesr.chat.message.ResChat.getDefaultInstance()) return this;
       if (other.type_ != 0) {
         setTypeValue(other.getTypeValue());
       }
@@ -589,11 +589,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      ResChat parsedMessage = null;
+      wxdgaming.mmo.script.gamesr.chat.message.ResChat parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (ResChat) e.getUnfinishedMessage();
+        parsedMessage = (wxdgaming.mmo.script.gamesr.chat.message.ResChat) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -639,10 +639,10 @@ private static final long serialVersionUID = 0L;
      * @return The type.
      */
     @java.lang.Override
-    public ChatType getType() {
+    public wxdgaming.mmo.script.gamesr.chat.message.ChatType getType() {
       @SuppressWarnings("deprecation")
-      ChatType result = ChatType.valueOf(type_);
-      return result == null ? ChatType.UNRECOGNIZED : result;
+      wxdgaming.mmo.script.gamesr.chat.message.ChatType result = wxdgaming.mmo.script.gamesr.chat.message.ChatType.valueOf(type_);
+      return result == null ? wxdgaming.mmo.script.gamesr.chat.message.ChatType.UNRECOGNIZED : result;
     }
     /**
      * <pre>
@@ -653,7 +653,7 @@ private static final long serialVersionUID = 0L;
      * @param value The type to set.
      * @return This builder for chaining.
      */
-    public Builder setType(ChatType value) {
+    public Builder setType(wxdgaming.mmo.script.gamesr.chat.message.ChatType value) {
       if (value == null) {
         throw new NullPointerException();
       }
@@ -928,12 +928,12 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:Proto.Chat.ResChat)
-  private static final ResChat DEFAULT_INSTANCE;
+  private static final wxdgaming.mmo.script.gamesr.chat.message.ResChat DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new ResChat();
+    DEFAULT_INSTANCE = new wxdgaming.mmo.script.gamesr.chat.message.ResChat();
   }
 
-  public static ResChat getDefaultInstance() {
+  public static wxdgaming.mmo.script.gamesr.chat.message.ResChat getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
@@ -958,7 +958,7 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
-  public ResChat getDefaultInstanceForType() {
+  public wxdgaming.mmo.script.gamesr.chat.message.ResChat getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 
