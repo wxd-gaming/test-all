@@ -9,6 +9,9 @@
             src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script charset="utf-8" type="text/javascript" src="/js/com.wxd.js"></script>
 
+
+    <script charset="utf-8" type="text/javascript" src="js/reqchat.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/style/com.wxd.css"/>
     <script type="application/javascript">
         $(() => {
@@ -16,6 +19,13 @@
                 console.log("战斗日志：" + msg);
             });
         });
+        var wsClient = new wxd.netty.WSClient();
+        var reqChat = new proto.Proto.Chat.ReqChat();
+        reqChat.setType(proto.Proto.ChatType.NORMAL);
+        reqChat.setMsg("ddd");
+        var serializeBinary = reqChat.serializeBinary();
+        // wsClient.socket.s
+
     </script>
 </head>
 <body>
