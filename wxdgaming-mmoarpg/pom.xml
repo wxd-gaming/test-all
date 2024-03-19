@@ -209,7 +209,19 @@
 
     <profiles>
         <profile>
-            <id>test-local</id>
+            <id>local-server</id>
+            <activation>
+                <jdk>21</jdk>
+            </activation>
+            <properties>
+
+                <server-id>1001</server-id>
+                <server-name>無心</server-name>
+
+            </properties>
+        </profile>
+        <profile>
+            <id>local-db</id>
             <activation>
                 <jdk>21</jdk>
             </activation>
