@@ -46,7 +46,7 @@ public final class ReqGmController implements IController {
 
         try {
             JSONArray jsonArray = new JSONArray();
-            ListOf.asList(jsonArray, reqMessage.getParams().split(",|，"));
+            ListOf.asList(jsonArray, reqMessage.getParams().split("[,，]"));
             gmMappingInfo.getMethod().invoke(gmMappingInfo.getInstance(), player, jsonArray);
         } catch (Throwable throwable) {
             log.error("执行gm命令：" + player.playerSnap().logName() + " - " + reqMessage.getName() + " - " + reqMessage.getParams(), throwable);
