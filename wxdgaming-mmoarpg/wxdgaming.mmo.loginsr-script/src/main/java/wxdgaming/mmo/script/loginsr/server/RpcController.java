@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import wxdgaming.boot.core.collection.ObjMap;
 import wxdgaming.boot.core.lang.RunResult;
 import wxdgaming.boot.core.system.GlobalUtil;
-import wxdgaming.boot.core.threading.Async;
+import wxdgaming.boot.core.threading.ThreadInfo;
 import wxdgaming.boot.net.SocketSession;
 import wxdgaming.boot.net.controller.ann.TextController;
 import wxdgaming.boot.net.controller.ann.TextMapping;
@@ -46,7 +46,7 @@ public class RpcController implements IBeanInit {
         return RunResult.ok().data("回调").toJson();
     }
 
-    @Async(vt = true/*虚拟线程执行*/)
+    @ThreadInfo(vt = true/*虚拟线程执行*/)
     @TextMapping
     public String syncLogin(SocketSession session, ObjMap putData) {
         int platform = putData.getIntValue("platform");
