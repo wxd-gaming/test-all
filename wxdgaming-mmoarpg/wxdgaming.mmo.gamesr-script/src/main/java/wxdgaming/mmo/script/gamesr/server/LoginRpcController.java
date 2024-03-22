@@ -12,6 +12,7 @@ import wxdgaming.boot.net.web.ws.WebSocketClient;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.gamesr.data.DataCenter;
+import wxdgaming.mmo.script.gamesr.login.message.ReqLogin;
 
 
 /**
@@ -50,9 +51,12 @@ public class LoginRpcController implements IBeanInit {
         /*rpc调用示例，向登录服务器获取网关监听结果 */
         loginSession.rpc(
                 "/Rpc/syncGatePort",
-                "1",
+                "sid",
                 1
         ).async(rpcEvent -> {log.info(rpcEvent.getResJson());});
+
+        ReqLogin.Builder builder = ReqLogin.newBuilder();
+        loginSession.write(builder);
 
     }
 

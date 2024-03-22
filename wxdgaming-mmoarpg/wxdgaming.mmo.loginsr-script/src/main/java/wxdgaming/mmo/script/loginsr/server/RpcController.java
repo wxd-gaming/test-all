@@ -7,6 +7,7 @@ import wxdgaming.boot.core.lang.RunResult;
 import wxdgaming.boot.core.system.GlobalUtil;
 import wxdgaming.boot.core.threading.ThreadInfo;
 import wxdgaming.boot.net.SocketSession;
+import wxdgaming.boot.net.controller.ann.Param;
 import wxdgaming.boot.net.controller.ann.TextController;
 import wxdgaming.boot.net.controller.ann.TextMapping;
 import wxdgaming.boot.starter.IocContext;
@@ -41,8 +42,8 @@ public class RpcController implements IBeanInit {
     }
 
     @TextMapping
-    public String syncGatePort(SocketSession session, ObjMap putData) {
-        log.debug("{}", putData);
+    public String syncGatePort(SocketSession session, ObjMap putData, @Param("sid") Integer sid) {
+        log.debug("{} sid {}", putData, sid);
         return RunResult.ok().data("回调").toJson();
     }
 
