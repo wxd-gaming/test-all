@@ -37,19 +37,19 @@ public class RpcController implements IBeanInit {
     }
 
     @TextMapping(remarks = "测试心跳")
-    public void syncHeart(SocketSession session, ObjMap putData) {
+    public void syncHeart(SocketSession session, ObjMap putData) throws Exception {
         log.debug("心跳");
     }
 
     @TextMapping
-    public String syncGatePort(SocketSession session, ObjMap putData, @Param("sid") Integer sid) {
+    public String syncGatePort(SocketSession session, ObjMap putData, @Param("sid") Integer sid) throws Exception {
         log.debug("{} sid {}", putData, sid);
         return RunResult.ok().data("回调").toJson();
     }
 
     @ThreadInfo(vt = true/*虚拟线程执行*/)
     @TextMapping
-    public String syncLogin(SocketSession session, ObjMap putData) {
+    public String syncLogin(SocketSession session, ObjMap putData) throws Exception {
         int platform = putData.getIntValue("platform");
         int sdk = putData.getIntValue("sdk");
         final String channel = putData.getString("channel");

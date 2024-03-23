@@ -1,9 +1,11 @@
 package code.impl;
 
 import org.junit.Test;
+import wxdgaming.boot.agent.exception.Throw;
 import wxdgaming.boot.agent.system.AnnUtil;
 import wxdgaming.boot.assist.JavaAssistBox;
 import wxdgaming.boot.core.collection.ObjMap;
+import wxdgaming.boot.core.str.TemplatePack;
 import wxdgaming.boot.net.SocketSession;
 import wxdgaming.boot.net.controller.TextMappingProxy;
 import wxdgaming.boot.net.controller.ann.TextMapping;
@@ -11,6 +13,9 @@ import wxdgaming.mmo.script.loginsr.server.RpcController;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -76,35 +81,47 @@ public class ImplTest {
                     TextMappingProxy.class,
                     RpcController.class.getClassLoader()
             );
+            javaAssist.importPackage(Throw.class);
+            javaAssist.importPackage(Throwable.class);
             javaAssist.importPackage(AtomicReference.class);
             javaAssist.importPackage(TextMappingProxy.class);
             javaAssist.importPackage(RpcController.class);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("public void proxy(Object out, Object instance, Object[] params) {").append("\n");
-            stringBuilder.append("    AtomicReference atomicReference = (AtomicReference) out;").append("\n");
+            HashMap<String, Object> datas = new HashMap<>();
             if (void.class.equals(method.getReturnType()) || Void.class.equals(method.getReturnType())) {
-                stringBuilder.append("    Object ret = null;").append("\n");
+                datas.put("ret_type", "Object");
+                datas.put("ret_set", "");
             } else {
                 javaAssist.importPackage(method.getReturnType().getPackageName());
-                stringBuilder.append("    ").append(method.getReturnType().getSimpleName()).append(" ret = null;").append("\n");
-                stringBuilder.append("    ret = ");
+                datas.put("ret_type", method.getReturnType().getSimpleName());
+                datas.put("ret_set", "ret = ");
             }
-            stringBuilder.append(String.format("((%s) instance).%s(", RpcController.class.getSimpleName(), method.getName()));
+            datas.put("instanceClass", RpcController.class.getSimpleName());
+            datas.put("methodName", method.getName());
+            datas.put("paramTypes", "");
             if (method.getParameters() != null) {
+                List<String> paramTypes = new ArrayList<>();
                 for (int i = 0; i < method.getParameters().length; i++) {
-                    if (i > 0) stringBuilder.append(",");
-                    stringBuilder.append("\n");
                     Parameter parameter = method.getParameters()[i];
-                    stringBuilder.append(String.format("        (%s) params[%s]", parameter.getType().getSimpleName(), i));
                     javaAssist.importPackage(parameter.getType());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    stringBuilder.append(String.format("(%s) params[%s]", parameter.getType().getSimpleName(), i));
+                    if (i < method.getParameters().length - 1) {
+                        stringBuilder.append(",");
+                    }
+                    paramTypes.add(stringBuilder.toString());
                 }
+                datas.put("paramTypes", paramTypes);
             }
-            stringBuilder.append(");").append("\n");
-            stringBuilder.append("    atomicReference.set(ret);").append("\n");
-            stringBuilder.append("}").append("\n");
-            String strCode = stringBuilder.toString();
-            System.out.println(strCode);
-            javaAssist.createMethod(strCode);
+
+            String codeString = TemplatePack.ftl2String(
+                    rpcControllerClass.getClassLoader(),
+                    "template/mapping",
+                    "proxy.ftl",
+                    datas
+            );
+
+            System.out.println(codeString);
+            javaAssist.createMethod(codeString);
             javaAssist.writeFile("target/out");
             TextMappingProxy textMappingProxy = javaAssist.toInstance();
             javaAssist.getCtClass().defrost();
