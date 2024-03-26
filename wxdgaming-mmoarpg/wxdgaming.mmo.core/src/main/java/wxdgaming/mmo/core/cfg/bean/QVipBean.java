@@ -16,7 +16,7 @@ import java.io.Serializable;
  **/
 @Getter
 @DbTable(name = "q_vip", comment = "Vip.xlsx - q_vip - vip等级")
-public class QVipRow extends QVipMapping implements Serializable {
+public class QVipBean extends QVipMapping implements Serializable {
 
     @Override public void initAndCheck() throws Exception {
         /*todo 实现数据检测和初始化*/

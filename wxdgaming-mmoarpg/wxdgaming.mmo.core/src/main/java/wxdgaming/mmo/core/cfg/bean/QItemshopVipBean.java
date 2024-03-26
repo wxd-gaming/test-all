@@ -16,7 +16,7 @@ import java.io.Serializable;
  **/
 @Getter
 @DbTable(name = "q_itemshop_vip", comment = "Vip.xlsx - q_itemshop_vip - vip礼包")
-public class QItemshopVipRow extends QItemshopVipMapping implements Serializable {
+public class QItemshopVipBean extends QItemshopVipMapping implements Serializable {
 
     @Override public void initAndCheck() throws Exception {
         /*todo 实现数据检测和初始化*/

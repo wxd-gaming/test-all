@@ -5,7 +5,7 @@ import lombok.Getter;
 import wxdgaming.boot.batis.store.JsonDataRepository;
 import wxdgaming.boot.batis.store.ann.Keys;
 import wxdgaming.boot.batis.struct.DbBean;
-import wxdgaming.mmo.core.cfg.bean.QVipRow;
+import wxdgaming.mmo.core.cfg.bean.QVipBean;
 import wxdgaming.mmo.core.cfg.bean.mapping.QVipMapping;
 
 import java.io.Serializable;
@@ -19,7 +19,7 @@ import java.io.Serializable;
  **/
 @Getter
 @Keys({"id#exp"})
-public class QVipTable extends DbBean<JsonDataRepository, QVipRow> implements Serializable {
+public class QVipTable extends DbBean<QVipBean, JsonDataRepository> implements Serializable {
 
     private int maxLv = 0;
 
