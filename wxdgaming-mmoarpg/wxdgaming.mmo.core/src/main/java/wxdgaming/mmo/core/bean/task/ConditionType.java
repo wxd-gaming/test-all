@@ -1,9 +1,6 @@
 package wxdgaming.mmo.core.bean.task;
 
-import wxdgaming.boot.core.collection.MapOf;
-import wxdgaming.boot.core.lang.IEnum;
-
-import java.util.Map;
+import wxdgaming.boot.core.lang.task.UpdateKey;
 
 /**
  * 完成条件
@@ -11,34 +8,15 @@ import java.util.Map;
  * @author: Troy.Chen(無心道, 15388152619)
  * @version: 2024-02-24 18:00
  **/
-public enum ConditionType implements IEnum {
+public interface ConditionType {
 
-    None(0, "默认值"),
-    LoginCount(1, "累计登录"),
-    LoginDayCount(1, "累计登录"),
-    ;
+    /** 登录次数 */
+    UpdateKey LoginCount = new UpdateKey(1);
+    /** 当前等级 */
+    UpdateKey Lv = new UpdateKey(3);
+    /** 等级提升 */
+    UpdateKey LvUp = new UpdateKey(4);
+    /** 杀怪 */
+    UpdateKey KillMonster = new UpdateKey(5);
 
-    private static final Map<Integer, ConditionType> static_map = MapOf.asMap(ConditionType::getCode, ConditionType.values());
-
-    public static ConditionType as(int value) {
-        return static_map.get(value);
-    }
-
-    private final int code;
-    private final String comment;
-
-    ConditionType(int code, String comment) {
-        this.code = code;
-        this.comment = comment;
-    }
-
-    @Override
-    public int getCode() {
-        return code;
-    }
-
-    @Override
-    public String getComment() {
-        return comment;
-    }
 }

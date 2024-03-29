@@ -3,6 +3,7 @@ package wxdgaming.mmo.core.bean.task;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import wxdgaming.boot.core.lang.task.UpdateType;
 import wxdgaming.boot.core.lang.task.Condition;
 import wxdgaming.boot.core.lang.task.ConditionProgress;
 
@@ -28,7 +29,7 @@ public class AchieveInfo extends ConditionProgress {
     }
 
     @Override protected Condition condition() {
-        return super.condition();
+        return new Condition(1, 0, 0, UpdateType.Add, 100);
     }
 
 }

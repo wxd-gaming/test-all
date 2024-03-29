@@ -1,6 +1,7 @@
 package wxdgaming.mmo.core.bean.task;
 
 
+import wxdgaming.boot.core.lang.task.UpdateType;
 import wxdgaming.boot.core.lang.task.Condition;
 import wxdgaming.boot.core.lang.task.TaskBase;
 
@@ -14,7 +15,7 @@ public class TaskInfo extends TaskBase {
 
     @Override protected Condition condition() {
         /*自己考虑通过 cfgId 获取*/
-        return super.condition();
+        return new Condition(1, 0, 0, UpdateType.Add, 100);
     }
 
 }

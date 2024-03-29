@@ -3,6 +3,7 @@ package wxdgaming.mmo.script.gamesr.task;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import wxdgaming.boot.core.lang.task.UpdateKey;
 import wxdgaming.mmo.core.bean.task.ConditionType;
 import wxdgaming.mmo.core.bean.task.TaskType;
 import wxdgaming.mmo.gamesr.bean.user.Player;
@@ -26,8 +27,6 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
      * @param player
      */
     @Override public void onLoginAfter(Player player) {
-        /*累计登录事件计数*/
-        change(player, ConditionType.LoginCount, 1);
     }
 
     /**
@@ -37,21 +36,21 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
      */
     @Override public void onPlayerDayEnd(Player player) {
         /*累计登录事件计数*/
-        change(player, ConditionType.LoginDayCount, 1);
+        change(player, ConditionType.LoginCount, 1);
     }
 
-    public void change(Player player, ConditionType conditionType, long progress) {
-        change(player, conditionType, 0, progress);
+    public void change(Player player, UpdateKey k1, long progress) {
+        change(player, k1, UpdateKey.NONE, progress);
     }
 
-    public void change(Player player, ConditionType conditionType, int k2, long progress) {
-        change(player, conditionType, k2, 0, progress);
+    public void change(Player player, UpdateKey k1, UpdateKey k2, long progress) {
+        change(player, k1, k2, UpdateKey.NONE, progress);
     }
 
-    public void change(Player player, ConditionType conditionType, int k2, int k3, long progress) {
+    public void change(Player player, UpdateKey conditionType, UpdateKey k2, UpdateKey k3, long progress) {
 
         player.getTaskPackage().getAchieves().values().forEach(condition -> {
-            boolean change = condition.change(conditionType.getCode(), k2, k3, progress);
+            boolean change = condition.change(conditionType, k2, k3, progress);
             if (change) {
                 /*通知客户端变更*/
                 log.info("{} 成就变更 {}", player, condition);
@@ -59,7 +58,7 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
         });
 
         player.getTaskPackage().getTasks().forEach(taskInfo -> {
-            boolean change = taskInfo.change(conditionType.getCode(), k2, k3, progress);
+            boolean change = taskInfo.change(conditionType, k2, k3, progress);
             if (change) {
                 /*通知客户端变更*/
                 log.info("{} 任务变更 {}", player, taskInfo);
