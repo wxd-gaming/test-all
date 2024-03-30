@@ -11,12 +11,12 @@ import wxdgaming.boot.core.lang.task.UpdateKey;
 public interface ConditionType {
 
     /** 登录次数 */
-    UpdateKey LoginCount = new UpdateKey(1);
+    UpdateKey LoginCount = new UpdateKey("loginDays");
     /** 当前等级 */
-    UpdateKey Lv = new UpdateKey(3);
+    UpdateKey Level = new UpdateKey("Level");
     /** 等级提升 */
-    UpdateKey LvUp = new UpdateKey(4);
+    UpdateKey LevelUp = new UpdateKey("LevelUp");
     /** 杀怪 */
-    UpdateKey KillMonster = new UpdateKey(5);
+    UpdateKey KillMonster = new UpdateKey("KillMonster");
 
 }

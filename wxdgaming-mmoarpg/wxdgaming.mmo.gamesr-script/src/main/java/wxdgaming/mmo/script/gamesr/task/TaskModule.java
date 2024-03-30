@@ -9,6 +9,8 @@ import wxdgaming.mmo.core.bean.task.TaskType;
 import wxdgaming.mmo.gamesr.bean.user.Player;
 import wxdgaming.mmo.script.gamesr.event.ScriptEventBus;
 
+import java.io.Serializable;
+
 /**
  * 任务模块
  *
@@ -40,14 +42,14 @@ public class TaskModule implements ScriptEventBus.PlayerLoginAfter, ScriptEventB
     }
 
     public void change(Player player, UpdateKey k1, long progress) {
-        change(player, k1, UpdateKey.NONE, progress);
+        change(player, k1, "0", progress);
     }
 
-    public void change(Player player, UpdateKey k1, UpdateKey k2, long progress) {
-        change(player, k1, k2, UpdateKey.NONE, progress);
+    public void change(Player player, UpdateKey k1, Serializable k2, long progress) {
+        change(player, k1, k2, "0", progress);
     }
 
-    public void change(Player player, UpdateKey conditionType, UpdateKey k2, UpdateKey k3, long progress) {
+    public void change(Player player, UpdateKey conditionType, Serializable k2, Serializable k3, long progress) {
 
         player.getTaskPackage().getAchieves().values().forEach(condition -> {
             boolean change = condition.change(conditionType, k2, k3, progress);
