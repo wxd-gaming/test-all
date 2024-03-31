@@ -29,26 +29,26 @@ public class RankModule implements IShutdown {
     @Inject DataCenter dataCenter;
     @Inject PlayerSnapCache playerSnapCache;
 
-    public RankMap<Long, ? extends RankScore<Long>> rankMap(RankType rankType) {
+    public RankMap<RankScore> rankMap(RankType rankType) {
         return dataCenter.getRanks().computeIfAbsent(rankType, l -> new RankMap<>());
     }
 
     public void update(Player player) {
         {
-            RankMap<Long, ? extends RankScore<Long>> levelRankMap = rankMap(RankType.Level);
+            RankMap<RankScore> levelRankMap = rankMap(RankType.Level);
             levelRankMap.setScore(player.getUid(), player.getLevel());
-            Collection<? extends RankScore<Long>> levelRange = levelRankMap.getRange(0, 10);
+            Collection<RankScore> levelRange = levelRankMap.getRange(0, 10);
             if (levelRange.size() == 10) {
-                log.info("等级排行榜：\n[\n{}\n]", levelRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.getUid()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
+                log.info("等级排行榜：\n[\n{}\n]", levelRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
             }
         }
         {
-            RankMap<Long, ? extends RankScore<Long>> powerRankMap = rankMap(RankType.Power);
+            RankMap<RankScore> powerRankMap = rankMap(RankType.Power);
             powerRankMap.setScore(player.getUid(), player.getFightPower());
 
-            Collection<? extends RankScore<Long>> powerRange = powerRankMap.getRange(0, 10);
+            Collection<RankScore> powerRange = powerRankMap.getRange(0, 10);
             if (powerRange.size() == 10) {
-                log.info("战力排行榜：\n[\n{}\n]", powerRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.getUid()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
+                log.info("战力排行榜：\n[\n{}\n]", powerRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
             }
         }
     }

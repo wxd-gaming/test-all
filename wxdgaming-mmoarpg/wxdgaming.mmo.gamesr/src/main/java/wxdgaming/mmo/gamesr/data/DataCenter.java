@@ -51,7 +51,7 @@ public class DataCenter implements IBeanInit {
     /** 全局数据 */
     private TreeMap<Integer, ServerData> serverDataMap = new TreeMap<>();
 
-    private ConcurrentHashMap<RankType, RankMap<Long, RankScore<Long>>> ranks = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<RankType, RankMap<RankScore>> ranks = new ConcurrentHashMap<>();
 
     @Override public void beanInit(IocContext iocContext) throws Exception {
         DataCenter.instance = this;
