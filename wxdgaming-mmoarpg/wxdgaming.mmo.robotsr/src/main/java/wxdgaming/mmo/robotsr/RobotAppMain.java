@@ -2,8 +2,10 @@ package wxdgaming.mmo.robotsr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import straightedge.geom.util.Tracker;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
+import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
@@ -12,6 +14,7 @@ import wxdgaming.boot.starter.Starter;
 import wxdgaming.mmo.core.common.cache.BeanBase;
 
 import java.io.File;
+import java.net.URLClassLoader;
 
 /**
  * 启动类
@@ -49,19 +52,20 @@ public class RobotAppMain {
 
     public static void initScript() throws Exception {
         File file = new File("./script.jar");
-        ClassDirLoader classDirLoader;
+        ClassDirLoader classLoader;
         if (file.exists()) {
-            classDirLoader = ClassDirLoader.bootLib(RobotAppMain.class.getClassLoader(), file.getPath());
+            classLoader = ClassDirLoader.bootLib(RobotAppMain.class.getClassLoader(), file.getPath());
         } else {
-            classDirLoader = new JavaCoderCompile()
+            classLoader = new JavaCoderCompile()
                     .parentClassLoader(RobotAppMain.class.getClassLoader())
                     .compilerJava("wxdgaming.mmo.robot-script/src/main/java")
-                    .builderClassLoader();
+                    .classLoader("target/bin", true);
+            classLoader.addURL("wxdgaming.mmo.robot-script/src/main/resources");
         }
-        initScript(classDirLoader);
+        initScript(classLoader);
     }
 
-    public static void initScript(ClassLoader classLoader) {
+    public static void initScript(ClassDirLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "wxdgaming.mmo");
         ReflectContext.Builder builder = ReflectContext.Builder.of(classLoader, "wxdgaming.mmo.robot.script");
         Starter.createChildInjector(builder.build());

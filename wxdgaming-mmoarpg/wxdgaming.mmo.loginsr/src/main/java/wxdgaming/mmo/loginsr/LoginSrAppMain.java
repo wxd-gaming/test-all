@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
+import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
@@ -12,6 +13,7 @@ import wxdgaming.boot.starter.Starter;
 import wxdgaming.mmo.core.GameBase;
 
 import java.io.File;
+import java.net.URLClassLoader;
 
 public class LoginSrAppMain {
 
@@ -42,17 +44,19 @@ public class LoginSrAppMain {
 
     public static void initScript() throws Exception {
         File file = new File("./script.jar");
-        ClassDirLoader classDirLoader;
+        ClassDirLoader classLoader;
         if (file.exists()) {
-            classDirLoader = ClassDirLoader.bootLib(LoginSrAppMain.class.getClassLoader(), file.getPath());
+            classLoader = ClassDirLoader.bootLib(LoginSrAppMain.class.getClassLoader(), file.getPath());
         } else {
-            classDirLoader = new JavaCoderCompile()
+
+            classLoader = new JavaCoderCompile()
                     .parentClassLoader(LoginSrAppMain.class.getClassLoader())
                     .compilerJava("wxdgaming.mmo.loginsr-script/src/main/java")
-                    .builderClassLoader();
-            classDirLoader.addURL("wxdgaming.mmo.loginsr-script/src/main/resources");
+                    .classLoader("wxdgaming.mmo.loginsr-script/target/classes");
+
+            classLoader.addURL("wxdgaming.mmo.loginsr-script/src/main/resources");
         }
-        initScript(classDirLoader);
+        initScript(classLoader);
     }
 
     public static void initScript(ClassLoader classLoader) {

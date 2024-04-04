@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
+import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
@@ -14,6 +15,7 @@ import wxdgaming.boot.starter.batis.MysqlService1;
 import wxdgaming.mmo.core.GameBase;
 
 import java.io.File;
+import java.net.URLClassLoader;
 
 public class GameSrAppMain {
 
@@ -55,13 +57,13 @@ public class GameSrAppMain {
             classDirLoader = new JavaCoderCompile()
                     .parentClassLoader(GameSrAppMain.class.getClassLoader())
                     .compilerJava("wxdgaming.mmo.gamesr-script/src/main/java")
-                    .builderClassLoader();
+                    .classLoader("wxdgaming.mmo.gamesr-script/target/classes");
             classDirLoader.addURL("wxdgaming.mmo.gamesr-script/src/main/resources");
         }
         initScript(classDirLoader);
     }
 
-    public static void initScript(ClassLoader classLoader) {
+    public static void initScript(ClassDirLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "wxdgaming.mmo");
         ReflectContext.Builder scripts = ReflectContext.Builder.of(classLoader, "wxdgaming.mmo.script.gamesr");
         Starter.createChildInjector(scripts.build());

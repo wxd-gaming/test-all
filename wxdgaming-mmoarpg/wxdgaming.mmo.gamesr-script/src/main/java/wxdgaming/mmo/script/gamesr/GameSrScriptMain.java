@@ -14,7 +14,6 @@ public class GameSrScriptMain {
     public static void main(String[] args) throws Exception {
         try {
             GameSrAppMain.init();
-            GameSrAppMain.initScript(GameSrScriptMain.class.getClassLoader());
             Starter.start(true, 1, "mmo-arpg", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");

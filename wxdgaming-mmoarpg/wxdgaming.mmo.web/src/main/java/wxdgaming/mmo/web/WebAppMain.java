@@ -10,6 +10,7 @@ import wxdgaming.boot.core.system.JvmUtil;
 import wxdgaming.boot.starter.Starter;
 
 import java.io.File;
+import java.net.URLClassLoader;
 
 public class WebAppMain {
 
@@ -42,12 +43,12 @@ public class WebAppMain {
             classDirLoader = new JavaCoderCompile()
                     .parentClassLoader(WebAppMain.class.getClassLoader())
                     .compilerJava("wxdgaming.mmo.web-script/src/main/java")
-                    .builderClassLoader();
+                    .classLoader();
         }
         initScript(classDirLoader);
     }
 
-    public static void initScript(ClassLoader classLoader) {
+    public static void initScript(ClassDirLoader classLoader) {
         ReflectContext.Builder reflectBuilder = ReflectContext
                 .Builder
                 .of(
