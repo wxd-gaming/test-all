@@ -4,18 +4,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
-import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
 import wxdgaming.boot.net.message.MessagePackage;
-import wxdgaming.boot.starter.Starter;
+import wxdgaming.boot.starter.AppContext;
 import wxdgaming.boot.starter.batis.MysqlService;
 import wxdgaming.boot.starter.batis.MysqlService1;
 import wxdgaming.mmo.core.GameBase;
 
 import java.io.File;
-import java.net.URLClassLoader;
 
 public class GameSrAppMain {
 
@@ -23,7 +21,7 @@ public class GameSrAppMain {
         try {
             init();
             initScript();
-            Starter.start(true, 1, "mmo-game", "测试版");
+            AppContext.start(true, 1, "mmo-game", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
@@ -36,15 +34,15 @@ public class GameSrAppMain {
         LogbackUtil.setLogbackConfig();
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
-        Starter.startBoot(
+        AppContext.boot(
                 GameSrAppMain.class,
                 GameBase.class
         );
 
-        MysqlService gameDb = Starter.curIocInjector().getInstance(MysqlService.class);
+        MysqlService gameDb = AppContext.context().getInstance(MysqlService.class);
         gameDb.checkDataBase("wxdgaming.mmo");
 
-        MysqlService1 loginDb = Starter.curIocInjector().getInstance(MysqlService1.class);
+        MysqlService1 loginDb = AppContext.context().getInstance(MysqlService1.class);
 
     }
 
@@ -66,7 +64,7 @@ public class GameSrAppMain {
     public static void initScript(ClassDirLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "wxdgaming.mmo");
         ReflectContext.Builder scripts = ReflectContext.Builder.of(classLoader, "wxdgaming.mmo.script.gamesr");
-        Starter.createChildInjector(scripts.build());
+        AppContext.createChildInjector(scripts.build());
     }
 
 }

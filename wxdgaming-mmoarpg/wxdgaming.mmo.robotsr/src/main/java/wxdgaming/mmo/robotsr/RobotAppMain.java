@@ -2,19 +2,16 @@ package wxdgaming.mmo.robotsr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import straightedge.geom.util.Tracker;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
-import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
 import wxdgaming.boot.net.message.MessagePackage;
-import wxdgaming.boot.starter.Starter;
+import wxdgaming.boot.starter.AppContext;
 import wxdgaming.mmo.core.common.cache.BeanBase;
 
 import java.io.File;
-import java.net.URLClassLoader;
 
 /**
  * 启动类
@@ -29,7 +26,7 @@ public class RobotAppMain {
         try {
             init();
             initScript();
-            Starter.start(true, 1, "mmo-login", "测试版");
+            AppContext.start(true, 1, "mmo-login", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
@@ -42,7 +39,7 @@ public class RobotAppMain {
         LogbackUtil.setLogbackConfig();
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
-        Starter.startBoot(
+        AppContext.boot(
                 RobotAppMain.class,
                 wxdgaming.mmo.core.login.BeanBase.class,
                 BeanBase.class
@@ -68,7 +65,7 @@ public class RobotAppMain {
     public static void initScript(ClassDirLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "wxdgaming.mmo");
         ReflectContext.Builder builder = ReflectContext.Builder.of(classLoader, "wxdgaming.mmo.robot.script");
-        Starter.createChildInjector(builder.build());
+        AppContext.createChildInjector(builder.build());
     }
 
 }

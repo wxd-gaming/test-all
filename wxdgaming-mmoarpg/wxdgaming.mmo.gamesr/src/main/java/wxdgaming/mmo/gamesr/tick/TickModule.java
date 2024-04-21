@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import wxdgaming.boot.core.threading.ThreadInfo;
 import wxdgaming.boot.core.timer.ann.Scheduled;
-import wxdgaming.boot.starter.Starter;
+import wxdgaming.boot.starter.AppContext;
 import wxdgaming.mmo.core.bean.config.ServerConfig;
 
 /**
@@ -21,7 +21,7 @@ public class TickModule {
     @Scheduled("*")
     @ThreadInfo(vt = true)
     public void serverSecondTick() {
-        Starter.curIocInjector().forEachBean(IServerSecondTick.class, tick -> {
+        AppContext.context().forEachBean(IServerSecondTick.class, tick -> {
             tick.onServerSecond(serverConfig);
         });
     }
@@ -29,7 +29,7 @@ public class TickModule {
     @Scheduled("0 *")
     @ThreadInfo(vt = true)
     public void serverMinuteTick() {
-        Starter.curIocInjector().forEachBean(IServerMinuteTick.class, tick -> {
+        AppContext.context().forEachBean(IServerMinuteTick.class, tick -> {
             tick.onServerMinute(serverConfig);
         });
     }
@@ -37,7 +37,7 @@ public class TickModule {
     @Scheduled("0 0 *")
     @ThreadInfo(vt = true)
     public void serverHourTick() {
-        Starter.curIocInjector().forEachBean(IServerHourTick.class, tick -> {
+        AppContext.context().forEachBean(IServerHourTick.class, tick -> {
             tick.onServerHour(serverConfig);
         });
     }
@@ -45,7 +45,7 @@ public class TickModule {
     @Scheduled("0 0 0")
     @ThreadInfo(vt = true)
     public void serverDayTick() {
-        Starter.curIocInjector().forEachBean(IServerDayTick.class, tick -> {
+        AppContext.context().forEachBean(IServerDayTick.class, tick -> {
             tick.onServerDay(serverConfig);
         });
     }

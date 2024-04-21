@@ -4,16 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wxdgaming.boot.agent.LogbackUtil;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
-import wxdgaming.boot.agent.loader.ClassFileObjectLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
 import wxdgaming.boot.net.message.MessagePackage;
-import wxdgaming.boot.starter.Starter;
+import wxdgaming.boot.starter.AppContext;
 import wxdgaming.mmo.core.GameBase;
 
 import java.io.File;
-import java.net.URLClassLoader;
 
 public class LoginSrAppMain {
 
@@ -21,7 +19,7 @@ public class LoginSrAppMain {
         try {
             init();
             initScript();
-            Starter.start(true, 1, "mmo-login", "测试版");
+            AppContext.start(true, 1, "mmo-login", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
@@ -35,7 +33,7 @@ public class LoginSrAppMain {
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
 
-        Starter.startBoot(
+        AppContext.boot(
                 LoginSrAppMain.class,
                 GameBase.class
         );
@@ -62,7 +60,7 @@ public class LoginSrAppMain {
     public static void initScript(ClassLoader classLoader) {
         MessagePackage.loadMessageId_HashCode(classLoader, true, "wxdgaming.mmo.script.game.proto.login.message");
         ReflectContext.Builder scripts = ReflectContext.Builder.of(classLoader, "wxdgaming.mmo.script.loginsr");
-        Starter.createChildInjector(scripts.build());
+        AppContext.createChildInjector(scripts.build());
     }
 
 }

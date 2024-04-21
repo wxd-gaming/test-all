@@ -7,10 +7,9 @@ import wxdgaming.boot.agent.loader.ClassDirLoader;
 import wxdgaming.boot.agent.loader.JavaCoderCompile;
 import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.system.JvmUtil;
-import wxdgaming.boot.starter.Starter;
+import wxdgaming.boot.starter.AppContext;
 
 import java.io.File;
-import java.net.URLClassLoader;
 
 public class WebAppMain {
 
@@ -18,7 +17,7 @@ public class WebAppMain {
         try {
             init();
             initScript();
-            Starter.start(true, 1, "mmo-login", "测试版");
+            AppContext.start(true, 1, "mmo-login", "测试版");
         } catch (Throwable throwable) {
             Logger logger = LoggerFactory.getLogger("root");
             logger.error("启动异常", throwable);
@@ -30,7 +29,7 @@ public class WebAppMain {
         LogbackUtil.setLogbackConfig();
         JvmUtil.setProperty("jks_path", "xiaw-jks/8227259__xiaw.net.jks");
         JvmUtil.setProperty("jks_pwd", "gmB8I91V");
-        Starter.startBoot(WebAppMain.class);
+        AppContext.boot(WebAppMain.class);
 
     }
 
@@ -55,7 +54,7 @@ public class WebAppMain {
                         classLoader,
                         "wxdgaming.mmo.web.script"
                 );
-        Starter.createChildInjector(reflectBuilder.build());
+        AppContext.createChildInjector(reflectBuilder.build());
     }
 
 }
