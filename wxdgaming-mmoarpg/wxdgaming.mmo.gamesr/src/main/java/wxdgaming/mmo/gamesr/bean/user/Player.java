@@ -6,15 +6,15 @@ import lombok.experimental.Accessors;
 import wxdgaming.boot.batis.struct.DbTable;
 import wxdgaming.boot.core.lang.LNum;
 import wxdgaming.boot.net.SocketSession;
+import wxdgaming.mmo.core.bean.bag.ItemPack;
+import wxdgaming.mmo.core.bean.bag.PackType;
 import wxdgaming.mmo.core.game.bean.fight.Fight;
 import wxdgaming.mmo.core.game.bean.user.PlayerSnap;
 import wxdgaming.mmo.core.game.cache.user.PlayerSnapCache;
-import wxdgaming.mmo.core.bean.bag.ItemPack;
-import wxdgaming.mmo.core.bean.bag.PackType;
+import wxdgaming.mmo.core.login.bean.user.Account;
 import wxdgaming.mmo.gamesr.bean.mail.MailPackage;
 import wxdgaming.mmo.gamesr.bean.task.TaskPackage;
 import wxdgaming.mmo.gamesr.cache.mail.MailPackageCache;
-import wxdgaming.mmo.core.login.bean.user.Account;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -52,12 +52,12 @@ public class Player extends Fight {
 
     /** 玩家的快照 */
     public PlayerSnap playerSnap() {
-        return PlayerSnapCache.getInstance().cache(this.getUid());
+        return PlayerSnapCache.getInstance().get(this.getUid());
     }
 
     /** 玩家的邮件背包 */
     public MailPackage mailPackage() {
-        return MailPackageCache.getInstance().cache(this.getUid());
+        return MailPackageCache.getInstance().get(this.getUid());
     }
 
     public ItemPack itemPack(PackType packType) {

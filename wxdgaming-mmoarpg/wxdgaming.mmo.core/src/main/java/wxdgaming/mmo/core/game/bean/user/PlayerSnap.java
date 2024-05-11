@@ -46,17 +46,15 @@ public class PlayerSnap extends GameBase {
     private long vipExp;
 
     public Account account() {
-        return AccountCache.getInstance().cache(this.getAccountName());
+        return AccountCache.getInstance().get(this.getAccountName());
     }
 
     public String logName() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        sb.append("uid='").append(getUid()).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", lv=").append(lv);
-        sb.append('}');
-        return sb.toString();
+        return "{" +
+                "uid='" + getUid() + '\'' +
+                ", name='" + name + '\'' +
+                ", lv=" + lv +
+                '}';
     }
 
 }

@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import wxdgaming.boot.agent.function.ConsumerE2;
-import wxdgaming.boot.core.cache.CachePack;
+import wxdgaming.boot.agent.function.Consumer2;
+import wxdgaming.boot.agent.function.Function1;
+import wxdgaming.boot.agent.function.Function2;
+import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService;
 import wxdgaming.boot.starter.batis.RedisService;
@@ -14,7 +16,6 @@ import wxdgaming.mmo.gamesr.bean.mail.MailPackage;
 import wxdgaming.mmo.gamesr.bean.user.Player;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 /**
  * 玩家角色快照
@@ -24,7 +25,7 @@ import java.util.function.Function;
  **/
 @Slf4j
 @Singleton
-public class MailPackageCache extends CachePack<Long, MailPackage> implements IBeanInit {
+public class MailPackageCache extends Cache<Long, MailPackage> implements IBeanInit {
 
     @Getter private static MailPackageCache instance = null;
 
@@ -32,12 +33,9 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
     @Inject RedisService redisService;
 
     public MailPackageCache() {
-
-        setCacheSurvivalTime(TimeUnit.MINUTES.toMillis(20));
-        setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
-        setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
-
-        this.loading = new Function<>() {
+        super(TimeUnit.MINUTES.toMillis(1));
+        expireAfterAccess = (TimeUnit.MINUTES.toMillis(20));
+        this.loader = new Function1<Long, MailPackage>() {
             @Override public MailPackage apply(Long aLong) {
                 MailPackage mailPackage = gameDb.queryEntity(MailPackage.class, aLong);
                 if (mailPackage == null) {
@@ -53,19 +51,20 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
             }
         };
 
-        this.heart = new Function<>() {
-            @Override public Boolean apply(MailPackage mailPackage) {
+        heartTime = TimeUnit.MINUTES.toMillis(1);
+        this.heartListener = new Consumer2<Long, MailPackage>() {
+            @Override public void accept(Long aLong, MailPackage mailPackage) {
                 if (mailPackage.checkSaveCode()) {/*判定异常是否需要存储*/
                     gameDb.getBatchPool().replace(mailPackage);
                 }
-                return null;
             }
         };
 
-        this.unload = new ConsumerE2<>() {
-            @Override public void accept(MailPackage mailPackage, String s) throws Exception {
+        removalListener = new Function2<Long, MailPackage, Boolean>() {
+            @Override public Boolean apply(Long aLong, MailPackage mailPackage) {
                 gameDb.getBatchPool().replace(mailPackage);
-                log.info("缓存过期移除：{}, {}", mailPackage, s);
+                log.info("缓存过期移除：{}", mailPackage);
+                return true;
             }
         };
 
@@ -79,8 +78,13 @@ public class MailPackageCache extends CachePack<Long, MailPackage> implements IB
         return gameDb.rowCount(Player.class);
     }
 
-    @Override public void addCache(Long aLong, MailPackage mailPackage) {
-        super.addCache(aLong, mailPackage);
+    @Override public void put(Long aLong, MailPackage mailPackage) {
+        super.put(aLong, mailPackage);
+        gameDb.getBatchPool().replace(mailPackage);
+    }
+
+    @Override public void putIfAbsent(Long aLong, MailPackage mailPackage) {
+        super.putIfAbsent(aLong, mailPackage);
         gameDb.getBatchPool().replace(mailPackage);
     }
 

@@ -2,8 +2,8 @@ package wxdgaming.mmo.script.gamesr.mail;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import wxdgaming.mmo.core.bean.data.UidSeed;
 import wxdgaming.mmo.core.bean.bag.goods.Item;
+import wxdgaming.mmo.core.bean.data.UidSeed;
 import wxdgaming.mmo.gamesr.bean.mail.MailPackage;
 import wxdgaming.mmo.gamesr.bean.mail.impl.Mail;
 import wxdgaming.mmo.gamesr.cache.mail.MailPackageCache;
@@ -27,7 +27,7 @@ public class MailModule {
     public Mail addSysMail(long toPlayer,
                            String title, String content,
                            String logs) {
-        return addSysMail(mailPackageCache.cache(toPlayer), title, content, logs);
+        return addSysMail(mailPackageCache.get(toPlayer), title, content, logs);
     }
 
     public Mail addSysMail(MailPackage mailPackage,
@@ -39,7 +39,7 @@ public class MailModule {
     public Mail addSysMail(long toPlayer,
                            String title, String content, ArrayList<String> contentParams,
                            ArrayList<Item> items, String logs) {
-        return addSysMail(mailPackageCache.cache(toPlayer), title, content, contentParams, items, logs);
+        return addSysMail(mailPackageCache.get(toPlayer), title, content, contentParams, items, logs);
     }
 
     public Mail addSysMail(MailPackage mailPackage,

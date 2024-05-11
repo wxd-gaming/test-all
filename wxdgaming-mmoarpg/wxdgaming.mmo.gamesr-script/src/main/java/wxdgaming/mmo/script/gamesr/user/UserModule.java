@@ -116,7 +116,7 @@ public class UserModule {
 
     public Player getUserInfo(long uid) {
         MarkTimer markTimer = MarkTimer.build();
-        Player Player = playerCache.cache(uid);
+        Player Player = playerCache.get(uid);
         log.info("读取一条数据{} {}", markTimer.execTime2String(), Player.toJson());
         log.info("读取一条数据{} {}", markTimer.execTime2String(), Player.toJsonWriteType());
         return Player;
@@ -131,7 +131,7 @@ public class UserModule {
 
         player.getItemPackMap().computeIfAbsent(PackType.BAG, b -> new ItemPack(PackType.BAG, 100));
         player.getItemPackMap().computeIfAbsent(PackType.STORE, b -> new ItemPack(PackType.STORE, 100));
-        playerCache.addCache(player.getUid(), player);
+        playerCache.put(player.getUid(), player);
 
         PlayerSnap playerSnap = new PlayerSnap();
         playerSnap.setUid(player.getUid());
@@ -143,7 +143,7 @@ public class UserModule {
         int maxLv = vipFactory.getMaxLv();
         playerSnap.setVipLv(RandomUtils.random(0, maxLv));
 
-        playerSnapCache.addCache(playerSnap.getUid(), playerSnap);
+        playerSnapCache.put(playerSnap.getUid(), playerSnap);
         return player;
     }
 

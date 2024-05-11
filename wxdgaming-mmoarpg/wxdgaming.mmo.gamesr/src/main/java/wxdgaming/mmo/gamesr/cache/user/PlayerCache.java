@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import wxdgaming.boot.agent.function.ConsumerE2;
-import wxdgaming.boot.core.cache.CachePack;
+import wxdgaming.boot.agent.function.Consumer2;
+import wxdgaming.boot.agent.function.Function1;
+import wxdgaming.boot.agent.function.Function2;
+import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService;
 import wxdgaming.boot.starter.batis.RedisService;
@@ -13,7 +15,6 @@ import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.gamesr.bean.user.Player;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 /**
  * 玩家角色快照
@@ -23,7 +24,7 @@ import java.util.function.Function;
  **/
 @Slf4j
 @Singleton
-public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
+public class PlayerCache extends Cache<Long, Player> implements IBeanInit {
 
     @Getter private static PlayerCache instance = null;
 
@@ -31,12 +32,9 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
     @Inject RedisService redisService;
 
     public PlayerCache() {
-
-        setCacheSurvivalTime(TimeUnit.MINUTES.toMillis(20));
-        setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
-        setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
-
-        this.loading = new Function<>() {
+        super(TimeUnit.MINUTES.toMillis(1));
+        expireAfterAccess = (TimeUnit.MINUTES.toMillis(20));
+        this.loader = new Function1<Long, Player>() {
             @Override public Player apply(Long aLong) {
                 Player player = gameDb.queryEntity(Player.class, aLong);
                 if (player == null) {
@@ -52,21 +50,20 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
             }
         };
 
-        this.heart = new Function<>() {
-
-            @Override public Boolean apply(Player player) {
+        heartTime = TimeUnit.MINUTES.toMillis(1);
+        this.heartListener = new Consumer2<Long, Player>() {
+            @Override public void accept(Long aLong, Player player) {
                 if (player.checkSaveCode()) {
                     gameDb.getBatchPool().replace(player);
                 }
-                return !player.online();
             }
-
         };
 
-        this.unload = new ConsumerE2<>() {
-            @Override public void accept(Player player, String s) throws Exception {
+        removalListener = new Function2<Long, Player, Boolean>() {
+            @Override public Boolean apply(Long aLong, Player player) {
                 gameDb.getBatchPool().replace(player);
-                log.info("缓存过期移除：{}, {}", player, s);
+                log.info("缓存过期移除：{}", player);
+                return true;
             }
         };
 
@@ -80,8 +77,14 @@ public class PlayerCache extends CachePack<Long, Player> implements IBeanInit {
         return gameDb.rowCount(Player.class);
     }
 
-    @Override public void addCache(Long aLong, Player player) {
-        super.addCache(aLong, player);
+    @Override public void put(Long aLong, Player player) {
+        super.put(aLong, player);
         gameDb.getBatchPool().replace(player);
     }
+
+    @Override public void putIfAbsent(Long aLong, Player player) {
+        super.putIfAbsent(aLong, player);
+        gameDb.getBatchPool().replace(player);
+    }
+
 }

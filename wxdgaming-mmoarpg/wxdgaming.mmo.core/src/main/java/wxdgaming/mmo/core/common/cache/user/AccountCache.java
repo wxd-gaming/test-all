@@ -4,16 +4,16 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import wxdgaming.boot.agent.function.ConsumerE2;
+import wxdgaming.boot.agent.function.Consumer2;
+import wxdgaming.boot.agent.function.Function2;
 import wxdgaming.boot.agent.function.SLFunction1;
-import wxdgaming.boot.core.cache.CachePack;
+import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService1;
 import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.core.login.bean.user.Account;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 /**
  * 账号缓存容器
@@ -23,33 +23,30 @@ import java.util.function.Function;
  **/
 @Slf4j
 @Singleton
-public class AccountCache extends CachePack<String, Account> implements IBeanInit {
+public class AccountCache extends Cache<String, Account> implements IBeanInit {
 
     @Getter private static AccountCache instance = null;
 
     @Inject MysqlService1 loginDb;
 
     public AccountCache() {
+        super(TimeUnit.MINUTES.toMillis(1));
+        expireAfterAccess = (TimeUnit.MINUTES.toMillis(20));
 
-        setCacheSurvivalTime(TimeUnit.MINUTES.toMillis(20));
-        setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
-        setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
+        loader = this::load;
 
-        loading = this::load;
-
-        unload = new ConsumerE2<Account, String>() {
-            @Override public void accept(Account account, String s) throws Exception {
-
-            }
-        };
-
-        heart = new Function<Account, Boolean>() {
-
-            @Override public Boolean apply(Account account) {
+        removalListener = new Function2<String, Account, Boolean>() {
+            @Override public Boolean apply(String string, Account account) {
 
                 return null;
             }
+        };
 
+        heartTime = (TimeUnit.MINUTES.toMillis(1));
+        heartListener = new Consumer2<String, Account>() {
+            @Override public void accept(String string, Account account) {
+
+            }
         };
 
     }
@@ -63,8 +60,13 @@ public class AccountCache extends CachePack<String, Account> implements IBeanIni
         return loginDb.rowCount(Account.class);
     }
 
-    @Override public void addCache(String accountName, Account account) {
-        super.addCache(accountName, account);
+    @Override public void put(String string, Account account) {
+        super.put(string, account);
+        loginDb.getBatchPool().replace(account);
+    }
+
+    @Override public void putIfAbsent(String string, Account account) {
+        super.putIfAbsent(string, account);
         loginDb.getBatchPool().replace(account);
     }
 

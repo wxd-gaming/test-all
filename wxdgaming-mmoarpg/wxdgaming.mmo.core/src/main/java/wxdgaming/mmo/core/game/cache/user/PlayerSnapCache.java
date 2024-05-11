@@ -2,8 +2,11 @@ package wxdgaming.mmo.core.game.cache.user;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import wxdgaming.boot.agent.function.ConsumerE2;
-import wxdgaming.boot.core.cache.CachePack;
+import lombok.Getter;
+import wxdgaming.boot.agent.function.Consumer2;
+import wxdgaming.boot.agent.function.Function1;
+import wxdgaming.boot.agent.function.Function2;
+import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService1;
 import wxdgaming.boot.starter.batis.RedisService;
@@ -11,7 +14,6 @@ import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.core.game.bean.user.PlayerSnap;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 /**
  * 玩家角色快照
@@ -20,45 +22,36 @@ import java.util.function.Function;
  * @version: 2023-08-03 14:54
  **/
 @Singleton
-public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBeanInit {
+public class PlayerSnapCache extends Cache<Long, PlayerSnap> implements IBeanInit {
 
-    private static PlayerSnapCache instance = null;
-
-    public static PlayerSnapCache getInstance() {
-        return instance;
-    }
+    @Getter private static PlayerSnapCache instance = null;
 
     @Inject MysqlService1 loginDb;
     @Inject RedisService redisService;
 
     public PlayerSnapCache() {
+        super(TimeUnit.MINUTES.toMillis(1));
+        expireAfterAccess = (TimeUnit.MINUTES.toMillis(20));
 
-        setCacheSurvivalTime(TimeUnit.MINUTES.toMillis(20));
-        setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
-        setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
 
-        loading = new Function<Long, PlayerSnap>() {
-
+        loader = new Function1<Long, PlayerSnap>() {
             @Override public PlayerSnap apply(Long aLong) {
 
                 return null;
             }
-
         };
 
-        unload = new ConsumerE2<PlayerSnap, String>() {
-            @Override public void accept(PlayerSnap playerSnap, String s) throws Exception {
-
-            }
-        };
-
-        heart = new Function<PlayerSnap, Boolean>() {
-
-            @Override public Boolean apply(PlayerSnap playerSnap) {
-
+        removalListener = new Function2<Long, PlayerSnap, Boolean>() {
+            @Override public Boolean apply(Long aLong, PlayerSnap playerSnap) {
                 return null;
             }
+        };
 
+        heartTime = (TimeUnit.MINUTES.toMillis(1));
+        heartListener = new Consumer2<Long, PlayerSnap>() {
+            @Override public void accept(Long aLong, PlayerSnap playerSnap) {
+
+            }
         };
 
     }
@@ -72,9 +65,15 @@ public class PlayerSnapCache extends CachePack<Long, PlayerSnap> implements IBea
         return loginDb.rowCount(PlayerSnap.class);
     }
 
-    @Override public void addCache(Long aLong, PlayerSnap playerSnap) {
-        super.addCache(aLong, playerSnap);
+    @Override public void put(Long aLong, PlayerSnap playerSnap) {
+        super.put(aLong, playerSnap);
         loginDb.getBatchPool().replace(playerSnap);
     }
+
+    @Override public void putIfAbsent(Long aLong, PlayerSnap playerSnap) {
+        super.putIfAbsent(aLong, playerSnap);
+        loginDb.getBatchPool().replace(playerSnap);
+    }
+
 
 }

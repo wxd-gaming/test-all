@@ -85,8 +85,8 @@ public class LoginModule implements IBeanInit {
      * @version: 2024-02-27 10:00
      */
     public RunResult login(Platforms platforms, SdkType sdkType, String channel, String channelAccount, String accountName, String token, ObjMap extMap) {
-        //synchronized (accountName.intern()) {/*虚拟线程会死锁，后续考虑怎么处理*/
-        Account account = accountCache.cache(accountName, true);
+        // synchronized (accountName.intern()) {/*虚拟线程会死锁，后续考虑怎么处理*/
+        Account account = accountCache.get(accountName);
         if (account == null) {
             /*不存在就直接创建*/
             account = new Account();
@@ -97,7 +97,7 @@ public class LoginModule implements IBeanInit {
             account.setChannelAccountName(channelAccount);
             account.setCreateTime(MyClock.millis());
             /*存储*/
-            accountCache.addCache(account.getAccountName(), account);
+            accountCache.put(account.getAccountName(), account);
         }
 
         if (!Objects.equals(account.getToken(), token)) {

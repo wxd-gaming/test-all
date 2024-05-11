@@ -7,8 +7,8 @@ import wxdgaming.boot.core.lang.rank.RankMap;
 import wxdgaming.boot.core.lang.rank.RankScore;
 import wxdgaming.boot.starter.batis.MysqlService;
 import wxdgaming.boot.starter.i.IShutdown;
-import wxdgaming.mmo.core.game.cache.user.PlayerSnapCache;
 import wxdgaming.mmo.core.bean.rank.RankType;
+import wxdgaming.mmo.core.game.cache.user.PlayerSnapCache;
 import wxdgaming.mmo.gamesr.bean.user.Player;
 import wxdgaming.mmo.gamesr.data.DataCenter;
 
@@ -39,7 +39,7 @@ public class RankModule implements IShutdown {
             levelRankMap.setScore(player.getUid(), player.getLevel());
             Collection<RankScore> levelRange = levelRankMap.getRange(0, 10);
             if (levelRange.size() == 10) {
-                log.info("等级排行榜：\n[\n{}\n]", levelRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
+                log.info("等级排行榜：\n[\n{}\n]", levelRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.get(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
             }
         }
         {
@@ -48,7 +48,7 @@ public class RankModule implements IShutdown {
 
             Collection<RankScore> powerRange = powerRankMap.getRange(0, 10);
             if (powerRange.size() == 10) {
-                log.info("战力排行榜：\n[\n{}\n]", powerRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.cache(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
+                log.info("战力排行榜：\n[\n{}\n]", powerRange.stream().map(r -> r.getUid() + " - " + playerSnapCache.get(r.uid2Long()).getName() + " - " + r.scoreLongValue()).collect(Collectors.joining("\n")));
             }
         }
     }

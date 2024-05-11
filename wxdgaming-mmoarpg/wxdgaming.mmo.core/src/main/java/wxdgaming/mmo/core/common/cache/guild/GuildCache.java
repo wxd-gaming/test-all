@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import wxdgaming.boot.agent.function.ConsumerE2;
-import wxdgaming.boot.core.cache.CachePack;
+import wxdgaming.boot.agent.function.Consumer2;
+import wxdgaming.boot.agent.function.Function1;
+import wxdgaming.boot.agent.function.Function2;
+import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService;
 import wxdgaming.boot.starter.batis.RedisService;
@@ -13,7 +15,6 @@ import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.core.bean.guild.GuildInfo;
 
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 /**
  * 账号缓存容器
@@ -23,7 +24,7 @@ import java.util.function.Function;
  **/
 @Slf4j
 @Singleton
-public class GuildCache extends CachePack<Long, GuildInfo> implements IBeanInit {
+public class GuildCache extends Cache<Long, GuildInfo> implements IBeanInit {
 
     @Getter private static GuildCache instance = null;
 
@@ -31,13 +32,11 @@ public class GuildCache extends CachePack<Long, GuildInfo> implements IBeanInit 
     @Inject RedisService redisService;
 
     public GuildCache() {
+        super(TimeUnit.MINUTES.toMillis(1));
 
-        setCacheSurvivalTime(TimeUnit.MINUTES.toMillis(20));
-        setCacheHeartTimer(TimeUnit.MINUTES.toMillis(1));
-        setCacheIntervalTime(TimeUnit.MINUTES.toMillis(1));
+        expireAfterAccess = (TimeUnit.MINUTES.toMillis(20));
 
-        loading = new Function<Long, GuildInfo>() {
-
+        loader = new Function1<Long, GuildInfo>() {
             @Override public GuildInfo apply(Long aLong) {
                 GuildInfo guildInfo = gameDb.queryEntity(GuildInfo.class, aLong);
                 if (guildInfo == null) {
@@ -45,20 +44,22 @@ public class GuildCache extends CachePack<Long, GuildInfo> implements IBeanInit 
                 }
                 return guildInfo;
             }
-
         };
 
-        unload = new ConsumerE2<GuildInfo, String>() {
-            @Override public void accept(GuildInfo guildInfo, String s) throws Exception {
+        removalListener = new Function2<Long, GuildInfo, Boolean>() {
 
-            }
-        };
-
-        heart = new Function<GuildInfo, Boolean>() {
-
-            @Override public Boolean apply(GuildInfo guildInfo) {
+            @Override public Boolean apply(Long aLong, GuildInfo guildInfo) {
 
                 return null;
+            }
+
+        };
+
+        heartTime = (TimeUnit.MINUTES.toMillis(1));
+        heartListener = new Consumer2<Long, GuildInfo>() {
+
+            @Override public void accept(Long aLong, GuildInfo guildInfo) {
+
             }
 
         };
@@ -82,8 +83,25 @@ public class GuildCache extends CachePack<Long, GuildInfo> implements IBeanInit 
         return gameDb.rowCount(GuildInfo.class);
     }
 
-    @Override public void addCache(Long aLong, GuildInfo guildInfo) {
-        super.addCache(aLong, guildInfo);
+    /**
+     * 添加缓存
+     *
+     * @param aLong
+     * @param guildInfo
+     */
+    @Override public void put(Long aLong, GuildInfo guildInfo) {
+        super.put(aLong, guildInfo);
+        gameDb.getBatchPool().replace(guildInfo);
+    }
+
+    /**
+     * 添加缓存
+     *
+     * @param aLong
+     * @param guildInfo
+     */
+    @Override public void putIfAbsent(Long aLong, GuildInfo guildInfo) {
+        super.putIfAbsent(aLong, guildInfo);
         gameDb.getBatchPool().replace(guildInfo);
     }
 
