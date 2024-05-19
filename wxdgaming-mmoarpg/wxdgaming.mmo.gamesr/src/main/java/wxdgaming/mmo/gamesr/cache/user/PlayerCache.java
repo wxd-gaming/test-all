@@ -10,6 +10,7 @@ import wxdgaming.boot.agent.function.Function2;
 import wxdgaming.boot.core.lang.Cache;
 import wxdgaming.boot.starter.IocContext;
 import wxdgaming.boot.starter.batis.MysqlService;
+import wxdgaming.boot.starter.batis.MysqlService1;
 import wxdgaming.boot.starter.batis.RedisService;
 import wxdgaming.boot.starter.i.IBeanInit;
 import wxdgaming.mmo.gamesr.bean.user.Player;
@@ -29,6 +30,7 @@ public class PlayerCache extends Cache<Long, Player> implements IBeanInit {
     @Getter private static PlayerCache instance = null;
 
     @Inject MysqlService gameDb;
+    @Inject MysqlService1 loginDb;
     @Inject RedisService redisService;
 
     public PlayerCache() {

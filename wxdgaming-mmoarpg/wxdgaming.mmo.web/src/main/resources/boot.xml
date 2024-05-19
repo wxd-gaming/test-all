@@ -10,7 +10,7 @@
         <jks>jks/xiaw.net.jks</jks>
         <jksPwd>jks/xiaw.net.jks.pwd</jksPwd>
     </server>
-    <wsserver>
+    <webSocket>
         <name>default</name>
         <host>*</host>
         <wanIp>127.0.0.1</wanIp>
@@ -19,7 +19,7 @@
         <jks>jks/xiaw.net.jks</jks>
         <jksPwd>jks/xiaw.net.jks.pwd</jksPwd>
         <headers/>
-    </wsserver>
+    </webSocket>
     <wsserver1>
         <name>s2s</name>
         <host>*</host>

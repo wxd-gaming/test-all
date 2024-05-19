@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- @author: Troy.Chen(無心道, 15388152619) -->
 <bootConfig>
-    <wsserver>
+    <webSocket>
         <name>default</name>
         <host>*</host>
         <wanIp>127.0.0.1</wanIp>
@@ -10,7 +10,7 @@
         <jks></jks>
         <jksPwd></jksPwd>
         <headers/>
-    </wsserver>
+    </webSocket>
     <http>
         <name>default</name>
         <host>*</host>
