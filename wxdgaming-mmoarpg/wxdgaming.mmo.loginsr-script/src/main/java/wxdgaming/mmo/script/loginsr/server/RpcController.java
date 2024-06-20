@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import wxdgaming.boot.core.collection.ObjMap;
 import wxdgaming.boot.core.lang.RunResult;
-import wxdgaming.boot.core.system.GlobalUtil;
+import wxdgaming.boot.core.GlobalUtil;
 import wxdgaming.boot.core.threading.ThreadInfo;
 import wxdgaming.boot.net.SocketSession;
 import wxdgaming.boot.net.controller.ann.Param;
