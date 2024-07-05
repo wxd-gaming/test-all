@@ -1,0 +1,12 @@
+[
+{
+  "name":"gvm.a.Main"
+},
+{
+  "name":"gvm.b.Main",
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"point","parameterTypes":[] }]
+},
+{
+  "name":"gvm.c.Main"
+}
+]

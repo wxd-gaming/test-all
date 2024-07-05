@@ -22,15 +22,28 @@
             <artifactId>gvm.b</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.oracle.substratevm</groupId>
+            <artifactId>svm</artifactId>
+            <version>19.2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.substratevm</groupId>
+            <artifactId>svm-driver</artifactId>
+            <version>19.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.nativeimage</groupId>
+            <artifactId>svm</artifactId>
+            <version>24.0.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <finalName>server-boot</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -52,8 +65,20 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>net.roseboy</groupId>
-                <artifactId>classfinal-maven-plugin</artifactId>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>0.10.2</version>
+                <configuration>
+                    <imageName>gvm-test</imageName>
+                    <mainClass>gvm.c.Main</mainClass>
+                    <buildArgs>
+                        <!-- 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 -->
+                        --no-fallback
+                        --report-unsupported-elements-at-runtime
+                        --allow-incomplete-classpath
+                        -H:+ReportExceptionStackTraces
+                    </buildArgs>
+                </configuration>
             </plugin>
         </plugins>
     </build>

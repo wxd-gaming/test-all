@@ -20,6 +20,32 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>public</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <!--            <url>https://repo1.maven.org/maven2/</url>-->
+        </repository>
+        <repository>
+            <id>central</id>
+            <url>https://maven.aliyun.com/repository/central</url>
+            <!--            <url>https://repo1.maven.org/maven2/</url>-->
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>public</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>central</id>
+            <name>central</name>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
@@ -78,53 +104,34 @@
                         </execution>
                     </executions>
                 </plugin>
-                <!--            <plugin>-->
-                <!--                &lt;!&ndash; 指定 JDK 版本 &ndash;&gt;-->
-                <!--                <groupId>org.apache.maven.plugins</groupId>-->
-                <!--                <artifactId>maven-compiler-plugin</artifactId>-->
-                <!--                <version>3.13.0</version>-->
-                <!--                <configuration>-->
-                <!--                    <staleMillis>1</staleMillis>-->
-                <!--                    <useIncrementalCompilation>true</useIncrementalCompilation>-->
-                <!--                    &lt;!&ndash; 启用分离的编译进程 &ndash;&gt;-->
-                <!--                    &lt;!&ndash;                    <fork>true</fork>&ndash;&gt;-->
-                <!--                    <meminitial>128m</meminitial> &lt;!&ndash; 编译器初始化内存大小 &ndash;&gt;-->
-                <!--                    <maxmem>1624m</maxmem> &lt;!&ndash; 编译器最大可用内存 &ndash;&gt;-->
-                <!--                    <compilerArgs>-->
-                <!--                        <arg>-Xpkginfo:always</arg>-->
-                <!--                        &lt;!&ndash; 过期的方法的警告&ndash;&gt;-->
-                <!--                        <arg>-Xlint:deprecation</arg>-->
-                <!--                        <arg>&#45;&#45;add-opens=java.base/java.lang=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-opens=java.base/java.util=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=java.base/sun.security.pkcs=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>-->
-                <!--                        <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>-->
-                <!--                    </compilerArgs>-->
-                <!--                </configuration>-->
-                <!--            </plugin>-->
-                <!--            <plugin>-->
-                <!--                <groupId>org.apache.maven.plugins</groupId>-->
-                <!--                <artifactId>maven-jar-plugin</artifactId>-->
-                <!--                <version>3.4.2</version>-->
-                <!--                <configuration>-->
-                <!--                    <archive>-->
-                <!--                        <manifest>-->
-                <!--                            <addClasspath>true</addClasspath>-->
-                <!--                            <classpathPrefix>lib/</classpathPrefix>-->
-                <!--                        </manifest>-->
-                <!--                        <manifestEntries>-->
-                <!--                            <Manifest-Version>1.0</Manifest-Version>-->
-                <!--                            <Premain-Class>gvm.Main</Premain-Class>-->
-                <!--                            <Can-Redefine-Classes>true</Can-Redefine-Classes>-->
-                <!--                            <Can-Retransform-Classes>true</Can-Retransform-Classes>-->
-                <!--                        </manifestEntries>-->
-                <!--                    </archive>-->
-                <!--                </configuration>-->
-                <!--            </plugin>-->
+                <plugin>
+                    <!-- 指定 JDK 版本 -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <staleMillis>1</staleMillis>
+                        <useIncrementalCompilation>true</useIncrementalCompilation>
+                        <!-- 启用分离的编译进程 -->
+                        <!-- <fork>true</fork>-->
+                        <meminitial>128m</meminitial> <!-- 编译器初始化内存大小 -->
+                        <maxmem>1624m</maxmem> <!-- 编译器最大可用内存 -->
+                        <compilerArgs>
+                            <arg>-Xpkginfo:always</arg>
+                            <!-- 过期的方法的警告-->
+                            <arg>-Xlint:deprecation</arg>
+                            <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                            <arg>--add-opens=java.base/java.util=ALL-UNNAMED</arg>
+                            <arg>--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED</arg>
+                            <arg>--add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>

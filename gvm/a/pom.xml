@@ -13,12 +13,6 @@
 
     <build>
         <finalName>a</finalName>
-        <plugins>
-            <plugin>
-                <groupId>net.roseboy</groupId>
-                <artifactId>classfinal-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
 </project>
