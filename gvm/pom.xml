@@ -4,13 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.sh.engine712</groupId>
+    <groupId>gvm</groupId>
     <artifactId>gvm</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>a</module>
         <module>b</module>
+        <module>c</module>
     </modules>
 
     <properties>
@@ -20,6 +21,22 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.agent</artifactId>
+            <version>j21-003</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
         <dependency>
             <groupId>org.graalvm.sdk</groupId>
             <artifactId>graal-sdk</artifactId>
@@ -40,6 +57,26 @@
                     <groupId>org.graalvm.buildtools</groupId>
                     <artifactId>native-maven-plugin</artifactId>
                     <version>0.10.2</version>
+                    <configuration>
+                        <imageName>gvm-test</imageName>
+                        <mainClass>gvm.b.Main</mainClass>
+                        <buildArgs>
+                            <!-- 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 -->
+                            --no-fallback
+                            --report-unsupported-elements-at-runtime
+                            --allow-incomplete-classpath
+                            -H:+ReportExceptionStackTraces
+                        </buildArgs>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>compile-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!--            <plugin>-->
                 <!--                &lt;!&ndash; 指定 JDK 版本 &ndash;&gt;-->
@@ -81,26 +118,111 @@
                 <!--                        </manifest>-->
                 <!--                        <manifestEntries>-->
                 <!--                            <Manifest-Version>1.0</Manifest-Version>-->
-                <!--                            <Premain-Class>com.sh.engine712.Main</Premain-Class>-->
+                <!--                            <Premain-Class>gvm.Main</Premain-Class>-->
                 <!--                            <Can-Redefine-Classes>true</Can-Redefine-Classes>-->
                 <!--                            <Can-Retransform-Classes>true</Can-Retransform-Classes>-->
                 <!--                        </manifestEntries>-->
                 <!--                    </archive>-->
                 <!--                </configuration>-->
                 <!--            </plugin>-->
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>2.6</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <executions>
+                        <execution>
+                            <id>copy</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>
+                                    ${project.build.directory}/lib
+                                </outputDirectory>
+                                <includeScope>runtime</includeScope>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <!-- https://gitee.com/roseboy/classfinal -->
+                    <groupId>net.roseboy</groupId>
+                    <artifactId>classfinal-maven-plugin</artifactId>
+                    <version>1.2.1</version>
+                    <configuration>
+                        <password>#</password><!--加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码-->
+                        <packages>gvm</packages>
+                        <!--                    <cfgfiles>application.yml</cfgfiles>-->
+                        <!--                    <excludes>org.spring</excludes>-->
+                        <!--                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>-->
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>classFinal</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <useUniqueVersions>false</useUniqueVersions>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.3.0</version>
+                    <configuration>
+                        <appendAssemblyId>false</appendAssemblyId>
+                        <descriptors>
+                            <descriptor>src/main/resources/assembly.xml</descriptor>
+                        </descriptors>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <!-- 需要main方法可执行的jar，请添加如下代码 -->
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                                <useUniqueVersions>false</useUniqueVersions>
+                                <!-- 加载主要运行类 -->
+                                <mainClass>wxdgaming.boot.convert.MainForm</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 

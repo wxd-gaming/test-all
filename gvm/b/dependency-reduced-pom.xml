@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>gvm</artifactId>
-    <groupId>com.sh.engine712</groupId>
+    <groupId>gvm</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -21,12 +21,12 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.sh.engine712.b.Main</mainClass>
+                  <mainClass>gvm.b.Main</mainClass>
                 </transformer>
               </transformers>
               <relocations>
                 <relocation>
-                  <pattern>com.sh.engine712</pattern>
+                  <pattern>gvm</pattern>
                   <shadedPattern>shaded.yourcompany.yourapp</shadedPattern>
                 </relocation>
               </relocations>

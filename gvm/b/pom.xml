@@ -4,86 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.sh.engine712</groupId>
+        <groupId>gvm</groupId>
         <artifactId>gvm</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>b</artifactId>
+    <artifactId>gvm.b</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sh.engine712</groupId>
-            <artifactId>a</artifactId>
-            <version>${project.version}</version>
+            <groupId>gvm</groupId>
+            <artifactId>gvm.a</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
     <build>
+        <finalName>b</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <!-- 设置主类 -->
-                                    <mainClass>com.sh.engine712.b.Main</mainClass>
-                                </transformer>
-                            </transformers>
-                            <relocations>
-                                <!-- 类重命名规则 -->
-                                <relocation>
-                                    <pattern>com.sh.engine712</pattern>
-                                    <shadedPattern>shaded.yourcompany.yourapp</shadedPattern>
-                                </relocation>
-                            </relocations>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>net.roseboy</groupId>
+                <artifactId>classfinal-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.graalvm.buildtools</groupId>-->
-<!--                <artifactId>native-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <imageName>gvm-test</imageName>-->
-<!--                    <mainClass>com.sh.engine712.b.Main</mainClass>-->
-<!--                    <buildArgs>-->
-<!--                        &lt;!&ndash; 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 &ndash;&gt;-->
-<!--                        &#45;&#45;no-fallback-->
-<!--                        &#45;&#45;report-unsupported-elements-at-runtime-->
-<!--                        &#45;&#45;allow-incomplete-classpath-->
-<!--                        -H:+ReportExceptionStackTraces-->
-<!--                    </buildArgs>-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>make-assembly</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>compile-no-fork</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 </project>
