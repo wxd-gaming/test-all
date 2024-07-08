@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>c</artifactId>
+    <artifactId>gvm.c</artifactId>
 
     <dependencies>
         <dependency>
@@ -22,23 +22,23 @@
             <artifactId>gvm.b</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.oracle.substratevm</groupId>
-            <artifactId>svm</artifactId>
-            <version>19.2.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.oracle.substratevm</groupId>
-            <artifactId>svm-driver</artifactId>
-            <version>19.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.graalvm.nativeimage</groupId>
-            <artifactId>svm</artifactId>
-            <version>24.0.1</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle.substratevm</groupId>-->
+        <!--            <artifactId>svm</artifactId>-->
+        <!--            <version>19.2.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle.substratevm</groupId>-->
+        <!--            <artifactId>svm-driver</artifactId>-->
+        <!--            <version>19.2.1</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.graalvm.nativeimage</groupId>-->
+        <!--            <artifactId>svm</artifactId>-->
+        <!--            <version>24.0.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -56,30 +56,44 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
                             <mainClass>gvm.c.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-                <version>0.10.2</version>
-                <configuration>
-                    <imageName>gvm-test</imageName>
-                    <mainClass>gvm.c.Main</mainClass>
-                    <buildArgs>
-                        <!-- 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 -->
-                        --no-fallback
-                        --report-unsupported-elements-at-runtime
-                        --allow-incomplete-classpath
-                        -H:+ReportExceptionStackTraces
-                    </buildArgs>
-                </configuration>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                &lt;!&ndash; https://gitee.com/roseboy/classfinal &ndash;&gt;-->
+            <!--                <groupId>net.roseboy</groupId>-->
+            <!--                <artifactId>classfinal-maven-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <password>000000</password>&lt;!&ndash;加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码&ndash;&gt;-->
+            <!--                    <packages>gvm</packages>-->
+            <!--                    &lt;!&ndash;                    <cfgfiles>application.yml</cfgfiles>&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                    <excludes>org.spring</excludes>&ndash;&gt;-->
+            <!--                    &lt;!&ndash;                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>&ndash;&gt;-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+            <!--            <plugin>-->
+            <!--                <groupId>org.graalvm.buildtools</groupId>-->
+            <!--                <artifactId>native-maven-plugin</artifactId>-->
+            <!--                <version>0.10.2</version>-->
+            <!--                <configuration>-->
+            <!--                    <imageName>gvm-test</imageName>-->
+            <!--                    <mainClass>gvm.c.Main</mainClass>-->
+            <!--                    <buildArgs>-->
+            <!--                        &lt;!&ndash; 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 &ndash;&gt;-->
+            <!--                        &#45;&#45;enable-url-protocols=http-->
+            <!--                        &#45;&#45;enable-http-->
+            <!--                        &#45;&#45;enable-https-->
+            <!--                        &#45;&#45;no-fallback-->
+            <!--                        &#45;&#45;report-unsupported-elements-at-runtime-->
+            <!--                        &#45;&#45;allow-incomplete-classpath-->
+            <!--                        -H:+ReportExceptionStackTraces-->
+            <!--                        -H:-ParseRuntimeOptions-->
+            <!--                    </buildArgs>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 

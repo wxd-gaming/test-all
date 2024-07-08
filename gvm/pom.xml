@@ -48,11 +48,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>wxdgaming.boot</groupId>
-            <artifactId>wxdgaming.boot.agent</artifactId>
-            <version>j21-003</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
@@ -63,17 +58,44 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
         </dependency>
+        <!--日志框架-->
         <dependency>
-            <groupId>org.graalvm.sdk</groupId>
-            <artifactId>graal-sdk</artifactId>
-            <version>24.0.1</version>
-            <scope>provided</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.4.14</version>
         </dependency>
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>23.0</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.4.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <!--日志框架-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.google.guava</groupId>-->
+        <!--            <artifactId>guava</artifactId>-->
+        <!--            <version>23.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>wxdgaming.boot</groupId>-->
+        <!--            <artifactId>wxdgaming.boot.agent</artifactId>-->
+        <!--            <version>j21-003</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.graalvm.sdk</groupId>-->
+        <!--            <artifactId>graal-sdk</artifactId>-->
+        <!--            <version>24.0.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -185,8 +207,6 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <addClasspath>true</addClasspath>
-                                <classpathPrefix>lib/</classpathPrefix>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                                 <useUniqueVersions>false</useUniqueVersions>

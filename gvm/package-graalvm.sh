@@ -10,6 +10,12 @@ java -version
 mvn clean package -f pom.xml
 
 cd c/target
-#/usr/local/graalvm-jdk-21.0.3+7.1/bin/java -agentlib:native-image-agent=config-merge-dir=c/src/resources/META-INF/native-image -jar server-boot.jar
+pwd
 
-./gvm-test
+#/usr/local/graalvm-jdk-21.0.3+7.1/bin/java -agentlib:native-image-agent=config-merge-dir=META-INF/native-image -classpath .:lib/*:server-boot.jar gvm.c.Main
+/usr/local/graalvm-jdk-21.0.3+7.1/bin/java -agentlib:native-image-agent=config-merge-dir=META-INF/native-image -jar server-boot.jar
+option="--enable-url-protocols=http --enable-http --enable-https --no-fallback --report-unsupported-elements-at-runtime --allow-incomplete-classpath -H:+ReportExceptionStackTraces -H:-ParseRuntimeOptions"
+/usr/local/graalvm-jdk-21.0.3+7.1/bin/native-image $option -jar server-boot.jar graalvm-test
+#rm -rfv lib/gvm.*-1.0-SNAPSHOT.jar
+
+./graalvm-test

@@ -1,35 +1,30 @@
 package gvm.c;
 
-import wxdgaming.boot.agent.system.ReflectContext;
+
+import gvm.a.ReflectContext;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.util.Set;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
-        // RemoteClassLoader remoteClassLoader = RemoteClassLoader.build(
-        //         Main.class.getClassLoader(),
-        //         "http://127.0.0.1:19000/serverapi/s1/aabb/128493823/a-encrypted.jar",
-        //         "http://127.0.0.1:19000/serverapi/s1/aabb/128493823/b-encrypted.jar"
-        // );
+        System.out.println("=================start=================");
         ClassLoader classLoader = Main.class.getClassLoader();
+
+        // classLoader = RemoteClassLoader.build(
+        //         Main.class.getClassLoader(),
+        //         "http://localhost/qj5/a.jar",
+        //         "http://localhost/qj5/b.jar"
+        // );
+
         ReflectContext.Builder
                 .of(classLoader, "gvm").build()
                 .classStream()
-                .forEach(System.out::println);
+                .forEach(c -> System.out.println("读取资源：" + c));
 
         System.out.println(classLoader);
-
-        Set<Class<?>> classes = SubstrateLoadedClassTable.getLoadedClasses();
-        for (Class<?> clazz : classes) {
-            if (!clazz.getName().startsWith("java.") && !clazz.getName().startsWith("sun.") && !clazz.getName().startsWith("com.oracle")) {
-                System.out.println(clazz.getName());
-            }
-        }
 
         Class<?> aClass = classLoader.loadClass("gvm.b.Main");
         if (aClass != null) {
