@@ -1,15 +1,16 @@
 package gvm.c;
 
 
-import gvm.a.ReflectContext;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.net.URL;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        System.setProperty("jdk.attach.allowAttachSelf", "false");
         System.out.println("=================start=================");
         ClassLoader classLoader = Main.class.getClassLoader();
 
@@ -19,12 +20,17 @@ public class Main {
         //         "http://localhost/qj5/b.jar"
         // );
 
-        ReflectContext.Builder
-                .of(classLoader, "gvm").build()
-                .classStream()
-                .forEach(c -> System.out.println("读取资源：" + c));
+        URL resource = Main.class.getResource("/");
+        System.out.println(classLoader + " - " + resource);
+        File file = new File(resource.toURI());
+        files("", file);
 
-        System.out.println(classLoader);
+        // ReflectContext.Builder
+        //         .of(classLoader, "gvm").build()
+        //         .classStream()
+        //         .forEach(c -> System.out.println("读取资源：" + c));
+        //
+        // System.out.println(classLoader);
 
         Class<?> aClass = classLoader.loadClass("gvm.b.Main");
         if (aClass != null) {
@@ -38,6 +44,16 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reader.readLine();
 
+    }
+
+    public static void files(String split, File file) {
+        System.out.println(split + file);
+        File[] files = file.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                files(split + "-", f);
+            }
+        }
     }
 
 }

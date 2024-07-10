@@ -246,22 +246,6 @@ public class ReflectContext {
                 packagePath = packageName.replace(".", "/");
             }
             try {
-                // if (classLoader instanceof ClassDirLoader dirLoader) {
-                //     final Collection<Class<?>> classes = dirLoader.getLoadClassMap().values();
-                //     if (!classes.isEmpty()) {
-                //         for (Class<?> aClass : classes) {
-                //             if (aClass.getName().startsWith(packageName)) {
-                //                 consumer.accept(aClass);
-                //             }
-                //         }
-                //     }
-                // }
-                //
-                // if (classLoader instanceof RemoteClassLoader remoteClassLoader) {
-                //     remoteClassLoader
-                //             .classStream(v -> v.startsWith(packageName))
-                //             .forEach(consumer);
-                // }
 
                 Enumeration<URL> resources = classLoader.getResources(packagePath);
                 if (resources != null) {
@@ -271,7 +255,7 @@ public class ReflectContext {
                         if (url != null) {
                             String type = url.getProtocol();
                             String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8);
-                            // System.out.println(type + " - " + urlPath);
+                            System.out.println(type + " - " + urlPath);
                             if ("file".equals(type) /* || "resource".equals(type) */) {
                                 String dir = urlPath.substring(0, urlPath.lastIndexOf(packagePath));
                                 findClassByFile(dir, urlPath, consumer);

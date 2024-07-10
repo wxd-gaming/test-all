@@ -113,11 +113,6 @@
             <version>2.20.0</version>
         </dependency>
         <!--日志框架-->
-        <dependency>
-            <groupId>org.wxd</groupId>
-            <artifactId>org.wxd.boot.agent</artifactId>
-            <version>wxd-j21-02</version>
-        </dependency>
     </dependencies>
 
     <build>

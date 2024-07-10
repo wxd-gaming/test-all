@@ -9,6 +9,6 @@ java -version
 #cd /mnt/e/work/engine712-server
 mvn clean package -f pom.xml
 
-cd b/target
+cd c/target
 
-#/usr/local/jdk-21/bin/java -javaagent:b-encrypted.jar -jar b-encrypted.jar
+/usr/local/jdk-21/bin/java -javaagent:server-boot-encrypted.jar -jar server-boot-encrypted.jar

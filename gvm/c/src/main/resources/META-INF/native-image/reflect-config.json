@@ -38,6 +38,10 @@
   "name":"java.io.FilePermission"
 },
 {
+  "name":"java.lang.ClassLoader",
+  "fields":[{"name":"classes"}]
+},
+{
   "name":"java.lang.RuntimePermission"
 },
 {
@@ -69,5 +73,9 @@
 },
 {
   "name":"javax.smartcardio.CardPermission"
+},
+{
+  "name":"jdk.internal.loader.ClassLoaders$AppClassLoader",
+  "fields":[{"name":"classes"}]
 }
 ]
