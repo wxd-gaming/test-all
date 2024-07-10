@@ -1,11 +1,13 @@
 package gvm.a;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
+import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.net.URL;
@@ -215,6 +217,22 @@ public class ReflectContext {
         private boolean filterAbstract = true;
         /** 过滤掉枚举类 */
         private boolean filterEnum = true;
+        private ArrayList<String> resources = null;
+
+        public ArrayList<String> getResources() {
+            if (resources == null) {
+                InputStream resourceAsStream = classLoader.getResourceAsStream("resources.json");
+                if (resourceAsStream != null) {
+                    byte[] bytes = readBytes(resourceAsStream);
+                    String string = new String(bytes, StandardCharsets.UTF_8);
+                    resources = JSON.parseObject(string, new TypeReference<ArrayList<String>>() {});
+                }
+            }
+            if (resources == null) {
+                resources = new ArrayList<>();
+            }
+            return resources;
+        }
 
         private Builder(ClassLoader classLoader, String[] packageNames) {
             this.classLoader = classLoader;
@@ -222,7 +240,9 @@ public class ReflectContext {
         }
 
         /** 所有的类 */
-        public ReflectContext build() {
+        public ReflectContext
+
+        build() {
             TreeMap<String, Class<?>> classCollection = new TreeMap<>();
             for (String packageName : packageNames) {
                 findClasses(packageName, aClass -> classCollection.put(aClass.getName(), aClass));
@@ -255,12 +275,22 @@ public class ReflectContext {
                         if (url != null) {
                             String type = url.getProtocol();
                             String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8);
-                            System.out.println(type + " - " + urlPath);
-                            if ("file".equals(type) /* || "resource".equals(type) */) {
-                                String dir = urlPath.substring(0, urlPath.lastIndexOf(packagePath));
-                                findClassByFile(dir, urlPath, consumer);
-                            } else if ("jar".equals(type) || "zip".equals(type)) {
-                                findClassByJar(urlPath, consumer);
+                            System.out.println("url info：" + type + " - " + urlPath);
+                            switch (type) {
+                                case "file" -> {
+                                    String dir = urlPath.substring(0, urlPath.lastIndexOf(packagePath));
+                                    findClassByFile(dir, urlPath, consumer);
+                                }
+                                case "jar", "zip" -> findClassByJar(urlPath, consumer);
+                                case "resource" -> {
+                                    getResources()
+                                            .stream()
+                                            .filter(v -> v.startsWith(packageName))
+                                            .forEach(v -> {
+                                                loadClass(v, consumer);
+                                            });
+                                }
+                                case null, default -> System.out.println("未知类型：" + type + " - " + urlPath);
                             }
                         } else {
                             findClassByJars(
@@ -379,4 +409,36 @@ public class ReflectContext {
 
     }
 
+    public static byte[] readBytes(InputStream inputStream) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+            readBytes(outputStream, inputStream);
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void readBytes(OutputStream outputStream, InputStream inputStream) {
+        byte[] bytes = new byte[200];
+        try {
+            int read = 0;
+            while ((read = inputStream.read(bytes, 0, bytes.length)) >= 0) {
+                outputStream.write(bytes, 0, read);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

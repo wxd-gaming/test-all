@@ -1,11 +1,13 @@
 package gvm.c;
 
 
+import gvm.a.ReflectContext;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
-import java.net.URL;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -20,17 +22,14 @@ public class Main {
         //         "http://localhost/qj5/b.jar"
         // );
 
-        URL resource = Main.class.getResource("/");
-        System.out.println(classLoader + " - " + resource);
-        File file = new File(resource.toURI());
-        files("", file);
+        ReflectContext.Builder gvm = ReflectContext.Builder.of(classLoader, "gvm");
+        ArrayList<String> resources = gvm.getResources();
+        gvm
+                .build()
+                .classStream()
+                .forEach(c -> System.out.println("ReflectContext：" + c));
 
-        // ReflectContext.Builder
-        //         .of(classLoader, "gvm").build()
-        //         .classStream()
-        //         .forEach(c -> System.out.println("读取资源：" + c));
-        //
-        // System.out.println(classLoader);
+        System.out.println(classLoader);
 
         Class<?> aClass = classLoader.loadClass("gvm.b.Main");
         if (aClass != null) {

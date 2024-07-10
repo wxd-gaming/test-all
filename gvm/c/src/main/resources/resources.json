@@ -1,0 +1,10 @@
+[
+	"gvm.a.Main",
+	"gvm.a.ReflectContext",
+	"gvm.a.ReflectContext$Builder",
+	"gvm.a.ReflectContext$Builder$1",
+	"gvm.a.ReflectContext$Content",
+	"gvm.b.Main",
+	"gvm.c.Main",
+	"gvm.c.NativeClassAction"
+]
