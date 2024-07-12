@@ -1,9 +1,9 @@
-package gvm.b;
+package gvm.test.b;
 
 public class Main {
 
     public void point() throws Exception {
-        gvm.a.Main.print();
+        gvm.test.a.Main.print();
         System.out.println(Main.class.getName() + " Hello world!");
 
     }

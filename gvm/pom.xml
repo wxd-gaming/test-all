@@ -15,8 +15,8 @@
     </modules>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -56,28 +56,24 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.20</version>
+            <scope>provided</scope>
         </dependency>
         <!--日志框架-->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-access</artifactId>
-            <version>1.4.14</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
+            <version>1.1.3</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.14</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>2.0.7</version>
+            <version>1.1.3</version>
         </dependency>
         <!--日志框架-->
         <dependency>
@@ -112,7 +108,7 @@
                     <version>0.10.2</version>
                     <configuration>
                         <imageName>gvm-test</imageName>
-                        <mainClass>gvm.b.Main</mainClass>
+                        <mainClass>gvm.c.Main</mainClass>
                         <buildArgs>
                             <!-- 这些配置类基本都是指定初始化时间和一些配置，都不用管，并且不要动，否则可能会打包失败 -->
                             --no-fallback
@@ -143,20 +139,20 @@
                         <!-- <fork>true</fork>-->
                         <meminitial>128m</meminitial> <!-- 编译器初始化内存大小 -->
                         <maxmem>1624m</maxmem> <!-- 编译器最大可用内存 -->
-                        <compilerArgs>
-                            <arg>-Xpkginfo:always</arg>
-                            <!-- 过期的方法的警告-->
-                            <arg>-Xlint:deprecation</arg>
-                            <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
-                            <arg>--add-opens=java.base/java.util=ALL-UNNAMED</arg>
-                            <arg>--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED</arg>
-                            <arg>--add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED</arg>
-                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
-                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
-                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
-                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
-                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
-                        </compilerArgs>
+                        <!--                        <compilerArgs>-->
+                        <!--                            <arg>-Xpkginfo:always</arg>-->
+                        <!--                            &lt;!&ndash; 过期的方法的警告&ndash;&gt;-->
+                        <!--                            <arg>-Xlint:deprecation</arg>-->
+                        <!--                            <arg>&#45;&#45;add-opens=java.base/java.lang=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-opens=java.base/java.util=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=java.base/sun.security.pkcs=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>-->
+                        <!--                            <arg>&#45;&#45;add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>-->
+                        <!--                        </compilerArgs>-->
                     </configuration>
                 </plugin>
                 <plugin>

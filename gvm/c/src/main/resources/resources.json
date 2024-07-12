@@ -1,10 +1,10 @@
 [
-	"gvm.a.Main",
-	"gvm.a.ReflectContext",
-	"gvm.a.ReflectContext$Builder",
-	"gvm.a.ReflectContext$Builder$1",
-	"gvm.a.ReflectContext$Content",
-	"gvm.b.Main",
-	"gvm.c.Main",
-	"gvm.c.NativeClassAction"
+	"gvm.test.a.Main",
+	"gvm.test.a.ReflectContext",
+	"gvm.test.a.ReflectContext$Builder",
+	"gvm.test.a.ReflectContext$Builder$1",
+	"gvm.test.a.ReflectContext$Content",
+	"gvm.test.b.Main",
+	"gvm.test.c.Main",
+	"gvm.test.c.NativeClassAction"
 ]

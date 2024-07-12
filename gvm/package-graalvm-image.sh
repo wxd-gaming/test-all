@@ -1,13 +1,11 @@
 #!/bin/bash
-cd c/target
-pwd
 
 option=""
 
 option="${option} -H:+UnlockExperimentalVMOptions"
 option="${option} -H:+ReportExceptionStackTraces"
 option="${option} -H:-ParseRuntimeOptions"
-option="${option} -H:ConfigurationFileDirectories=META-INF/native-image"
+option="${option} -H:ConfigurationFileDirectories=native-image/config"
 option="${option} --enable-http"
 option="${option} --enable-https"
 option="${option} --no-fallback"
@@ -22,6 +20,7 @@ option="${option} --initialize-at-build-time=org.apache.log4j"
 option="${option} --initialize-at-build-time=ch.qos.logback"
 option="${option} --initialize-at-build-time=io.netty"
 option="${option} --initialize-at-build-time=gvm"
+option="${option} --initialize-at-build-time=com.alibaba"
 
 #<!--build-time-->
 
@@ -31,6 +30,7 @@ option="${option} --initialize-at-run-time=com.lang.server.handler.FarChannelHan
 option="${option} --initialize-at-run-time=org.slf4j.impl.StaticLoggerBinder"
 option="${option} --initialize-at-run-time=io.netty"
 option="${option} --initialize-at-run-time=gvm"
+option="${option} --initialize-at-run-time=com.alibaba"
 
 
 #<!--新增-->
@@ -45,13 +45,14 @@ option="${option} --trace-class-initialization=java.beans.Introspector"
 option="${option} --trace-class-initialization=java.beans.ThreadGroupContext"
 option="${option} --trace-class-initialization=ch.qos.logback"
 option="${option} --trace-class-initialization=gvm"
+option="${option} --trace-class-initialization=com.alibaba"
 
 
 option="${option} -Dio.netty.tryReflectionSetAccessible=true"
 option="${option} --add-exports=java.base/java.nio=ALL-UNNAMED"
 option="${option} --add-opens java.base/java.nio=ALL-UNNAMED"
 
-/usr/local/graalvm-jdk-21.0.3+7.1/bin/native-image $option -jar server-boot.jar graalvm-test
+/usr/local/graalvm-jdk-17.0.11+7.1/bin/native-image $option -cp "c/target/lib/*" -jar c/target/server-boot.jar native-image/graalvm-test
 #rm -rfv lib/gvm.*-1.0-SNAPSHOT.jar
 
-./graalvm-test
+./native-image/graalvm-test

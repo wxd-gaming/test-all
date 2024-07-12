@@ -57,24 +57,24 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>gvm.c.Main</mainClass>
+                            <mainClass>gvm.test.c.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
 
-            <plugin>
-                <!-- https://gitee.com/roseboy/classfinal -->
-                <groupId>net.roseboy</groupId>
-                <artifactId>classfinal-maven-plugin</artifactId>
-                <configuration>
-                    <password>#</password><!--加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码-->
-                    <packages>gvm</packages>
-                    <!--                    <cfgfiles>application.yml</cfgfiles>-->
-                    <!--                    <excludes>org.spring</excludes>-->
-                    <!--                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>-->
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                &lt;!&ndash; https://gitee.com/roseboy/classfinal &ndash;&gt;-->
+<!--                <groupId>net.roseboy</groupId>-->
+<!--                <artifactId>classfinal-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <password>#</password>&lt;!&ndash;加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码&ndash;&gt;-->
+<!--                    <packages>gvm</packages>-->
+<!--                    &lt;!&ndash;                    <cfgfiles>application.yml</cfgfiles>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <excludes>org.spring</excludes>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

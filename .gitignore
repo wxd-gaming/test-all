@@ -44,3 +44,4 @@ build/
 /spring-test/target
 /spring-test/.idea
 /wxdgaming-mmoarpg/.idea
+/gvm/native-image

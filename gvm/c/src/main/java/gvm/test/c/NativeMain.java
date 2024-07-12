@@ -1,20 +1,21 @@
-package gvm.c;
+package gvm.test.c;
 
 
-import gvm.a.ReflectContext;
+import gvm.test.a.ReflectContext;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
-public class Main {
+public class NativeMain {
 
     public static void main(String[] args) throws Exception {
         System.setProperty("jdk.attach.allowAttachSelf", "false");
         System.out.println("=================start=================");
-        ClassLoader classLoader = Main.class.getClassLoader();
 
         // classLoader = RemoteClassLoader.build(
         //         Main.class.getClassLoader(),
@@ -22,16 +23,24 @@ public class Main {
         //         "http://localhost/qj5/b.jar"
         // );
 
-        ReflectContext.Builder gvm = ReflectContext.Builder.of(classLoader, "gvm");
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        System.out.println(classLoader);
+
+        Enumeration<URL> urls = classLoader.getResources("gvm/test");
+        while (urls.hasMoreElements()) {
+            URL next = urls.nextElement();
+            System.out.println(next);
+        }
+
+        ReflectContext.Builder gvm = ReflectContext.Builder.of(classLoader, "gvm.test");
         ArrayList<String> resources = gvm.getResources();
         gvm
                 .build()
                 .classStream()
                 .forEach(c -> System.out.println("ReflectContext：" + c));
 
-        System.out.println(classLoader);
 
-        Class<?> aClass = classLoader.loadClass("gvm.b.Main");
+        Class<?> aClass = classLoader.loadClass("gvm.test.b.Main");
         if (aClass != null) {
             System.out.println(aClass.getClassLoader().hashCode());
             System.out.println(aClass.hashCode());

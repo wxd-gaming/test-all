@@ -1,4 +1,4 @@
-package gvm.a;
+package gvm.test.a;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package gvm.a;
+package gvm.test.a;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
@@ -254,7 +255,7 @@ public class ReflectContext {
                     .filter(v -> !filterAbstract || !Modifier.isAbstract(v.getModifiers()))
                     .filter(v -> !filterEnum || !v.isEnum())
                     .filter(v -> !v.isAnnotation())
-                    .toList();
+                    .collect(Collectors.toList());
             return new ReflectContext(list);
         }
 
@@ -274,23 +275,28 @@ public class ReflectContext {
                         url = resources.nextElement();
                         if (url != null) {
                             String type = url.getProtocol();
-                            String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8);
+                            String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.toString());
                             System.out.println("url info：" + type + " - " + urlPath);
                             switch (type) {
-                                case "file" -> {
+                                case "file":
                                     String dir = urlPath.substring(0, urlPath.lastIndexOf(packagePath));
                                     findClassByFile(dir, urlPath, consumer);
-                                }
-                                case "jar", "zip" -> findClassByJar(urlPath, consumer);
-                                case "resource" -> {
+                                    break;
+                                case "jar":
+                                case "zip":
+                                    findClassByJar(urlPath, consumer);
+                                    break;
+                                case "resource":
                                     getResources()
                                             .stream()
                                             .filter(v -> v.startsWith(packageName))
                                             .forEach(v -> {
                                                 loadClass(v, consumer);
                                             });
-                                }
-                                case null, default -> System.out.println("未知类型：" + type + " - " + urlPath);
+                                    break;
+                                default:
+                                    System.out.println("未知类型：" + type + " - " + urlPath);
+                                    break;
                             }
                         } else {
                             findClassByJars(
@@ -345,7 +351,12 @@ public class ReflectContext {
 
             if (urls != null) {
                 for (URL url : urls) {
-                    String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8);
+                    String urlPath = null;
+                    try {
+                        urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.toString());
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
+                    }
                     // 不必搜索classes文件夹
                     if (urlPath.endsWith("classes/")) {
                         continue;
