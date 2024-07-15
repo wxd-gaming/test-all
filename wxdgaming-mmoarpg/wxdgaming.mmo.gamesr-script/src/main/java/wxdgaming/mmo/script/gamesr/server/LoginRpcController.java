@@ -50,10 +50,14 @@ public class LoginRpcController implements IBeanInit {
 
         /*rpc调用示例，向登录服务器获取网关监听结果 */
         loginSession.rpc(
-                "/Rpc/syncGatePort",
-                "sid",
-                1
-        ).async(rpcEvent -> {log.info(rpcEvent.getResJson());});
+                        "/Rpc/syncGatePort",
+                        "sid", 1
+                )
+                .async(
+                        rpcEvent -> {
+                            log.info(rpcEvent.getResJson());
+                        }
+                );
 
         ReqLogin.Builder builder = ReqLogin.newBuilder();
         loginSession.write(builder);
