@@ -20,6 +20,7 @@
         <module>wxdgaming.mmo.robotsr-script</module>
         <module>wxdgaming.mmo.web</module>
         <module>wxdgaming.mmo.web-script</module>
+        <module>local-db</module>
     </modules>
 
     <properties>
