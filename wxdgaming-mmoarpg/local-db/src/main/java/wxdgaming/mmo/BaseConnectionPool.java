@@ -1,11 +1,11 @@
 package wxdgaming.mmo;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 
 /**
  * 数据库链接
@@ -58,4 +58,78 @@ public abstract class BaseConnectionPool {
         }
         return false;
     }
+
+    public int update(String sql, Object[] params) {
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                for (int i = 1; i <= params.length; i++) {
+                    preparedStatement.setObject(i, params[i - 1]);
+                }
+                String string = preparedStatement.toString();
+                System.out.println(string);
+                return preparedStatement.executeUpdate();
+            } finally {
+                connection.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public int updateBatch(String sql, List<Object[]> paramList) {
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            int count = 0;
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                for (Object[] params : paramList) {
+                    preparedStatement.clearParameters();
+                    for (int i = 1; i <= params.length; i++) {
+                        preparedStatement.setObject(i, params[i - 1]);
+                    }
+                    count += preparedStatement.executeUpdate();
+                }
+                return count;
+            } finally {
+                connection.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public void queryAll(String sql, Object[] params, Consumer consumer) {
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                for (int i = 1; i <= params.length; i++) {
+                    preparedStatement.setObject(i, params[i - 1]);
+                }
+                String string = preparedStatement.toString();
+                System.out.println(string);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    JSONObject rowMap = new JSONObject(true);
+                    int columnCount = resultSet.getMetaData().getColumnCount();
+                    for (int j = 1; j < columnCount + 1; j++) {
+                        Object object = resultSet.getObject(j);
+                        String columnName = resultSet.getMetaData().getColumnLabel(j);
+                        rowMap.put(columnName, object);
+                    }
+                    consumer.accept(rowMap);
+                }
+            } finally {
+                connection.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public interface Consumer {
+        void accept(JSONObject row) throws Exception;
+    }
+
 }

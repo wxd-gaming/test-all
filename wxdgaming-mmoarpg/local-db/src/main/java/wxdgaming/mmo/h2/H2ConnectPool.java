@@ -52,9 +52,11 @@ jdbc:h2:file:./target/testDB
     }
 
     protected void init() {
-        this.db_url = String.format("jdbc:h2:%s:./db/h2_database/%s", this.dbType.getExt(), dataBaseName);
-        String[] split = this.db_url.split(":");
-        new File(split[split.length - 1]).getParentFile().mkdirs();
+        this.db_url = String.format("jdbc:h2:%s:%s", this.dbType.getExt(), dataBaseName);
+        if (dbType == DbType.FILE) {
+            String[] split = this.db_url.split(":");
+            new File(split[split.length - 1]).getParentFile().mkdirs();
+        }
         try {
             Class.forName(DRIVER_CLASS);
         } catch (Throwable e) {
