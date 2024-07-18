@@ -6,6 +6,8 @@ import org.h2.tools.Server;
 import wxdgaming.mmo.h2.H2ConnectPool;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 
 public class H2Example {
 
@@ -26,20 +28,17 @@ public class H2Example {
                 ") ;\n" +
                 "INSERT INTO `s_sql_version` VALUES ('2021-01-01 00:00:00');");
 
-        final String INSERT_USERS_SQL = "INSERT INTO users" +
-                "  (id, name, email, country, password) VALUES " +
-                " (?, ?, ?, ?, ?)";
-
-        test.updateBatch(
-                INSERT_USERS_SQL,
-                List.of(
-                        new Object[]{System.nanoTime(), "test1", "test", "test", "test"},
-                        new Object[]{System.nanoTime(), "test2", "test2", "test", "test"}
-                )
-        );
+        CountDownLatch countDownLatch = new CountDownLatch(1000);
+        long count = countDownLatch.getCount();
+        for (int i = 0; i < count; i++) {
+            CompletableFuture.runAsync(() -> {
+                insert(test);
+                countDownLatch.countDown();
+            });
+        }
+        countDownLatch.await();
 
         test.queryAll("select * from users", new Object[]{}, row -> {
-
             System.out.println(row.toJSONString());
         });
 
@@ -54,6 +53,19 @@ public class H2Example {
         server.start();
         System.out.println(server.getURL());
         System.in.read();
+    }
+
+    public static void insert(H2ConnectPool connectPool) {
+        final String INSERT_USERS_SQL = "INSERT INTO users" +
+                "  (id, name, email, country, password) VALUES " +
+                " (?, ?, ?, ?, ?)";
+        connectPool.updateBatch(
+                INSERT_USERS_SQL,
+                List.of(
+                        new Object[]{System.nanoTime(), "test1", "test", "test", "test"},
+                        new Object[]{System.nanoTime(), "test2", "test2", "test", "test"}
+                )
+        );
     }
 
 }
