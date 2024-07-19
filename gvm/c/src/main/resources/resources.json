@@ -1,10 +1,12 @@
 [
 	"gvm.test.a.Main",
-	"gvm.test.a.ReflectContext",
-	"gvm.test.a.ReflectContext$Builder",
-	"gvm.test.a.ReflectContext$Builder$1",
-	"gvm.test.a.ReflectContext$Content",
 	"gvm.test.b.Main",
 	"gvm.test.c.Main",
-	"gvm.test.c.NativeClassAction"
+	"gvm.test.c.NativeClassAction",
+	"gvm.test.c.NativeMain",
+	"gvm.test.c.ReflectContext",
+	"gvm.test.c.ReflectContext$Builder",
+	"gvm.test.c.ReflectContext$Builder$1",
+	"gvm.test.c.ReflectContext$Content",
+	"gvm.test.c.RemoteClassLoader"
 ]

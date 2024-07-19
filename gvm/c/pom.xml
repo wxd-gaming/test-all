@@ -9,19 +9,19 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gvm.c</artifactId>
+    <artifactId>gvm.test.c</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>gvm</groupId>
-            <artifactId>gvm.a</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>gvm</groupId>
-            <artifactId>gvm.b</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>gvm</groupId>-->
+        <!--            <artifactId>gvm.a</artifactId>-->
+        <!--            <version>1.0-SNAPSHOT</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>gvm</groupId>-->
+        <!--            <artifactId>gvm.b</artifactId>-->
+        <!--            <version>1.0-SNAPSHOT</version>-->
+        <!--        </dependency>-->
         <!--        <dependency>-->
         <!--            <groupId>com.oracle.substratevm</groupId>-->
         <!--            <artifactId>svm</artifactId>-->
@@ -62,19 +62,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
-<!--            <plugin>-->
-<!--                &lt;!&ndash; https://gitee.com/roseboy/classfinal &ndash;&gt;-->
-<!--                <groupId>net.roseboy</groupId>-->
-<!--                <artifactId>classfinal-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <password>#</password>&lt;!&ndash;加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码&ndash;&gt;-->
-<!--                    <packages>gvm</packages>-->
-<!--                    &lt;!&ndash;                    <cfgfiles>application.yml</cfgfiles>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                    <excludes>org.spring</excludes>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>&ndash;&gt;-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 

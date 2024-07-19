@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gvm.a</artifactId>
+    <artifactId>gvm.test.a</artifactId>
 
     <build>
         <finalName>a</finalName>

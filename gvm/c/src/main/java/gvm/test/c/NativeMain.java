@@ -1,8 +1,6 @@
 package gvm.test.c;
 
 
-import gvm.test.a.ReflectContext;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -17,13 +15,13 @@ public class NativeMain {
         System.setProperty("jdk.attach.allowAttachSelf", "false");
         System.out.println("=================start=================");
 
-        // classLoader = RemoteClassLoader.build(
-        //         Main.class.getClassLoader(),
-        //         "http://localhost/qj5/a.jar",
-        //         "http://localhost/qj5/b.jar"
-        // );
-
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        classLoader = RemoteClassLoader.build(
+                classLoader,
+                "http://localhost/qj5/a.jar",
+                "http://localhost/qj5/b.jar"
+        );
+
         System.out.println(classLoader);
 
         Enumeration<URL> urls = classLoader.getResources("gvm/test");
@@ -51,7 +49,8 @@ public class NativeMain {
         System.out.println("敲入回车关闭：");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reader.readLine();
-
+        Thread.sleep(2000);
+        Runtime.getRuntime().exit(0);
     }
 
     public static void files(String split, File file) {

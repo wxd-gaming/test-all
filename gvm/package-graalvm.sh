@@ -8,7 +8,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 # 打印出Java版本信息以验证设置是否成功
 java -version
 #cd /mnt/e/work/engine712-server
-mvn clean package -f pom.xml
-
+#mvn clean compile test -Dtest=action.NativeClassActionTest#f1 -Dsurefire.failIfNoSpecifiedTests=false package -f pom.xml
+mvn clean compile package -Dmaven.test.skip=true -f pom.xml
+if [ $? != 0 ]; then
+  echo "打包失败"
+  exit 1
+fi
 #/usr/local/graalvm-jdk-21.0.3+7.1/bin/java -agentlib:native-image-agent=config-merge-dir=META-INF/native-image -classpath .:lib/*:server-boot.jar gvm.c.Main
 /usr/local/graalvm-jdk-17.0.11+7.1/bin/java -agentlib:native-image-agent=config-merge-dir=native-image/config -cp "c/target/lib/*:c/target/server-boot.jar" gvm.test.c.NativeMain

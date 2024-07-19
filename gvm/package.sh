@@ -7,7 +7,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 # 打印出Java版本信息以验证设置是否成功
 java -version
 #cd /mnt/e/work/engine712-server
-mvn clean compiler test -Dtest=action.NativeClassActionTest#f1 -DfailIfNoTests=false package -f pom.xml
+mvn clean compile test -Dtest=action.NativeClassActionTest#f1 -DfailIfNoTests=false package -f pom.xml
 
 cd c/target
 

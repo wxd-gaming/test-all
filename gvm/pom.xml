@@ -102,6 +102,17 @@
     <build>
         <pluginManagement>
             <plugins>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                    <version>2.22.2</version>-->
+<!--                    <configuration>-->
+<!--                        <skip>true</skip>-->
+<!--                        <testFailureIgnore>true</testFailureIgnore>-->
+<!--                        &lt;!&ndash; 定义文件编码，否则nacos配置文件中存在中文会报错 &ndash;&gt;-->
+<!--                        <argLine>-Dfile.encoding=UTF-8</argLine>-->
+<!--                    </configuration>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.graalvm.buildtools</groupId>
                     <artifactId>native-maven-plugin</artifactId>
@@ -131,7 +142,7 @@
                     <!-- 指定 JDK 版本 -->
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
+                    <version>3.10.1</version>
                     <configuration>
                         <staleMillis>1</staleMillis>
                         <useIncrementalCompilation>true</useIncrementalCompilation>
@@ -202,6 +213,25 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <!-- 指定 JDK 版本 -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                    <configuration>
+                        <compilerArgs>
+                            <arg>--add-exports=java.base/sun.security.pkcs=ALL-UNNAMED</arg>
+                            <arg>--add-exports=java.base/sun.reflect.annotation=ALL-UNNAMED</arg>
+                            <arg>--add-opens=java.base/java.lang=ALL-UNNAMED</arg>
+                            <arg>--add-opens=java.base/java.util=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+                            <arg>--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+                        </compilerArgs>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.2.0</version>
@@ -251,6 +281,19 @@
             </plugins>
         </pluginManagement>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--            </plugin>-->
+            <plugin>
+                <!-- 指定 JDK 版本 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 

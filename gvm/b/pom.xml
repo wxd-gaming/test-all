@@ -9,12 +9,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>gvm.b</artifactId>
+    <artifactId>gvm.test.b</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>gvm</groupId>
-            <artifactId>gvm.a</artifactId>
+            <artifactId>gvm.test.a</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

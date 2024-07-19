@@ -1,8 +1,6 @@
 package gvm.test.c;
 
 
-import gvm.test.a.ReflectContext;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;

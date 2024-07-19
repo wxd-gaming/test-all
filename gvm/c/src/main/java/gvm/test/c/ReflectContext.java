@@ -1,4 +1,4 @@
-package gvm.test.a;
+package gvm.test.c;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -267,7 +267,10 @@ public class ReflectContext {
                 packagePath = packageName.replace(".", "/");
             }
             try {
-
+                if (classLoader instanceof RemoteClassLoader) {
+                    RemoteClassLoader remoteClassLoader = (RemoteClassLoader) classLoader;
+                    remoteClassLoader.classStream().forEach(consumer);
+                }
                 Enumeration<URL> resources = classLoader.getResources(packagePath);
                 if (resources != null) {
                     URL url = null;
@@ -276,7 +279,7 @@ public class ReflectContext {
                         if (url != null) {
                             String type = url.getProtocol();
                             String urlPath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.toString());
-                            System.out.println("url info：" + type + " - " + urlPath);
+                            // System.out.println("url info：" + type + " - " + urlPath);
                             switch (type) {
                                 case "file":
                                     String dir = urlPath.substring(0, urlPath.lastIndexOf(packagePath));
