@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class NativeMain {
 
@@ -23,11 +24,13 @@ public class NativeMain {
         );
 
         System.out.println(classLoader);
-
-        Enumeration<URL> urls = classLoader.getResources("gvm/test");
-        while (urls.hasMoreElements()) {
-            URL next = urls.nextElement();
-            System.out.println(next);
+        List<String> strings = ReflectContext.jarResources();
+        for (String string : strings) {
+            Enumeration<URL> urls = classLoader.getResources(string);
+            while (urls.hasMoreElements()) {
+                URL next = urls.nextElement();
+                System.out.println(next);
+            }
         }
 
         ReflectContext.Builder gvm = ReflectContext.Builder.of(classLoader, "gvm.test");

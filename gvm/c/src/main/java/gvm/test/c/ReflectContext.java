@@ -14,6 +14,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -21,6 +23,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 
 /**
@@ -32,6 +36,29 @@ import java.util.stream.Stream;
 @Slf4j
 @Getter
 public class ReflectContext {
+
+    public static String javaClassPath() {
+        return System.getProperty("java.class.path");
+    }
+
+    /** 读取jar所有资源 */
+    public static List<String> jarResources() throws Exception {
+        List<String> resourcesPath = new ArrayList<>();
+        String x = javaClassPath();
+        String[] split = x.split(File.pathSeparator);
+        for (String string : split) {
+            if (!string.endsWith(".jar")) continue;
+            try (InputStream inputStream = Files.newInputStream(Paths.get(string));
+                 ZipInputStream zipInputStream = new ZipInputStream(inputStream)) {
+                ZipEntry nextEntry = null;
+                while ((nextEntry = zipInputStream.getNextEntry()) != null) {
+                    /* todo 读取的资源字节可以做解密操作 */
+                    resourcesPath.add(nextEntry.getName());
+                }
+            }
+        }
+        return resourcesPath;
+    }
 
     /** 判定 接口, 枚举, 注解, 抽象类 返回 false */
     public static boolean checked(Class<?> aClass) {
