@@ -23,21 +23,21 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 
 @Slf4j
-public class IocContext {
+public class SpringContext {
     /**
      * 上下文对象实例
      */
     private static ConfigurableApplicationContext applicationContext;
 
     public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
-        IocContext.applicationContext = applicationContext;
+        SpringContext.applicationContext = applicationContext;
     }
 
     /**
      * 获取applicationContext
      */
     public static ApplicationContext getApplicationContext() {
-        return IocContext.applicationContext;
+        return SpringContext.applicationContext;
     }
 
     /**
@@ -68,6 +68,71 @@ public class IocContext {
      */
     public static <T> T getBean(String name, Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
+    }
+
+    /**
+     * 注册一个bean
+     *
+     * @param beanClass bean 类
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-07-26 17:30
+     */
+    public static void registerBean(Class<?> beanClass) {
+        registerBean(beanClass.getName(), beanClass);
+    }
+
+    /**
+     * 注册一个bean
+     *
+     * @param beanClass bean 类
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-07-26 17:30
+     */
+    public static void registerBean(String name, Class<?> beanClass) {
+        // 将有@spring注解的类交给spring管理
+        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
+        BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
+        // 设置当前bean定义对象是单利的
+        beanDefinition.setScope("singleton");
+
+        // 获取bean工厂并转换为DefaultListableBeanFactory
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        if (defaultListableBeanFactory.containsBean(name)) {
+            defaultListableBeanFactory.removeBeanDefinition(name);
+        }
+        defaultListableBeanFactory.registerBeanDefinition(name, beanDefinition);
+
+        log.debug("register bean {}, {}", name, beanClass);
+    }
+
+    /**
+     * 注册一个实例对象
+     *
+     * @param instance 对象
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-07-26 17:30
+     */
+    public static void registerInstance(Object instance) {
+        registerInstance(instance.getClass().getName(), instance);
+    }
+
+    /**
+     * 注册一个实例对象
+     *
+     * @param name     对象名，beanName
+     * @param instance 对象实例
+     * @author: Troy.Chen(無心道, 15388152619)
+     * @version: 2024-07-26 17:30
+     */
+    public static void registerInstance(String name, Object instance) {
+        // 获取bean工厂并转换为DefaultListableBeanFactory
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        if (defaultListableBeanFactory.containsBean(name)) {
+            defaultListableBeanFactory.removeBeanDefinition(name);
+        }
+        defaultListableBeanFactory.registerSingleton(name, instance);
+
+        log.debug("register instance {}, {}", name, instance.getClass().getName());
     }
 
     /**
@@ -115,23 +180,11 @@ public class IocContext {
     public static void loadClassLoader(ClassLoader classLoader, String... packages) {
         List<Class<?>> list = ReflectContext.Builder.of(classLoader, packages)
                 .build().classStream()
-                .filter(IocContext::hasSpringAnnotation)
+                .filter(SpringContext::hasSpringAnnotation)
                 .toList();
-        for (Class<?> clazz : list) {
-            // 将有@spring注解的类交给spring管理
-            BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
-            BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
-            // 设置当前bean定义对象是单利的
-            beanDefinition.setScope("singleton");
 
-            final String clazzName = clazz.getName();
-            // 获取bean工厂并转换为DefaultListableBeanFactory
-            DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
-            if (defaultListableBeanFactory.containsBean(clazzName)) {
-                defaultListableBeanFactory.removeBeanDefinition(clazzName);
-            }
-            defaultListableBeanFactory.registerBeanDefinition(clazzName, beanDefinition);
-            log.debug("register bean {}, {}", clazzName, clazz);
+        for (Class<?> clazz : list) {
+            registerBean(clazz);
         }
 
         for (Class<?> clazz : list) {
@@ -166,7 +219,7 @@ public class IocContext {
     /**
      * 去掉Controller的Mapping
      *
-     * @param controllerBeanName 需要协助的服务
+     * @param controllerBeanName 需要卸载的服务
      */
     public static void unregisterController(String controllerBeanName) {
         final RequestMappingHandlerMapping requestMappingHandlerMapping = (RequestMappingHandlerMapping) applicationContext.getBean("requestMappingHandlerMapping");
