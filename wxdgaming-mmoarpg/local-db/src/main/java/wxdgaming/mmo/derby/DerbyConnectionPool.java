@@ -11,7 +11,7 @@ import wxdgaming.mmo.BaseConnectionPool;
 public class DerbyConnectionPool extends BaseConnectionPool {
 
     // Derby的JDBC驱动名称
-    protected final String driver = "org.apache.derby.jdbc.EmbeddedDriver";
+    protected final String driver = org.apache.derby.jdbc.EmbeddedDriver.class.getName();
 
     public DerbyConnectionPool(String dataBase) {
         super(dataBase);
@@ -24,8 +24,8 @@ public class DerbyConnectionPool extends BaseConnectionPool {
     }
 
     protected void init() {
-        System.setProperty("derby.stream.error.file", "db/derby_database/derby.log");
-        db_url = "jdbc:derby:db/derby_database/" + getDataBaseName() + ";create=true";
+        System.setProperty("derby.stream.error.file", "data-base/derby/derby.log");
+        db_url = "jdbc:derby:data-base/derby/" + getDataBaseName() + ";IGNORECASE=TRUE;auto_server=true;database_to_upper=false;create=true";
         // 注册JDBC驱动
         try {
             Class.forName(driver);
@@ -34,4 +34,10 @@ public class DerbyConnectionPool extends BaseConnectionPool {
         }
     }
 
+    @Override protected String checkTableSql(String tableSql) {
+        String s = super.checkTableSql(tableSql);
+        s = s.replace("`", "")
+                .replace(";", "");
+        return s;
+    }
 }

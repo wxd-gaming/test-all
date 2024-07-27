@@ -19,7 +19,7 @@ public abstract class BaseConnectionPool {
     /** 默认 */
     public static final String _USER = "test";
     /** 默认 */
-    public static final String _PASSWORD = "geytghjioqw984jnkdxv89034";
+    public static final String _PASSWORD = "test";
 
     protected final String USER;
     protected final String PASSWORD;
@@ -48,6 +48,15 @@ public abstract class BaseConnectionPool {
         try {
             connection.close();
         } catch (Exception ignore) {}
+    }
+
+    public boolean createTable(String tableSql) {
+        String tmp = checkTableSql(tableSql);
+        return update(tmp);
+    }
+
+    protected String checkTableSql(String tableSql) {
+        return tableSql;
     }
 
     public boolean update(String sql) {
