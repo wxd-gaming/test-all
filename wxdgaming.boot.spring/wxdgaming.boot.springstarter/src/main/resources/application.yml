@@ -5,6 +5,8 @@ server:
     min-spare-threads: 10
 
 spring:
+  profiles:
+    active: thread,db-mysql,db-redis
   web:
     resources:
       chain:
@@ -15,6 +17,9 @@ spring:
       max-file-size: 20MB
       max-request-size: 100MB
       enabled: true
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 task:
   pool:
     corePoolSize: 3

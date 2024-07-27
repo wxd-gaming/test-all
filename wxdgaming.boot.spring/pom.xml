@@ -133,6 +133,36 @@
             <version>${wxdgaming.boot.version}</version>
             <optional>false</optional>
         </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.batis</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.batis.sql</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.batis.sql.mysql</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.batis.mongodb</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.batis.redis</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
     </dependencies>
 
     <build>

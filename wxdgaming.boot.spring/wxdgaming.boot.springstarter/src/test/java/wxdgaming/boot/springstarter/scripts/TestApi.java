@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wxdgaming.boot.springstarter.TestBean;
+import wxdgaming.boot.springstarter.test.B1;
 
 /**
  * 测试
@@ -20,8 +20,8 @@ import wxdgaming.boot.springstarter.TestBean;
 @RestController
 public class TestApi {
 
-    @Autowired TestBean.B1 b1;
-    // @Autowired TestBean.B2 b2;
+    @Autowired B1 b1;
+    @Autowired B2 b2;
 
     @RequestMapping("/api")
     public ResponseEntity<?> api(

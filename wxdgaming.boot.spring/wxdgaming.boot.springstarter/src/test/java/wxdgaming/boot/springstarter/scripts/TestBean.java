@@ -1,4 +1,4 @@
-package wxdgaming.boot.springstarter;
+package wxdgaming.boot.springstarter.scripts;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,17 +10,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestBean {
 
-    @Bean()
-    public B1 configBean() {
-        return new B1();
-    }
-
-    public static class B1 {
-        private int b = 1;
-    }
-
-    public static class B2 {
-        private int b = 1;
-    }
 
 }

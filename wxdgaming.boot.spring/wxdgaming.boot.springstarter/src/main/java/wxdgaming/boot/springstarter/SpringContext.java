@@ -1,10 +1,13 @@
 package wxdgaming.boot.springstarter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -23,21 +26,21 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 
 @Slf4j
-public class SpringContext {
-    /**
-     * 上下文对象实例
-     */
-    private static ConfigurableApplicationContext applicationContext;
+@Configuration
+public class SpringContext implements ApplicationContextAware, BeanDefinitionRegistryPostProcessor {
 
-    public static void setApplicationContext(ConfigurableApplicationContext applicationContext) {
-        SpringContext.applicationContext = applicationContext;
+    /** 上下文对象实例 */
+    private static ConfigurableApplicationContext applicationContext;
+    private static BeanDefinitionRegistry beanDefinitionRegistry;
+
+    /** 获取applicationContext */
+    public static ConfigurableApplicationContext getApplicationContext() {
+        return SpringContext.applicationContext;
     }
 
-    /**
-     * 获取applicationContext
-     */
-    public static ApplicationContext getApplicationContext() {
-        return SpringContext.applicationContext;
+    /** d */
+    public static BeanDefinitionRegistry getBeanDefinitionRegistry() {
+        return SpringContext.beanDefinitionRegistry;
     }
 
     /**
@@ -89,18 +92,22 @@ public class SpringContext {
      * @version: 2024-07-26 17:30
      */
     public static void registerBean(String name, Class<?> beanClass) {
+        registerBean(name, beanClass, true);
+    }
+
+    public static void registerBean(String name, Class<?> beanClass, boolean removeOld) {
         // 将有@spring注解的类交给spring管理
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
         BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
         // 设置当前bean定义对象是单利的
         beanDefinition.setScope("singleton");
 
-        // 获取bean工厂并转换为DefaultListableBeanFactory
-        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
-        if (defaultListableBeanFactory.containsBean(name)) {
-            defaultListableBeanFactory.removeBeanDefinition(name);
+        if (removeOld && beanDefinitionRegistry.containsBeanDefinition(name)) {
+            beanDefinitionRegistry.removeBeanDefinition(name);
         }
-        defaultListableBeanFactory.registerBeanDefinition(name, beanDefinition);
+
+        // 获取bean工厂并转换为DefaultListableBeanFactory
+        beanDefinitionRegistry.registerBeanDefinition(name, beanDefinition);
 
         log.debug("register bean {}, {}", name, beanClass);
     }
@@ -124,13 +131,31 @@ public class SpringContext {
      * @author: Troy.Chen(無心道, 15388152619)
      * @version: 2024-07-26 17:30
      */
-    public static void registerInstance(String name, Object instance) {
+    public static <T> void registerInstance(String name, T instance) {
+        registerInstance(name, instance, true);
+    }
+
+    public static <T> void registerInstance(String name, T instance, boolean removeOld) {
         // 获取bean工厂并转换为DefaultListableBeanFactory
-        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
-        if (defaultListableBeanFactory.containsBean(name)) {
-            defaultListableBeanFactory.removeBeanDefinition(name);
+        // DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        // if (defaultListableBeanFactory.containsBean(name)) {
+        //     defaultListableBeanFactory.removeBeanDefinition(name);
+        // }
+        // defaultListableBeanFactory.registerSingleton(name, instance);
+
+
+        if (removeOld && beanDefinitionRegistry.containsBeanDefinition(name)) {
+            beanDefinitionRegistry.removeBeanDefinition(name);
         }
-        defaultListableBeanFactory.registerSingleton(name, instance);
+
+        Class<T> beanClass = (Class<T>) instance.getClass();
+
+        // 将有@spring注解的类交给spring管理
+        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass, () -> instance);
+        BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
+        // 设置当前bean定义对象是单利的
+        beanDefinition.setScope("singleton");
+        beanDefinitionRegistry.registerBeanDefinition(name, beanDefinition);
 
         log.debug("register instance {}, {}", name, instance.getClass().getName());
     }
@@ -155,12 +180,14 @@ public class SpringContext {
         }
 
         try {
-            if (clazz.getAnnotation(Component.class) != null ||
-                    clazz.getAnnotation(Repository.class) != null ||
-                    clazz.getAnnotation(Service.class) != null ||
-                    clazz.getAnnotation(Controller.class) != null ||
-                    clazz.getAnnotation(RestController.class) != null ||
-                    clazz.getAnnotation(Configuration.class) != null) {
+            if (
+                    clazz.getAnnotation(Configuration.class) != null ||
+                            clazz.getAnnotation(Service.class) != null ||
+                            clazz.getAnnotation(Component.class) != null ||
+                            clazz.getAnnotation(Repository.class) != null ||
+                            clazz.getAnnotation(Controller.class) != null ||
+                            clazz.getAnnotation(RestController.class) != null
+            ) {
                 return true;
             }
         } catch (Exception e) {
@@ -190,6 +217,9 @@ public class SpringContext {
         for (Class<?> clazz : list) {
             registerController(clazz.getName());
         }
+
+        // applicationContext.refresh();
+
     }
 
     /**
@@ -247,6 +277,21 @@ public class SpringContext {
                 },
                 ReflectionUtils.USER_DECLARED_METHODS
         );
+    }
+
+    // @Autowired
+    // public SpringContext(ApplicationContext applicationContext) {
+    //     SpringContext.applicationContext = (applicationContext);
+    // }
+
+    @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringContext.applicationContext = (ConfigurableApplicationContext) applicationContext;
+        log.info("register applicationContext");
+    }
+
+    @Override public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        SpringContext.beanDefinitionRegistry = (registry);
+        log.info("register beanDefinitionRegistry");
     }
 
 }

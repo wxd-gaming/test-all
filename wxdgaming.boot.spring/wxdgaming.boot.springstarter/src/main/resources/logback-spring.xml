@@ -54,7 +54,7 @@
     </appender>
 
     <logger name="io.netty" level="INFO" additivity="false"/>
-    <logger name="org.springframework" level="INFO" additivity="false"/>
+    <logger name="org.springframework" level="DEBUG" additivity="false"/>
 
     <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
     <root level="DEBUG"> <!-- ERROR, WARN, INFO, DEBUG -->

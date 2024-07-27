@@ -1,0 +1,12 @@
+executor:
+  vtExecutor:
+    coreSize: 100
+    maxSize: 300
+
+  defaultExecutor:
+    coreSize: 2
+    maxSize: 4
+
+  logicExecutor:
+    coreSize: 6
+    maxSize: 12
