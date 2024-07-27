@@ -45,3 +45,5 @@ build/
 /spring-test/.idea
 /wxdgaming-mmoarpg/.idea
 /gvm/native-image
+/MariaDBServer/data-base
+/MariaDBServer/graalvm-win/exec

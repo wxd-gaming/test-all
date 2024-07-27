@@ -1,17 +1,15 @@
 package scripts;
 
-import jakarta.servlet.ServletRegistration;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.DispatcherServlet;
 
 @Configuration
 public class ScriptConfig {
 
+
+
     //@Bean
-    //public DispatcherServlet resourceServlet(ApplicationContext applicationContext) {
+    // public DispatcherServlet resourceServlet(ApplicationContext applicationContext) {
     //    System.out.println("init resourceServlet");
     //    System.out.println("------------111111--------");
     //    // 创建DispatcherServlet的实例
