@@ -3,7 +3,6 @@ package wxdgaming.boot.springstarter.test;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Component
 public class B1 implements AutoCloseable {
     private int b = 1;
 

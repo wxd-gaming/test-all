@@ -1,8 +1,7 @@
-package wxdgaming.boot.springstarter.scripts;
+package wxdgaming.boot.springstarter.test;
 
 import org.springframework.stereotype.Service;
 
-@Service
 public class B2 {
     private int b = 1;
 

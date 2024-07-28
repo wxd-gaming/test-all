@@ -1,8 +1,9 @@
-package wxdgaming.boot.springstarter.config.threading;
+package wxdgaming.boot.springstarter.config;
 
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import wxdgaming.boot.core.system.JvmUtil;
@@ -16,8 +17,10 @@ import java.io.Serializable;
  * @version: 2023-11-24 11:45
  */
 @Slf4j
-@Order(20)
+@Getter
+@Setter
 @ConfigurationProperties(prefix = "executor")
+@Order(1)
 public class ThreadPoolConfig implements Serializable {
 
     private ThreadConfig vtExecutor = new ThreadConfig(100, 300);

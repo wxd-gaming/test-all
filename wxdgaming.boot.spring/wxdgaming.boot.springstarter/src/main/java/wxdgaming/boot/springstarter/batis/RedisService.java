@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import wxdgaming.boot.batis.redis.RedisDataHelper;
-import wxdgaming.boot.springstarter.config.db.DataBaseConfig;
+import wxdgaming.boot.springstarter.config.DataBaseConfig;
 
 /**
  * redis

@@ -149,25 +149,31 @@
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.batis.sql.mysql</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.batis.mongodb</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.batis.redis</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.bcel</groupId>
+            <artifactId>bcel</artifactId>
+            <version>6.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.luaj</groupId>
+            <artifactId>luaj-jse</artifactId>
+            <version>3.0.1</version>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.lua</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
     </dependencies>
 

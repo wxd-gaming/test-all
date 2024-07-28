@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -96,18 +97,21 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
     }
 
     public static void registerBean(String name, Class<?> beanClass, boolean removeOld) {
+
+        // 获取bean工厂并转换为DefaultListableBeanFactory
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
         // 将有@spring注解的类交给spring管理
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
         BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
         // 设置当前bean定义对象是单利的
         beanDefinition.setScope("singleton");
 
-        if (removeOld && beanDefinitionRegistry.containsBeanDefinition(name)) {
-            beanDefinitionRegistry.removeBeanDefinition(name);
+        if (removeOld && defaultListableBeanFactory.containsBeanDefinition(name)) {
+            defaultListableBeanFactory.removeBeanDefinition(name);
         }
 
         // 获取bean工厂并转换为DefaultListableBeanFactory
-        beanDefinitionRegistry.registerBeanDefinition(name, beanDefinition);
+        defaultListableBeanFactory.registerBeanDefinition(name, beanDefinition);
 
         log.debug("register bean {}, {}", name, beanClass);
     }
@@ -137,25 +141,11 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
 
     public static <T> void registerInstance(String name, T instance, boolean removeOld) {
         // 获取bean工厂并转换为DefaultListableBeanFactory
-        // DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
-        // if (defaultListableBeanFactory.containsBean(name)) {
-        //     defaultListableBeanFactory.removeBeanDefinition(name);
-        // }
-        // defaultListableBeanFactory.registerSingleton(name, instance);
-
-
-        if (removeOld && beanDefinitionRegistry.containsBeanDefinition(name)) {
-            beanDefinitionRegistry.removeBeanDefinition(name);
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        if (removeOld && defaultListableBeanFactory.containsBean(name)) {
+            defaultListableBeanFactory.removeBeanDefinition(name);
         }
-
-        Class<T> beanClass = (Class<T>) instance.getClass();
-
-        // 将有@spring注解的类交给spring管理
-        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass, () -> instance);
-        BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
-        // 设置当前bean定义对象是单利的
-        beanDefinition.setScope("singleton");
-        beanDefinitionRegistry.registerBeanDefinition(name, beanDefinition);
+        defaultListableBeanFactory.registerSingleton(name, instance);
 
         log.debug("register instance {}, {}", name, instance.getClass().getName());
     }
@@ -218,8 +208,6 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
             registerController(clazz.getName());
         }
 
-        // applicationContext.refresh();
-
     }
 
     /**
@@ -230,7 +218,11 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
     public static void registerController(String controllerBeanName) {
         final RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
         try {
-            // unregisterController(controllerBeanName);
+            unregisterController(controllerBeanName);
+        } catch (Throwable e) {
+            log.error("unregister controllerBeanName={}", controllerBeanName, e);
+        }
+        try {
             // 注册Controller
             Method method = requestMappingHandlerMapping
                     .getClass()
@@ -241,8 +233,8 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
             method.setAccessible(true);
             method.invoke(requestMappingHandlerMapping, controllerBeanName);
             log.debug("register Controller {}", controllerBeanName);
-        } catch (Exception e) {
-            throw new RuntimeException("controllerBeanName=" + controllerBeanName, e);
+        } catch (Throwable e) {
+            log.error("register controllerBeanName={}", controllerBeanName, e);
         }
     }
 
@@ -253,13 +245,13 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
      */
     public static void unregisterController(String controllerBeanName) {
         final RequestMappingHandlerMapping requestMappingHandlerMapping = (RequestMappingHandlerMapping) applicationContext.getBean("requestMappingHandlerMapping");
-        Object controller = applicationContext.getBean(controllerBeanName);
+        final Object controller = applicationContext.getBean(controllerBeanName);
         final Class<?> targetClass = controller.getClass();
         ReflectionUtils.doWithMethods(
                 targetClass,
                 method -> {
-                    Method specificMethod = ClassUtils.getMostSpecificMethod(method, targetClass);
                     try {
+                        Method specificMethod = ClassUtils.getMostSpecificMethod(method, targetClass);
                         Method createMappingMethod = RequestMappingHandlerMapping.class.getDeclaredMethod(
                                 "getMappingForMethod",
                                 Method.class,
@@ -272,17 +264,12 @@ public class SpringContext implements ApplicationContextAware, BeanDefinitionReg
                             requestMappingHandlerMapping.unregisterMapping(requestMappingInfo);
                         }
                     } catch (Throwable e) {
-                        throw new RuntimeException("controllerBeanName=" + controllerBeanName, e);
+                        log.error("unregister controllerBeanName={}", controllerBeanName, e);
                     }
                 },
                 ReflectionUtils.USER_DECLARED_METHODS
         );
     }
-
-    // @Autowired
-    // public SpringContext(ApplicationContext applicationContext) {
-    //     SpringContext.applicationContext = (applicationContext);
-    // }
 
     @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringContext.applicationContext = (ConfigurableApplicationContext) applicationContext;

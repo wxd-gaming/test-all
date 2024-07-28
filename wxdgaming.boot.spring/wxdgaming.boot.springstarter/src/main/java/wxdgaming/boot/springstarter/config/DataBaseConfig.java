@@ -1,4 +1,4 @@
-package wxdgaming.boot.springstarter.config.db;
+package wxdgaming.boot.springstarter.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,8 +16,8 @@ import wxdgaming.boot.batis.DbConfig;
 @Slf4j
 @Setter
 @Getter
-@Order(3)
 @ConfigurationProperties(prefix = "database")
+@Order(3)
 public class DataBaseConfig {
 
     private DbConfig mysql = null;
