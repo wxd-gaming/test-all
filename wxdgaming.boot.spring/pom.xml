@@ -163,6 +163,12 @@
             <version>${wxdgaming.boot.version}</version>
             <optional>false</optional>
         </dependency>
+        <dependency>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.lua</artifactId>
+            <version>${wxdgaming.boot.version}</version>
+            <optional>false</optional>
+        </dependency>
     </dependencies>
 
     <build>

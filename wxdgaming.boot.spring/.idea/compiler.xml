@@ -6,47 +6,51 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="robotsr" />
         <module name="wxdgaming.boot.batis.mongodb" />
         <module name="wxdgaming.boot.convert" />
         <module name="wxdgaming.boot.jscript" />
-        <module name="wxdgaming.chargame.server-scripts" />
-        <module name="wxdgaming.chargame.client" />
-        <module name="gamesr-script" />
-        <module name="wxdgaming-reactor" />
-        <module name="wxdgaming.chargame.server" />
         <module name="wxdgaming.boot.batis.redis" />
         <module name="wxdgaming.boot.holder" />
-        <module name="web-script" />
         <module name="wxdgaming.boot.net" />
-        <module name="web" />
         <module name="wxdgaming.boot.batis" />
-        <module name="jetty" />
         <module name="wxdgaming.boot.agent" />
-        <module name="gamesr" />
         <module name="wxdgaming.boot.kotlin" />
         <module name="wxdgaming.boot.batis.sql.sqlite" />
         <module name="wxdgaming.boot.batis.sql.mysql" />
         <module name="wxdgaming.boot.net.http.client.url" />
-        <module name="loginsr-script" />
-        <module name="robotsr-script" />
         <module name="wxdgaming.boot.net.http" />
         <module name="wxdgaming.boot.net.http.client.apache" />
         <module name="wxdgaming.boot.net.http.client.jdk" />
         <module name="wxdgaming.boot.starter" />
-        <module name="local-db" />
-        <module name="message" />
         <module name="wxdgaming.boot.net.http.service.simple" />
         <module name="wxdgaming.boot.assist" />
-        <module name="loginsr" />
         <module name="wxdgaming.boot.batis.sql" />
         <module name="wxdgaming.boot.logbus" />
         <module name="wxdgaming.boot.lua" />
-        <module name="core" />
         <module name="wxdgaming.boot.core" />
         <module name="wxdgaming.boot.springstarter" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="core" target="21" />
+      <module name="gamesr" target="21" />
+      <module name="gamesr-script" target="21" />
+      <module name="jetty" target="21" />
+      <module name="local-db" target="21" />
+      <module name="loginsr" target="21" />
+      <module name="loginsr-script" target="21" />
+      <module name="message" target="21" />
+      <module name="robotsr" target="21" />
+      <module name="robotsr-script" target="21" />
+      <module name="web" target="21" />
+      <module name="web-script" target="21" />
+      <module name="wxdgaming-chargame" target="21" />
+      <module name="wxdgaming-mmoarpg" target="21" />
+      <module name="wxdgaming-reactor" target="21" />
+      <module name="wxdgaming.chargame.client" target="21" />
+      <module name="wxdgaming.chargame.server" target="21" />
+      <module name="wxdgaming.chargame.server-scripts" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
