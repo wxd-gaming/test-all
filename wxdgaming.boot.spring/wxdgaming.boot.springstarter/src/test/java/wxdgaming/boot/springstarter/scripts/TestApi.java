@@ -30,12 +30,11 @@ public class TestApi {
     @RequestMapping("/**")
     public ResponseEntity<?> all(
             HttpServletRequest httpServletRequest,
-            HttpServletResponse httpServletResponse,
-            @RequestBody(required = false) String body) throws Exception {
+            HttpServletResponse httpServletResponse) throws Exception {
         LuaTable luaTable = new LuaTable();
         luaTable.set("request", CoerceJavaToLua.coerce(httpServletRequest));
         luaTable.set("response", CoerceJavaToLua.coerce(httpServletResponse));
-        luaTable.set("body", body);
+        luaTable.set("body", "body");
         LuaValue index = luaService
                 .getLuaBus()
                 .get("index")

@@ -10,5 +10,7 @@ function index(info)
     local body = info.body
     print("request = " .. tostring(request))
     print("response = " .. tostring(response))
+    local var = JsonUtil:toJson(info)
+    print(var)
     return "lua -- dd"
 end
