@@ -14,3 +14,13 @@ function index(info)
     print(var)
     return "lua -- dd"
 end
+
+function paramsTest(p1, p2, p3, p4, p5, p6)
+    print("p1 = " .. tostring(p1)
+            .. "; p2 = " .. tostring(p2)
+            .. "; p3 = " .. tostring(p3)
+            .. "; p4 = " .. tostring(p4)
+            .. "; p5 = " .. tostring(p5)
+    )
+    return { "ok", "ok" }
+end
