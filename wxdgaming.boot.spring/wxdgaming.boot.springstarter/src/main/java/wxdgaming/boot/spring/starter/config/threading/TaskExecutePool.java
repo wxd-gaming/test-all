@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * 线程池配置
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-24 11:45
  */
 @Slf4j

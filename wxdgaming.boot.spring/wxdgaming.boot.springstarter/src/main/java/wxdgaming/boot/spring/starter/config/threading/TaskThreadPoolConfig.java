@@ -3,17 +3,19 @@ package wxdgaming.boot.spring.starter.config.threading;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.Serializable;
 
 /**
  * 线程池配置
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-24 11:45
  */
 @Getter
 @Setter
+@Configuration
 @ConfigurationProperties(prefix = "task.pool")
 public class TaskThreadPoolConfig implements Serializable {
 

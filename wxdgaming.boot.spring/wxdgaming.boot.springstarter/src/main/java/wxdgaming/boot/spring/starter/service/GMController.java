@@ -8,7 +8,7 @@ import wxdgaming.boot.spring.starter.BootStarter;
 /**
  * gm
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-28 13:10
  **/
 @RestController

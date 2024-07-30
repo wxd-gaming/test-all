@@ -1,27 +1,27 @@
-package wxdgaming.boot.spring.a;
+package wxdgaming.boot.spring.a.thread;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import wxdgaming.boot.core.system.JvmUtil;
-import wxdgaming.boot.spring.starter.IBaseOrder;
 
 import java.io.Serializable;
 
 /**
  * 线程池配置
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-24 11:45
  */
 @Slf4j
 @Data
-@Component(value = "0001")
+@Component
+@DependsOn({"springUtil"})
 @ConfigurationProperties(prefix = "executor")
-public class ThreadPoolConfig implements IBaseOrder, Serializable {
+public class ThreadPoolConfig implements Serializable {
 
     private ThreadConfig vtExecutor = new ThreadConfig(100, 300);
     private ThreadConfig defaultExecutor = new ThreadConfig(2, 4);
@@ -32,23 +32,18 @@ public class ThreadPoolConfig implements IBaseOrder, Serializable {
     }
 
     @Override public String toString() {
-        return "{" +
-                "vtExecutor=" + vtExecutor +
-                ", defaultExecutor=" + defaultExecutor +
-                ", logicExecutor=" + logicExecutor +
-                '}';
+        return String.format(
+                "{\n\n%20s = %s\n%20s = %s\n%20s = %s}",
+                "vtExecutor", vtExecutor,
+                "defaultExecutor", defaultExecutor,
+                "logicExecutor", logicExecutor
+        );
     }
 
     /** 初始化 */
     @PostConstruct
-    @Order(2)
     public void init() {
-        log.info("{}", String.format(
-                "\n\n%20s = %s\n%20s = %s\n%20s = %s\n",
-                "vtExecutor", vtExecutor,
-                "defaultExecutor", defaultExecutor,
-                "logicExecutor", logicExecutor
-        ));
+        log.info("{}", toString());
         JvmUtil.setProperty(JvmUtil.VT_Executor_Core_Size, vtExecutor.coreSize);
         JvmUtil.setProperty(JvmUtil.VT_Executor_Max_Size, vtExecutor.maxSize);
 

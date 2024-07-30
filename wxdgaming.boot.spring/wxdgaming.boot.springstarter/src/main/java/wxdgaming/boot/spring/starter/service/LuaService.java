@@ -9,7 +9,7 @@ import wxdgaming.boot.LuaBus;
 /**
  * lua
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-28 12:15
  **/
 

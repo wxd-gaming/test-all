@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter.config.web;
+package wxdgaming.boot.spring.a.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * 忽略 url 大小写问题
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-24 11:45
  */
 @Configuration

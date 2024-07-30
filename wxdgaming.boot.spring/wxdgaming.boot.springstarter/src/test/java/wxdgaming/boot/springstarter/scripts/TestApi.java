@@ -16,7 +16,7 @@ import wxdgaming.boot.spring.starter.test.B2;
 /**
  * 测试
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-26 10:35
  **/
 @Slf4j
@@ -25,7 +25,14 @@ public class TestApi {
 
     @Autowired B1 b1;
     @Autowired B2 b2;
+    TestBean.TB1 tb1;
     @Autowired LuaService luaService;
+
+    @Autowired
+    public TestApi(TestBean.TB1 tb1) {
+        this.tb1 = tb1;
+        System.out.println("\n" + this.getClass());
+    }
 
     @RequestMapping("/**")
     public ResponseEntity<?> all(

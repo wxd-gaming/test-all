@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter;
+package wxdgaming.boot.spring.a;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -7,9 +7,13 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -24,24 +28,36 @@ import wxdgaming.boot.agent.system.ReflectContext;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * spring 工具
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-30 14:52
  */
 @Slf4j
+@Component
 @Configuration
-public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcessor {
+public class SpringUtil implements ApplicationContextAware, BeanDefinitionRegistryPostProcessor {
 
     /** 上下文对象实例 */
     private static ConfigurableApplicationContext applicationContext;
+    private static ConfigurableApplicationContext subApplicationContext;
     private static BeanDefinitionRegistry beanDefinitionRegistry;
+
+    /** 获取applicationContext */
+    public static ConfigurableApplicationContext curApplicationContext() {
+        return SpringUtil.subApplicationContext == null ? SpringUtil.applicationContext : SpringUtil.subApplicationContext;
+    }
 
     /** 获取applicationContext */
     public static ConfigurableApplicationContext getApplicationContext() {
         return SpringUtil.applicationContext;
+    }
+
+    public static void setSubApplicationContext(ConfigurableApplicationContext applicationContext) {
+        SpringUtil.subApplicationContext = applicationContext;
     }
 
     /** d */
@@ -83,7 +99,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      * 注册一个bean
      *
      * @param beanClass bean 类
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-07-26 17:30
      */
     public static void registerBean(Class<?> beanClass) {
@@ -94,7 +110,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      * 注册一个bean
      *
      * @param beanClass bean 类
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-07-26 17:30
      */
     public static void registerBean(String name, Class<?> beanClass) {
@@ -104,7 +120,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
     public static void registerBean(String name, Class<?> beanClass, boolean removeOld) {
 
         // 获取bean工厂并转换为DefaultListableBeanFactory
-        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) curApplicationContext().getBeanFactory();
         // 将有@spring注解的类交给spring管理
         BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(beanClass);
         BeanDefinition beanDefinition = beanDefinitionBuilder.getRawBeanDefinition();
@@ -125,7 +141,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      * 注册一个实例对象
      *
      * @param instance 对象
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-07-26 17:30
      */
     public static void registerInstance(Object instance) {
@@ -137,7 +153,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      *
      * @param name     对象名，beanName
      * @param instance 对象实例
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-07-26 17:30
      */
     public static <T> void registerInstance(String name, T instance) {
@@ -146,7 +162,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
 
     public static <T> void registerInstance(String name, T instance, boolean removeOld) {
         // 获取bean工厂并转换为DefaultListableBeanFactory
-        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) curApplicationContext().getBeanFactory();
         if (removeOld && defaultListableBeanFactory.containsBean(name)) {
             defaultListableBeanFactory.removeBeanDefinition(name);
         }
@@ -177,6 +193,8 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
         try {
             if (
                     clazz.getAnnotation(Configuration.class) != null ||
+                            clazz.getAnnotation(ConfigurationProperties.class) != null ||
+                            clazz.getAnnotation(ConditionalOnProperty.class) != null ||
                             clazz.getAnnotation(Service.class) != null ||
                             clazz.getAnnotation(Component.class) != null ||
                             clazz.getAnnotation(Repository.class) != null ||
@@ -196,18 +214,36 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      *
      * @param classLoader classLoader
      * @param packages    需要加载的包名
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-07-25 20:48
      */
     public static void loadClassLoader(ClassLoader classLoader, String... packages) {
-        List<Class<?>> list = ReflectContext.Builder.of(classLoader, packages)
-                .build().classStream()
+        loadClassLoader(ReflectContext.Builder.of(classLoader, packages).build());
+
+    }
+
+    public static void loadClassLoader(ReflectContext context) {
+        List<Class<?>> list = context.classStream()
                 .filter(SpringUtil::hasSpringAnnotation)
+                .sorted((o1, o2) -> {
+                    int o1Annotation = Optional.ofNullable(o1.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+                    int o2Annotation = Optional.ofNullable(o2.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+                    if (o1Annotation != o2Annotation) {
+                        return Integer.compare(o1Annotation, o2Annotation);
+                    }
+                    return o1.getName().compareTo(o2.getName());
+                })
                 .toList();
+        loadClassLoader(list);
+    }
+
+    public static void loadClassLoader(List<Class<?>> list) {
 
         for (Class<?> clazz : list) {
             registerBean(clazz);
         }
+
+        initHandlerMethods();
 
         for (Class<?> clazz : list) {
             registerController(clazz.getName());
@@ -216,16 +252,37 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
     }
 
     /**
+     *
+     */
+    public static void initHandlerMethods() {
+        final RequestMappingHandlerMapping requestMappingHandlerMapping = curApplicationContext().getBean(RequestMappingHandlerMapping.class);
+        try {
+            // 注册Controller
+            Method method = requestMappingHandlerMapping
+                    .getClass()
+                    .getSuperclass()
+                    .getSuperclass().
+                    getDeclaredMethod("initHandlerMethods");
+            // 将private改为可使用
+            method.setAccessible(true);
+            method.invoke(requestMappingHandlerMapping);
+            log.debug("initHandlerMethods");
+        } catch (Throwable e) {
+            log.debug("initHandlerMethods", e);
+        }
+    }
+
+    /**
      * 注册Controller
      *
      * @param controllerBeanName 新注册的
      */
     public static void registerController(String controllerBeanName) {
-        final RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
+        final RequestMappingHandlerMapping requestMappingHandlerMapping = curApplicationContext().getBean(RequestMappingHandlerMapping.class);
         try {
             unregisterController(controllerBeanName);
         } catch (Throwable e) {
-            log.error("unregister controllerBeanName={}", controllerBeanName, e);
+            log.debug("unregister controllerBeanName={}", controllerBeanName, e);
         }
         try {
             // 注册Controller
@@ -239,7 +296,7 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
             method.invoke(requestMappingHandlerMapping, controllerBeanName);
             log.debug("register Controller {}", controllerBeanName);
         } catch (Throwable e) {
-            log.error("register controllerBeanName={}", controllerBeanName, e);
+            log.debug("register controllerBeanName={}", controllerBeanName, e);
         }
     }
 
@@ -249,8 +306,8 @@ public class SpringUtil implements IBaseOrder, BeanDefinitionRegistryPostProcess
      * @param controllerBeanName 需要卸载的服务
      */
     public static void unregisterController(String controllerBeanName) {
-        final RequestMappingHandlerMapping requestMappingHandlerMapping = (RequestMappingHandlerMapping) applicationContext.getBean("requestMappingHandlerMapping");
-        final Object controller = applicationContext.getBean(controllerBeanName);
+        final RequestMappingHandlerMapping requestMappingHandlerMapping = (RequestMappingHandlerMapping) curApplicationContext().getBean("requestMappingHandlerMapping");
+        final Object controller = curApplicationContext().getBean(controllerBeanName);
         final Class<?> targetClass = controller.getClass();
         ReflectionUtils.doWithMethods(
                 targetClass,

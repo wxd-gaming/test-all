@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.core;
+package wxdgaming.boot.spring.starter.core;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,7 +10,7 @@ import wxdgaming.boot.agent.LogbackUtil;
 /**
  * 过滤器
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-30 13:59
  **/
 public interface BastFilter extends WebMvcConfigurer, HandlerInterceptor {
