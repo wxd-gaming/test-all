@@ -9,9 +9,9 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import wxdgaming.boot.springstarter.service.LuaService;
-import wxdgaming.boot.springstarter.test.B1;
-import wxdgaming.boot.springstarter.test.B2;
+import wxdgaming.boot.spring.starter.service.LuaService;
+import wxdgaming.boot.spring.starter.test.B1;
+import wxdgaming.boot.spring.starter.test.B2;
 
 /**
  * 测试
