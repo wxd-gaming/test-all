@@ -22,17 +22,25 @@ public class GraalvmMain {
         System.out.println("");
         System.out.println("====================================================");
 
+        Thread addShutdownHook = new Thread(() -> {
+            DBFactory.getIns().stop();
+        });
+        Thread thread = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                System.out.println("敲回车，等待程序退出");
+                try {
+                    Thread.sleep(10_000);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+        Runtime.getRuntime().addShutdownHook(addShutdownHook);
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         bufferedReader.readLine();
-        DBFactory.getIns().getMyDB().stop();
-        System.out.println("停止服务 成功");
-        int i = 3;
-        do {
-            Thread.sleep(1000);
-            System.out.println("即将退出：" + String.valueOf(i));
-        } while (--i > 0);
-        Runtime.getRuntime().exit(0);
+        Runtime.getRuntime().removeShutdownHook(addShutdownHook);
+        addShutdownHook.run();
     }
 
 }

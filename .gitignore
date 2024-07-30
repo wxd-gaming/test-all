@@ -47,3 +47,4 @@ build/
 /gvm/native-image
 /MariaDBServer/data-base
 /MariaDBServer/graalvm-win/exec
+/SpringMariaDBServer/data-base

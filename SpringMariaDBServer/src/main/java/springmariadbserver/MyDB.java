@@ -1,9 +1,10 @@
-package example.db;
+package springmariadbserver;
 
 import ch.vorburger.exec.ManagedProcess;
 import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfiguration;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -13,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class MyDB extends DB {
 
     final Properties props;
@@ -52,7 +54,7 @@ public class MyDB extends DB {
     public void initDb() {
         try {
             String database = props.getProperty("database");
-            String[] split = database.split(",|£¨");
+            String[] split = database.split(",|Ôºå");
             for (String dbName : split) {
                 createDB(dbName, props.getProperty("user"), props.getProperty("pwd"));
             }
@@ -85,7 +87,7 @@ public class MyDB extends DB {
             String format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
 
             String database = props.getProperty("database");
-            String[] split = database.split(",|£¨");
+            String[] split = database.split(",|Ôºå");
             for (String dbName : split) {
                 File outputFile = new File("data-base/bak/" + dbName + "/" + format + ".sql");
                 outputFile.getParentFile().mkdirs();
@@ -95,17 +97,18 @@ public class MyDB extends DB {
                         props.getProperty("user"),
                         props.getProperty("pwd")
                 );
+                log.info("ÂºÄÂßã Â§á‰ªΩÔºö{}", outputFile);
                 try {
                     managedProcess.start();
-                    managedProcess.waitForExit();
+                    managedProcess.waitForExitMaxMs(TimeUnit.MINUTES.toMillis(1));
                 } catch (Exception ignore) {
                 }
                 try {
                     managedProcess.destroy();
                 } catch (Exception ignore) {}
-                System.out.println("±∏∑›£∫" + outputFile);
+                log.info("ÂÆåÊàê Â§á‰ªΩÔºö{}", outputFile);
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             e.printStackTrace(System.err);
         }
     }
@@ -118,7 +121,7 @@ public class MyDB extends DB {
     @Override public synchronized void stop() throws ManagedProcessException {
         timer.cancel();
         timer.purge();
-        bakSql();
+        // bakSql();
         super.stop();
     }
 

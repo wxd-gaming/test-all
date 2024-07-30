@@ -163,6 +163,8 @@
   }, {
     "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
   }, {
+    "pattern":"\\QMETA-INF/services/java.net.spi.InetAddressResolverProvider\\E"
+  }, {
     "pattern":"\\QMETA-INF/services/java.sql.Driver\\E"
   }, {
     "pattern":"\\QMETA-INF/services/java.time.zone.ZoneRulesProvider\\E"
@@ -5294,6 +5296,10 @@
     "pattern":"\\Qexample/db/MyDB$1.class\\E"
   }, {
     "pattern":"\\Qexample/db/MyDB.class\\E"
+  }, {
+    "pattern":"\\Qexample/db/WebService$1.class\\E"
+  }, {
+    "pattern":"\\Qexample/db/WebService.class\\E"
   }, {
     "pattern":"\\Qexample/db/\\E"
   }, {

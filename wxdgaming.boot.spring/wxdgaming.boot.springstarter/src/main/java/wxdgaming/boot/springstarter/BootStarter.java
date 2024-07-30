@@ -8,8 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
-import wxdgaming.boot.springstarter.batis.MysqlService;
-import wxdgaming.boot.springstarter.batis.RedisService;
 
 @EnableAsync
 @EnableScheduling

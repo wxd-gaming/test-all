@@ -3,6 +3,7 @@ package wxdgaming.boot.springstarter.config;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import wxdgaming.boot.batis.DbConfig;
@@ -30,7 +31,11 @@ public class DataBaseConfig {
     private DbConfig redis2 = null;
     private DbConfig redis3 = null;
 
-    public DataBaseConfig() {
+    ThreadPoolConfig threadPoolConfig;
+
+    @Autowired
+    public DataBaseConfig(ThreadPoolConfig threadPoolConfig) {
+        this.threadPoolConfig = threadPoolConfig;
         System.out.println("\n\n" + this.getClass() + "\n\n");
     }
 

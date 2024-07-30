@@ -18,17 +18,17 @@ import java.util.zip.ZipInputStream;
 
 public class GraalvmUtil {
 
-    /** 获取所有资源 <br>如果传入的目录本地文件夹没有，<br>会查找本地目录config目录，<br>如果还没有查找jar包内资源 TODO 开发者模式会有点点路径文件 */
+    /** ?????????? <br>?????????????????????校?<br>??????????config????<br>???????胁???jar??????? TODO ???????????械??路????? */
     public static Stream<Tuple<String, InputStream>> resourceStreams(final String path) {
         return resourceStreams(Thread.currentThread().getContextClassLoader(), path);
     }
 
-    /** 获取所有资源 <br>如果传入的目录本地文件夹没有，<br>会查找本地目录config目录，<br>如果还没有查找jar包内资源  TODO 开发者模式会有点点路径文件 */
+    /** ?????????? <br>?????????????????????校?<br>??????????config????<br>???????胁???jar???????  TODO ???????????械??路????? */
     public static Stream<Tuple<String, InputStream>> resourceStreams(ClassLoader classLoader, final String path) {
         try {
             String findPath = path;
             boolean fileExists = new File(path).exists();
-            if (!fileExists) {/*当本地文件不存在才查找资源文件*/
+            if (!fileExists) {/*?????????????????????????*/
                 URL resource = classLoader.getResource(path);
                 if (resource != null) {
                     findPath = URLDecoder.decode(resource.getPath(), StandardCharsets.UTF_8.toString());
@@ -46,7 +46,7 @@ public class GraalvmUtil {
                                 String name = nextEntry.getName();
                                 String replace = name.replace("\\", "/");
                                 if (replace.startsWith(path)) {
-                                    /* todo 读取的资源字节可以做解密操作 */
+                                    /* todo ??????????????????????? */
                                     byte[] extra = new byte[(int) nextEntry.getSize()];
                                     zipInputStream.read(extra, 0, (int) nextEntry.getSize());
                                     tmps.add(new Tuple<>(nextEntry.getName(), new ByteArrayInputStream(extra)));
@@ -87,7 +87,7 @@ public class GraalvmUtil {
                  ZipInputStream zipInputStream = new ZipInputStream(inputStream)) {
                 ZipEntry nextEntry = null;
                 while ((nextEntry = zipInputStream.getNextEntry()) != null) {
-                    /* todo 读取的资源字节可以做解密操作 */
+                    /* todo ??????????????????????? */
                     resourcesPath.add(nextEntry.getName());
                 }
             }
