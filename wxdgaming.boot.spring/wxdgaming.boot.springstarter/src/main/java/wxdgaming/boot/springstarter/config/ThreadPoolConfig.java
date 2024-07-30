@@ -1,12 +1,12 @@
 package wxdgaming.boot.springstarter.config;
 
 import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import wxdgaming.boot.core.system.JvmUtil;
+import wxdgaming.boot.springstarter.IBaseOrder;
 
 import java.io.Serializable;
 
@@ -17,18 +17,17 @@ import java.io.Serializable;
  * @version: 2023-11-24 11:45
  */
 @Slf4j
-@Getter
-@Setter
-@ConfigurationProperties(prefix = "executor")
+@Data
 @Order(1)
-public class ThreadPoolConfig implements Serializable {
+@ConfigurationProperties(prefix = "executor")
+public class ThreadPoolConfig implements IBaseOrder, Serializable {
 
     private ThreadConfig vtExecutor = new ThreadConfig(100, 300);
     private ThreadConfig defaultExecutor = new ThreadConfig(2, 4);
     private ThreadConfig logicExecutor = new ThreadConfig(6, 20);
 
     public ThreadPoolConfig() {
-        System.out.println("\n\n" + this.getClass() + "\n\n");
+        System.out.println("\n" + this.getClass());
     }
 
     @Override public String toString() {

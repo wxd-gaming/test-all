@@ -28,7 +28,7 @@ import java.util.List;
 
 @Slf4j
 @Configuration
-public class SpringContext implements ApplicationContextAware, BeanDefinitionRegistryPostProcessor {
+public class SpringContext implements IBaseOrder, BeanDefinitionRegistryPostProcessor {
 
     /** 上下文对象实例 */
     private static ConfigurableApplicationContext applicationContext;

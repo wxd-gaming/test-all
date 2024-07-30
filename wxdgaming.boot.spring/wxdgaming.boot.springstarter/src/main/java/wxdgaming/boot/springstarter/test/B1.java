@@ -7,7 +7,7 @@ public class B1 implements AutoCloseable {
     private int b = 1;
 
     public B1() {
-        System.out.println("\n\n" + this.getClass() + "\n\n");
+        System.out.println("\n" + this.getClass());
     }
 
     @Override public void close() throws Exception {

@@ -18,7 +18,7 @@ public class Z2Config implements Ordered {
     }
 
     public Z2Config() {
-        System.out.println("\n\n" + this.getClass() + "\n\n");
+        System.out.println("\n" + this.getClass());
     }
 
     @Bean

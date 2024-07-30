@@ -1,12 +1,11 @@
 package wxdgaming.boot.springstarter.config;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import wxdgaming.boot.batis.DbConfig;
+import wxdgaming.boot.springstarter.IBaseOrder;
 
 /**
  * 数据库配置
@@ -15,11 +14,10 @@ import wxdgaming.boot.batis.DbConfig;
  * @version: 2024-07-27 10:47
  **/
 @Slf4j
-@Setter
-@Getter
-@ConfigurationProperties(prefix = "database")
+@Data
 @Order(3)
-public class DataBaseConfig {
+@ConfigurationProperties(prefix = "database")
+public class DataBaseConfig implements IBaseOrder {
 
     private DbConfig mysql = null;
     private DbConfig mysql1 = null;
@@ -31,37 +29,8 @@ public class DataBaseConfig {
     private DbConfig redis2 = null;
     private DbConfig redis3 = null;
 
-    ThreadPoolConfig threadPoolConfig;
-
-    @Autowired
-    public DataBaseConfig(ThreadPoolConfig threadPoolConfig) {
-        this.threadPoolConfig = threadPoolConfig;
-        System.out.println("\n\n" + this.getClass() + "\n\n");
+    public DataBaseConfig() {
+        System.out.println("\n" + this.getClass());
     }
-
-    // /** 初始化 */
-    // @PostConstruct
-    // public void init() throws Exception {
-    //     try {
-    //         StringBuilder stringBuilder = new StringBuilder();
-    //         if (mysql != null) {
-    //             stringBuilder.append(String.format("%15s = %s", "mysql", mysql)).append("\n");
-    //             MysqlDataHelper instance = new MysqlService(mysql);
-    //             SpringContext.registerInstance(mysql.getName(), instance, false);
-    //         }
-    //
-    //         if (mysql1 != null) {
-    //             stringBuilder.append(String.format("%15s = %s", "mysql", mysql1)).append("\n");
-    //             MysqlDataHelper instance = new MysqlService1(mysql1);
-    //             SpringContext.registerInstance(mysql1.getName(), instance, false);
-    //         }
-    //
-    //         if (stringBuilder.length() > 0) {
-    //             log.info("\n\n{}", stringBuilder.toString());
-    //         }
-    //     } catch (Throwable t) {
-    //         throw new RuntimeException(t);
-    //     }
-    // }
 
 }
