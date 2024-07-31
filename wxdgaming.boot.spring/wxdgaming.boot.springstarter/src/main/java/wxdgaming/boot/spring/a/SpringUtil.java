@@ -1,5 +1,9 @@
 package wxdgaming.boot.spring.a;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -20,6 +24,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -39,30 +44,17 @@ import java.util.Optional;
 @Slf4j
 @Component
 @Configuration
-public class SpringUtil implements ApplicationContextAware, BeanDefinitionRegistryPostProcessor {
+public class SpringUtil implements ApplicationContextAware, WebApplicationInitializer, BeanDefinitionRegistryPostProcessor {
 
     /** 上下文对象实例 */
-    private static ConfigurableApplicationContext applicationContext;
-    private static ConfigurableApplicationContext subApplicationContext;
-    private static BeanDefinitionRegistry beanDefinitionRegistry;
+    @Getter private static ConfigurableApplicationContext applicationContext;
+    @Getter @Setter private static ConfigurableApplicationContext subApplicationContext;
+    @Getter @Setter private static ServletContext servletContext;
+    @Getter @Setter private static BeanDefinitionRegistry beanDefinitionRegistry;
 
     /** 获取applicationContext */
     public static ConfigurableApplicationContext curApplicationContext() {
         return SpringUtil.subApplicationContext == null ? SpringUtil.applicationContext : SpringUtil.subApplicationContext;
-    }
-
-    /** 获取applicationContext */
-    public static ConfigurableApplicationContext getApplicationContext() {
-        return SpringUtil.applicationContext;
-    }
-
-    public static void setSubApplicationContext(ConfigurableApplicationContext applicationContext) {
-        SpringUtil.subApplicationContext = applicationContext;
-    }
-
-    /** d */
-    public static BeanDefinitionRegistry getBeanDefinitionRegistry() {
-        return SpringUtil.beanDefinitionRegistry;
     }
 
     /**
@@ -336,6 +328,11 @@ public class SpringUtil implements ApplicationContextAware, BeanDefinitionRegist
     @Override public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SpringUtil.applicationContext = (ConfigurableApplicationContext) applicationContext;
         log.info("register applicationContext");
+    }
+
+    @Override public void onStartup(ServletContext servletContext) throws ServletException {
+        SpringUtil.servletContext = servletContext;
+        log.info("register servletContext");
     }
 
     @Override public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
