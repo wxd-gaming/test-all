@@ -9,12 +9,11 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.boot.web.servlet.context.AnnotationConfigServletWebApplicationContext;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.context.WebApplicationContext;
-import wxdgaming.boot.spring.a.SpringUtil;
+import wxdgaming.boot.spring.starter.config.SpringUtil;
 
 /**
  * 测试启动器
@@ -39,7 +38,7 @@ public class BootStarterTest {
         bean.onRefresh(applicationContext1);
     }
 
-    public static WebApplicationContext subContext(ApplicationContext parentContext) {
+    public static WebApplicationContext subContext(ConfigurableApplicationContext parentContext) {
         AnnotationConfigServletWebApplicationContext subContext = new AnnotationConfigServletWebApplicationContext();
         subContext.setParent(parentContext);
         subContext.setServletContext(SpringUtil.getServletContext());

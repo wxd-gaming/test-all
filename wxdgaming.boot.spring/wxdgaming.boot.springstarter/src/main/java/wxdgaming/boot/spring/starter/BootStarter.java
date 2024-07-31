@@ -12,10 +12,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
 import wxdgaming.boot.agent.system.ReflectContext;
-import wxdgaming.boot.spring.a.SpringUtil;
+import wxdgaming.boot.spring.starter.config.SpringUtil;
 
 import java.util.Optional;
 
@@ -24,7 +23,7 @@ import java.util.Optional;
 @ConfigurationPropertiesScan
 @SpringBootApplication(
         scanBasePackages = {
-                "wxdgaming.boot.spring.a",
+                "wxdgaming.boot.spring",
         },
         exclude = {
                 DataSourceAutoConfiguration.class,
@@ -37,24 +36,24 @@ public class BootStarter {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(BootStarter.class, args);
-        // reload();
+        reload();
 
         // SpringUtil.loadClassLoader(BootStarter.class.getClassLoader(), "wxdgaming.boot.spring.starter");
-        ApplicationContext subContext = load(
-                SpringUtil.getApplicationContext(),
-                BootStarter.class.getClassLoader(),
-                BootStarter.class.getPackageName()
-        );
-        // SpringUtil.setSubApplicationContext(subContext);
-        ClassDirLoader classDirLoader = new ClassDirLoader(
-                "wxdgaming.boot.springstarter/target/test-classes",
-                BootStarter.class.getClassLoader()
-        );
-        load(
-                subContext,
-                classDirLoader,
-                "wxdgaming.boot.springstarter.scripts"
-        );
+        // ApplicationContext subContext = load(
+        //         SpringUtil.getApplicationContext(),
+        //         BootStarter.class.getClassLoader(),
+        //         BootStarter.class.getPackageName()
+        // );
+        // // SpringUtil.setSubApplicationContext(subContext);
+        // ClassDirLoader classDirLoader = new ClassDirLoader(
+        //         "wxdgaming.boot.springstarter/target/test-classes",
+        //         BootStarter.class.getClassLoader()
+        // );
+        // load(
+        //         subContext,
+        //         classDirLoader,
+        //         "wxdgaming.boot.springstarter.scripts"
+        // );
     }
 
     public static void reload() throws Exception {

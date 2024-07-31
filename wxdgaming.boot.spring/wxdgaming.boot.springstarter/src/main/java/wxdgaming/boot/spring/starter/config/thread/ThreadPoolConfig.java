@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.a.thread;
+package wxdgaming.boot.spring.starter.config.thread;
 
 import jakarta.annotation.PostConstruct;
 import lombok.Data;

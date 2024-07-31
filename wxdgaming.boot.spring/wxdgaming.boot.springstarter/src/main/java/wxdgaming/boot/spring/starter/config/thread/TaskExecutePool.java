@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter.config.threading;
+package wxdgaming.boot.spring.starter.config.thread;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

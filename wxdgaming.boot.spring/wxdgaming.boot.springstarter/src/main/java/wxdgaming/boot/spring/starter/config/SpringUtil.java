@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.a;
+package wxdgaming.boot.spring.starter.config;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

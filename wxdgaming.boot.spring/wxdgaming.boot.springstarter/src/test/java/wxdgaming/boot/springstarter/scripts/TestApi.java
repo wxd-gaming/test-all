@@ -9,6 +9,9 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import wxdgaming.boot.core.lang.RandomUtils;
+import wxdgaming.boot.spring.starter.core.BastFilter;
 import wxdgaming.boot.spring.starter.service.LuaService;
 import wxdgaming.boot.spring.starter.test.B1;
 import wxdgaming.boot.spring.starter.test.B2;
@@ -21,16 +24,18 @@ import wxdgaming.boot.spring.starter.test.B2;
  **/
 @Slf4j
 @RestController
-public class TestApi {
+@RequestMapping("/test")
+public class TestApi implements BastFilter {
+
+    @Override public void filter(InterceptorRegistration registration) {
+
+    }
 
     @Autowired B1 b1;
     @Autowired B2 b2;
-    TestBean.TB1 tb1;
     @Autowired LuaService luaService;
 
-    @Autowired
-    public TestApi(TestBean.TB1 tb1) {
-        this.tb1 = tb1;
+    public TestApi() {
         System.out.println("\n" + this.getClass());
     }
 
@@ -55,7 +60,9 @@ public class TestApi {
             HttpServletRequest httpServletRequest,
             HttpServletResponse httpServletResponse,
             @RequestBody(required = false) String body) throws Exception {
-
+        if (RandomUtils.randomBoolean()) {
+            throw new RuntimeException("test");
+        }
         return ResponseEntity.ok("ok-" + b1);
     }
 

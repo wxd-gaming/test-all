@@ -1,7 +1,10 @@
 package wxdgaming.boot.spring.starter.core;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -31,4 +34,58 @@ public interface BastFilter extends WebMvcConfigurer, HandlerInterceptor {
 
     void filter(InterceptorRegistration registration);
 
+    default String getCurrentUrl(HttpServletRequest request) {
+        String scheme = request.getScheme();             // http
+        String serverName = request.getServerName();     // hostname.com
+        int serverPort = request.getServerPort();        // 80
+        String contextPath = request.getContextPath();   // /mywebapp
+        String servletPath = request.getServletPath();   // /servlet/MyServlet
+
+        // Reconstruct original requesting URL
+        StringBuilder url = new StringBuilder();
+        url.append(scheme).append("://").append(serverName);
+
+        // Include server port if it's not standard http/https port
+        if (!((scheme.equals("http") && serverPort == 80) || (scheme.equals("https") && serverPort == 443))) {
+            url.append(":").append(serverPort);
+        }
+
+        url.append(contextPath).append(servletPath);
+
+        return url.toString();
+    }
+
+    @Override default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        LogbackUtil.logger().info(
+                "\n{} {}\ndata={}\nhandler={}",
+                request.getMethod(),
+                getCurrentUrl(request),
+                request.getQueryString(),
+                handler
+        );
+        return HandlerInterceptor.super.preHandle(request, response, handler);
+    }
+
+    @Override default void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        LogbackUtil.logger().info(
+                "\n{} {}\ndata={}\nhandler={}",
+                request.getMethod(),
+                getCurrentUrl(request),
+                request.getQueryString(),
+                handler
+        );
+        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+    }
+
+    @Override default void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        LogbackUtil.logger().info(
+                "\n{} {}\ndata={}\nhandler={}",
+                request.getMethod(),
+                getCurrentUrl(request),
+                request.getQueryString(),
+                handler,
+                ex
+        );
+        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+    }
 }

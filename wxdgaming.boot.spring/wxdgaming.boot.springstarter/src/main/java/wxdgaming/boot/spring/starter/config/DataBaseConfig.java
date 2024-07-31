@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.a;
+package wxdgaming.boot.spring.starter.config;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

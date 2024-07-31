@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter.config.threading;
+package wxdgaming.boot.spring.starter.config.thread;
 
 import lombok.Getter;
 import lombok.Setter;

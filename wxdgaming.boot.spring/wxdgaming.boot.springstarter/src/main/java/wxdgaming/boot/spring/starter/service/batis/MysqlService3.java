@@ -6,7 +6,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import wxdgaming.boot.batis.sql.mysql.MysqlDataHelper;
-import wxdgaming.boot.spring.a.DataBaseConfig;
+import wxdgaming.boot.spring.starter.config.DataBaseConfig;
 
 /**
  * mysql

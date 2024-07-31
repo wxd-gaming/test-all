@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.a.web;
+package wxdgaming.boot.spring.starter.config.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
