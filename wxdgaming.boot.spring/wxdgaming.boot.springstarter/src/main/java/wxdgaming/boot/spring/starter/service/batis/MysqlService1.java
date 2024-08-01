@@ -13,7 +13,6 @@ import wxdgaming.boot.spring.starter.config.DataBaseConfig;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-12-11 18:18
  **/
-@Order(101)
 @Component
 @ConditionalOnProperty(value = "database.mysql1.dbHost")
 public class MysqlService1 extends MysqlDataHelper {

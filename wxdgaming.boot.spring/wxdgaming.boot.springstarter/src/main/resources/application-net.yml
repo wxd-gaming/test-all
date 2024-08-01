@@ -1,0 +1,21 @@
+net-config:
+  tcpSocket:
+    name: "g1"
+    host: "*"
+    wanIp: "127.0.0.1"
+    port: 17000
+
+  tcpSocket1:
+    name: "g2"
+    host: "*"
+    wanIp: "127.0.0.1"
+    port: 17001
+
+  webSocket:
+    name: "g1"
+    host: "*"
+    wanIp: "127.0.0.1"
+    port: 18000
+    sslProtocolType: "TLSv1"
+    jks: "jks/wxdtest-1.8.jks"
+    jksPwd: "jks/wxdtest-1.8.jks.pwd"

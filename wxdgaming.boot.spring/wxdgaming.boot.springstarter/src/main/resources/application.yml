@@ -6,7 +6,7 @@ server:
 
 spring:
   profiles:
-    active: thread,db-mysql,db-redis
+    active: thread,db-mysql,db-redis,net
   web:
     resources:
       chain:

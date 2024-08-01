@@ -12,7 +12,6 @@ import wxdgaming.boot.batis.redis.RedisDataHelper;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-12-11 18:19
  **/
-@Order(201)
 @Component
 @ConditionalOnProperty(value = "database.redis1.dbHost")
 public class RedisService1 extends RedisDataHelper {

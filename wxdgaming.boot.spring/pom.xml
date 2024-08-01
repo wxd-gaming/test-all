@@ -52,6 +52,16 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>2.0.45</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -95,7 +105,6 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>2.0.45</version>
         </dependency>
         <!--日志框架-->
         <dependency>
@@ -161,18 +170,13 @@
             <version>${wxdgaming.boot.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.bcel</groupId>
-            <artifactId>bcel</artifactId>
-            <version>6.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.luaj</groupId>
-            <artifactId>luaj-jse</artifactId>
-            <version>3.0.1</version>
+            <groupId>wxdgaming.boot</groupId>
+            <artifactId>wxdgaming.boot.lua</artifactId>
+            <version>${wxdgaming.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
-            <artifactId>wxdgaming.boot.lua</artifactId>
+            <artifactId>wxdgaming.boot.net</artifactId>
             <version>${wxdgaming.boot.version}</version>
         </dependency>
     </dependencies>

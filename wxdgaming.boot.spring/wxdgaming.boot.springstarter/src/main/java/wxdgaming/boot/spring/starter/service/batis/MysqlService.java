@@ -14,7 +14,6 @@ import wxdgaming.boot.spring.starter.config.DataBaseConfig;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-12-11 18:18
  **/
-@Order(100)
 @Component
 @ConditionalOnProperty(value = "database.mysql.dbHost")
 public class MysqlService extends MysqlDataHelper implements Ordered {

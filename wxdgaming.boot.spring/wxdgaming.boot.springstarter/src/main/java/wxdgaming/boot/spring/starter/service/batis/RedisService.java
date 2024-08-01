@@ -13,7 +13,6 @@ import wxdgaming.boot.spring.starter.config.DataBaseConfig;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-12-11 18:19
  **/
-@Order(200)
 @Component
 @ConditionalOnProperty(value = "database.redis.dbHost")
 public class RedisService extends RedisDataHelper {

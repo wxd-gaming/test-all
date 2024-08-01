@@ -11,6 +11,5 @@ public class B1 implements AutoCloseable {
     }
 
     @Override public void close() throws Exception {
-        System.out.println("\n\nclose() " + this.getClass() + "\n\n");
     }
 }

@@ -6,6 +6,9 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../../wxdgaming.boot/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring-lua/pom.xml" />
+        <option value="$PROJECT_DIR$/../wxdgaming-mmoarpg/pom.xml" />
+        <option value="$PROJECT_DIR$/../../wxdgaming-chargame/pom.xml" />
       </list>
     </option>
   </component>

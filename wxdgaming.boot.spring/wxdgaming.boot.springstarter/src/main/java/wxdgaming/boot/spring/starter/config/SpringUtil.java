@@ -32,6 +32,7 @@ import wxdgaming.boot.agent.system.ReflectContext;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -214,17 +215,20 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
 
     }
 
+    public static final Comparator<Class<?>> classComparator = (o1, o2) -> {
+        int o1Annotation = Optional.ofNullable(o1.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+        int o2Annotation = Optional.ofNullable(o2.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+        if (o1Annotation != o2Annotation) {
+            return Integer.compare(o1Annotation, o2Annotation);
+        }
+        return o1.getName().compareTo(o2.getName());
+    };
+
     public static void loadClassLoader(ReflectContext context) {
+
         List<Class<?>> list = context.classStream()
                 .filter(SpringUtil::hasSpringAnnotation)
-                .sorted((o1, o2) -> {
-                    int o1Annotation = Optional.ofNullable(o1.getAnnotation(Order.class)).map(Order::value).orElse(999999);
-                    int o2Annotation = Optional.ofNullable(o2.getAnnotation(Order.class)).map(Order::value).orElse(999999);
-                    if (o1Annotation != o2Annotation) {
-                        return Integer.compare(o1Annotation, o2Annotation);
-                    }
-                    return o1.getName().compareTo(o2.getName());
-                })
+                .sorted(classComparator)
                 .toList();
         loadClassLoader(list);
     }

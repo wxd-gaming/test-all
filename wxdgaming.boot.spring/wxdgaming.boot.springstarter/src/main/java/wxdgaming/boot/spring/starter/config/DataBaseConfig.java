@@ -18,7 +18,6 @@ import java.io.Serializable;
  **/
 @Slf4j
 @Data
-@Order(1)
 @Component
 @DependsOn(value = {"threadPoolConfig"})
 @ConfigurationProperties(prefix = "database")
