@@ -4,8 +4,6 @@
 --- DateTime: 2024/7/28 下午2:49
 ---
 
-JsonUtil = luajava.bindClass("wxdgaming.boot.core.str.json.FastJsonUtil");
-
 -- 不要用这种方式，特别耗时
 --function logbackUtil()
 --    return luajava.bindClass("logback.LogbackUtil");
@@ -26,3 +24,8 @@ end
 function setLuaData(key, value)
     return lua_data:put(key, value);
 end
+
+function urlPath(request)
+    return request:getServletPath();
+end
+

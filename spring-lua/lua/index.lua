@@ -4,15 +4,22 @@
 --- DateTime: 2024/7/27 下午11:36
 ---
 
-function index(info)
-    local request = info.request
-    local response = info.response
-    local body = info.body
+function root(request, response, postBody)
+    responseUtil:responseText(response, "hello world")
+end
+
+function index(request, response, postBody)
+    print("")
+    print(request:getServletPath())
     print("request = " .. tostring(request))
     print("response = " .. tostring(response))
-    local var = JsonUtil:toJson(info)
-    print(var)
-    return "lua -- dd"
+    responseUtil:responseText(response, "lua -- dd")
+end
+
+function index3(request, response, postBody)
+    print("index3")
+    local obj = { error = 0, msg = "ok" };
+    responseUtil:responseObj(response, obj)
 end
 
 function paramsTest(p1, p2, p3, p4, p5, p6)
