@@ -22,6 +22,11 @@ function index3(request, response, postBody)
     responseUtil:responseObj(response, obj)
 end
 
+function api_test(request, response, postBody)
+    print("api_test")
+    responseUtil:responseText(response, "api_test")
+end
+
 function paramsTest(p1, p2, p3, p4, p5, p6)
     print("p1 = " .. tostring(p1)
             .. "; p2 = " .. tostring(p2)
