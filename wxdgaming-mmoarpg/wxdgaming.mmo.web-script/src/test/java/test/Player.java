@@ -3,7 +3,7 @@ package test;
 import wxdgaming.boot.core.str.StringUtil;
 
 /**
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-29 16:22
  **/
 public class Player {

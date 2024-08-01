@@ -16,7 +16,7 @@ import java.io.File;
 /**
  * 启动类
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-10 12:12
  **/
 public class RobotAppMain {

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 全服数据模型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-02 16:24
  **/
 @Slf4j

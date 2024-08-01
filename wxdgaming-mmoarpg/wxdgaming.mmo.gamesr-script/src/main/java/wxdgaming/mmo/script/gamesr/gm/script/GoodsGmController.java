@@ -10,7 +10,7 @@ import wxdgaming.mmo.script.gamesr.gm.IGm;
 /**
  * 道具类的gm命令
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-09 18:10
  **/
 @Singleton

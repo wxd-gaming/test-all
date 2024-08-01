@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 排行榜类型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-07 20:30
  **/
 public enum RankType implements IEnum {

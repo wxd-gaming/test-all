@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 账号缓存容器
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-03 14:38
  **/
 @Slf4j
@@ -71,7 +71,7 @@ public class GuildCache extends Cache<Long, GuildInfo> implements IBeanInit {
      *
      * @param iocContext
      * @throws Exception
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-02-22 21:07
      */
     @Override public void beanInit(IocContext iocContext) throws Exception {

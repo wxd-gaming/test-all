@@ -10,7 +10,7 @@ import wxdgaming.mmo.core.bean.type.SdkType;
 /**
  * 登录
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-04 19:59
  **/
 public interface ILogin extends EventBusBase.IScript<SdkType> {

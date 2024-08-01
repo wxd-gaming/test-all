@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 背包类型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-08 15:15
  **/
 public enum PackType implements IEnum {

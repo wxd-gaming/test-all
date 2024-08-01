@@ -10,7 +10,7 @@ import wxdgaming.mmo.core.bean.bag.ItemType;
 /**
  * 普通道具
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-02 20:31
  **/
 @Getter

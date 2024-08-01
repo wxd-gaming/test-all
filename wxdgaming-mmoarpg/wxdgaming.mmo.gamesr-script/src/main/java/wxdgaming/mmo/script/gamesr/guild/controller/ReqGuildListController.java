@@ -12,7 +12,7 @@ import wxdgaming.mmo.gamesr.bean.user.Player;
 /**
  * 公会列表 file=Guild.proto
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-03-14 22:27:10
  */
 @Slf4j

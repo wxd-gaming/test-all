@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * 邮件模块
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-03 20:20
  **/
 @Singleton

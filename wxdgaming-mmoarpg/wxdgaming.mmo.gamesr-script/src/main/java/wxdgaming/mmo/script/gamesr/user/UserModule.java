@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 玩家管理
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-10 15:41
  **/
 @Slf4j

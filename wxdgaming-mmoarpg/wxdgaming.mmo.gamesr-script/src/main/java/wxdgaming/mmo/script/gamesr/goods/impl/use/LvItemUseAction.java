@@ -15,7 +15,7 @@ import wxdgaming.mmo.script.gamesr.goods.impl.IAction;
 /**
  * 等级丹的道具使用
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-23 11:31
  **/
 @Singleton

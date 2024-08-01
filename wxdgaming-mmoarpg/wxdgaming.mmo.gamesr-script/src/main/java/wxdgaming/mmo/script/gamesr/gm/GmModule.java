@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 /**
  * gm模块管理
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-09 17:04
  **/
 @Slf4j

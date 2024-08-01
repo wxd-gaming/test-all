@@ -7,7 +7,7 @@ import wxdgaming.mmo.core.bean.config.ServerConfig;
 /**
  * 用户模块的绑定配置
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-29 14:45
  */
 public class GameUserModule extends UserModule {

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * 道具类型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-07 20:16
  **/
 public enum ItemType implements IEnum {

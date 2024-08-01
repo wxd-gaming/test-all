@@ -5,7 +5,7 @@ import wxdgaming.boot.core.lang.task.UpdateKey;
 /**
  * 完成条件
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-24 18:00
  **/
 public interface ConditionType {

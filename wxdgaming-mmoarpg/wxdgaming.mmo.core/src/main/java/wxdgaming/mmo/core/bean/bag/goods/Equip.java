@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 /**
  * 装备
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-01 16:48
  **/
 @Getter

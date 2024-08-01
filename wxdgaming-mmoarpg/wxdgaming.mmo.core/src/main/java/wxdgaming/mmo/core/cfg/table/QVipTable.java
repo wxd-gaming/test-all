@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  * excel 构建 Vip.xlsx - q_vip - vip等级
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-03-14 09:48:44
  **/
 @Getter

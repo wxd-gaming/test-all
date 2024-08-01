@@ -3,7 +3,7 @@ package wxdgaming.mmo.core.bean.bag.goods;
 /**
  * 货币
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-25 11:41
  **/
 public class Currency extends Item {

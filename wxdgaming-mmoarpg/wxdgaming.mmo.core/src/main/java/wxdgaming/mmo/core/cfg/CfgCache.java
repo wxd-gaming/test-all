@@ -10,7 +10,7 @@ import wxdgaming.boot.starter.i.IBeanInit;
 /**
  * 策划配置缓存
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-03 14:50
  **/
 @Slf4j

@@ -6,7 +6,7 @@ import wxdgaming.boot.starter.AppContext;
 import wxdgaming.mmo.loginsr.LoginSrAppMain;
 
 /**
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-02 16:25
  **/
 public class LoginSrScriptMain {

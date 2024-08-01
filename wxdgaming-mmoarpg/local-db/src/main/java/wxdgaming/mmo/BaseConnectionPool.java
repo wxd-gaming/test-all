@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 数据库链接
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-17 16:15
  */
 @Getter

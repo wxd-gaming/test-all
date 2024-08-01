@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * 道具创建
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-07 20:24
  **/
 @Singleton

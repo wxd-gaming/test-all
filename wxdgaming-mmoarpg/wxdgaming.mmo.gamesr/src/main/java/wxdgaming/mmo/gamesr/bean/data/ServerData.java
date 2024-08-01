@@ -11,7 +11,7 @@ import wxdgaming.mmo.core.bean.data.UidSeed;
 /**
  * 全局数据
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-03 19:56
  **/
 @Getter

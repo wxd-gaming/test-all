@@ -12,7 +12,7 @@ import wxdgaming.mmo.gamesr.bean.user.Player;
 /**
  * 请求发送聊天 file=Chat.proto
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-03-14 22:27:10
  */
 @Slf4j

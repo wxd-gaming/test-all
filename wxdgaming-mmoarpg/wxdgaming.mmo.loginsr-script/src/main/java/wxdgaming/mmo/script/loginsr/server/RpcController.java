@@ -22,7 +22,7 @@ import wxdgaming.mmo.script.loginsr.login.ILogin;
 /**
  * 和登录服务器rpc通信
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-07-28 19:07
  **/
 @Slf4j

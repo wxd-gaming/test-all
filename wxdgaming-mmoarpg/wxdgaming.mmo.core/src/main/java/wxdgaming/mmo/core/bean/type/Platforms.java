@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * 渠道枚举
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-07-31 15:59
  **/
 @Getter

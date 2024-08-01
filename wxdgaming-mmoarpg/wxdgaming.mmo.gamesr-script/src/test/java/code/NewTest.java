@@ -10,7 +10,7 @@ import wxdgaming.boot.core.str.json.FastJsonUtil;
 import wxdgaming.mmo.core.bean.bag.ItemCfg;
 
 /**
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-07 20:56
  **/
 public class NewTest {

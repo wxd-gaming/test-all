@@ -11,7 +11,7 @@ import wxdgaming.boot.starter.service.WsService;
 /**
  * 消息处理器
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-10-17 14:51
  **/
 @Slf4j

@@ -5,7 +5,7 @@ import wxdgaming.boot.agent.system.ReflectContext;
 import wxdgaming.boot.core.timer.ann.Scheduled;
 
 /**
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-10-16 11:10
  **/
 public class Code {

@@ -9,7 +9,7 @@ import wxdgaming.mmo.core.GameBase;
 /**
  * 战斗对象
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-07 15:05
  **/
 @Getter

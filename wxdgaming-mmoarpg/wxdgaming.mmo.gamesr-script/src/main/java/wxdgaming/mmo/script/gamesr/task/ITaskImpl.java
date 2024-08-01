@@ -7,7 +7,7 @@ import wxdgaming.mmo.gamesr.bean.user.Player;
 /**
  * 任务类型实现
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-23 19:40
  **/
 public interface ITaskImpl extends EventBusBase.IScript<TaskType> {

@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * gm 方法映射
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-09 19:56
  **/
 @Getter

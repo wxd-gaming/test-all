@@ -12,7 +12,7 @@ import wxdgaming.mmo.gamesr.bean.user.Player;
 /**
  * 货币变更处理
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-11-08 15:06
  **/
 @Slf4j

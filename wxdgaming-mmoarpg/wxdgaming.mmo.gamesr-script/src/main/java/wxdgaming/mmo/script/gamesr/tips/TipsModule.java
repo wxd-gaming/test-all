@@ -9,7 +9,7 @@ import wxdgaming.mmo.script.gamesr.tips.message.TipsType;
 /**
  * 提示通用类
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-02-10 15:20
  **/
 @Singleton
@@ -25,7 +25,7 @@ public class TipsModule {
      * @param player
      * @param content 提示内容
      * @param resId 客户端当前正在监听等待返回的消息id
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-02-29 20:48
      */
     public void sendError(Player player, String content, int resId) {

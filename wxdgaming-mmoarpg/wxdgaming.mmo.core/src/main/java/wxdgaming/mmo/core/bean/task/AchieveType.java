@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 成就类型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-23 19:24
  **/
 public enum AchieveType implements IEnum {

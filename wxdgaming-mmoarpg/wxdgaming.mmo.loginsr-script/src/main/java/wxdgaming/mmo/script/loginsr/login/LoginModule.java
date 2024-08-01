@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * 登录模块
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-04 19:53
  **/
 @Slf4j
@@ -81,7 +81,7 @@ public class LoginModule implements IBeanInit {
      * @param token          秘钥
      * @param extMap         扩展参数
      * @return
-     * @author: Troy.Chen(無心道, 15388152619)
+     * @author: wxd-gaming(無心道, 15388152619)
      * @version: 2024-02-27 10:00
      */
     public RunResult login(Platforms platforms, SdkType sdkType, String channel, String channelAccount, String accountName, String token, ObjMap extMap) {

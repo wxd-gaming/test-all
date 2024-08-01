@@ -14,7 +14,7 @@ import wxdgaming.mmo.script.loginsr.login.LoginModule;
 /**
  * 本地登录，调试系统登录
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-07-31 15:29
  **/
 @Singleton

@@ -19,7 +19,7 @@ import wxdgaming.mmo.script.gamesr.tips.TipsModule;
 /**
  * 请求执行gm命令--没有回复 file=Gm.proto
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023/02/10 15:03:58
  */
 @Slf4j

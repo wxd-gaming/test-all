@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 玩家角色快照
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-03 15:12
  **/
 @Slf4j

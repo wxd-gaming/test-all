@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * 任务类型
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-07-31 17:25
  **/
 public enum TaskType implements IEnum {

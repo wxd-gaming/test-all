@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 服务器标记配置
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2023-08-02 20:45
  **/
 @Getter

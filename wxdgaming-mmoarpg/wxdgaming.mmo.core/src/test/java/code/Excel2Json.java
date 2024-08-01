@@ -9,7 +9,7 @@ import wxdgaming.mmo.core.cfg.table.QVipTable;
 /**
  * excel 转化 json 文件
  *
- * @author: Troy.Chen(無心道, 15388152619)
+ * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-02-29 17:11
  **/
 public class Excel2Json {
