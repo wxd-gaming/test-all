@@ -1,10 +1,12 @@
 package wxdgaming.boot.spring.starter.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import wxdgaming.boot.spring.data.repository.UserRepository;
 import wxdgaming.boot.spring.starter.BootStarter;
 
 /**
@@ -15,6 +17,9 @@ import wxdgaming.boot.spring.starter.BootStarter;
  **/
 @Controller
 public class GMController {
+
+    @Autowired UserRepository userRepository;
+
 
     @ResponseBody
     @RequestMapping("/reload/jar")

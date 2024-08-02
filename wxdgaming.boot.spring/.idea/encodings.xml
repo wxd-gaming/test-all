@@ -28,7 +28,8 @@
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.web/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/wxdgaming.boot.springstarter/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wxdgaming.boot.spring.data/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wxdgaming.boot.spring.starter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/jetty/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/jetty/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/src/main/java" charset="UTF-8" />

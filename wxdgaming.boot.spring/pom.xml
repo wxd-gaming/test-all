@@ -15,7 +15,8 @@
     <packaging>pom</packaging>
     <name>wxdgaming.boot.spring</name>
     <modules>
-        <module>wxdgaming.boot.springstarter</module>
+        <module>wxdgaming.boot.spring.starter</module>
+        <module>wxdgaming.boot.spring.data</module>
     </modules>
 
     <properties>
@@ -89,6 +90,16 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -109,6 +120,12 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <!--mysql连接器-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
         <!--日志框架-->
         <dependency>
@@ -132,31 +149,26 @@
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.agent</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.assist</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.core</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.batis</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>
             <artifactId>wxdgaming.boot.batis.sql</artifactId>
             <version>${wxdgaming.boot.version}</version>
-            <optional>false</optional>
         </dependency>
         <dependency>
             <groupId>wxdgaming.boot</groupId>

@@ -6,7 +6,7 @@ server:
 
 spring:
   profiles:
-    active: thread,db-mysql,db-redis,net
+    active: thread
   web:
     resources:
       chain:
@@ -20,6 +20,17 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb?createDatabaseIfNotExist=true
+    username: root
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
 task:
   pool:
     corePoolSize: 3
