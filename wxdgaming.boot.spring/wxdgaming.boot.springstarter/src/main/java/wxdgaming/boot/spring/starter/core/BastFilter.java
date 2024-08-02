@@ -2,19 +2,13 @@ package wxdgaming.boot.spring.starter.core;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.catalina.connector.RequestFacade;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 import wxdgaming.boot.agent.LogbackUtil;
-import wxdgaming.boot.core.str.StringUtil;
-import wxdgaming.boot.net.http.HttpHeadNameType;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * 过滤器
@@ -61,29 +55,7 @@ public interface BastFilter extends WebMvcConfigurer, HandlerInterceptor {
         return url.toString();
     }
 
-    default String getRequestBody(HttpServletRequest request) throws UnsupportedEncodingException {
-        if (request instanceof ContentCachingRequestWrapper wrapper) {
-            byte[] buf = wrapper.getContentAsByteArray();
-            if (buf.length > 0) {
-                return new String(buf, 0, buf.length, wrapper.getCharacterEncoding());
-            }
-        }
-        return "";
-    }
-
     @Override default boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request instanceof RequestFacade requestFacade){
-            int contentLength = requestFacade.getContentLength();
-        }
-
-        LogbackUtil.logger().info(
-                "\n{} {}\ncontent-type:{}\ndata={}\nhandler={}",
-                request.getClass().getName() + " - " + request.getMethod(),
-                getCurrentUrl(request),
-                request.getHeader(HttpHeadNameType.Content_Type.getValue()),
-                getRequestBody(request) + (StringUtil.emptyOrNull(request.getQueryString()) ? "" : request.getQueryString()),
-                handler
-        );
         return HandlerInterceptor.super.preHandle(request, response, handler);
     }
 
