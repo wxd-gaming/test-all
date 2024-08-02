@@ -8,8 +8,11 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
+import wxdgaming.boot.core.str.StringUtil;
+import wxdgaming.boot.core.timer.MyClock;
 import wxdgaming.boot.spring.starter.config.SpringUtil;
 import wxdgaming.boot.spring.starter.i.OnStart;
+import wxdgaming.boot.spring.starter.service.batis.RedisService;
 
 @EnableAsync
 @EnableScheduling
@@ -40,6 +43,10 @@ public class BootStarter {
                         throw new RuntimeException(e);
                     }
                 });
+        RedisService redisService = SpringUtil.getBean(RedisService.class);
+        String randomString = StringUtil.getRandomString(2048);
+        redisService.hset("ddss", randomString, String.valueOf(MyClock.millis()));
+        redisService.set(randomString, String.valueOf(MyClock.millis()), 15);
     }
 
     public static void reload() throws Exception {
