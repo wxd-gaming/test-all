@@ -1,7 +1,10 @@
 package wxdgaming.boot.spring.starter.service;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import wxdgaming.boot.spring.starter.BootStarter;
 
 /**
@@ -10,18 +13,21 @@ import wxdgaming.boot.spring.starter.BootStarter;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-07-28 13:10
  **/
-@RestController
+@Controller
 public class GMController {
 
-    @GetMapping("/reload/jar")
+    @ResponseBody
+    @RequestMapping("/reload/jar")
     public String reload_jar() throws Exception {
         BootStarter.reload();
         return "reload/jar";
     }
 
-    @GetMapping("/reload/lua")
-    public String reload_lua() throws Exception {
-        return "reload/lua";
+    @ResponseBody
+    @RequestMapping("/reload/lua")
+    public String reload_lua(HttpServletRequest httpServletRequest,
+                             @RequestBody(required = false) String body) throws Exception {
+        return "ok";
     }
 
 }

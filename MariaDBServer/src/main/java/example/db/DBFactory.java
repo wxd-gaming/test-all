@@ -3,6 +3,7 @@ package example.db;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.nio.charset.StandardCharsets;
@@ -44,14 +45,17 @@ public class DBFactory {
 
         myDB = new MyDB(props, configBuilder.build());
         myDB.start();
+        write(1);
+    }
 
+    public static void write(int state) throws IOException {
+        String json = "{\"PID\":" + fetchProcessId() + ", \"states\":" + state + "}";
         Files.write(
                 ok.toPath(),
-                String.valueOf(fetchProcessId()).getBytes(StandardCharsets.UTF_8),
+                json.getBytes(StandardCharsets.UTF_8),
                 StandardOpenOption.CREATE,
                 StandardOpenOption.TRUNCATE_EXISTING
         );
-
     }
 
     public DBConfigurationBuilder getConfigBuilder() {
@@ -66,7 +70,7 @@ public class DBFactory {
     public void stop() {
         System.out.println("addShutdownHook");
         try {
-            ok.delete();
+            write(0);
         } catch (Exception ignore) {}
         try {
             getMyDB().stop();
@@ -82,14 +86,14 @@ public class DBFactory {
         Runtime.getRuntime().halt(0);
     }
 
-    public static final int fetchProcessId() {
+    public static String fetchProcessId() {
         try {
             RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
             String name = runtime.getName();
-            return Integer.parseInt(name.substring(0, name.indexOf("@")));
+            return name.substring(0, name.indexOf("@"));
 
         } catch (Exception ignore) {
-            return -1;
+            return "-1";
         }
     }
 }

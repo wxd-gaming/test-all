@@ -3,7 +3,7 @@
     <!--关闭自身日志-->
     <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
     <property name="LOG_PATH" value="target/logs"/>
-    <property name="LOG_PATTERN" value="[%d{MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%C{0}#%M:%L] - %msg%n"/>
+    <property name="LOG_PATTERN" value="%red([%d{MM-dd HH:mm:ss}]) %green([%thread]) %highlight([%-5level]) %boldMagenta([%C{0}#%M:%-3L]) - %msg%n"/>
     <!-- 日志记录器，日期滚动记录 -->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->

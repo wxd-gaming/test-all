@@ -34,7 +34,10 @@ import wxdgaming.boot.agent.system.ReflectContext;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -50,13 +53,12 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
 
     /** 上下文对象实例 */
     @Getter private static ConfigurableApplicationContext applicationContext;
-    @Getter @Setter private static ConfigurableApplicationContext subApplicationContext;
     @Getter @Setter private static ServletContext servletContext;
     @Getter @Setter private static BeanDefinitionRegistry beanDefinitionRegistry;
 
     /** 获取applicationContext */
     public static ConfigurableApplicationContext curApplicationContext() {
-        return SpringUtil.subApplicationContext == null ? SpringUtil.applicationContext : SpringUtil.subApplicationContext;
+        return SpringUtil.applicationContext;
     }
 
     /**
@@ -130,7 +132,7 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
         return reflectContext().classWithSuper(cls);
     }
 
-    public static Stream<Method> reflectContext(Class<? extends Annotation> annotationType) {
+    public static Stream<Method> withMethodAnnotated(Class<? extends Annotation> annotationType) {
         return reflectContext()
                 .withMethodAnnotated(annotationType)
                 .sorted(METHOD_COMPARATOR);

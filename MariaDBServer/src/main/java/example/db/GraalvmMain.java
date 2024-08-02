@@ -1,7 +1,5 @@
 package example.db;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 
@@ -25,22 +23,9 @@ public class GraalvmMain {
         Thread addShutdownHook = new Thread(() -> {
             DBFactory.getIns().stop();
         });
-        Thread thread = new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                System.out.println("敲回车，等待程序退出");
-                try {
-                    Thread.sleep(10_000);
-                } catch (InterruptedException e) {
-                    break;
-                }
-            }
-        });
-        Runtime.getRuntime().addShutdownHook(addShutdownHook);
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        bufferedReader.readLine();
-        Runtime.getRuntime().removeShutdownHook(addShutdownHook);
+        Thread.sleep(30_000);
         addShutdownHook.run();
+        Runtime.getRuntime().halt(0);
     }
 
 }

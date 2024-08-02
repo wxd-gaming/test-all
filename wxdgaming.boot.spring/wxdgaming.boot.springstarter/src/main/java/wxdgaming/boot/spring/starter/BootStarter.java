@@ -28,11 +28,9 @@ public class BootStarter {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(BootStarter.class, args);
-        reload();
+        // reload();
         SpringUtil
-                .reflectContext()
                 .withMethodAnnotated(OnStart.class)
-                .sorted(SpringUtil.METHOD_COMPARATOR)
                 .forEach(method -> {
                     Class<?> cls = method.getDeclaringClass();
                     Object bean = SpringUtil.getBean(cls);
