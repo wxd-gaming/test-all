@@ -37,6 +37,7 @@ public class WsService extends WebSocketServer<WebSession> {
         super.close();
     }
 
+    @Order(3)
     @OnStart
     @Override public void open() {
         super.open();

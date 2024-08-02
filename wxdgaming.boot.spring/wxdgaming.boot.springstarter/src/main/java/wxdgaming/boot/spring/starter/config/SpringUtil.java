@@ -18,6 +18,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -30,11 +31,11 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import wxdgaming.boot.agent.system.ReflectContext;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * spring 工具
@@ -86,6 +87,53 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
      */
     public static <T> T getBean(String name, Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
+    }
+
+    public static List<Object> getBeans() {
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        List<Object> beans = new ArrayList<>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            Object bean = applicationContext.getBean(beanDefinitionName);
+            beans.add(bean);
+        }
+        beans.sort((o1, o2) -> SpringUtil.CLASS_COMPARATOR.compare(o1.getClass(), o2.getClass()));
+        return beans;
+    }
+
+    public static <T> Stream<T> getBeansOfType(@Nullable Class<T> type) {
+        return applicationContext
+                .getBeansOfType(type)
+                .values()
+                .stream();
+    }
+
+    public static Stream<Object> getBeansWithAnnotation(Class<? extends Annotation> annotation) {
+        return applicationContext.getBeansWithAnnotation(annotation).values().stream();
+    }
+
+    public static ReflectContext reflectContext() {
+        String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
+        List<Class<?>> clazzs = new ArrayList<>();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            Object bean = applicationContext.getBean(beanDefinitionName);
+            clazzs.add(bean.getClass());
+        }
+        clazzs.sort(SpringUtil.CLASS_COMPARATOR);
+        return new ReflectContext(clazzs);
+    }
+
+    public static Stream<Class<?>> classWithAnnotated(Class<? extends Annotation> annotation) {
+        return reflectContext().classWithAnnotated(annotation);
+    }
+
+    public static <U> Stream<Class<U>> classWithSuper(Class<U> cls) {
+        return reflectContext().classWithSuper(cls);
+    }
+
+    public static Stream<Method> reflectContext(Class<? extends Annotation> annotationType) {
+        return reflectContext()
+                .withMethodAnnotated(annotationType)
+                .sorted(METHOD_COMPARATOR);
     }
 
     /**
@@ -215,7 +263,16 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
 
     }
 
-    public static final Comparator<Class<?>> classComparator = (o1, o2) -> {
+    public static final Comparator<Class<?>> CLASS_COMPARATOR = (o1, o2) -> {
+        int o1Annotation = Optional.ofNullable(o1.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+        int o2Annotation = Optional.ofNullable(o2.getAnnotation(Order.class)).map(Order::value).orElse(999999);
+        if (o1Annotation != o2Annotation) {
+            return Integer.compare(o1Annotation, o2Annotation);
+        }
+        return o1.getName().compareTo(o2.getName());
+    };
+
+    public static final Comparator<Method> METHOD_COMPARATOR = (o1, o2) -> {
         int o1Annotation = Optional.ofNullable(o1.getAnnotation(Order.class)).map(Order::value).orElse(999999);
         int o2Annotation = Optional.ofNullable(o2.getAnnotation(Order.class)).map(Order::value).orElse(999999);
         if (o1Annotation != o2Annotation) {
@@ -228,7 +285,7 @@ public class SpringUtil implements ApplicationContextAware, WebApplicationInitia
 
         List<Class<?>> list = context.classStream()
                 .filter(SpringUtil::hasSpringAnnotation)
-                .sorted(classComparator)
+                .sorted(CLASS_COMPARATOR)
                 .toList();
         loadClassLoader(list);
     }

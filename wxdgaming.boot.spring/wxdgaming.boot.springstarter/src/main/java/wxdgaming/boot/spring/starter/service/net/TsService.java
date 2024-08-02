@@ -3,6 +3,7 @@ package wxdgaming.boot.spring.starter.service.net;
 import io.netty.buffer.ByteBuf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import wxdgaming.boot.net.ts.TcpServer;
 import wxdgaming.boot.net.ts.TcpSession;
@@ -42,6 +43,7 @@ public class TsService extends TcpServer<TcpSession> {
         super.close();
     }
 
+    @Order(2)
     @OnStart
     @Override public void open() {
         super.open();
