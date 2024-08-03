@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.data.user;
+package wxdgaming.boot.spring.data.entity.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

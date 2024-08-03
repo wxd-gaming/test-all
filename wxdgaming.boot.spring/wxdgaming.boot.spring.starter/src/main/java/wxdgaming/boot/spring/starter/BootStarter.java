@@ -21,7 +21,6 @@ import wxdgaming.boot.spring.starter.service.batis.RedisService;
 @EnableAsync
 @EnableScheduling
 @EntityScan("wxdgaming.boot.spring.data")
-@EnableTransactionManagement
 @EnableJpaRepositories("wxdgaming.boot.spring.data")
 @SpringBootApplication(
         scanBasePackages = {"wxdgaming.boot.spring"},

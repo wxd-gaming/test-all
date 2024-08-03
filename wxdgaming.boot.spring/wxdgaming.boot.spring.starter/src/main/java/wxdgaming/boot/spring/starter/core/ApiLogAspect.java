@@ -1,5 +1,6 @@
 package wxdgaming.boot.spring.starter.core;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -7,10 +8,13 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import wxdgaming.boot.spring.data.entity.log.ApiLog;
+import wxdgaming.boot.spring.data.repository.ApiLogRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +32,8 @@ import java.util.stream.Stream;
 @Order(20)
 @Component
 public class ApiLogAspect {
+
+     // @Autowired ApiLogRepository apiLogRepository;
 
     /**
      * 切入连接点，使用固定 controller层下的所有文件

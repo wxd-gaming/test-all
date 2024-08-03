@@ -1,47 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/../spring-lua/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/local-db/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/local-db/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.core/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.gamesr-script/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.gamesr-script/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.gamesr/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.gamesr/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.loginsr-script/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.loginsr-script/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.loginsr/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.loginsr/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.message/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.message/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.robotsr-script/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.robotsr-script/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.robotsr/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.robotsr/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.web-script/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.web-script/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.web/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../wxdgaming-mmoarpg/wxdgaming.mmo.web/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wxdgaming.boot.spring.data/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/wxdgaming.boot.spring.starter/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/jetty/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/jetty/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming-reactor/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming-reactor/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.server-scripts/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.server-scripts/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/../../wxdgaming-chargame/wxdgaming.chargame.server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming.boot/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming.boot/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../../wxdgaming.boot/wxdgaming.boot.agent/src/main/java" charset="UTF-8" />

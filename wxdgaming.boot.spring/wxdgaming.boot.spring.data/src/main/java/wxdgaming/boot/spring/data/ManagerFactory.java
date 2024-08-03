@@ -17,18 +17,18 @@ public class ManagerFactory {
 
     @Resource(name = "dsOne") DataSource dsOne;
 
-    @Autowired JpaProperties jpaProperties;
+    @Resource JpaProperties jpaProperties;
 
 
-    @Bean
-    @Primary
-    LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(dsOne)
-                .properties(jpaProperties.getProperties())
-                .packages("wxdgaming.boot.spring.data")
-                .persistenceUnit("pu1")
-                .build();
-    }
+    // @Bean
+    // @Primary
+    // LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
+    //     return builder
+    //             .dataSource(dsOne)
+    //             .properties(jpaProperties.getProperties())
+    //             .packages("wxdgaming.boot.spring.data")
+    //             .persistenceUnit("pu1")
+    //             .build();
+    // }
 
 }
