@@ -3,6 +3,7 @@ package wxdgaming.boot.spring.starter.config.thread;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class ThreadPoolConfig implements Serializable {
 
     @Override public String toString() {
         return String.format(
-                "{\n\n%20s = %s\n%20s = %s\n%20s = %s}",
+                "\n{\n%20s = %s\n%20s = %s\n%20s = %s\n}",
                 "vtExecutor", vtExecutor,
                 "defaultExecutor", defaultExecutor,
                 "logicExecutor", logicExecutor
@@ -68,10 +69,7 @@ public class ThreadPoolConfig implements Serializable {
         }
 
         @Override public String toString() {
-            return "{" +
-                    "coreSize=" + coreSize +
-                    ", maxSize=" + maxSize +
-                    '}';
+            return String.format("{coreSize=%3s, maxSize=%3s}", coreSize, maxSize);
         }
     }
 

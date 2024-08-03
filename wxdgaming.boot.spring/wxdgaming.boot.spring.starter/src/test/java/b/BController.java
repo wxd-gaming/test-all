@@ -2,6 +2,7 @@ package b;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 测试
@@ -16,6 +17,7 @@ public class BController {
         System.out.println("BController");
     }
 
+    @ResponseBody
     @RequestMapping("/hello")
     public String hello() {
         return "hello world";

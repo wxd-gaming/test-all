@@ -20,7 +20,7 @@ public class DataSourceConfig {
     @Bean
     @Primary
     @ConfigurationProperties("spring.datasource")
-    public DataSource dsOne() {
+    public DataSource datasource() {
         return DruidDataSourceBuilder.create().build();
     }
 }

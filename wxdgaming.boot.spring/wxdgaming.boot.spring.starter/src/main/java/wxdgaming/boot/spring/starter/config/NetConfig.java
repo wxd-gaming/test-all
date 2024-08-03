@@ -14,7 +14,7 @@ import wxdgaming.boot.spring.starter.config.bean.TcpConfig;
 @Slf4j
 @Data
 @Component
-@DependsOn(value = {"threadPoolConfig"})
+// @DependsOn(value = {"threadPoolConfig"})
 @ConfigurationProperties(prefix = "net-config")
 public class NetConfig {
 

@@ -15,9 +15,9 @@ import javax.sql.DataSource;
 @Configuration
 public class ManagerFactory {
 
-    @Resource(name = "dsOne") DataSource dsOne;
-
-    @Resource JpaProperties jpaProperties;
+    // @Resource(name = "dsOne") DataSource dsOne;
+    //
+    // @Resource JpaProperties jpaProperties;
 
 
     // @Bean

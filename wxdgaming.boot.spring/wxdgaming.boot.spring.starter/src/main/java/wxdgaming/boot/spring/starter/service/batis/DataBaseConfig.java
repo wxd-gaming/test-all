@@ -1,10 +1,9 @@
-package wxdgaming.boot.spring.starter.config;
+package wxdgaming.boot.spring.starter.service.batis;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import wxdgaming.boot.batis.DbConfig;
 
@@ -19,8 +18,7 @@ import java.io.Serializable;
 @Slf4j
 @Data
 @Component
-@DependsOn(value = {"threadPoolConfig"})
-@ConfigurationProperties(prefix = "database")
+@ConfigurationProperties(prefix = "wxdgaming.database")
 public class DataBaseConfig implements Serializable {
 
     private DbConfig mysql = null;

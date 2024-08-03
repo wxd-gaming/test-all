@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter.service.batis;
+package wxdgaming.boot.spring.starter.service.batis.mongo;
 
 import wxdgaming.boot.batis.DbConfig;
 import wxdgaming.boot.batis.mongodb.MongoDataHelper;

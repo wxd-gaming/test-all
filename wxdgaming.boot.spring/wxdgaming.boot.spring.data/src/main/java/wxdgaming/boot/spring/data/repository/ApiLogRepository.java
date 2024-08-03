@@ -1,7 +1,7 @@
 package wxdgaming.boot.spring.data.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import wxdgaming.boot.spring.data.BaseRepository;
 import wxdgaming.boot.spring.data.entity.log.ApiLog;
 
 /**
@@ -11,6 +11,6 @@ import wxdgaming.boot.spring.data.entity.log.ApiLog;
  * @version: 2024-08-03 10:36
  **/
 @Repository
-public interface ApiLogRepository extends JpaRepository<ApiLog, Long> {
+public interface ApiLogRepository extends BaseRepository<ApiLog, Long> {
 
 }

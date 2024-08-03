@@ -1,47 +1,25 @@
-database:
-  mysql:
-    name: "db-test"
-    show_sql: false
-    createDbBase: true
-    connectionPool: false
-    batchSizeThread: 0
-    dbHost: 127.0.0.1
-    dbPort: 3306
-    dbBase: test
-    dbUser: root
-    dbPwd: test
+wxdgaming:
+  database:
+    mysql:
+      name: "db-test"
+      show_sql: false
+      createDbBase: true
+      connectionPool: false
+      batchSizeThread: 0
+      dbHost: 127.0.0.1
+      dbPort: 3306
+      dbBase: test
+      dbUser: root
+      dbPwd: test
 
-  mysql1:
-    name: "db-logic"
-    show_sql: false
-    createDbBase: true
-    connectionPool: false
-    batchSizeThread: 0
-    dbHost: 127.0.0.1
-    dbPort: 3306
-    dbBase: logic
-    dbUser: root
-    dbPwd: test
-
-  mysql3:
-    name: "db-logic"
-    show_sql: false
-    createDbBase: true
-    connectionPool: false
-    batchSizeThread: 0
-    dbHost: 127.0.0.1
-    dbPort: 3306
-    dbBase: logic
-    dbUser: root
-    dbPwd: test
-
-
-
-
-
-
-
-
-
-
-
+    mysql1:
+      name: "db-logic"
+      show_sql: false
+      createDbBase: true
+      connectionPool: false
+      batchSizeThread: 0
+      dbHost: 127.0.0.1
+      dbPort: 3306
+      dbBase: logic
+      dbUser: root
+      dbPwd: test

@@ -1,29 +1,25 @@
 package wxdgaming.boot.spring.starter;
 
+import boot.b.BScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import wxdgaming.boot.agent.loader.ClassDirLoader;
-import wxdgaming.boot.core.str.StringUtil;
-import wxdgaming.boot.core.timer.MyClock;
+import wxdgaming.boot.spring.data.DataScan;
 import wxdgaming.boot.spring.starter.config.SpringUtil;
 import wxdgaming.boot.spring.starter.i.OnStart;
-import wxdgaming.boot.spring.starter.service.batis.RedisService;
 
 @EnableAsync
 @EnableScheduling
 @EntityScan("wxdgaming.boot.spring.data")
 @EnableJpaRepositories("wxdgaming.boot.spring.data")
 @SpringBootApplication(
-        scanBasePackages = {"wxdgaming.boot.spring"},
+        scanBasePackageClasses = {BScan.class, BootScan.class, DataScan.class},
         exclude = {
                 DataSourceAutoConfiguration.class,
                 MongoAutoConfiguration.class

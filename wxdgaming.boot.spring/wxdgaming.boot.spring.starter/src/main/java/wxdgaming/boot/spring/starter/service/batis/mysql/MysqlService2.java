@@ -1,11 +1,10 @@
-package wxdgaming.boot.spring.starter.service.batis;
+package wxdgaming.boot.spring.starter.service.batis.mysql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import wxdgaming.boot.batis.sql.mysql.MysqlDataHelper;
-import wxdgaming.boot.spring.starter.config.DataBaseConfig;
+import wxdgaming.boot.spring.starter.service.batis.DataBaseConfig;
 
 /**
  * mysql
@@ -14,12 +13,12 @@ import wxdgaming.boot.spring.starter.config.DataBaseConfig;
  * @version: 2023-12-11 18:18
  **/
 @Component
-@ConditionalOnProperty(value = "database.mysql1.dbHost")
-public class MysqlService1 extends MysqlDataHelper {
+@ConditionalOnProperty(value = "wxdgaming.database.mysql2.dbHost")
+public class MysqlService2 extends MysqlDataHelper {
 
     @Autowired
-    public MysqlService1(DataBaseConfig dataBaseConfig) {
-        super(dataBaseConfig.getMysql1());
+    public MysqlService2(DataBaseConfig dataBaseConfig) {
+        super(dataBaseConfig.getMysql2());
     }
 
 

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import wxdgaming.boot.core.threading.Executors;
 
 import java.io.Serializable;
 
@@ -26,5 +27,9 @@ public class TaskThreadPoolConfig implements Serializable {
     private int keepAliveSeconds;
 
     private int queueCapacity;
+
+    public TaskThreadPoolConfig() {
+
+    }
 
 }

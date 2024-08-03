@@ -1,10 +1,9 @@
-package wxdgaming.boot.spring.starter.service.batis;
+package wxdgaming.boot.spring.starter.service.batis.redis;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import wxdgaming.boot.batis.DbConfig;
 import wxdgaming.boot.batis.redis.RedisDataHelper;
+import wxdgaming.boot.spring.starter.service.batis.DataBaseConfig;
 
 /**
  * redis
@@ -13,11 +12,11 @@ import wxdgaming.boot.batis.redis.RedisDataHelper;
  * @version: 2023-12-11 18:19
  **/
 @Component
-@ConditionalOnProperty(value = "database.redis1.dbHost")
+@ConditionalOnProperty(value = "wxdgaming.database.redis1.dbHost")
 public class RedisService1 extends RedisDataHelper {
 
-    public RedisService1(DbConfig dbConfig) {
-        super(dbConfig);
+    public RedisService1(DataBaseConfig dbConfig) {
+        super(dbConfig.getRedis1());
     }
 
 }
