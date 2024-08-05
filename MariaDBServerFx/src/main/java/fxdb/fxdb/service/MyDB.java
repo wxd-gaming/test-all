@@ -1,4 +1,4 @@
-package example.db;
+package fxdb.fxdb.service;
 
 import ch.vorburger.exec.ManagedProcess;
 import ch.vorburger.exec.ManagedProcessException;
@@ -8,19 +8,23 @@ import ch.vorburger.mariadb4j.DBConfiguration;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class MyDB extends DB {
 
-    final Properties props;
-    final Timer timer = new Timer();
+    private String data_base;
+    private String user;
+    private String pwd;
+    int bak_Time = 0;
+    Timer timer = new Timer();
 
-    public MyDB(Properties props, DBConfiguration config) {
+    public MyDB(DBConfiguration config, String data_base, String user, String pwd, int bak_Time) {
         super(config);
-        this.props = props;
+        this.data_base = data_base;
+        this.user = user;
+        this.pwd = pwd;
         try {
             this.prepareDirectories();
         } catch (Exception e) {
@@ -51,20 +55,18 @@ public class MyDB extends DB {
 
     public void initDb() {
         try {
-            String database = props.getProperty("database");
-            String[] split = database.split(",|£¨");
+            String[] split = data_base.split(",|Ôºå");
             for (String dbName : split) {
-                createDB(dbName, props.getProperty("user"), props.getProperty("pwd"));
+                createDB(dbName, user, pwd);
             }
 
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-        int bak_Time = Integer.parseInt(props.getProperty("bak"));
-        initBakTimer(bak_Time);
+        initBakTimer();
     }
 
-    public void initBakTimer(int bak_Time) {
+    public void initBakTimer() {
         if (bak_Time > 0) {
 
             timer.scheduleAtFixedRate(
@@ -84,16 +86,13 @@ public class MyDB extends DB {
         try {
             String format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS").format(new Date());
 
-            String database = props.getProperty("database");
-            String[] split = database.split(",|£¨");
+            String[] split = data_base.split(",|Ôºå");
             for (String dbName : split) {
                 File outputFile = new File("data-base/bak/" + dbName + "/" + format + ".sql");
                 outputFile.getParentFile().mkdirs();
                 ManagedProcess managedProcess = dumpSQL(
                         outputFile,
-                        dbName,
-                        props.getProperty("user"),
-                        props.getProperty("pwd")
+                        dbName, user, pwd
                 );
                 try {
                     managedProcess.start();
@@ -103,7 +102,7 @@ public class MyDB extends DB {
                 try {
                     managedProcess.destroy();
                 } catch (Exception ignore) {}
-                System.out.println("±∏∑›£∫" + outputFile);
+                System.out.println("Â§á‰ªΩÔºö" + outputFile);
             }
         } catch (Exception e) {
             e.printStackTrace(System.err);
@@ -116,9 +115,12 @@ public class MyDB extends DB {
     }
 
     @Override public synchronized void stop() throws ManagedProcessException {
-        timer.cancel();
-        timer.purge();
-        /*±∏∑›ø…ƒ‹ª·ø®◊°*/
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+            timer = null;
+        }
+        /*ËøôÈáå‰ºöÂç°*/
         // bakSql();
         super.stop();
     }

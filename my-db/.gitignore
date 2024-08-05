@@ -36,20 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/.idea
-/ok.txt
-/mmoarpg-j21/ok.txt
-/mmoarpg-j21/.idea
-/mmoarpg-j21/LOG_PATH_IS_UNDEFINEDtarget
-/spring-test/target
-/spring-test/.idea
-/wxdgaming-mmoarpg/.idea
-/gvm/native-image
-/MariaDBServer/data-base
-/MariaDBServer/graalvm-win/exec
-/SpringMariaDBServer/data-base
-/MariaDBServerFx/data-base
-/MariaDBServerFx/.idea
-/MariaDBServerFx/db-ok.txt
-/MariaDBServerFx/graalvm-win/exec
-/MariaDBServerFx/graalvm-win/native-image
