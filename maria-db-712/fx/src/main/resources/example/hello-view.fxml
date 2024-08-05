@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" prefHeight="800" prefWidth="1200" spacing="20.0" xmlns="http://javafx.com/javafx/22"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="example.HelloController">
+    <padding>
+        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+    </padding>
+    <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+             minWidth="-Infinity" style="-fx-background-color: 999999;" tabClosingPolicy="UNAVAILABLE"
+             VBox.vgrow="ALWAYS">
+        <Tab text="设置">
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+                <children>
+                    <Label layoutX="41.0" layoutY="51.0" text="端口："/>
+                    <TextField fx:id="txt_port" layoutX="100.0" layoutY="45.0" text="3308"/>
+                    <Label layoutX="41.0" layoutY="78.0" prefHeight="15.0" prefWidth="48.0" text="用户："/>
+                    <TextField fx:id="txt_user" layoutX="100.0" layoutY="109.0" text="root"/>
+                    <Label layoutX="41.0" layoutY="113.0" text="密码："/>
+                    <TextField fx:id="txt_pwd" layoutX="100.0" layoutY="74.0" text="root"/>
+                    <Button layoutX="100.0" layoutY="144.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0"
+                            fx:id="btn_stop_db" onMouseClicked="#onStopDb" text="停止"/>
+                    <Button fx:id="btn_restart_db" layoutX="100.0" layoutY="177.0" mnemonicParsing="false"
+                            onMouseClicked="#onReStartDb" text="重启服务"/>
+                    <Button fx:id="btn_close_window" layoutX="100.0" layoutY="210.0" mnemonicParsing="false"
+                            onMouseClicked="#onCloseWindow" text="退出程序"/>
+                </children>
+            </AnchorPane>
+        </Tab>
+        <Tab text="输出">
+            <AnchorPane minHeight="0.0" minWidth="0.0">
+                <TextArea fx:id="textAreaGame" layoutX="255.0" layoutY="96.0" style="-fx-background-color: 99999;"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                          AnchorPane.topAnchor="0.0"/>
+            </AnchorPane>
+        </Tab>
+    </TabPane>
+</VBox>
