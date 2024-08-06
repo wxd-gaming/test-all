@@ -34,8 +34,8 @@ set option=%option% --trace-object-instantiation=java.util.jar.JarFile
 
 set option=%option% --add-exports=java.base/java.nio=ALL-UNNAMED
 set option=%option% --add-opens java.base/java.nio=ALL-UNNAMED
-set option=%option% -Dlogback.configurationFile=logback-gbk.xml
-@REM set option=%option% -Dfile.encoding=GBK
+set option=%option% -Dlogback.configurationFile=logback.xml
+set option=%option% -Dfile.encoding=GBK
 set option=%option% -Dio.netty.tryReflectionSetAccessible=true
 :: 关闭控制台窗口
 set option=%option% -H:NativeLinkerOption=/SUBSYSTEM:WINDOWS
@@ -44,4 +44,4 @@ set option=%option% -H:NativeLinkerOption=/ENTRY:mainCRTStartup
 
 echo %option%
 
-C:\\java\\graalvm-jdk-21.0.3+7.1\\bin\\native-image.cmd %option% -H:ConfigurationFileDirectories=target/winfm/config -cp "target/winfm/mysql-server.jar;target/winfm/lib/*" -jar target/winfm/mysql-server.jar target/winfm/mysql-server-win
+C:\\java\\graalvm-jdk-21.0.3+7.1\\bin\\native-image.cmd %option% -H:ConfigurationFileDirectories=target/winfm/config -cp "target/winfm/mysql-server.jar;target/winfm/lib/*" -jar target/winfm/mysql-server.jar target/winfm/mysql-server

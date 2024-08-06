@@ -12,9 +12,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class Main {
+public class ConsoleMain {
 
-    static Logger log = LoggerFactory.getLogger(Main.class);
+    static Logger log = LoggerFactory.getLogger(ConsoleMain.class);
 
     public static void main(String[] args) throws Exception {
         if (args.length > 0) {

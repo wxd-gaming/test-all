@@ -9,9 +9,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class MainApplication {
+public class ApplicationMain {
 
     public static void main(String[] args) throws Exception {
+
         LogbackResetTimeFilter.out = true;
         if (args.length > 0) {
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
@@ -23,7 +24,7 @@ public class MainApplication {
 
             CompletableFuture.runAsync(() -> {
                 try {
-                    Thread.sleep(30_000);
+                    Thread.sleep(130_000);
                     DBFactory.getIns().stop();
                     Runtime.getRuntime().halt(0);
                 } catch (Exception ignore) {}

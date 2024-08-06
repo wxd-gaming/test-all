@@ -73,7 +73,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>example.console.Main</mainClass>
+                            <mainClass>example.console.ConsoleMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
