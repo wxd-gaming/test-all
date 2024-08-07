@@ -14,18 +14,20 @@
         <Tab text="设置">
             <AnchorPane minHeight="0.0" minWidth="0.0">
                 <children>
-                    <Label layoutX="41.0" layoutY="51.0" text="端口："/>
+                    <Label layoutX="35.0" layoutY="18.0" text="web端口："/>
+                    <TextField fx:id="txt_webPort" layoutX="100.0" layoutY="14.0" text="19902"/>
+                    <Label layoutX="56.0" layoutY="51.0" text="端口："/>
                     <TextField fx:id="txt_port" layoutX="100.0" layoutY="45.0" text="3308"/>
-                    <Label layoutX="41.0" layoutY="78.0" prefHeight="15.0" prefWidth="48.0" text="用户："/>
+                    <Label layoutX="56.0" layoutY="78.0" prefHeight="15.0" prefWidth="38.0" text="用户："/>
                     <TextField fx:id="txt_user" layoutX="100.0" layoutY="109.0" text="root"/>
-                    <Label layoutX="41.0" layoutY="113.0" text="密码："/>
+                    <Label layoutX="56.0" layoutY="113.0" text="密码："/>
                     <TextField fx:id="txt_pwd" layoutX="100.0" layoutY="74.0" text="root"/>
-                    <Button layoutX="100.0" layoutY="144.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="64.0"
-                            onMouseClicked="#onStopDb" text="停止"/>
-                    <Button layoutX="100.0" layoutY="177.0" mnemonicParsing="false"
-                            onMouseClicked="#onReStartDb" text="重启服务"/>
-                    <Button layoutX="100.0" layoutY="210.0" mnemonicParsing="false"
-                            onMouseClicked="#onCloseWindow" text="退出程序"/>
+                    <Button layoutX="100.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#onStopDb"
+                            prefHeight="23.0" prefWidth="64.0" text="停止"/>
+                    <Button layoutX="100.0" layoutY="177.0" mnemonicParsing="false" onMouseClicked="#onReStartDb"
+                            text="重启服务"/>
+                    <Button layoutX="100.0" layoutY="210.0" mnemonicParsing="false" onMouseClicked="#onCloseWindow"
+                            text="退出程序"/>
                 </children>
             </AnchorPane>
         </Tab>

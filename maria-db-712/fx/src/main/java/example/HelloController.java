@@ -14,11 +14,11 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 public class HelloController {
 
-
     @FXML private TextArea textAreaGame;
     @FXML private TextField txt_port;
     @FXML private TextField txt_user;
     @FXML private TextField txt_pwd;
+    @FXML private TextField txt_webPort;
 
     Thread hook;
 
@@ -41,7 +41,7 @@ public class HelloController {
         CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(500);
-                WebService.getIns().start();
+                WebService.getIns().start(Integer.parseInt(txt_webPort.getText()));
                 onReStartDb();
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -57,7 +57,7 @@ public class HelloController {
                 txt_user.getText(),
                 txt_pwd.getText()
         );
-        log.info("启动成功");
+        DBFactory.getIns().print();
     }
 
     public void onStopDb() throws Exception {
@@ -65,6 +65,13 @@ public class HelloController {
     }
 
     public void onCloseWindow() {
+        /*增加30秒强制退出*/
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(30_000);
+                Runtime.getRuntime().halt(0);
+            } catch (Exception ignore) {}
+        });
         hook.start();
     }
 

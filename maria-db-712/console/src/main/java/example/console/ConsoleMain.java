@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 public class ConsoleMain {
@@ -25,17 +26,10 @@ public class ConsoleMain {
                 System.out.println(string + " - " + resource);
             }
         }
-        DBFactory.getIns().init();
-
-        WebService.getIns().start();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("====================================================").append("\n");
-        stringBuilder.append("").append("\n");
-        stringBuilder.append("数据库服务器启动完成  - " + "127.0.0.1:" + DBFactory.getIns().getMyDB().getConfiguration().getPort()).append("\n");
-        stringBuilder.append("敲回车键可以关闭服务").append("\n");
-        stringBuilder.append("").append("\n");
-        stringBuilder.append("====================================================").append("\n");
-        log.info(stringBuilder.toString());
+        Properties properties = DBFactory.getIns().init();
+        int webPort = Integer.parseInt(properties.getProperty("web-port"));
+        WebService.getIns().start(webPort);
+        DBFactory.getIns().print();
         Thread thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 log.info("敲回车，等待程序退出");
@@ -71,6 +65,13 @@ public class ConsoleMain {
             thread.join();
         } catch (Exception ignore) {}
 
+        /*增加30秒强制退出*/
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(30_000);
+                Runtime.getRuntime().halt(0);
+            } catch (Exception ignore) {}
+        });
         hook.run();
     }
 

@@ -32,7 +32,7 @@ public class DBFactory {
     private DBConfigurationBuilder configBuilder;
     private MyDB myDB;
 
-    public void init() throws Exception {
+    public Properties init() throws Exception {
         Properties props = new Properties();
         props.load(Files.newInputStream(Paths.get("my.ini")));
         init(
@@ -41,10 +41,10 @@ public class DBFactory {
                 props.getProperty("user"),
                 props.getProperty("pwd")
         );
+        return props;
     }
 
     public void init(String dataBase, int port, String user, String pwd) throws Exception {
-
         configBuilder = DBConfigurationBuilder.newBuilder();
         configBuilder.setPort(port); // OR, default: setPort(0); => autom. detect free port
         configBuilder.setBaseDir("data-base/"); // just an example
@@ -55,8 +55,8 @@ public class DBFactory {
         write(1);
     }
 
-    public static void write(int state) throws IOException {
-        String json = "{\"PID\":" + fetchProcessId() + ", \"states\":" + state + "}";
+    public void write(int state) throws IOException {
+        String json = "{\"PID\":" + fetchProcessId() + ", \"states\":" + state + ", \"web-port\":" + WebService.getIns().getPort() + "}";
         Files.write(
                 ok.toPath(),
                 json.getBytes(StandardCharsets.UTF_8),
@@ -65,9 +65,19 @@ public class DBFactory {
         );
     }
 
+    public void print() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("====================================================").append("\n");
+        stringBuilder.append("").append("\n");
+        stringBuilder.append(" db service  - " + "127.0.0.1:" + myDB.getConfiguration().getPort()).append("\n");
+        stringBuilder.append("web service  - " + "127.0.0.1:" + WebService.getIns().getPort()).append("\n");
+        stringBuilder.append("").append("\n");
+        stringBuilder.append("====================================================").append("\n");
+        log.info(stringBuilder.toString());
+    }
+
 
     public void stop() {
-        log.info("addShutdownHook");
         try {
             write(0);
         } catch (Exception ignore) {}
@@ -76,9 +86,9 @@ public class DBFactory {
                 getMyDB().stop();
             }
         } catch (Throwable e) {
-            log.info("关闭服务 " + e);
+            log.info("db service close {}", e.toString());
         }
-        log.info("关闭服务完成");
+        log.info("db service close");
     }
 
     public static String fetchProcessId() {

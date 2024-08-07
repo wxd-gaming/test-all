@@ -14,16 +14,19 @@ import java.nio.charset.StandardCharsets;
  * @version: 2024-07-29 16:46
  **/
 @Slf4j
+@Getter
 public class WebService {
 
     @Getter private static final WebService ins = new WebService();
 
     WebService() {}
 
-    HttpServer httpServer;
+    private int port;
+    private HttpServer httpServer;
 
-    public void start() throws Exception {
-        httpServer = HttpServer.create(new InetSocketAddress(19902), 0);
+    public void start(int port) throws Exception {
+        this.port = port;
+        httpServer = HttpServer.create(new InetSocketAddress(port), 0);
 
         HttpHandler httpHandler = exchange -> {
 
@@ -47,8 +50,8 @@ public class WebService {
             httpHandler.handle(exchange);
         });
         httpServer.start();
-        log.info("http://localhost:19902/api/db/stop");
-        log.info("http://localhost:19902/api/db/check");
+        log.info("http://localhost:{}/api/db/stop", this.port);
+        log.info("http://localhost:{}/api/db/check", this.port);
     }
 
 }
