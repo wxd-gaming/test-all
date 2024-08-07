@@ -1,7 +1,7 @@
-package example;
+package db712.winfm;
 
-import db.server.DBFactory;
-import db.server.WebService;
+import db712.server.DBFactory;
+import db712.server.WebService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -9,8 +9,6 @@ import javafx.scene.control.TextField;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -23,6 +21,7 @@ public class HelloController {
     @FXML private TextField txt_user;
     @FXML private TextField txt_pwd;
     @FXML private TextField txt_webPort;
+    @FXML private TextField txt_database;
 
     Thread hook;
 
@@ -53,26 +52,31 @@ public class HelloController {
                     };
                     System.setOut(printStream);
                 }
-                WebService.getIns().start(Integer.parseInt(txt_webPort.getText()));
+                WebService.getIns().setPort(Integer.parseInt(txt_webPort.getText()));
                 onReStartDb();
+                WebService.getIns().start();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
     }
 
-    public void onReStartDb() throws Exception {
+    public void onReStartDb() {
         onStopDb();
-        DBFactory.getIns().init(
-                "local_712_xw",
-                Integer.parseInt(txt_port.getText()),
-                txt_user.getText(),
-                txt_pwd.getText()
-        );
-        DBFactory.getIns().print();
+        try {
+            DBFactory.getIns().init(
+                    txt_database.getText(),
+                    Integer.parseInt(txt_port.getText()),
+                    txt_user.getText(),
+                    txt_pwd.getText()
+            );
+            DBFactory.getIns().print();
+        } catch (Exception e) {
+            log.error("启动异常", e);
+        }
     }
 
-    public void onStopDb() throws Exception {
+    public void onStopDb() {
         DBFactory.getIns().stop();
     }
 

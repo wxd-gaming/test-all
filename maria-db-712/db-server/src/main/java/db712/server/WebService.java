@@ -1,9 +1,10 @@
-package db.server;
+package db712.server;
 
 
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetSocketAddress;
@@ -21,11 +22,10 @@ public class WebService {
 
     WebService() {}
 
-    private int port;
+    @Setter private int port;
     private HttpServer httpServer;
 
-    public void start(int port) throws Exception {
-        this.port = port;
+    public void start() throws Exception {
         httpServer = HttpServer.create(new InetSocketAddress(port), 0);
 
         HttpHandler httpHandler = exchange -> {
@@ -44,6 +44,7 @@ public class WebService {
         httpServer.createContext("/api/db/stop", exchange -> {
             httpHandler.handle(exchange);
             DBFactory.getIns().stop();
+            Runtime.getRuntime().halt(0);
         });
 
         httpServer.createContext("/api/db/check", exchange -> {

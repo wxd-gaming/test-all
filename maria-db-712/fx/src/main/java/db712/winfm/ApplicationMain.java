@@ -1,8 +1,6 @@
-package example;
+package db712.winfm;
 
-import db.server.DBFactory;
-import db.server.GraalvmUtil;
-import db.server.LogbackResetTimeFilter;
+import db712.server.*;
 import javafx.application.Application;
 
 import java.net.URL;
@@ -22,9 +20,15 @@ public class ApplicationMain {
                 System.out.println(string + " - " + resource);
             }
 
+            ReflectAction reflectAction = ReflectAction.of();
+            reflectAction.action(MyDB.class, false);
+            reflectAction.action(DBFactory.class, false);
+            reflectAction.action(HelloApplication.class, false);
+            reflectAction.action(HelloController.class, false);
+
             CompletableFuture.runAsync(() -> {
                 try {
-                    Thread.sleep(130_000);
+                    Thread.sleep(10_000);
                     DBFactory.getIns().stop();
                     Runtime.getRuntime().halt(0);
                 } catch (Exception ignore) {}

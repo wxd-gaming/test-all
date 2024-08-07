@@ -1,4 +1,4 @@
-package db.server;
+package db712.server;
 
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import lombok.Getter;
@@ -10,9 +10,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Properties;
 
 /**
  * 数据库工厂
@@ -32,23 +30,12 @@ public class DBFactory {
     private DBConfigurationBuilder configBuilder;
     private MyDB myDB;
 
-    public Properties init() throws Exception {
-        Properties props = new Properties();
-        props.load(Files.newInputStream(Paths.get("my.ini")));
-        init(
-                props.getProperty("database"),
-                Integer.parseInt(props.getProperty("port")),
-                props.getProperty("user"),
-                props.getProperty("pwd")
-        );
-        return props;
-    }
-
     public void init(String dataBase, int port, String user, String pwd) throws Exception {
         configBuilder = DBConfigurationBuilder.newBuilder();
         configBuilder.setPort(port); // OR, default: setPort(0); => autom. detect free port
         configBuilder.setBaseDir("data-base/"); // just an example
         configBuilder.setDataDir("data-base/data");
+        configBuilder.setDefaultCharacterSet("utf8mb4");
 
         myDB = new MyDB(configBuilder.build(), dataBase, user, pwd, 60);
         myDB.start();

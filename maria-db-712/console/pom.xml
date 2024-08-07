@@ -73,7 +73,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
                             <useUniqueVersions>false</useUniqueVersions>
-                            <mainClass>example.console.ConsoleMain</mainClass>
+                            <mainClass>db712.console.ConsoleMain</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

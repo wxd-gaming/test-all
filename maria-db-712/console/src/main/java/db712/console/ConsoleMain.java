@@ -1,14 +1,14 @@
-package example.console;
+package db712.console;
 
-import db.server.DBFactory;
-import db.server.GraalvmUtil;
-import db.server.WebService;
+import db712.server.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
@@ -25,11 +25,21 @@ public class ConsoleMain {
                 URL resource = contextClassLoader.getResource(string);
                 System.out.println(string + " - " + resource);
             }
+            ReflectAction reflectAction = ReflectAction.of();
+            reflectAction.action(MyDB.class, false);
+            reflectAction.action(DBFactory.class, false);
         }
-        Properties properties = DBFactory.getIns().init();
-        int webPort = Integer.parseInt(properties.getProperty("web-port"));
-        WebService.getIns().start(webPort);
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get("my.ini")));
+        WebService.getIns().setPort(Integer.parseInt(properties.getProperty("web-port")));
+        DBFactory.getIns().init(
+                properties.getProperty("database"),
+                Integer.parseInt(properties.getProperty("port")),
+                properties.getProperty("user"),
+                properties.getProperty("pwd")
+        );
         DBFactory.getIns().print();
+        WebService.getIns().start();
         Thread thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 log.info("敲回车，等待程序退出");
