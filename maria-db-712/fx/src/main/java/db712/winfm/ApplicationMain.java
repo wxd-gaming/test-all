@@ -28,7 +28,7 @@ public class ApplicationMain {
 
             CompletableFuture.runAsync(() -> {
                 try {
-                    Thread.sleep(10_000);
+                    Thread.sleep(100_000);
                     DBFactory.getIns().stop();
                     Runtime.getRuntime().halt(0);
                 } catch (Exception ignore) {}
