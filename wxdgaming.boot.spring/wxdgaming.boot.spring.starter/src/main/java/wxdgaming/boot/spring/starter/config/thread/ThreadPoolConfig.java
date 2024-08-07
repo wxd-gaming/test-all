@@ -3,7 +3,6 @@ package wxdgaming.boot.spring.starter.config.thread;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -55,6 +54,7 @@ public class ThreadPoolConfig implements Serializable {
         JvmUtil.setProperty(JvmUtil.Logic_Executor_Max_Size, logicExecutor.maxSize);
     }
 
+    @Data
     public static class ThreadConfig {
 
         private int coreSize;
