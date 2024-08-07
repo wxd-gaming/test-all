@@ -61,13 +61,14 @@
         <!--encoder 默认配置为PatternLayoutEncoder-->
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf-8</charset>
         </encoder>
     </appender>
 
     <logger name="io.netty" level="info" additivity="true"/>
     <logger name="com.zaxxer.hikari" level="info" additivity="true"/>
     <logger name="org.mongodb.driver" level="info" additivity="true"/>
-    <logger name="ch.vorburger" level="ERROR" additivity="false"/>
+    <logger name="ch.vorburger" level="info" additivity="true"/>
 
     <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
     <root level="debug"> <!-- ERROR, WARN, INFO, DEBUG -->

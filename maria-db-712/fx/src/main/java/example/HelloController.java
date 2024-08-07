@@ -2,13 +2,17 @@ package example;
 
 import db.server.DBFactory;
 import db.server.WebService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -23,16 +27,6 @@ public class HelloController {
     Thread hook;
 
     public HelloController() throws Exception {
-        PrintStream printStream = new PrintStream(System.out) {
-            @Override public void println(String x) {
-                if (textAreaGame.getText().length() > 1024 * 1024 * 30) {
-                    int i = textAreaGame.getText().indexOf("\n");
-                    textAreaGame.setText(textAreaGame.getText().substring(i + 1));
-                }
-                textAreaGame.appendText(x + "\n");
-            }
-        };
-        System.setOut(printStream);
 
         hook = new Thread(() -> {
             DBFactory.getIns().stop();
@@ -41,6 +35,24 @@ public class HelloController {
         CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(500);
+                {
+                    /*TODO 必须要等他初始化完成*/
+                    PrintStream printStream = new PrintStream(System.out) {
+                        @Override public synchronized void println(String x) {
+                            Platform.runLater(() -> {
+                                /*委托给ui线程*/
+                                try {
+                                    if (textAreaGame.getText().length() > 1024 * 1024 * 30) {
+                                        String collect = textAreaGame.getText().lines().skip(100).collect(Collectors.joining(System.lineSeparator()));
+                                        textAreaGame.setText(collect);
+                                    }
+                                    textAreaGame.appendText(x + System.lineSeparator());
+                                } catch (Exception ignore) {}
+                            });
+                        }
+                    };
+                    System.setOut(printStream);
+                }
                 WebService.getIns().start(Integer.parseInt(txt_webPort.getText()));
                 onReStartDb();
             } catch (Exception e) {
