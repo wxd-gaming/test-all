@@ -63,6 +63,7 @@
             <pattern>${LOG_PATTERN}</pattern>
             <charset>GBK</charset>
         </encoder>
+        <target>System.out</target>
     </appender>
 
     <logger name="io.netty" level="info" additivity="true"/>
