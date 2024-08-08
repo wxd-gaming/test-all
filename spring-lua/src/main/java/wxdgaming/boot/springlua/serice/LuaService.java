@@ -8,7 +8,10 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import wxdgaming.boot.springlua.bean.LuaLogger;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,14 +31,22 @@ public class LuaService {
 
     private Globals globals;
 
-    public LuaService() {
+    private final LuaLogger logger;
+    final RedisTemplate<?, ?> redisTemplate;
 
+    @Autowired
+    public LuaService(LuaLogger logger, RedisTemplate<?, ?> redisTemplate) {
+        this.logger = logger;
+        this.redisTemplate = redisTemplate;
     }
 
     @PostConstruct
     public void init() throws IOException {
         this.globals = JsePlatform.standardGlobals();
         this.globals.set("responseUtil", CoerceJavaToLua.coerce(new ResponseUtil()));
+        this.globals.set("logger", CoerceJavaToLua.coerce(logger));
+        this.globals.set("redisTemplate", CoerceJavaToLua.coerce(redisTemplate));
+
         Files.walk(Path.of("lua"), 99)
                 .map(Path::toFile)
                 .filter(File::isFile)

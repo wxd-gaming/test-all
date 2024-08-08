@@ -3,25 +3,6 @@
 --- Created by troy-chen.
 --- DateTime: 2024/7/27 下午11:36
 ---
-
-function root(request, response, postBody)
-    responseUtil:responseText(response, "hello world")
-end
-
-function index(request, response, postBody)
-    print("")
-    print(request:getServletPath())
-    print("request = " .. tostring(request))
-    print("response = " .. tostring(response))
-    responseUtil:responseText(response, "lua -- dd")
-end
-
-function index3(request, response, postBody)
-    print("index3")
-    local obj = { error = 0, msg = "ok" };
-    responseUtil:responseObj(response, obj)
-end
-
 function api_test(request, response, postBody)
     print("api_test")
     responseUtil:responseText(response, "api_test")

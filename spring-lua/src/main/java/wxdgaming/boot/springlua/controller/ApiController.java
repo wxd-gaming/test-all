@@ -3,10 +3,11 @@ package wxdgaming.boot.springlua.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.luaj.vm2.LuaValue;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import wxdgaming.boot.springlua.data.repository.UserRepository;
 import wxdgaming.boot.springlua.serice.LuaService;
 
 import java.io.IOException;
@@ -20,8 +21,12 @@ public class ApiController {
 
     final LuaService luaService;
 
-    @Autowired
-    public ApiController(LuaService luaService) {
+    final RedisTemplate<?, ?> redisTemplate;
+    final UserRepository userRepository;
+
+    public ApiController(UserRepository userRepository, RedisTemplate<?, ?> redisTemplate, LuaService luaService) {
+        this.userRepository = userRepository;
+        this.redisTemplate = redisTemplate;
         this.luaService = luaService;
     }
 
