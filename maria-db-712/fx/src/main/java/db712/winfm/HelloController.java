@@ -4,12 +4,10 @@ import db712.server.DBFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.PrintStream;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -32,7 +30,7 @@ public class HelloController {
                 {
                     /*TODO 必须要等他初始化完成*/
                     PrintStream printStream = new PrintStream(System.out) {
-                        @Override public synchronized void println(String x) {
+                        @Override public void print(String x) {
                             Platform.runLater(() -> {
                                 /*委托给ui线程*/
                                 try {

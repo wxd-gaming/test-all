@@ -54,6 +54,7 @@ public class WebService {
         httpServer.start();
         log.info("http://localhost:{}/api/db/stop", this.port);
         log.info("http://localhost:{}/api/db/check", this.port);
+        log.info("http://localhost:{}/api/db/show", this.port);
     }
 
     public void initShow() {

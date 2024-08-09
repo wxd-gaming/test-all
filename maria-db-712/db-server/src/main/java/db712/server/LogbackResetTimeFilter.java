@@ -1,6 +1,8 @@
 package db712.server;
 
+import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.classic.spi.ThrowableProxy;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
 
@@ -26,6 +28,12 @@ public class LogbackResetTimeFilter extends Filter<LoggingEvent> implements Seri
     @Override public FilterReply decide(LoggingEvent event) {
         if (out) {
             System.out.println(event.getFormattedMessage());
+            IThrowableProxy ithrowableProxy = event.getThrowableProxy();
+            if (ithrowableProxy != null) {
+                ThrowableProxy throwableProxy = (ThrowableProxy) ithrowableProxy;
+                Throwable throwable = throwableProxy.getThrowable();
+                throwable.printStackTrace(System.out);
+            }
         }
         return FilterReply.NEUTRAL;
     }
