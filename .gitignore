@@ -48,3 +48,11 @@ build/
 /MariaDBServer/data-base
 /MariaDBServer/graalvm-win/exec
 /SpringMariaDBServer/data-base
+/MariaDBServerFx/data-base
+/MariaDBServerFx/.idea
+/MariaDBServerFx/db-ok.txt
+/MariaDBServerFx/graalvm-win/exec
+/MariaDBServerFx/graalvm-win/native-image
+/maria-db-712/.idea
+/maria-db-712/data-base
+/maria-db-712/db-ok.txt

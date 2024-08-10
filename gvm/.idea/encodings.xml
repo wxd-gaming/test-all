@@ -9,6 +9,11 @@
     <file url="file://$PROJECT_DIR$/c/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/win/graalvm-image-start-all.bat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/win/graalvm-image.bat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/win/graalvm-package-server.bat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/win/graalvm-package.bat" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/win/package.bat" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

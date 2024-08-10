@@ -3,7 +3,9 @@
     <!--关闭自身日志-->
     <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
     <property name="LOG_PATH" value="target/logs"/>
-    <property name="LOG_PATTERN" value="[%d{MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%C{0}#%M:%L] - %msg%n"/>
+<!--    <property name="LOG_PATTERN" value="[%d{MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%C{0}#%M:%L] - %msg%n"/>-->
+    <property name="LOG_PATTERN" value="[%d{MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger#%M:%L] - %msg%n"/>
+
     <!-- 日志记录器，日期滚动记录 -->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文件的路径及文件名 -->
@@ -53,8 +55,13 @@
         </encoder>
     </appender>
 
-    <logger name="io.netty" level="INFO" additivity="false"/>
-    <logger name="org.springframework" level="DEBUG" additivity="false"/>
+    <logger name="io.netty" level="INFO" additivity="true"/>
+    <logger name="io.lettuce" level="INFO" additivity="true"/>
+    <logger name="org.jboss" level="INFO" additivity="true"/>
+    <logger name="reactor.util" level="INFO" additivity="true"/>
+    <logger name="org.hibernate" level="INFO" additivity="true"/>
+    <logger name="org.springframework" level="info" additivity="true"/>
+<!--    <logger name="_org.springframework" level="info" additivity="true"/>-->
 
     <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
     <root level="DEBUG"> <!-- ERROR, WARN, INFO, DEBUG -->
