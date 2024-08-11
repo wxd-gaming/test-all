@@ -36,7 +36,7 @@ public class ApiController {
         return "ok";
     }
 
-    @RequestMapping("/**")
+    @RequestMapping("/lua/*")
     public void all(HttpServletRequest request, HttpServletResponse response, @RequestBody(required = false) String body) throws IOException {
         String servletPath = request.getServletPath();
         if (servletPath.startsWith("/"))
