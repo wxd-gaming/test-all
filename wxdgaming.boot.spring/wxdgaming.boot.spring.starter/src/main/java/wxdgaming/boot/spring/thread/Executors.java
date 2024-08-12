@@ -1,4 +1,4 @@
-package wxdgaming.boot.spring.starter.config.thread;
+package wxdgaming.boot.spring.thread;
 
 /**
  * 线程处理器
