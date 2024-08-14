@@ -4,6 +4,7 @@ import db712.server.*;
 import javafx.application.Application;
 
 import java.net.URL;
+import java.net.http.HttpClient;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -14,7 +15,6 @@ public class ApplicationMain {
     }
 
     public static void main(String[] args) throws Exception {
-
         LogbackResetTimeFilter.out = true;
         if (javaClassPath() != null && javaClassPath().contains(".jar")) {
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();

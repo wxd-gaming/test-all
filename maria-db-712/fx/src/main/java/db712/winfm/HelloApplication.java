@@ -19,7 +19,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -28,13 +32,14 @@ import java.util.concurrent.CompletableFuture;
 public class HelloApplication extends Application {
 
     final String title = "712引擎数据库服务";
+    final String iconName = "db-icon.png";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         setIcon(primaryStage);
 
-        Image image_logo = new Image("icon.jpg");
+        Image image_logo = new Image(iconName);
         /*阻止停止运行*/
         Platform.setImplicitExit(false);
         WebService.getIns().setShowWindow(() -> {
@@ -70,7 +75,21 @@ public class HelloApplication extends Application {
                 Thread.sleep(500);
                 Properties properties = new Properties();
                 properties.load(Files.newInputStream(Paths.get("my.ini")));
-                WebService.getIns().setPort(Integer.parseInt(properties.getProperty("web-port")));
+                int webPort = Integer.parseInt(properties.getProperty("web-port"));
+
+                try (HttpClient client = HttpClient.newHttpClient()) {
+
+                    HttpRequest build = HttpRequest.newBuilder().GET().uri(URI.create("http://localhost:" + webPort + "/api/db/show")).build();
+                    HttpResponse<byte[]> send = client.send(build, HttpResponse.BodyHandlers.ofByteArray());
+                    /*正常访问说明已经打开过，退出当前程序，*/
+                    System.exit(0);
+                    return;
+                } catch (Exception ignore) {
+                    /*如果访问报错说没有启动过；*/
+                }
+                System.out.println("可以正常开启");
+
+                WebService.getIns().setPort(webPort);
                 DBFactory.getIns().init(
                         properties.getProperty("database"),
                         Integer.parseInt(properties.getProperty("port")),
@@ -118,7 +137,7 @@ public class HelloApplication extends Application {
                 // });
                 // popup.add(menuItem);
 
-                BufferedImage bufferedImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("icon.jpg"));
+                BufferedImage bufferedImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(iconName));
                 TrayIcon trayIcon = new TrayIcon(bufferedImage, title, popup);
                 trayIcon.setImageAutoSize(true);
                 trayIcon.addActionListener(new ActionListener() {
