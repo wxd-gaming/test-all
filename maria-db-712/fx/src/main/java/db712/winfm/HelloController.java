@@ -29,7 +29,7 @@ public class HelloController {
 
         CompletableFuture.runAsync(() -> {
             try {
-                Thread.sleep(500);
+                Thread.sleep(50);
                 {
                     /*TODO 必须要等他初始化完成*/
                     PrintStream printStream = new PrintStream(System.out) {
@@ -42,8 +42,8 @@ public class HelloController {
                                         while (list_view.getItems().size() > 300) {
                                             list_view.getItems().removeFirst();
                                         }
-                                        if (line.length() > 200)
-                                            line = line.substring(0, 200) + "......";
+                                        if (line.length() > 300)
+                                            line = line.substring(0, 300) + "......";
                                         list_view.getItems().add(line);
                                         list_view.scrollTo(list_view.getItems().size() + 999);
                                     } catch (Throwable ignore) {}

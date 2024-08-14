@@ -14,6 +14,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,9 +27,14 @@ import java.util.concurrent.CompletableFuture;
 
 public class HelloApplication extends Application {
 
+    final String title = "712引擎数据库服务";
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Image image_logo = new Image("logo.png");
+
+        setIcon(primaryStage);
+
+        Image image_logo = new Image("icon.jpg");
         /*阻止停止运行*/
         Platform.setImplicitExit(false);
         WebService.getIns().setShowWindow(() -> {
@@ -42,7 +52,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
 
         Scene scene = new Scene(fxmlLoader.load(), Color.BLACK);
-        primaryStage.setTitle("qj-712-db-server");
+        primaryStage.setTitle(title);
         primaryStage.setScene(scene);
 
         primaryStage.getIcons().add(image_logo);
@@ -89,6 +99,39 @@ public class HelloApplication extends Application {
                 System.out.println("启动异常了！");
             }
         });
+    }
+
+    /** 开启系统托盘图标 */
+    public void setIcon(Stage primaryStage) {
+        try {
+            if (SystemTray.isSupported()) {
+                /*TODO 系统托盘图标*/
+                SystemTray tray = SystemTray.getSystemTray();
+                PopupMenu popup = new PopupMenu();
+
+                // MenuItem menuItem = new MenuItem();
+                // menuItem.setLabel("Exit");
+                // menuItem.addActionListener(new ActionListener() {
+                //     public void actionPerformed(ActionEvent e) {
+                //         System.exit(0);
+                //     }
+                // });
+                // popup.add(menuItem);
+
+                BufferedImage bufferedImage = ImageIO.read(this.getClass().getClassLoader().getResourceAsStream("icon.jpg"));
+                TrayIcon trayIcon = new TrayIcon(bufferedImage, title, popup);
+                trayIcon.setImageAutoSize(true);
+                trayIcon.addActionListener(new ActionListener() {
+                    /*TODO 图标双击事件 */
+                    @Override public void actionPerformed(ActionEvent e) {
+                        WebService.getIns().getShowWindow().run();
+                    }
+                });
+                tray.add(trayIcon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
     }
 
     public void select(Stage primaryStage) {

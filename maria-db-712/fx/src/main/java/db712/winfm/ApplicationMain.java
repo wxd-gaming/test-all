@@ -9,10 +9,14 @@ import java.util.concurrent.CompletableFuture;
 
 public class ApplicationMain {
 
+    public static String javaClassPath() {
+        return System.getProperty("java.class.path");
+    }
+
     public static void main(String[] args) throws Exception {
 
         LogbackResetTimeFilter.out = true;
-        if (args.length > 0) {
+        if (javaClassPath() != null && javaClassPath().contains(".jar")) {
             ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
             List<String> strings = GraalvmUtil.jarResources();
             for (String string : strings) {

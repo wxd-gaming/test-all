@@ -118,6 +118,12 @@
                                     </fileset>
                                 </copy>
 
+                                <copy todir="${project.basedir}/../target/winfm/" overwrite="true">
+                                    <fileset dir="${project.basedir}/../" erroronmissingdir="false">
+                                        <include name="my.ini"/>
+                                    </fileset>
+                                </copy>
+
                             </target>
                         </configuration>
                     </execution>
