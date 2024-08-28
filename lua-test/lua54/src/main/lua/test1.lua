@@ -3,7 +3,10 @@
 --- Created by admin.
 --- DateTime: 2024/8/19 09:49
 ---
-
+---
+function errFunc(error)
+    print("\n==============\nerrFunc - " .. debug.traceback(error) .. "\n==============\n")
+end
 
 function t1(str)
     print(str)
@@ -13,15 +16,14 @@ function t1(str)
     local time = os.time()
     print(type(time) .. " - " .. tostring(time))
     --print(type(time) + num .. tostring(time))
-    local str = "1t"
-    print(debug.traceback())
-    print(str + num)
+    --print(debug.traceback())
+    --print(str + num)
 end
 
 local success, error = pcall(t1, "d")
 if not success then
-    print(debug.traceback())
-    print("An error occurred: " .. error)
+    errFunc(error)
 else
     print("Code executed successfully.")
 end
+

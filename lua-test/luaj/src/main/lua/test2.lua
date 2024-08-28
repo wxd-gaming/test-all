@@ -1,7 +1,19 @@
-function t2(key)
-    t1()
+function t2(key, map)
     print(key)
-    return { a = "s", b = "1" }
+    print(tostring(map))
+    print(map[1])
+    print(map[2])
+    for i, fruit in pairs(map) do
+        print(i, type(fruit), fruit)
+    end
+
+    local array = { "apple", "banana" }
+
+    for i, fruit in ipairs(array) do
+        print(i, fruit)
+    end
+
+    return map
 end
 
 function t3(str)

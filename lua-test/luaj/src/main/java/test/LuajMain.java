@@ -1,5 +1,6 @@
 package test;
 
+import com.alibaba.fastjson.JSON;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LoadState;
 import org.luaj.vm2.LuaValue;
@@ -54,8 +55,15 @@ public class LuajMain {
                 return LuaValue.valueOf("javaT3");
             }
         });
-        LuaValue call = globals.get("t3").call("ss");
-        System.out.println(call.tostring());
+
+        LuaValue fun = globals.get("t2");
+        LuaValue[] funcArgs = new LuaValue[2];
+        funcArgs[0] = LuajUtils.valueOf("3-");
+        funcArgs[1] = LuajUtils.valueOf(new Object[]{1, "2"});
+        Varargs invoke = fun.invoke(funcArgs);
+        LuaValue luaValue = invoke.arg1();
+        Object o = LuajUtils.luaValue2Object(luaValue);
+        System.out.println(JSON.toJSONString(o));
 
     }
 

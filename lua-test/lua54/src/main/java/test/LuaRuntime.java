@@ -26,14 +26,13 @@ import java.nio.file.Paths;
 @Getter
 public class LuaRuntime implements Closeable {
 
-    final Lua54 lua54;
-    final ThreadLocal<Lua> threadLocal;
+    final Lua712_54 lua54;
+    final ThreadLocal<Lua712_54> threadLocal;
 
     public LuaRuntime() {
-        lua54 = new Lua54();
+        lua54 = new Lua712_54();
         lua54.openLibraries();
         threadLocal = ThreadLocal.withInitial(lua54::newThread);
-
     }
 
     /** 加载一个lua文件 */
@@ -59,7 +58,7 @@ public class LuaRuntime implements Closeable {
         try {
             byte[] bytes = Files.readAllBytes(filePath);
             Buffer flip = ByteBuffer.allocateDirect(bytes.length).put(bytes).flip();
-            lua54.run(flip, filePath.toString());
+            lua54.run(flip, filePath.getFileName().toString());
             System.out.println("load lua file: " + filePath.toString());
         } catch (Exception e) {
             throw new RuntimeException(filePath.toString(), e);
