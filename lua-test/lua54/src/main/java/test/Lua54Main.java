@@ -58,7 +58,7 @@ public class Lua54Main {
             luaValue.push(lua);
             lua.push("3-");
             Object[] objects = {1, "2"};
-            lua.pushArray(objects);
+            lua.pushJavaArray(objects);
             lua.pCall(2, Consts.LUA_MULTRET, 0);
             Object javaObject = JavaFunction.luaValue2Object(lua.get());
             System.out.println(JSON.toJSONString(javaObject));
