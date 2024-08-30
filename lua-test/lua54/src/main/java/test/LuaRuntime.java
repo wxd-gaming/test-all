@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import party.iroiro.luajava.JFunction;
 import party.iroiro.luajava.Lua;
-import party.iroiro.luajava.lua54.Lua54;
+import party.iroiro.luajava.value.LuaTableValue;
 import party.iroiro.luajava.value.LuaValue;
 
 import java.io.Closeable;
@@ -15,6 +15,8 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * lua 装载器
@@ -119,4 +121,44 @@ public class LuaRuntime implements Closeable {
     @Override public void close() throws IOException {
         lua54.close();
     }
+
+    public static Object luaValue2Object(LuaValue luaValue) {
+        if (luaValue.type() == Lua.LuaType.NUMBER) {
+            long integer = luaValue.toInteger();
+            if (integer == (int) integer) {
+                return (int) integer;
+            }
+            double number = luaValue.toNumber();
+            if (integer == number) {
+                return integer;
+            }
+            return number;
+
+        } else if (luaValue.type() == Lua.LuaType.TABLE) {
+            LuaTableValue luaTableValue = (LuaTableValue) luaValue;
+            Map<Object, Object> map = new HashMap<>();
+            for (Map.Entry<LuaValue, LuaValue> entry : luaTableValue.entrySet()) {
+                map.put(luaValue2Object(entry.getKey()), luaValue2Object(entry.getValue()));
+            }
+            return map;
+        } else if (luaValue.type() == Lua.LuaType.NONE || luaValue.type() == Lua.LuaType.NIL) {
+            return null;
+        }
+        return luaValue.toJavaObject();
+    }
+
+    public static int push(Lua L, LuaValue fun, Object... objects) {
+        if (fun != null) {
+            fun.push(L);
+        }
+        for (Object object : objects) {
+            if (object != null && object.getClass().isArray()) {
+                L.pushJavaArray(object);
+            } else {
+                L.push(object, Lua.Conversion.FULL);
+            }
+        }
+        return objects.length;
+    }
+
 }

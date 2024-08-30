@@ -62,6 +62,15 @@ public class LuajUtils {
         }
     }
 
+    public static LuaValue[] vsArray(Object... os) {
+        LuaValue[] vs = new LuaValue[os.length];
+        for (int i = 0; i < os.length; i++) {
+            Object o = os[i];
+            vs[i] = valueOf(o);
+        }
+        return vs;
+    }
+
     public static LuaValue valueOf(Object value) {
         if (value == null) {
             return LuaNil.NIL;
@@ -109,7 +118,15 @@ public class LuajUtils {
                 table.set(luaKey, luaVal);
             }
             return table;
-        } else {
+        } /* else if (value.getClass().isArray()) {
+            Object[] array = (Object[]) value;
+            LuaValue[] vs = new LuaValue[array.length];
+            for (int i = 0; i < array.length; i++) {
+                Object a = array[i];
+                vs[i] = valueOf(a);
+            }
+            return LuaValue.listOf(vs);
+        } */ else {
             return CoerceJavaToLua.coerce(value);
         }
     }

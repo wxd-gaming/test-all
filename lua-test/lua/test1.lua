@@ -20,10 +20,10 @@ function t1(str)
     --print(str + num)
 end
 
-local success, error = pcall(t1, "d")
-if not success then
-    errFunc(error)
-else
-    print("Code executed successfully.")
-end
+--local success, error = pcall(t1, "d")
+--if not success then
+--    errFunc(error)
+--else
+--    print("Code executed successfully.")
+--end
 

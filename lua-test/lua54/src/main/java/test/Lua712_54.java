@@ -4,7 +4,6 @@ import party.iroiro.luajava.AbstractLua;
 import party.iroiro.luajava.LuaException;
 import party.iroiro.luajava.lua54.Lua54;
 import party.iroiro.luajava.value.LuaValue;
-import party.iroiro.luajava.value.RefLuaValue;
 
 /**
  * @author: wxd-gaming(無心道, 15388152619)
@@ -27,8 +26,20 @@ public class Lua712_54 extends Lua54 {
         return new Lua712_54(L, id, mainThread);
     }
 
+    @Override public LuaValue get() {
+        return super.get();
+    }
+
+    @Override public LuaValue from(long n) {
+        return new LuaLong(this, n);
+    }
+
     @Override public void checkStack(int extra) throws RuntimeException {
         super.checkStack(extra);
+    }
+
+    @Override public void pushArray(Object array) throws IllegalArgumentException {
+        pushJavaArray(array);
     }
 
     public void pCall(int nArgs, int nResults, int errfunc) throws LuaException {

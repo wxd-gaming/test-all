@@ -1,6 +1,7 @@
 package test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LoadState;
 import org.luaj.vm2.LuaValue;
@@ -9,7 +10,12 @@ import org.luaj.vm2.compiler.LuaC;
 import org.luaj.vm2.lib.*;
 import org.luaj.vm2.lib.jse.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wxd-gaming(無心道, 15388152619)
@@ -17,7 +23,7 @@ import java.util.Arrays;
  **/
 public class LuajMain {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         /* TODO 测试下来还是5.2.x */
         Globals globals = new Globals();
         globals.load(new JseBaseLib());
@@ -37,9 +43,23 @@ public class LuajMain {
         /* TODO 如果加入了 globals.load(new DebugLib()); 将无效 */
         // LuaJC.install(globals);
 
+        Files.walk(Paths.get("lua"), 99)
+                .filter(p -> {
+                    String string = p.toString();
+                    return string.endsWith(".lua") || string.endsWith(".LUA");
+                })
+                .filter(Files::isRegularFile)
+                .forEach(path -> {
+                    String filePath = path.toString();
+                    try {
+                        globals.loadfile(filePath).call();
+                        System.out.println("load lua file: " + filePath.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace(System.err);
+                    }
+                });
+
         /*TODO 可以直接运行文件 也是加载和编译文件 */
-        globals.loadfile("luaj/src/main/lua/test1.lua").call();
-        globals.loadfile("luaj/src/main/lua/test2.lua").call();
         /*注册函数*/
         globals.set("javaT3", new VarArgFunction() {
 
@@ -56,11 +76,17 @@ public class LuajMain {
             }
         });
 
-        LuaValue fun = globals.get("t2");
-        LuaValue[] funcArgs = new LuaValue[2];
-        funcArgs[0] = LuajUtils.valueOf("3-");
-        funcArgs[1] = LuajUtils.valueOf(new Object[]{1, "2"});
-        Varargs invoke = fun.invoke(funcArgs);
+        LuaValue fun = globals.get("gameDebugT2");
+
+        Object key = 19126499763390465L;
+        Object[] vs = {1, "2"};
+        List<Map> list = new ArrayList<>();
+        list.add(new JSONObject().fluentPut("fid", 19126499763390464L).fluentPut("sid", 19126499763390465L));
+
+        LuaValue[] luaValues = LuajUtils.vsArray(key, vs, list);
+
+        Varargs invoke = fun.invoke(luaValues);
+
         LuaValue luaValue = invoke.arg1();
         Object o = LuajUtils.luaValue2Object(luaValue);
         System.out.println(JSON.toJSONString(o));
