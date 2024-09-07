@@ -14,19 +14,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.14.18</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.14.18</version>
+        </dependency>
+        <dependency>
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.30.2-GA</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.jvm.sandbox</groupId>
-            <artifactId>sandbox-core</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.jvm.sandbox</groupId>
-            <artifactId>sandbox-api</artifactId>
-            <version>1.4.0</version>
         </dependency>
     </dependencies>
 
@@ -45,7 +45,7 @@
                         </manifest>
                         <manifestEntries>
                             <Manifest-Version>1.0</Manifest-Version>
-                            <Premain-Class>assist.AssistMonitor</Premain-Class>
+                            <Premain-Class>agent.service.PremainService</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                         </manifestEntries>
@@ -69,6 +69,8 @@
                     <artifactSet>
                         <includes>
                             <include>org.javassist:javassist:jar:</include>
+                            <include>net.bytebuddy:byte-buddy:jar:</include>
+                            <include>net.bytebuddy:byte-buddy-agent:jar:</include>
                         </includes>
                     </artifactSet>
                 </configuration>
