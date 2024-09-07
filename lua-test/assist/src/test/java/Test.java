@@ -8,6 +8,8 @@ import com.alibaba.jvm.sandbox.api.listener.ext.EventWatchBuilder;
 import com.alibaba.jvm.sandbox.api.listener.ext.EventWatchCondition;
 import com.alibaba.jvm.sandbox.api.resource.ModuleEventWatcher;
 
+import java.lang.invoke.MethodHandles;
+
 /**
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-08-30 14:44
@@ -46,6 +48,7 @@ public class Test {
     }
 
     public static void main(String[] args) throws Exception {
+        MethodHandles
         ModuleEventWatcher moduleEventWatcher = new CustomModuleEventWatcher();
         new EventWatchBuilder(moduleEventWatcher)
                 .onClass("java.lang.System")
