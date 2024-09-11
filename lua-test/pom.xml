@@ -17,6 +17,7 @@
         <module>lua51</module>
         <module>luajit</module>
         <module>luaj</module>
+        <module>monitor</module>
     </modules>
 
     <properties>
