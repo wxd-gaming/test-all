@@ -74,7 +74,7 @@ public class MonitorTransformer implements ClassFileTransformer {
                     new RuntimeException(className + "#" + declaredBehavior.getLongName(), e).printStackTrace();
                 }
             }
-            String outPath = MonitorAgent.monitorConfig.getOutPath().get();
+            String outPath = MonitorAgent.monitorConfig.getOutClassPath().get();
             if (outPath != null && !outPath.trim().isEmpty()) {
                 ctClass.writeFile("target/out");
             }

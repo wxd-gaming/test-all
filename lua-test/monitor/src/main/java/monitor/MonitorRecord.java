@@ -1,6 +1,11 @@
 package monitor;
 
-import java.lang.annotation.*;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -26,7 +31,12 @@ public class MonitorRecord {
             MonitorAgent.monitorConfig.getPrintLimitTime().set(Math.max(10_000L, MonitorAgent.monitorConfig.getPrintLimitTime().get()));
             Thread monitorThread = new Thread(() -> {
                 while (true) {
-                    System.out.println(record2String());
+                    String record2String = record2String();
+                    write(MonitorAgent.monitorConfig.getPrintFilePath().get(), record2String);
+                    if (!MonitorAgent.monitorConfig.getPrintConsole().get()) {
+                        System.out.println(record2String);
+                    }
+
                     try {
                         Thread.sleep(MonitorAgent.monitorConfig.getPrintLimitTime().get());
                     } catch (InterruptedException ignore) {
@@ -36,6 +46,27 @@ public class MonitorRecord {
             });
             monitorThread.setDaemon(true);
             monitorThread.start();
+        }
+    }
+
+    /** 覆盖 */
+    public static void write(String pathString, String content) {
+        try {
+            if (pathString == null || pathString.trim().isEmpty()) return;
+            Path path = Paths.get(pathString);
+            File parentFile = path.toFile().getParentFile();
+            if (parentFile != null)
+                parentFile.mkdirs();
+
+            Files.write(
+                    path,
+                    content.getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.TRUNCATE_EXISTING
+            );
+
+        } catch (Exception e) {
+            throw new RuntimeException(pathString, e);
         }
     }
 

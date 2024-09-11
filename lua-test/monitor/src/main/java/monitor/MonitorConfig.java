@@ -37,7 +37,9 @@ public class MonitorConfig {
     /** 毫秒 */
     private final AtomicLong needAvgTime = new AtomicLong(10);
     private final AtomicBoolean printAfterReset = new AtomicBoolean(true);
-    private final AtomicReference<String> outPath = new AtomicReference<>();
+    private final AtomicBoolean printConsole = new AtomicBoolean(true);
+    private final AtomicReference<String> printFilePath = new AtomicReference<>();
+    private final AtomicReference<String> outClassPath = new AtomicReference<>();
 
     private final HashSet<String> agentArgs = new HashSet<>();
     private final HashSet<String> ignoreArgs = new HashSet<>();
@@ -62,7 +64,9 @@ public class MonitorConfig {
             needTotalTime.set(Long.parseLong(properties.getProperty("needTotalTime", "10")));
             needAvgTime.set(Long.parseLong(properties.getProperty("needAvgTime", "10")));
             printAfterReset.set(Boolean.parseBoolean(properties.getProperty("printAfterReset", "false")));
-            outPath.set(properties.getProperty("outPath"));
+            printConsole.set(Boolean.parseBoolean(properties.getProperty("printConsole", "true")));
+            printFilePath.set(properties.getProperty("printFilePath"));
+            outClassPath.set(properties.getProperty("outClassPath"));
 
             BufferedReader monitorConfigAgent = readBody("monitor-config-agent.cfg");
             if (monitorConfigAgent != null) {
@@ -121,7 +125,7 @@ public class MonitorConfig {
                 ", needTotalCount=" + needTotalCount +
                 ", needAvgTime=" + needAvgTime +
                 ", printAfterReset=" + printAfterReset +
-                ", outPath=" + outPath.get() +
+                ", outPath=" + outClassPath.get() +
                 ", agentArgs=" + agentArgs +
                 ", ignoreArgs=" + ignoreArgs +
                 '}';
