@@ -119,7 +119,9 @@ public class LuaRuntime implements Closeable {
 
     /** 关闭资源 */
     @Override public void close() throws IOException {
-        lua54.close();
+        try {
+            lua54.close();
+        } catch (Exception ignore) {}
     }
 
     public static Object luaValue2Object(LuaValue luaValue) {

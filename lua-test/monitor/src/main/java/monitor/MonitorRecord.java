@@ -6,7 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.DecimalFormat;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.stream.Collectors;
@@ -19,28 +21,25 @@ import java.util.stream.Collectors;
  **/
 public class MonitorRecord {
 
-    static ConcurrentSkipListMap<String, MethodRecord> classes = new ConcurrentSkipListMap<>();
+    static ConcurrentSkipListMap<String, MethodRecord> totalMonitorMap = new ConcurrentSkipListMap<>();
 
     public static void add(String methodName, long start) {
-        classes.computeIfAbsent(methodName, MethodRecord::new)
-                .add((System.nanoTime() - start) / 10000);
+        totalMonitorMap.computeIfAbsent(methodName, MethodRecord::new)
+                .add((System.nanoTime() - start));
     }
 
     public static void init() {
         if (MonitorAgent.monitorConfig.getPrintLimitTime().get() > 0) {
-            MonitorAgent.monitorConfig.getPrintLimitTime().set(Math.max(10_000L, MonitorAgent.monitorConfig.getPrintLimitTime().get()));
+            MonitorAgent.monitorConfig.getPrintLimitTime().set(Math.max(1_000L, MonitorAgent.monitorConfig.getPrintLimitTime().get()));
             Thread monitorThread = new Thread(() -> {
                 while (true) {
-                    String record2String = record2String();
-                    write(MonitorAgent.monitorConfig.getPrintFilePath().get(), record2String);
-                    if (!MonitorAgent.monitorConfig.getPrintConsole().get()) {
-                        System.out.println(record2String);
-                    }
-
                     try {
                         Thread.sleep(MonitorAgent.monitorConfig.getPrintLimitTime().get());
+                        write();
                     } catch (InterruptedException ignore) {
                         break;
+                    } catch (Exception e) {
+                        e.printStackTrace(System.out);
                     }
                 }
             });
@@ -49,11 +48,46 @@ public class MonitorRecord {
         }
     }
 
+    public static void write() {
+        long limit = MonitorAgent.monitorConfig.getPrintLimitCount().get();
+        String content = record2String(limit, (o1, o2) -> {
+            if (o2.getTotal().getAvgCost() != o1.getTotal().getAvgCost())
+                return Long.compare(o2.getTotal().getAvgCost(), o1.getTotal().getAvgCost());
+            if (o2.getTotal().getTotalExecTime() != o1.getTotal().getTotalExecTime())
+                return Long.compare(o2.getTotal().getTotalExecTime(), o1.getTotal().getTotalExecTime());
+            if (o2.getTotal().getTotalExecCount() != o1.getTotal().getTotalExecCount())
+                return Long.compare(o2.getTotal().getTotalExecCount(), o1.getTotal().getTotalExecCount());
+            return o2.getMethodName().compareTo(o1.getMethodName());
+        });
+
+        if (MonitorAgent.monitorConfig.getOutLogConsole().get()) {
+            System.out.println(content);
+        }
+
+        if (!MonitorAgent.monitorConfig.getOutLogFile().get()) return;
+        write("monitor.log", content);
+        write("monitor-exec-count.log", record2String(Math.max(800, limit), (o1, o2) -> {
+            if (o2.getTotal().getTotalExecCount() != o1.getTotal().getTotalExecCount())
+                return Long.compare(o2.getTotal().getTotalExecCount(), o1.getTotal().getTotalExecCount());
+            return o2.getMethodName().compareTo(o1.getMethodName());
+        }));
+        write("monitor-total-time.log", record2String(Math.max(800, limit), (o1, o2) -> {
+            if (o2.getTotal().getTotalExecTime() != o1.getTotal().getTotalExecTime())
+                return Long.compare(o2.getTotal().getTotalExecTime(), o1.getTotal().getTotalExecTime());
+            return o2.getMethodName().compareTo(o1.getMethodName());
+        }));
+        write("monitor-min-time.log", record2String(Math.max(800, limit), (o1, o2) -> {
+            if (o2.getTotal().getMinCost() != o1.getTotal().getMinCost())
+                return Long.compare(o2.getTotal().getMinCost(), o1.getTotal().getMinCost());
+            return o2.getMethodName().compareTo(o1.getMethodName());
+        }));
+    }
+
     /** 覆盖 */
-    public static void write(String pathString, String content) {
+    public static void write(String fileName, String content) {
+        String first = MonitorAgent.monitorConfig.getOutPath() + "/" + fileName;
         try {
-            if (pathString == null || pathString.trim().isEmpty()) return;
-            Path path = Paths.get(pathString);
+            Path path = Paths.get(first);
             File parentFile = path.toFile().getParentFile();
             if (parentFile != null)
                 parentFile.mkdirs();
@@ -66,66 +100,66 @@ public class MonitorRecord {
             );
 
         } catch (Exception e) {
-            throw new RuntimeException(pathString, e);
+            throw new RuntimeException(first, e);
         }
     }
 
     public static Collection<MethodRecord> reset() {
-        Collection<MethodRecord> values = classes.values();
-        classes = new ConcurrentSkipListMap<>();
+        Collection<MethodRecord> values = totalMonitorMap.values();
+        totalMonitorMap = new ConcurrentSkipListMap<>();
         return values;
     }
 
-    public static String record2String() {
+    public static String record2String(long limit, Comparator<MethodRecord> comparator) {
         Collection<MethodRecord> values;
         if (MonitorAgent.monitorConfig.getPrintAfterReset().get()) {
             values = reset();
         } else {
-            values = classes.values();
+            values = totalMonitorMap.values();
         }
 
         List<MethodRecord> collect = values.stream()
-                .map(mr -> {
-                    MethodRecord clone = mr.clone();
-                    clone.setAvgCost(mr.getTotalCostTime() / mr.getExecCount());
-                    return clone;
-                })
-                .filter(mr -> mr.getAvgCost() > 0.01f)
-                .filter(mr -> mr.getTotalCostTime() > MonitorAgent.monitorConfig.getNeedTotalTime().get() * 100)
-                .filter(mr -> mr.getExecCount() > MonitorAgent.monitorConfig.getNeedTotalCount().get())
-                .filter(mr -> mr.getAvgCost() > MonitorAgent.monitorConfig.getNeedAvgTime().get() * 100)
-                .sorted((o1, o2) -> {
-                    if (o2.getAvgCost() != o1.getAvgCost())
-                        return Long.compare(o2.getAvgCost(), o1.getAvgCost());
-                    if (o2.getTotalCostTime() != o1.getTotalCostTime())
-                        return Long.compare(o2.getTotalCostTime(), o1.getTotalCostTime());
-                    if (o2.getExecCount() != o1.getExecCount())
-                        return Long.compare(o2.getExecCount(), o1.getExecCount());
-                    return o2.getMethodName().compareTo(o1.getMethodName());
-                })
-                .limit(MonitorAgent.monitorConfig.getPrintLimitCount().get())
+                .map(MethodRecord::clone)
+                /*执行次数控制一下*/
+                .filter(mr -> mr.getTotal().getTotalExecCount() >= MonitorAgent.monitorConfig.getNeedTotalCount().get())
+                /*执行时间和平均时间满足一项即可*/
+                .filter(mr ->
+                        mr.getTotal().getTotalExecTime() >= MonitorAgent.monitorConfig.getNeedTotalTime().get()
+                                || mr.getTotal().getAvgCost() >= MonitorAgent.monitorConfig.getNeedAvgTime().get()
+                )
+                .sorted(comparator)
+                .limit(limit)
                 .collect(Collectors.toList());
 
         StringBuilder sb = new StringBuilder();
-        String format = "%-18s\t%-20s\t%-12s\t%-12s\t%-12s\t%s";
+        sb.append(MonitorAgent.monitorConfig.toString()).append("\n");
+        sb.append("全部监控数量：").append(values.size()).append("\n");
+        sb.append("符合监控的数量：").append(collect.size()).append("\n");
+        String format = "%-18s\t%-20s\t%-12s\t%-12s\t%-12s\t%-12s\t%-12s\t%-12s\t%s";
         sb.append(
                 String.format(
                         format,
-                        "execCount", "totalTime(ms)", "avgCost(ms)", "minCost(ms)", "maxCost(ms)", "methodName")
+                        "execCount", "totalTime(ns)", "avgCost(ms)", "avg5m(ms)", "avg30m(ms)", "avg60m(ms)", "minCost(ms)", "maxCost(ms)", "methodName")
         ).append("\n");
 
         for (MethodRecord methodRecord : collect) {
             sb.append(String.format(
                     format,
-                    methodRecord.getExecCount(),
-                    methodRecord.getTotalCostTime() / 100f,
-                    methodRecord.getAvgCost() / 100f,
-                    methodRecord.getMinCost() / 100f,
-                    methodRecord.getMaxCost() / 100f,
+                    methodRecord.getTotal().getTotalExecCount(),
+                    decimalFormat2.format(methodRecord.getTotal().getTotalExecTime()),
+                    decimalFormat5.format(methodRecord.getTotal().getAvgCost() / 1000000f),
+                    decimalFormat5.format(methodRecord.getS5().getAvgCost() / 1000000f),
+                    decimalFormat5.format(methodRecord.getS30().getAvgCost() / 1000000f),
+                    decimalFormat5.format(methodRecord.getS60().getAvgCost() / 1000000f),
+                    decimalFormat5.format(methodRecord.getTotal().getMinCost() / 1000000f),
+                    decimalFormat5.format(methodRecord.getTotal().getMaxCost() / 1000000f),
                     methodRecord.getMethodName()
             )).append("\n");
         }
 
         return sb.toString();
     }
+
+    static final DecimalFormat decimalFormat2 = new DecimalFormat("#"); // 根据需要定制格式
+    static final DecimalFormat decimalFormat5 = new DecimalFormat("#.#####"); // 根据需要定制格式
 }

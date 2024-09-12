@@ -75,7 +75,9 @@ public class Lua54Main {
             /* TODO 无法获取处理lua堆栈，只能通过 print(debug.traceback()) */
             e.printStackTrace();
         }
-        luaRuntime.getLua54().close();
+        luaRuntime.close();
+        luaRuntime.close();
+        luaRuntime.close();
     }
 
     public static void javaT3(String str) {

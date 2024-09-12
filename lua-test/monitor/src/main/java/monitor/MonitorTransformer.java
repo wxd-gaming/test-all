@@ -5,9 +5,14 @@ import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.LoaderClassPath;
 
-import javax.annotation.Resource;
+import java.io.File;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.security.ProtectionDomain;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -26,17 +31,18 @@ public class MonitorTransformer implements ClassFileTransformer {
                                       ProtectionDomain protectionDomain,
                                       byte[] classfileBuffer) throws IllegalClassFormatException {
         try {
+
             if (className == null || className.isEmpty()) return classfileBuffer;
             String finalClassName = className.replace("/", ".");
-            if (!MonitorAgent.monitorConfig.getIgnoreArgs().isEmpty()
-                    && MonitorAgent.monitorConfig.getIgnoreArgs().stream().anyMatch(finalClassName::startsWith)) {
-                // System.out.println(MonitorAgent.monitorConfig.getIgnoreArgs().size() + " - " + finalClassName);
-                return classfileBuffer;
-            }
 
             if (!MonitorAgent.monitorConfig.getAgentArgs().isEmpty()
                     && MonitorAgent.monitorConfig.getAgentArgs().stream().noneMatch(finalClassName::startsWith)) {
                 // System.out.println(finalClassName);
+                return classfileBuffer;
+            }
+
+            if (!MonitorAgent.monitorConfig.getIgnoreArgs().isEmpty()
+                    && MonitorAgent.monitorConfig.getIgnoreArgs().stream().anyMatch(finalClassName::startsWith)) {
                 return classfileBuffer;
             }
 
@@ -49,41 +55,76 @@ public class MonitorTransformer implements ClassFileTransformer {
                     .map(p -> p.substring(0, 1))
                     .collect(Collectors.joining("."));
             CtBehavior[] declaredBehaviors = ctClass.getDeclaredBehaviors();
+
+            write("monitor load - " + finalClassName + " - method len " + declaredBehaviors.length);
+            int len = 0;
             for (CtBehavior declaredBehavior : declaredBehaviors) {
                 try {
-                    if (declaredBehavior.hasAnnotation(Deprecated.class)) continue;
-                    Resource annotation = (Resource) declaredBehavior.getAnnotation(Resource.class);
-                    if (annotation != null && "ignore".equalsIgnoreCase(annotation.description())) {
-                        continue;
-                    }
                     if (declaredBehavior.isEmpty()) {
                         /*空方法，没意义*/
+                        write("monitor load - " + finalClassName + " - 添加监控方法：" + declaredBehavior.getName() + " - 空方法");
                         continue;
                     }
-                    CtClass longClass = pool.get(long.class.getName());
-                    declaredBehavior.addLocalVariable("__TimeStart", longClass);
-                    declaredBehavior.insertBefore("__TimeStart = java.lang.System.nanoTime();");
-                    declaredBehavior.insertAfter(String.format(
-                            "monitor.MonitorRecord.add(\"%s.%s#%s(%s)\", __TimeStart);",
+
+                    String methodName = String.format(
+                            "%s.%s#%s(%s)",
                             packName,
                             ctClass.getSimpleName(),
                             declaredBehavior.getName(),
                             Arrays.stream(declaredBehavior.getParameterTypes()).map(CtClass::getSimpleName).collect(Collectors.joining(", "))
+                    );
+
+                    if (!MonitorAgent.monitorConfig.getIgnoreArgs().isEmpty()
+                            && MonitorAgent.monitorConfig.getIgnoreArgs().stream().anyMatch(methodName::startsWith)) {
+                        continue;
+                    }
+
+                    CtClass longClass = pool.get(long.class.getName());
+                    declaredBehavior.addLocalVariable("__TimeStart", longClass);
+                    declaredBehavior.insertBefore("__TimeStart = java.lang.System.nanoTime();");
+                    declaredBehavior.insertAfter(String.format(
+                            "monitor.MonitorRecord.add(\"%s\", __TimeStart);",
+                            methodName
                     ));
-                } catch (Exception e) {
-                    new RuntimeException(className + "#" + declaredBehavior.getLongName(), e).printStackTrace();
+                    len++;
+                    write("monitor load - " + finalClassName + " - 添加监控方法：" + methodName);
+                } catch (Throwable e) {
+                    write("monitor load - " + finalClassName + " - 添加监控方法：" + declaredBehavior.getName() + " - 异常：" + e.toString());
                 }
             }
-            String outPath = MonitorAgent.monitorConfig.getOutClassPath().get();
-            if (outPath != null && !outPath.trim().isEmpty()) {
-                ctClass.writeFile("target/out");
+            if (len > 0) {
+                if (MonitorAgent.monitorConfig.getOutClass().get()) {
+                    ctClass.writeFile(MonitorAgent.monitorConfig.getOutPath() + "/classes");
+                }
             }
             return ctClass.toBytecode();
-        } catch (Exception e) {
-            new RuntimeException(className, e).printStackTrace();
+        } catch (Throwable e) {
+            write("monitor load - " + className + " - 异常：" + e.toString());
         }
 
         return classfileBuffer;
+    }
+
+    /** 覆盖 */
+    public static void write(String content) {
+        if (!MonitorAgent.monitorConfig.getOutInitLog().get()) return;
+        String first = MonitorAgent.monitorConfig.getOutPath() + "/init.log";
+        try {
+            Path path = Paths.get(first);
+            File parentFile = path.toFile().getParentFile();
+            if (parentFile != null)
+                parentFile.mkdirs();
+
+            Files.write(
+                    path,
+                    (content + "\n").getBytes(StandardCharsets.UTF_8),
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND
+            );
+
+        } catch (Exception e) {
+            throw new RuntimeException(first, e);
+        }
     }
 
 }

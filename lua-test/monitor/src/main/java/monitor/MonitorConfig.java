@@ -3,6 +3,7 @@ package monitor;
 import lombok.Getter;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.instrument.Instrumentation;
@@ -36,11 +37,12 @@ public class MonitorConfig {
     private final AtomicLong needTotalCount = new AtomicLong(10);
     /** 毫秒 */
     private final AtomicLong needAvgTime = new AtomicLong(10);
-    private final AtomicBoolean printAfterReset = new AtomicBoolean(true);
-    private final AtomicBoolean printConsole = new AtomicBoolean(true);
-    private final AtomicReference<String> printFilePath = new AtomicReference<>();
-    private final AtomicReference<String> outClassPath = new AtomicReference<>();
-
+    private final AtomicBoolean printAfterReset = new AtomicBoolean(false);
+    private final AtomicReference<String> outPath = new AtomicReference<>("target");
+    private final AtomicBoolean outInitLog = new AtomicBoolean(false);
+    private final AtomicBoolean outLogConsole = new AtomicBoolean(false);
+    private final AtomicBoolean outLogFile = new AtomicBoolean(false);
+    private final AtomicBoolean outClass = new AtomicBoolean(false);
     private final HashSet<String> agentArgs = new HashSet<>();
     private final HashSet<String> ignoreArgs = new HashSet<>();
 
@@ -58,15 +60,21 @@ public class MonitorConfig {
                 properties.load(configReader);
             } finally {configReader.close();}
 
-            printLimitTime.set(Long.parseLong(properties.getProperty("printLimitTime", "30000")));
             printLimitCount.set(Long.parseLong(properties.getProperty("printLimitCount", "100")));
             needTotalCount.set(Long.parseLong(properties.getProperty("needTotalCount", "10")));
+            printLimitTime.set(Long.parseLong(properties.getProperty("printLimitTime", "30000")));
             needTotalTime.set(Long.parseLong(properties.getProperty("needTotalTime", "10")));
             needAvgTime.set(Long.parseLong(properties.getProperty("needAvgTime", "10")));
             printAfterReset.set(Boolean.parseBoolean(properties.getProperty("printAfterReset", "false")));
-            printConsole.set(Boolean.parseBoolean(properties.getProperty("printConsole", "true")));
-            printFilePath.set(properties.getProperty("printFilePath"));
-            outClassPath.set(properties.getProperty("outClassPath"));
+            outPath.set(properties.getProperty("outPath", "target"));
+            if (outPath.get() == null || outPath.get().trim().isEmpty()) {
+                outPath.set("target");
+            }
+            outInitLog.set(Boolean.parseBoolean(properties.getProperty("outInitLog", "false")));
+            outLogConsole.set(Boolean.parseBoolean(properties.getProperty("outLogConsole", "false")));
+            outLogFile.set(Boolean.parseBoolean(properties.getProperty("outLogFile", "false")));
+            outClass.set(Boolean.parseBoolean(properties.getProperty("outClass", "false")));
+            del(new File(outPath.get()));
 
             BufferedReader monitorConfigAgent = readBody("monitor-config-agent.cfg");
             if (monitorConfigAgent != null) {
@@ -98,10 +106,27 @@ public class MonitorConfig {
                 }
             }
 
+            /*配置单位是毫秒，转化成纳秒*/
+            needTotalTime.set(needTotalTime.get() * 100 * 10000);
+            needAvgTime.set(needAvgTime.get() * 100 * 10000);
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
             throw new RuntimeException(e);
         }
+    }
+
+    void del(File file) {
+        if (!file.exists()) return;
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File file1 : files) {
+                    del(file1);
+                }
+            }
+        }
+        file.delete();
     }
 
     BufferedReader readBody(String fileName) throws Exception {
@@ -110,7 +135,7 @@ public class MonitorConfig {
         if (Files.exists(path)) {
             inputStream = Files.newInputStream(path);
         } else {
-            inputStream = MonitorConfig.class.getResourceAsStream("/" + fileName);
+            inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
         }
         if (inputStream == null) return null;
         InputStreamReader in = new InputStreamReader(inputStream);
@@ -125,7 +150,11 @@ public class MonitorConfig {
                 ", needTotalCount=" + needTotalCount +
                 ", needAvgTime=" + needAvgTime +
                 ", printAfterReset=" + printAfterReset +
-                ", outPath=" + outClassPath.get() +
+                ", outPath=" + outPath +
+                ", outInitLog=" + outInitLog +
+                ", outLogConsole=" + outLogConsole +
+                ", outLogFile=" + outLogFile +
+                ", outClass=" + outClass +
                 ", agentArgs=" + agentArgs +
                 ", ignoreArgs=" + ignoreArgs +
                 '}';

@@ -79,4 +79,10 @@ public class Lua712_54 extends Lua54 {
         }
         throw e;
     }
+
+    @Override public void close() {
+        try {
+            super.close();
+        } catch (Exception ignore) {}
+    }
 }
