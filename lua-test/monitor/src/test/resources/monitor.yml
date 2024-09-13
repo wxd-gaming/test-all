@@ -1,0 +1,33 @@
+#调用打印的时间 0 表示不自动打印 单位毫秒
+printLimitTime: 5000
+# 打印的时候根据排序规则显示前100条
+printLimitCount: 100
+# 打印的时候需要总执行时间  单位毫秒
+needTotalTime: 0
+# 打印的时候需要的总执行次数
+needTotalCount: 1
+# 打印平均耗时  单位毫秒
+needAvgTime: 0
+# 打印的时候是否重置
+printAfterReset: false
+# 输出文件夹目录
+outPath: target
+# 打印到控制台
+outInitLog: true
+# 打印到控制台
+outLogConsole: true
+# 输出 监控日志
+outLogFile: true
+# 输出 asm class
+outClass: true
+# 需要监控的包
+agentArgs:
+  - code.m
+  - code.d
+# 需要忽略的包
+ignoreArgs:
+  - java.
+  - sun.
+  - javax.
+  - c.m.MonitorTest#test2(String[])
+  - c.m.MonitorTest#MonitorTest()

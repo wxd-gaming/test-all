@@ -93,7 +93,7 @@ public class MonitorTransformer implements ClassFileTransformer {
                 }
             }
             if (len > 0) {
-                if (MonitorAgent.monitorConfig.getOutClass().get()) {
+                if (MonitorAgent.monitorConfig.isOutClass()) {
                     ctClass.writeFile(MonitorAgent.monitorConfig.getOutPath() + "/classes");
                 }
             }
@@ -107,7 +107,7 @@ public class MonitorTransformer implements ClassFileTransformer {
 
     /** 覆盖 */
     public static void write(String content) {
-        if (!MonitorAgent.monitorConfig.getOutInitLog().get()) return;
+        if (!MonitorAgent.monitorConfig.isOutInitLog()) return;
         String first = MonitorAgent.monitorConfig.getOutPath() + "/init.log";
         try {
             Path path = Paths.get(first);

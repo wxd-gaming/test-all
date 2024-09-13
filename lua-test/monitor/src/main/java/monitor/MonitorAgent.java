@@ -13,7 +13,7 @@ public class MonitorAgent {
     public static MonitorConfig monitorConfig;
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        monitorConfig = new MonitorConfig(inst, agentArgs);
+        monitorConfig = MonitorConfig.create(inst, agentArgs);
         System.out.println("monitor agent init " + monitorConfig.toString());
         MonitorRecord.init();
         inst.addTransformer(new MonitorTransformer());

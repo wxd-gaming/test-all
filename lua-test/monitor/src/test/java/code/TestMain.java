@@ -1,6 +1,7 @@
 package code;
 
 import code.m.MonitorTest;
+import monitor.MonitorConfig;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -54,17 +55,8 @@ public class TestMain {
 
     @Test
     public void t3() {
-        // ThreadLocal<String> stringThreadLocal = new ThreadLocal<>();
-        // new Runnable() {
-        //     @Override public void run() {
-        //         stringThreadLocal.set("a");
-        //         try {
-        //             doAction();
-        //         } finally {
-        //             stringThreadLocal.remove();
-        //         }
-        //     }
-        // };
+        MonitorConfig monitorConfig = MonitorConfig.create(null, "monitor.yml");
+        System.out.println(monitorConfig);
     }
 
 }

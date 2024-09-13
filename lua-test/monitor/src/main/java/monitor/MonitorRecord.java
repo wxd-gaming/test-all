@@ -29,12 +29,11 @@ public class MonitorRecord {
     }
 
     public static void init() {
-        if (MonitorAgent.monitorConfig.getPrintLimitTime().get() > 0) {
-            MonitorAgent.monitorConfig.getPrintLimitTime().set(Math.max(1_000L, MonitorAgent.monitorConfig.getPrintLimitTime().get()));
+        if (MonitorAgent.monitorConfig.getPrintLimitTime() > 0) {
             Thread monitorThread = new Thread(() -> {
                 while (true) {
                     try {
-                        Thread.sleep(MonitorAgent.monitorConfig.getPrintLimitTime().get());
+                        Thread.sleep(MonitorAgent.monitorConfig.getPrintLimitTime());
                         write();
                     } catch (InterruptedException ignore) {
                         break;
@@ -49,7 +48,7 @@ public class MonitorRecord {
     }
 
     public static void write() {
-        long limit = MonitorAgent.monitorConfig.getPrintLimitCount().get();
+        long limit = MonitorAgent.monitorConfig.getPrintLimitCount();
         String content = record2String(limit, (o1, o2) -> {
             if (o2.getTotal().getAvgCost() != o1.getTotal().getAvgCost())
                 return Long.compare(o2.getTotal().getAvgCost(), o1.getTotal().getAvgCost());
@@ -60,11 +59,11 @@ public class MonitorRecord {
             return o2.getMethodName().compareTo(o1.getMethodName());
         });
 
-        if (MonitorAgent.monitorConfig.getOutLogConsole().get()) {
+        if (MonitorAgent.monitorConfig.isOutLogConsole()) {
             System.out.println(content);
         }
 
-        if (!MonitorAgent.monitorConfig.getOutLogFile().get()) return;
+        if (!MonitorAgent.monitorConfig.isOutLogFile()) return;
         write("monitor.log", content);
         write("monitor-exec-count.log", record2String(Math.max(800, limit), (o1, o2) -> {
             if (o2.getTotal().getTotalExecCount() != o1.getTotal().getTotalExecCount())
@@ -112,7 +111,7 @@ public class MonitorRecord {
 
     public static String record2String(long limit, Comparator<MethodRecord> comparator) {
         Collection<MethodRecord> values;
-        if (MonitorAgent.monitorConfig.getPrintAfterReset().get()) {
+        if (MonitorAgent.monitorConfig.isPrintAfterReset()) {
             values = reset();
         } else {
             values = totalMonitorMap.values();
@@ -121,11 +120,10 @@ public class MonitorRecord {
         List<MethodRecord> collect = values.stream()
                 .map(MethodRecord::clone)
                 /*执行次数控制一下*/
-                .filter(mr -> mr.getTotal().getTotalExecCount() >= MonitorAgent.monitorConfig.getNeedTotalCount().get())
+                .filter(mr -> mr.getTotal().getTotalExecCount() >= MonitorAgent.monitorConfig.getNeedTotalCount())
                 /*执行时间和平均时间满足一项即可*/
-                .filter(mr ->
-                        mr.getTotal().getTotalExecTime() >= MonitorAgent.monitorConfig.getNeedTotalTime().get()
-                                || mr.getTotal().getAvgCost() >= MonitorAgent.monitorConfig.getNeedAvgTime().get()
+                .filter(mr -> mr.getTotal().getTotalExecTime() >= MonitorAgent.monitorConfig.getNeedTotalTime()
+                        || mr.getTotal().getAvgCost() >= MonitorAgent.monitorConfig.getNeedAvgTime()
                 )
                 .sorted(comparator)
                 .limit(limit)
