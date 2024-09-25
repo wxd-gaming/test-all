@@ -173,6 +173,39 @@ function gameDebug.debug0(fun, appendYinhao, appendType, ...)
     end
 end
 
+--- 断言 当值 false 异常
+function gameDebug.assertEquals(o1, o2, error_msg)
+    if o1 ~= o2 then
+        gameDebug.error(error_msg)
+    end
+end
+
+--- 断言 当值 false 异常
+function gameDebug.assertTrue(bool, error_msg)
+    if not bool then
+        gameDebug.error(error_msg)
+    end
+end
+
+--- 断言对象为nil
+function gameDebug.assertNil(obj, error_msg)
+    if obj == nil then
+        gameDebug.error(error_msg)
+    end
+end
+
+--- 带堆栈抛出异常
+function gameDebug.error(error_msg)
+    error(debug.traceback(error_msg), 1)
+end
+
+gameDebug.assertEquals(1, 1, "id异常")
+gameDebug.assertEquals(1, 2, "id异常")
+gameDebug.assertTrue(1 == 1, "对象 nil")
+gameDebug.assertTrue(1 == 2, "对象 nil")
+gameDebug.assertNil(nil, "对象 nil")
+gameDebug.assertNil("11", "对象 nil")
+
 --- 测试函数
 function gameDebugT2(key, vs, list)
     gameDebug.print("key = ", key, "vs = ", vs, "list = ", list)
