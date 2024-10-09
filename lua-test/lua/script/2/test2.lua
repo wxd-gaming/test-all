@@ -10,5 +10,8 @@ function t3(str)
     return str
 end
 
---t2()
-
+function testNow(map)
+    print("      lua now - " .. map["now"])
+    print("   lua nowsec - " .. map["nowsec"])
+    print("lua math.ceil - " .. math.ceil(map["now"] / 1000))
+end

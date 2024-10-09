@@ -10,8 +10,7 @@ import party.iroiro.luajava.value.LuaValue;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-08-26 11:01
  */
-public interface JavaFunction extends JFunction {
-
+public interface LuaFunction extends JFunction {
 
     @Override default int __call(Lua L) {
         try {
@@ -19,13 +18,15 @@ public interface JavaFunction extends JFunction {
             Object[] _args = new Object[oldTop];
             for (int i = 0; i < _args.length; i++) {
                 LuaValue luaValue1 = L.get();
-                Object javaObject = LuaRuntime.luaValue2Object(luaValue1);
+                Object javaObject = LuaUtils.luaValue2Object(luaValue1);
                 _args[_args.length - i - 1] = javaObject;
             }
             L.setTop(oldTop);
             Object results = doAction(L, _args);
-            LuaRuntime.push(L, null, results);
-            return 1;
+            if (results != null) {
+                LuaUtils.push(L, results);
+            }
+            return results == null ? 0 : 1;
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }

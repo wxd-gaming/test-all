@@ -1,6 +1,5 @@
 package test;
 
-import com.sun.istack.internal.Nullable;
 import party.iroiro.luajava.Lua;
 import party.iroiro.luajava.value.ImmutableLuaValue;
 
@@ -26,7 +25,7 @@ public class LuaLong extends ImmutableLuaValue<Long> {
     }
 
     @Override
-    public @Nullable Long toJavaObject() {
+    public Long toJavaObject() {
         return value;
     }
 
