@@ -15,6 +15,8 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,30 +40,51 @@ public class LuaRuntime implements Closeable {
     }
 
     /** 加载一个lua文件 */
-    public void loadDir(String dir) throws Exception {
-        Files.walk(Paths.get(dir), 99)
-                .filter(p -> {
-                    String string = p.toString();
-                    return string.endsWith(".lua") || string.endsWith(".LUA");
-                })
-                .filter(path -> {
-                    return Files.isRegularFile(path);
-                })
-                .forEach(this::loadFile);
+    public void loadDir(Path dir) {
+        ArrayList<String> modules = new ArrayList<>();
+        ArrayList<Path> errorPaths = new ArrayList<>();
+        try {
+            Files.walk(dir, 99)
+                    .filter(p -> {
+                        String string = p.toString();
+                        return string.endsWith(".lua") || string.endsWith(".LUA");
+                    })
+                    .filter(Files::isRegularFile)
+                    .sorted(Comparator.comparing(o -> o.toString().toLowerCase()))
+                    .forEach(filePath -> {
+                        try {
+                            String module = loadfile(filePath);
+                            modules.add(module);
+                        } catch (Exception e) {
+                            errorPaths.add(filePath);
+                        }
+                    });
+            if (!errorPaths.isEmpty()) {
+                for (Path errorPath : errorPaths) {
+                    log.warn("lua file load error: {}", errorPath);
+                    loadfile(errorPath);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        log.info("{} {}", dir, modules);
     }
 
     /** 加载一个lua文件 */
-    public void loadFile(String filePath) {
-        loadFile(Paths.get(filePath));
+    public String loadfile(String filePath) {
+        return loadfile(Paths.get(filePath));
     }
 
     /** 加载一个lua文件 */
-    public void loadFile(Path filePath) {
+    public String loadfile(Path filePath) {
         try {
             byte[] bytes = Files.readAllBytes(filePath);
             Buffer flip = ByteBuffer.allocateDirect(bytes.length).put(bytes).flip();
-            lua54.run(flip, filePath.getFileName().toString());
-            System.out.println("load lua file: " + filePath.toString());
+            String chunkName = filePath.getFileName().toString();
+            lua54.run(flip, chunkName);
+            System.out.println("load lua file: " + chunkName);
+            return chunkName;
         } catch (Exception e) {
             throw new RuntimeException(filePath.toString(), e);
         }

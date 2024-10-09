@@ -199,12 +199,14 @@ function gameDebug.error(error_msg)
     error(debug.traceback(error_msg), 1)
 end
 
-gameDebug.assertEquals(1, 1, "id异常")
-gameDebug.assertEquals(1, 2, "id异常")
-gameDebug.assertTrue(1 == 1, "对象 nil")
-gameDebug.assertTrue(1 == 2, "对象 nil")
-gameDebug.assertNil(nil, "对象 nil")
-gameDebug.assertNil("11", "对象 nil")
+function debugT3()
+    gameDebug.assertEquals(1, 1, "id异常")
+    gameDebug.assertEquals(1, 2, "id异常")
+    gameDebug.assertTrue(1 == 1, "对象 nil")
+    gameDebug.assertTrue(1 == 2, "对象 nil")
+    gameDebug.assertNil(nil, "对象 nil")
+    gameDebug.assertNil("11", "对象 nil")
+end
 
 --- 测试函数
 function gameDebugT2(key, vs, list)

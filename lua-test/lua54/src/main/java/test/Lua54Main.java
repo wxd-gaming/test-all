@@ -2,12 +2,12 @@ package test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 import party.iroiro.luajava.Consts;
 import party.iroiro.luajava.value.LuaValue;
 
 import java.lang.reflect.Method;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class Lua54Main {
         LuaRuntime luaRuntime = new LuaRuntime();
 
         /*TODO 可以直接运行文件 也是加载和编译文件 */
-        luaRuntime.loadDir("lua");
+        luaRuntime.loadDir(Paths.get("lua"));
 
         Method javaT3 = Lua54Main.class.getMethod("javaT3", String.class);
 
