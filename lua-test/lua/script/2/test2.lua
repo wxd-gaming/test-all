@@ -11,10 +11,15 @@ function t3(str)
 end
 
 function testNow(map)
+    argsTest(1, "3")
     print("      lua now - " .. ret(map))
     print("      lua now - " .. ret(map["now"]))
     print("   lua nowsec - " .. ret(map["nowsec"]))
     print("lua math.ceil - " .. ret(math.ceil(map["now"] / 1000)))
+end
+
+function argsTest(...)
+    gameDebug.assertTrue(1 == 2, "参数异常", ...)
 end
 
 function ret(obj)
