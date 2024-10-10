@@ -11,7 +11,19 @@ function t3(str)
 end
 
 function testNow(map)
-    print("      lua now - " .. map["now"])
-    print("   lua nowsec - " .. map["nowsec"])
-    print("lua math.ceil - " .. math.ceil(map["now"] / 1000))
+    print("      lua now - " .. ret(map))
+    print("      lua now - " .. ret(map["now"]))
+    print("   lua nowsec - " .. ret(map["nowsec"]))
+    print("lua math.ceil - " .. ret(math.ceil(map["now"] / 1000)))
+end
+
+function ret(obj)
+    local success, ret = pcall(function()
+        return "dd - " .. obj
+    end)
+    if not success then
+        local var = gameDebug.toStrings(obj, true)
+        print(debug.traceback(var .. ret), 1)
+    end
+    return ret
 end

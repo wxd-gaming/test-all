@@ -54,6 +54,22 @@ function gameDebug.toArrayJson(arr, appendYinhao, appendType)
 end
 
 --- 把对象转化成字符串
+--- @param ... 参数
+function gameDebug.toStrings(...)
+    local printString = ""
+    local tmp = { ... }
+    local success, error = pcall(function()
+        for i, v in pairs(tmp) do
+            if not (printString == nil or printString == "") then
+                printString = printString .. ", "
+            end
+            printString = printString .. gameDebug.toString(v, true, false)
+        end
+    end)
+    return "【" .. printString .. "】"
+end
+
+--- 把对象转化成字符串
 --- @param obj 参数
 --- @param appendYinhao 是否添加引号
 --- @param appendType 是否添加类型
@@ -174,29 +190,30 @@ function gameDebug.debug0(fun, appendYinhao, appendType, ...)
 end
 
 --- 断言 当值 false 异常
-function gameDebug.assertEquals(o1, o2, error_msg)
+function gameDebug.assertEquals(o1, o2, ...)
     if o1 ~= o2 then
-        gameDebug.error(error_msg)
+        gameDebug.error(...)
     end
 end
 
 --- 断言 当值 false 异常
-function gameDebug.assertTrue(bool, error_msg)
+function gameDebug.assertTrue(bool, ...)
     if not bool then
-        gameDebug.error(error_msg)
+        gameDebug.error(...)
     end
 end
 
 --- 断言对象为nil
-function gameDebug.assertNil(obj, error_msg)
+function gameDebug.assertNil(obj, ...)
     if obj == nil then
-        gameDebug.error(error_msg)
+        gameDebug.error(...)
     end
 end
 
 --- 带堆栈抛出异常
-function gameDebug.error(error_msg)
-    error(debug.traceback(error_msg), 1)
+function gameDebug.error(...)
+    local var = gameDebug.toStrings(...)
+    error(debug.traceback(var), 1)
 end
 
 function debugT3()

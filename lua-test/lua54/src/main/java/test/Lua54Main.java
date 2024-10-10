@@ -14,6 +14,7 @@ public class Lua54Main {
         LuaEventBus luaEventBus = LuaEventBus.buildFromDirs("lua");
         long start = System.currentTimeMillis();
         luaEventBus.pcall("testNow", new JSONObject().fluentPut("now", start).fluentPut("nowsec", (int) (start / 1000)));
+        luaEventBus.pcall("debugT3");
     }
 
     public static void test(LuaContext context) {
