@@ -1,6 +1,6 @@
 package test;
 
-import com.alibaba.fastjson.JSONObject;
+import java.util.Optional;
 
 /**
  * 测试
@@ -18,7 +18,9 @@ public class Lua54Main {
         //             context.getL().run("local num = 99999999999999999\n" +
         //                                "    print(num)");
         //         });
+
         long start = System.currentTimeMillis();
+        System.out.println(start / 1000);
         // luaEventBus.pcall("debugt3", new JSONObject().fluentPut("now", start).fluentPut("nowsec", (int) (start / 1000)));
         Object pcall = luaEventBus.contextModule("1")
                 .context()

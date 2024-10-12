@@ -169,7 +169,7 @@ function gameDebug.debugType(fun, ...)
 end
 
 function gameDebug.debug0(fun, appendYinhao, appendType, ...)
-    local f_success, f_error = pcall(fun, ...)
+    local f_success, f_error = xpcall(fun, debug.traceback, ...)
     if not f_success then
         local printString = ""
         local tmp = { ... }
@@ -184,7 +184,7 @@ function gameDebug.debug0(fun, appendYinhao, appendType, ...)
         print("===================参数======================\n"
                 .. "[\n" .. printString .. "\n]" ..
                 "\n===================堆栈=======================\n"
-                .. debug.traceback(f_error) ..
+                .. f_error ..
                 "\n===================结束=======================\n"
         )
     end
@@ -264,7 +264,7 @@ end
 --end
 
 function dispatch(function_name, ...)
-    gameDebug.print(function_name, ...)
+    --gameDebug.print(function_name, ...)
     --查找函数 通过load字符串的形式 动态编译 返回函数
     local loadFunc = load("return " .. function_name)()
     --调用函数
