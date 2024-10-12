@@ -9,7 +9,7 @@ function errFunc(error)
 end
 
 function t1(str)
-    print(str)
+    print(str, type(str))
     local num = 99999999999999999
     print(num)
     print(1 << 2)
@@ -18,6 +18,7 @@ function t1(str)
     --print(type(time) + num .. tostring(time))
     --print(debug.traceback())
     --print(str + num)
+    return str
 end
 
 --local success, error = pcall(t1, "d")

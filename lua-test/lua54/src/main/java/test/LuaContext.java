@@ -161,7 +161,9 @@ public class LuaContext implements Closeable {
             LuaValue returnValue = call[0];
             return LuaUtils.luaValue2Object(returnValue);
         } catch (Throwable e) {
-            throw new RuntimeException(e.getMessage(), e);
+            RuntimeException runtimeException = new RuntimeException(e.getMessage());
+            runtimeException.setStackTrace(e.getStackTrace());
+            throw runtimeException;
         } finally {
             L.setTop(oldTop);
         }

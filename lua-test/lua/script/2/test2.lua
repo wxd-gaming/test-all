@@ -27,7 +27,7 @@ function ret(obj)
         return "dd - " .. obj
     end)
     if not success then
-        local var = gameDebug.toStrings(obj, true)
+        local var = gameDebug.toStrings(", ", obj, true)
         print(debug.traceback(var .. ret), 1)
     end
     return ret

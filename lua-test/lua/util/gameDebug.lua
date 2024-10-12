@@ -3,6 +3,7 @@
 --- @Created by wxd-gaming(無心道, 15388152619)
 --- @DateTime: 2024/8/29 15:53
 gameDebug = {}
+SystemError = load("return _G.error")()
 
 --- 把 table 数据转化成json字符串
 --- @param tab table数据类型
@@ -22,7 +23,7 @@ end
 --- @param arr 数组数据类型
 function gameDebug.toArrayJson(arr, appendYinhao, appendType)
     local json = ""
-    local success, error = pcall(function()
+    local success, result = pcall(function()
         for i, v in ipairs(arr) do
             if not (json == nil or json == "") then
                 json = json .. ", "
@@ -31,7 +32,7 @@ function gameDebug.toArrayJson(arr, appendYinhao, appendType)
         end
     end)
     if not success then
-        --print("gameDebug.toArrayJson error: " .. error)
+        --print("gameDebug.toArrayJson error: " .. result)
         if (json == nil or json == "") then
             if type(arr) == "userdata" then
                 -- 这里可能是luaj的数组
@@ -55,18 +56,18 @@ end
 
 --- 把对象转化成字符串
 --- @param ... 参数
-function gameDebug.toStrings(...)
+function gameDebug.toStrings(split, ...)
     local printString = ""
     local tmp = { ... }
-    local success, error = pcall(function()
+    local _, _ = pcall(function()
         for i, v in pairs(tmp) do
             if not (printString == nil or printString == "") then
-                printString = printString .. ", "
+                printString = printString .. split
             end
-            printString = printString .. gameDebug.toString(v, true, false)
+            printString = printString .. gameDebug.toString(v, false, false)
         end
     end)
-    return "【" .. printString .. "】"
+    return printString
 end
 
 --- 把对象转化成字符串
@@ -138,7 +139,7 @@ end
 function gameDebug.print0(traceback, appendYinhao, appendType, ...)
     local printString = ""
     local tmp = { ... }
-    local success, error = pcall(function()
+    local success, result = pcall(function()
         for i, v in pairs(tmp) do
             if not (printString == nil or printString == "") then
                 printString = printString .. ",\n"
@@ -148,7 +149,7 @@ function gameDebug.print0(traceback, appendYinhao, appendType, ...)
     end)
     printString = "===================参数======================\n" .. "[\n" .. printString .. "\n]"
     if traceback then
-        printString = printString .. "\n===================堆栈=======================\n" .. debug.traceback(error)
+        printString = printString .. "\n===================堆栈=======================\n" .. debug.traceback(result)
     end
     printString = printString .. "\n===================结束=======================\n"
     print(printString)
@@ -168,7 +169,7 @@ function gameDebug.debugType(fun, ...)
 end
 
 function gameDebug.debug0(fun, appendYinhao, appendType, ...)
-    local f_success, f_error = pcall(fun)
+    local f_success, f_error = pcall(fun, ...)
     if not f_success then
         local printString = ""
         local tmp = { ... }
@@ -212,21 +213,12 @@ end
 
 --- 带堆栈抛出异常
 function gameDebug.error(...)
-    local var = gameDebug.toStrings(...)
-    error(debug.traceback(var), 1)
-end
-
-function debugT3()
-    gameDebug.assertEquals(1, 1, "id异常")
-    gameDebug.assertEquals(1, 2, "id异常")
-    gameDebug.assertTrue(1 == 1, "对象 nil")
-    gameDebug.assertTrue(1 == 2, "对象 nil")
-    gameDebug.assertNil(nil, "对象 nil")
-    gameDebug.assertNil("11", "对象 nil")
+    local var = gameDebug.toStrings(" ", ...)
+    SystemError(debug.traceback(var), 1)
 end
 
 --- 测试函数
-function gameDebugT2(key, vs, list)
+function gamedebugt2(key, vs, list)
     gameDebug.print("key = ", key, "vs = ", vs, "list = ", list)
     gameDebug.printType("key = ", key, "vs = ", vs, "list = ", list)
     gameDebug.printTraceback("key = ", key, "vs = ", vs, "list = ", list)
@@ -249,4 +241,39 @@ function gameDebugT2(key, vs, list)
     print(type(key), key, keyString, keyNumber)
 
     return list
+end
+
+function debugt3(...)
+    --gameDebug.assertEquals(1, 1, "id异常")
+    --gameDebug.assertEquals(1, 2, "id异常")
+    --gameDebug.assertTrue(1 == 1, "对象 nil")
+    --gameDebug.assertTrue(1 == 2, "对象 nil")
+    --gameDebug.assertNil(nil, "对象 nil")
+    --gameDebug.assertNil("11", "对象 nil")
+    test3(...)
+end
+
+function test3()
+    local tab = {}
+    tab[1] = "dd"
+    print(1 .. tab)
+end
+
+--function error(...)
+--    gameDebug.error(...)
+--end
+
+function dispatch(function_name, ...)
+    gameDebug.print(function_name, ...)
+    --查找函数 通过load字符串的形式 动态编译 返回函数
+    local loadFunc = load("return " .. function_name)()
+    --调用函数
+    local success, result = xpcall(loadFunc, debug.traceback, ...)
+    if not success then
+        --local trace = debug.traceback(result)
+        local var = "[Error] dispatch func name [" .. function_name .. "] 参数：" .. gameDebug.toStrings(" ", ...)
+        var = var .. "\n" .. result
+        SystemError(var)
+    end
+    return result
 end

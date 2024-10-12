@@ -15,17 +15,17 @@
         <dependency>
             <groupId>party.iroiro.luajava</groupId>
             <artifactId>luajava</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
         </dependency>
         <dependency>
             <groupId>party.iroiro.luajava</groupId>
             <artifactId>lua54</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
         </dependency>
         <dependency>
             <groupId>party.iroiro.luajava</groupId>
             <artifactId>lua54-platform</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
             <classifier>natives-desktop</classifier>
         </dependency>
     </dependencies>
