@@ -3,7 +3,14 @@
 --- @Created by wxd-gaming(無心道, 15388152619)
 --- @DateTime: 2024/8/29 15:53
 gameDebug = {}
-SystemError = load("return _G.error")()
+LUA_Error = load("return _G.error")()
+LUA_Print = load("return _G.print")()
+
+function print(...)
+    local var = gameDebug.toStrings(" ", ...)
+    LUA_Print(var)
+    io.flush()
+end
 
 --- 把 table 数据转化成json字符串
 --- @param tab table数据类型
@@ -214,7 +221,7 @@ end
 --- 带堆栈抛出异常
 function gameDebug.error(...)
     local var = gameDebug.toStrings(" ", ...)
-    SystemError(debug.traceback(var), 1)
+    LUA_Error(debug.traceback(var), 1)
 end
 
 --- 测试函数
@@ -250,13 +257,20 @@ function debugt3(...)
     --gameDebug.assertTrue(1 == 2, "对象 nil")
     --gameDebug.assertNil(nil, "对象 nil")
     --gameDebug.assertNil("11", "对象 nil")
+    gameDebug.print(...)
     test3(...)
 end
 
 function test3()
     local tab = {}
     tab[1] = "dd"
-    print(1 .. tab)
+    --print(1 .. tab)
+end
+
+function testlong(l)
+    local var = tonumber(l)
+    print(var)
+    io.flush()
 end
 
 --function error(...)
@@ -273,7 +287,43 @@ function dispatch(function_name, ...)
         --local trace = debug.traceback(result)
         local var = "[Error] dispatch func name [" .. function_name .. "] 参数：" .. gameDebug.toStrings(" ", ...)
         var = var .. "\n" .. result
-        SystemError(var)
+        LUA_Error(var)
     end
     return result
+end
+
+local mem = {  }
+function cache_memory()
+    for i = 1, 10 do
+        local var = {}
+        for j = 1, 2000 do
+            var[j] = tostring(i) .. tostring(j) .. "gddddd"
+        end
+        mem[#mem + 1] = var
+    end
+end
+
+function cleancache()
+    mem = {}
+end
+
+function cleanup(th)
+    local m1 = memory2()
+    mem = {}
+    collectgarbage("collect")
+    collectgarbage("collect")
+    collectgarbage("collect")
+    collectgarbage("collect")
+    local m2 = memory2()
+    print("name=", th, "回收前", m1, "回收后", m2, "lua version", _VERSION)
+end
+
+function showmemory(th)
+    print("thread=", th, "内存占用", memory2(), "lua version", _VERSION)
+end
+
+function memory2()
+    --collectgarbage("collect")
+    local var = collectgarbage("count")
+    return tostring(math.ceil(var / 1024)) .. " mb"
 end

@@ -6,7 +6,6 @@ import party.iroiro.luajava.Lua;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
@@ -40,17 +39,21 @@ public class LuaEventBus {
     public static LuaEventBus buildFromDirs(String base_dir) throws IOException {
         LuaEventBus luaEventBus = new LuaEventBus();
 
-        Path script_path = Paths.get(base_dir + "/script");
-        Files.walk(script_path, 1)
-                .filter(Files::isDirectory)
-                .forEach(filePath -> {
-                    if (filePath.equals(script_path)) return;
-                    log.info("load lua module：{} - {}", filePath, filePath.getFileName());
-                    LuaRuntime luaRuntime = new LuaRuntime(filePath.getFileName().toString(), new Path[]{filePath, Paths.get(base_dir + "/util")});
-                    luaRuntime.getGlobals().put("jlog", LuaLogger.getIns());
-                    luaRuntime.getGlobals().put("globalArgs", lua_data);
-                    luaEventBus.put(luaRuntime);
-                });
+        LuaRuntime luaRuntime = new LuaRuntime("root", new Path[]{Paths.get(base_dir)});
+        luaRuntime.getGlobals().put("jlog", LuaLogger.getIns());
+        luaRuntime.getGlobals().put("globalArgs", lua_data);
+        luaEventBus.put(luaRuntime);
+        // Path script_path = Paths.get(base_dir + "/script");
+        // Files.walk(script_path, 1)
+        //         .filter(Files::isDirectory)
+        //         .forEach(filePath -> {
+        //             if (filePath.equals(script_path)) return;
+        //             log.info("load lua module：{} - {}", filePath, filePath.getFileName());
+        //             LuaRuntime luaRuntime = new LuaRuntime(filePath.getFileName().toString(), new Path[]{filePath, Paths.get(base_dir + "/util")});
+        //             luaRuntime.getGlobals().put("jlog", LuaLogger.getIns());
+        //             luaRuntime.getGlobals().put("globalArgs", lua_data);
+        //             luaEventBus.put(luaRuntime);
+        //         });
         // FileUtil.walkDirs(script_path.getPath(), 1).forEach(dir -> {
         //     if (dir.equals(script_path)) return;
         //     log.info("load lua module：{} - {}", dir, dir.getName());
@@ -69,10 +72,22 @@ public class LuaEventBus {
 
     }
 
-    synchronized void put(LuaRuntime luaRuntime) {
-        LinkedHashMap<String, LuaRuntime> stringLuaRuntimeLinkedHashMap = new LinkedHashMap<>(luaRuntimeMap);
-        stringLuaRuntimeLinkedHashMap.put(luaRuntime.getName(), luaRuntime);
-        luaRuntimeMap = stringLuaRuntimeLinkedHashMap;
+    /** 清理 */
+    public void cleanup() {
+        LinkedHashMap<String, LuaRuntime> stringLuaRuntimeLinkedHashMap;
+        synchronized (this) {
+            stringLuaRuntimeLinkedHashMap = luaRuntimeMap;
+            luaRuntimeMap = new LinkedHashMap<>();
+        }
+        stringLuaRuntimeLinkedHashMap.values().forEach(LuaRuntime::close);
+    }
+
+    void put(LuaRuntime luaRuntime) {
+        synchronized (this) {
+            LinkedHashMap<String, LuaRuntime> stringLuaRuntimeLinkedHashMap = new LinkedHashMap<>(luaRuntimeMap);
+            stringLuaRuntimeLinkedHashMap.put(luaRuntime.getName(), luaRuntime);
+            luaRuntimeMap = stringLuaRuntimeLinkedHashMap;
+        }
     }
 
     public void set(String key, LuaFunction value) {

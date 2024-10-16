@@ -12,7 +12,7 @@ function t1(str)
     print(str, type(str))
     local num = 99999999999999999
     print(num)
-    print(1 << 2)
+    --print(1 << 2)
     local time = os.time()
     print(type(time) .. " - " .. tostring(time))
     --print(type(time) + num .. tostring(time))

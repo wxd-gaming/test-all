@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Lua54Main" type="Application" factoryName="Application" nameIsGenerated="true">
-    <option name="MAIN_CLASS_NAME" value="test.Lua54Main" />
+  <configuration default="false" name="LuaMain" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="test.LuaMain" />
     <module name="lua54" />
     <extension name="coverage">
       <pattern>

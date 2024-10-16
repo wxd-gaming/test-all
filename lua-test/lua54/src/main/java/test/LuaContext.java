@@ -35,7 +35,9 @@ public class LuaContext implements Closeable {
     private Map<String, LuaValue> funcCache = new HashMap<>();
 
     public LuaContext(ConcurrentHashMap<String, Object> globals, Path... paths) {
-        this.L = new Lua54_Sub("");
+        this.L = new Lua54_Sub();
+        // this.L = new LuaJit_Sub();
+
         this.L.openLibraries();
         this.paths = paths;
         for (Map.Entry<String, Object> entry : globals.entrySet()) {
@@ -169,16 +171,30 @@ public class LuaContext implements Closeable {
         }
     }
 
+    public void gc() {
+        synchronized (this) {
+            if (closed) return;
+            try {
+                pcall("cleanup", this.L.toString());
+            } catch (Exception ignore) {
+                System.out.println(this.toString() + " - cleanup error " + ignore.toString());
+            }
+        }
+    }
+
     @Override public void close() {
         synchronized (this) {
             if (closed) return;
             closed = true;
-            funcCache.clear();
+            gc();
+            funcCache = new HashMap<>();
             L.close();
         }
+        System.out.println(L.toString() + " closed");
     }
 
     @Override public String toString() {
-        return "LuacContext{" + "lua=" + L + ", isClosed=" + closed + '}';
+        return L.toString();
     }
+
 }
