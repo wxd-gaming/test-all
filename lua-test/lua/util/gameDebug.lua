@@ -308,6 +308,14 @@ function cleancache()
 end
 
 function cleanup(th)
+
+    print("当前的暂停时间: " .. collectgarbage("setpause", 100))
+    print("当前的步进比例: " .. collectgarbage("setstepmul", 100))
+
+    -- 打印当前的暂停时间和步进比例
+    print("当前的暂停时间: " .. collectgarbage("setpause"))
+    print("当前的步进比例: " .. collectgarbage("setstepmul"))
+
     local m1 = memory2()
     mem = {}
     collectgarbage("collect")
