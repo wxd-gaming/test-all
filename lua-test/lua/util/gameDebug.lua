@@ -103,6 +103,22 @@ function gameDebug.toString(obj, appendYinhao, appendType)
             str = "【string】 " .. str
         end
         return str
+    elseif typeString == 'cdata' then
+        local str = tostring(obj)
+        -- 获取字符串的长度
+        local len = string.len(str)
+        -- 检查字符串最后一个字符是否是目标字符
+        if string.sub(str, len - 2, len) == 'ULL' then
+            -- 删除最后一个字符
+            str = string.sub(str, 1, len - 3)
+        elseif string.sub(str, len - 1, len) == 'LL' then
+            -- 删除最后一个字符
+            str = string.sub(str, 1, len - 2)
+        end
+        if appendType then
+            str = "【long】 " .. str
+        end
+        return str
     elseif typeString == 'table' then
         local str = gameDebug.toTableJson(obj, appendYinhao, appendType)
         if appendType then
@@ -268,10 +284,16 @@ function test3()
 end
 
 function testlong(l)
-    local var = tonumber(l)
+    local var = tonumber(l) + 0ULL --0Ull 或者 0LL 是luajit写法转化long类型用的
+    local str = gameDebug.toString(var, true, true)
+    print(str)
+    var = var - 1
     print(var)
-    io.flush()
+    print(tostring(var))
+    --io.flush()
 end
+
+
 
 --function error(...)
 --    gameDebug.error(...)

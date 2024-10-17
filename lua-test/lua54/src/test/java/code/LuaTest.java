@@ -1,7 +1,9 @@
-package test;
+package code;
 
+import org.junit.Test;
 import party.iroiro.luajava.JuaAPI;
 import party.iroiro.luajava.Lua;
+import party.iroiro.luajava.lua54.Lua54;
 import party.iroiro.luajava.luajit.LuaJit;
 
 import java.io.IOException;
@@ -9,11 +11,28 @@ import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class LuajitMain {
+/**
+ * 测试
+ *
+ * @author: wxd-gaming(無心道, 15388152619)
+ * @version: 2024-10-09 19:08
+ **/
+public class LuaTest {
 
-    public static void main(String[] args) throws Exception {
-        /* TODO 测试下来还是5.1 */
+
+    @Test
+    public void testLua54() throws Exception {
+        Lua lua = new Lua54();
+        testLua(lua);
+    }
+
+    @Test
+    public void testLuaJit() throws Exception {
         Lua lua = new LuaJit();
+        testLua(lua);
+    }
+
+    public void testLua(Lua lua) throws Exception {
         lua.openLibraries();
         long timeMillis = System.currentTimeMillis();
 
@@ -22,7 +41,7 @@ public class LuajitMain {
         // lua.run("local i=" + timeMillis + "\n" +
         //         "print(type(i) ..\" - \".. i)");
 
-        String file = "lua";
+        String file = "../lua";
         Files.walk(Paths.get(file), 99)
                 .filter(Files::isRegularFile)
                 .forEach(path -> {
@@ -41,9 +60,10 @@ public class LuajitMain {
         lua.get("testlong").call(Long.MAX_VALUE);
         lua.get("debugt3").call(System.currentTimeMillis(), Long.MAX_VALUE, "test");
 
-        for (int j = 0; j < 1000; j++) {
-            lua.get("cache_memory").call(1);
-        }
-        lua.get("cleanup").call("12");
+        // for (int j = 0; j < 1000; j++) {
+        //     lua.get("cache_memory").call(1);
+        // }
+        // lua.get("cleanup").call("12");
     }
+
 }
