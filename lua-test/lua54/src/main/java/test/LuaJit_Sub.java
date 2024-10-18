@@ -21,12 +21,17 @@ public class LuaJit_Sub extends LuaJit {
         this.name = Thread.currentThread().getName();
     }
 
+    public LuaJit_Sub(long L, int id, AbstractLua main) {
+        super(L, id, main);
+        this.name = Thread.currentThread().getName();
+    }
+
     @Override public LuaJit_Sub newThread() {
-        throw new UnsupportedOperationException("不允许");
+        return (LuaJit_Sub) super.newThread();
     }
 
     @Override protected LuaJit_Sub newThread(long L, int id, AbstractLua mainThread) {
-        throw new UnsupportedOperationException("不允许");
+        return new LuaJit_Sub(L, id, mainThread);
     }
 
     @Override public LuaValue get() {

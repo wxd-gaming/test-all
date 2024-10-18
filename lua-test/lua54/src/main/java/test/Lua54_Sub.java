@@ -23,12 +23,17 @@ public class Lua54_Sub extends Lua54 {
         this.name = Thread.currentThread().getName();
     }
 
+    public Lua54_Sub(long L, int id, AbstractLua main) {
+        super(L, id, main);
+        this.name = Thread.currentThread().getName();
+    }
+
     @Override public Lua54_Sub newThread() {
-        throw new UnsupportedOperationException("不允许");
+        return (Lua54_Sub) super.newThread();
     }
 
     @Override protected Lua54_Sub newThread(long L, int id, AbstractLua mainThread) {
-        throw new UnsupportedOperationException("不允许");
+        return new Lua54_Sub(L, id, mainThread);
     }
 
     @Override public LuaValue get() {

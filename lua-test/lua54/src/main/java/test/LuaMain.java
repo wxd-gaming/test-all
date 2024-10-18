@@ -29,7 +29,7 @@ public class LuaMain {
             LuaRuntime luaRuntime = luaEventBus.contextModule("root");
             s(luaRuntime);
             Thread.sleep(10 * 1000);
-            luaRuntime.getThreadLocal().values().forEach(LuaContext::gc);
+            luaRuntime.getContexts().values().forEach(LuaContext::gc);
             System.out.println("lua gc");
             Thread.sleep(20 * 1000);
             luaRuntime.close();

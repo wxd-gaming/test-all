@@ -34,12 +34,6 @@ public class LuaTest {
 
     public void testLua(Lua lua) throws Exception {
         lua.openLibraries();
-        long timeMillis = System.currentTimeMillis();
-
-        // lua.run("local num = 99999999999999999LL\n" +
-        //         "    print(num)");
-        // lua.run("local i=" + timeMillis + "\n" +
-        //         "print(type(i) ..\" - \".. i)");
 
         String file = "../lua";
         Files.walk(Paths.get(file), 99)
@@ -59,11 +53,6 @@ public class LuaTest {
 
         lua.get("testlong").call(Long.MAX_VALUE);
         lua.get("debugt3").call(System.currentTimeMillis(), Long.MAX_VALUE, "test");
-
-        // for (int j = 0; j < 1000; j++) {
-        //     lua.get("cache_memory").call(1);
-        // }
-        // lua.get("cleanup").call("12");
     }
 
 }

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 当前lua上下文
@@ -34,10 +33,12 @@ public class LuaContext implements Closeable {
     private volatile boolean closed = false;
     private Map<String, LuaValue> funcCache = new HashMap<>();
 
-    public LuaContext(ConcurrentHashMap<String, Object> globals, Path... paths) {
-        this.L = new Lua54_Sub();
-        // this.L = new LuaJit_Sub();
+    public LuaContext(Map<String, Object> globals, Path... paths) {
+        this(new Lua54_Sub(), globals, paths);
+    }
 
+    public LuaContext(Lua L, Map<String, Object> globals, Path... paths) {
+        this.L = L;
         this.L.openLibraries();
         this.paths = paths;
         for (Map.Entry<String, Object> entry : globals.entrySet()) {

@@ -284,12 +284,12 @@ function test3()
 end
 
 function testlong(l)
-    local var = tonumber(l) + 0ULL --0Ull 或者 0LL 是luajit写法转化long类型用的
-    local str = gameDebug.toString(var, true, true)
-    print(str)
-    var = var - 1
-    print(var)
-    print(tostring(var))
+    --local var = tonumber(l) + 0ULL --0Ull 或者 0LL 是luajit写法转化long类型用的
+    --local str = gameDebug.toString(var, true, true)
+    --print(str)
+    --var = var - 1
+    --print(var)
+    --print(tostring(var))
     --io.flush()
 end
 
@@ -319,7 +319,7 @@ function cache_memory()
     for i = 1, 10 do
         local var = {}
         for j = 1, 2000 do
-            var[j] = tostring(i) .. tostring(j) .. "gddddd"
+            var[j] = tostring(i) .. "-" .. tostring(j) .. "-gddddd"
         end
         mem[#mem + 1] = var
     end
@@ -330,30 +330,34 @@ function cleancache()
 end
 
 function cleanup(th)
-
-    print("当前的暂停时间: " .. collectgarbage("setpause", 100))
-    print("当前的步进比例: " .. collectgarbage("setstepmul", 100))
-
-    -- 打印当前的暂停时间和步进比例
-    print("当前的暂停时间: " .. collectgarbage("setpause"))
-    print("当前的步进比例: " .. collectgarbage("setstepmul"))
+    --
+    --print("当前的暂停时间: " .. collectgarbage("setpause", 100))
+    --print("当前的步进比例: " .. collectgarbage("setstepmul", 100))
+    --
+    ---- 打印当前的暂停时间和步进比例
+    --print("当前的暂停时间: " .. collectgarbage("setpause"))
+    --print("当前的步进比例: " .. collectgarbage("setstepmul"))
 
     local m1 = memory2()
+    local var = mem[1]
     mem = {}
     collectgarbage("collect")
     collectgarbage("collect")
     collectgarbage("collect")
     collectgarbage("collect")
     local m2 = memory2()
-    print("name=", th, "回收前", m1, "回收后", m2, "lua version", _VERSION)
+    print("name=", th, "回收前", m1, "回收后", m2, "lua version", _VERSION, var)
 end
 
 function showmemory(th)
     print("thread=", th, "内存占用", memory2(), "lua version", _VERSION)
 end
 
-function memory2()
+function memory0()
     --collectgarbage("collect")
-    local var = collectgarbage("count")
-    return tostring(math.ceil(var / 1024)) .. " mb"
+    return collectgarbage("count")
+end
+
+function memory2()
+    return math.ceil(memory0() / 1024) .. " mb"
 end
