@@ -56,8 +56,8 @@ public class LuaThreadTest {
                         }
                         synchronized (currentThread) {
                             try {
-                                if (ThreadLocalRandom.current().nextInt(1, 10000) < 800)
-                                    currentThread.pcall("cleancache");
+                                // if (ThreadLocalRandom.current().nextInt(1, 10000) < 800)
+                                //     currentThread.pcall("cleancache");
                                 currentThread.pcall("cache_memory");
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -89,7 +89,7 @@ public class LuaThreadTest {
                         }
                     }
                 }
-                System.out.println(string + " - lua 总内存： " + (memory / 1024) + " mb - " + (System.currentTimeMillis() - nanoTime));
+                System.out.printf("%s - %s 个lua虚拟机 总内存： %d mb - 统计耗时 %d ms %n", string, list.size(), memory / 1024, System.currentTimeMillis() - nanoTime);
             }
         }, "check").start();
 

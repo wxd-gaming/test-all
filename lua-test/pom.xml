@@ -18,6 +18,7 @@
         <module>luajit</module>
         <module>luaj</module>
         <module>monitor</module>
+        <module>luac</module>
     </modules>
 
     <properties>
@@ -68,6 +69,16 @@
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
         </dependency>
         <!--日志框架-->
         <dependency>
