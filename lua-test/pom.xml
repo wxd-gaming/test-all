@@ -11,14 +11,11 @@
 
     <modules>
         <module>assist</module>
-        <module>luak</module>
-        <module>lua4</module>
-        <module>lua54</module>
-        <module>lua51</module>
-        <module>luajit</module>
-        <module>luaj</module>
-        <module>monitor</module>
         <module>luac</module>
+        <module>luaj</module>
+        <module>luajit</module>
+        <module>luak</module>
+        <module>monitor</module>
     </modules>
 
     <properties>
@@ -37,6 +34,10 @@
             <id>central</id>
             <url>https://maven.aliyun.com/repository/central</url>
             <!--            <url>https://repo1.maven.org/maven2/</url>-->
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 

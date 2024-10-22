@@ -1,8 +1,9 @@
 package code;
 
 import lombok.extern.slf4j.Slf4j;
-import luac.LuaService;
-import luac.LuacType;
+import luajava.LuaService;
+import luajava.LuaType;
+import org.junit.After;
 import org.junit.Test;
 
 /**
@@ -16,16 +17,30 @@ public class LuaTest {
 
     LuaService luaService;
 
-    public void testLUA54() {
-        luaService = LuaService.of(LuacType.LUA54, false, true, "../lua");
+    public void createLUA54() {
+        luaService = LuaService.of(LuaType.LUA54, false, true, "../lua");
+    }
+
+    public void createLUAJit() {
+        luaService = LuaService.of(LuaType.LUAJit, false, true, "../lua");
     }
 
     @Test
-    public void t00() {
-        log.info("ddd");
-        testLUA54();
-        luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+    public void tLUAJit() {
+        createLUAJit();
     }
 
+    @Test
+    public void tLUA54() {
+        createLUA54();
+    }
+
+    @After
+    public void after() {
+        luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+        luaService.getRuntime().call("t3", Long.MAX_VALUE);
+        luaService.getRuntime().call("cache_memory");
+        luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+    }
 
 }

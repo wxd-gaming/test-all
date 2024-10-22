@@ -1,7 +1,6 @@
 package test;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LoadState;
 import org.luaj.vm2.LuaValue;
@@ -12,10 +11,7 @@ import org.luaj.vm2.lib.jse.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author: wxd-gaming(無心道, 15388152619)
@@ -76,20 +72,16 @@ public class LuajMain {
             }
         });
 
-        LuaValue fun = globals.get("gameDebugT2");
-
-        Object key = 19126499763390465L;
-        Object[] vs = {1, "2"};
-        List<Map> list = new ArrayList<>();
-        list.add(new JSONObject().fluentPut("fid", 19126499763390464L).fluentPut("sid", 19126499763390465L));
-
-        LuaValue[] luaValues = LuajUtils.vsArray(key, vs, list);
-
-        Varargs invoke = fun.invoke(luaValues);
-
-        LuaValue luaValue = invoke.arg1();
-        Object o = LuajUtils.luaValue2Object(luaValue);
-        System.out.println(JSON.toJSONString(o));
+        for (int i = 0; i < 16; i++) {
+            new Thread(() -> {
+                LuaValue fun = globals.get("t3");
+                LuaValue[] luaValues = LuajUtils.vsArray(Long.MAX_VALUE);
+                Varargs invoke = fun.invoke(luaValues);
+                LuaValue luaValue = invoke.arg1();
+                Object o = LuajUtils.luaValue2Object(luaValue);
+                System.out.println(JSON.toJSONString(o));
+            }).start();
+        }
 
     }
 
