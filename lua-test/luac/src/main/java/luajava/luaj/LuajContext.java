@@ -1,18 +1,17 @@
-package luajava.luac;
+package luajava.luaj;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaRuntime;
-import luajava.LuaType;
-import luajava.luac.impl.Lua54Impl;
-import luajava.luac.impl.LuaJitImpl;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import party.iroiro.luajava.Consts;
-import party.iroiro.luajava.JuaAPI;
-import party.iroiro.luajava.Lua;
-import party.iroiro.luajava.value.LuaValue;
+import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaFunction;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
+import org.luaj.vm2.lib.jse.CoerceJavaToLua;
+import org.luaj.vm2.lib.jse.JsePlatform;
 
-import java.nio.Buffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,29 +27,23 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @Slf4j
 @Getter
-public class LuaContext implements luajava.ILuaContext {
+public class LuajContext implements luajava.ILuaContext {
 
     boolean closed = false;
     final String name;
-    final Lua L;
+    final Globals L;
     HashMap<String, LuaValue> funcCache = new HashMap<>();
 
-    public LuaContext(LuaRuntime luacRuntime) {
-        if (luacRuntime.getLuaType() == LuaType.LUAJit) {
-            L = new LuaJitImpl();
-        } else {
-            L = new Lua54Impl();
-        }
-
+    public LuajContext(LuaRuntime luacRuntime) {
+        L = JsePlatform.debugGlobals();
         this.name = luacRuntime.getName() + " - " + Thread.currentThread().getName();
-        L.openLibraries();
 
         for (ImmutablePair<Path, byte[]> immutablePair : luacRuntime.getExtendList()) {
             load(immutablePair.left, immutablePair.right);
         }
 
         for (Map.Entry<String, Object> entry : luacRuntime.getGlobals().entrySet()) {
-            L.set(entry.getKey(), entry.getValue());
+            L.set(entry.getKey(), CoerceJavaToLua.coerce(entry));
         }
 
         List<ImmutablePair<Path, byte[]>> error = new ArrayList<>();
@@ -75,8 +68,14 @@ public class LuaContext implements luajava.ILuaContext {
 
     @Override public String load(String fileName, byte[] bytes) {
         log.debug("load lua {}", fileName);
-        Buffer flip = JuaAPI.allocateDirect(bytes.length).put(bytes).flip();
-        L.run(flip, fileName);
+        try {
+            String code = new String(bytes, StandardCharsets.UTF_8);
+            LuaValue chunk = L.load(code, fileName);
+            chunk.call();
+            log.info("lua脚本加载完毕，path:{}", fileName);
+        } catch (Throwable e) {
+            log.error("lua脚本文件加载失败，path:{}，msg:{}", fileName, e.getMessage());
+        }
         return fileName;
     }
 
@@ -87,8 +86,21 @@ public class LuaContext implements luajava.ILuaContext {
     public LuaValue findLuaValue(String name) {
         return funcCache.computeIfAbsent(name, f -> {
             LuaValue value = L.get(name);
-            return value.type() == Lua.LuaType.NIL || value.type() == Lua.LuaType.NONE ? null : value;
+            return isLuaFunc(value) ? value : null;
         });
+    }
+
+    private static boolean isLuaFunc(LuaValue event) {
+        if (event == null) {
+            return false;
+        }
+        if (event instanceof LuajFunction) {
+            return false;
+        }
+        if (event instanceof LuaFunction) {
+            return true;
+        }
+        return false;
     }
 
     @Override public Object call(boolean xpcall, String key, Object... args) {
@@ -115,30 +127,20 @@ public class LuaContext implements luajava.ILuaContext {
     }
 
     Object pcall0(LuaValue luaValue, Object... args) {
-        int oldTop = L.getTop();
-        luaValue.push(L);
-        for (Object o : args) {
-            LuaUtils.push(L, o);
+        LuaValue[] funcArgs = new LuaValue[args.length];
+        for (int i = 0; i < args.length; i++) {
+            LuaValue evenArg = LuajUtils.valueOf(args[i]);
+            funcArgs[i] = evenArg;
         }
         try {
-            L.pCall(args.length, Consts.LUA_MULTRET);
-            int returnCount = L.getTop() - oldTop;
-            if (returnCount == 0) {
-                return null;
-            }
-            LuaValue[] call = new LuaValue[returnCount];
-            for (int i = 0; i < returnCount; i++) {
-                call[returnCount - i - 1] = L.get();
-            }
-            LuaValue returnValue = call[0];
-            return LuaUtils.luaValue2Object(returnValue);
-        } catch (Throwable e) {
-            RuntimeException runtimeException = new RuntimeException(e.getMessage());
-            runtimeException.setStackTrace(e.getStackTrace());
-            throw runtimeException;
-        } finally {
-            L.setTop(oldTop);
+            Varargs result = luaValue.invoke(funcArgs);
+            // 默认给第一个返回值
+            LuaValue ret = result.arg(1);
+            return LuajUtils.luaValue2Object(ret);
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
         }
+        return null;
     }
 
     @Override public void memory(AtomicLong memory) {
@@ -150,23 +152,13 @@ public class LuaContext implements luajava.ILuaContext {
     }
 
     @Override public void gc() {
-        synchronized (this) {
-            if (closed) return;
-            try {
-                this.L.gc();
-            } catch (Exception e) {
-                log.error("{} - cleanup error {}", this.toString(), e.toString());
-            }
-        }
     }
 
     @Override public void close() {
         synchronized (this) {
             if (closed) return;
             closed = true;
-            gc();
             funcCache = new HashMap<>();
-            L.close();
         }
     }
 

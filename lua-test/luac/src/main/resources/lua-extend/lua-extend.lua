@@ -3,8 +3,8 @@
 --- Created by wxd-gaming(無心道, 15388152619).
 --- DateTime: 2024/10/21 19:49
 
-LUA_Error = load("return _G.error")()
 LUA_Print = load("return _G.print")()
+LUA_Error = load("return _G.error")()
 
 function print(...)
     local var = gameDebug.toStrings(" ", ...)
@@ -35,7 +35,7 @@ function showmemory()
         str = str .. tostring(kb) .. " KB "
     end
 
-    print("Memory: " .. str, _VERSION)
+    print("Memory: ", str, _VERSION)
 end
 
 local dispatch_tab = {}
@@ -91,22 +91,31 @@ function gameDebug.toArrayJson(arr, appendYinhao, appendType)
             if not (json == nil or json == "") then
                 json = json .. ", "
             end
-            json = json .. gameDebug.toString(v, appendYinhao, appendType)
+            local var = type(v)
+            if var == "function" then
+                LUA_Error("d")
+            else
+                json = json .. gameDebug.toString(v, appendYinhao, appendType)
+            end
         end
     end)
+    --LUA_Print(type(arr), result)
     if not success then
-        --print("gameDebug.toArrayJson error: " .. result)
+        --LUA_Print("gameDebug.toArrayJson error: " .. result)
         if (json == nil or json == "") then
             if type(arr) == "userdata" then
                 -- 这里可能是luaj的数组
                 local len = arr.length
-                if type(len) == "number" then
+                local len_type = type(len)
+                if len_type == "number" then
                     for i = 1, len, 1 do
                         if not (json == nil or json == "") then
                             json = json .. ", "
                         end
                         json = json .. gameDebug.toString(arr[i], appendYinhao, appendType)
                     end
+                elseif len_type == "function" then
+                    json = arr:toString()
                 else
                     json = tostring(arr)
                 end
@@ -127,6 +136,7 @@ function gameDebug.toStrings(split, ...)
             if not (printString == nil or printString == "") then
                 printString = printString .. split
             end
+            --LUA_Print(type(v), v)
             printString = printString .. gameDebug.toString(v, false, false)
         end
     end)
@@ -145,6 +155,7 @@ function gameDebug.toString(obj, appendYinhao, appendType)
         return "nil";
     end
     local typeString = type(obj)
+    --LUA_Print(typeString)
     if typeString == "number" or typeString == "boolean" then
         if appendType then
             return "【" .. typeString .. "】 " .. tostring(obj)
@@ -181,6 +192,8 @@ function gameDebug.toString(obj, appendYinhao, appendType)
             str = "【" .. typeString .. "】 " .. str
         end
         return str
+    elseif typeString == "function" then
+        str = obj:toString()
     else
         local str = gameDebug.toArrayJson(obj, appendYinhao, appendType)
         if appendType then
@@ -228,7 +241,7 @@ function gameDebug.print0(traceback, appendYinhao, appendType, ...)
     end)
     printString = "===================参数======================\n" .. "[\n" .. printString .. "\n]"
     if traceback then
-        printString = printString .. "\n===================堆栈=======================\n" .. debug.traceback(result)
+        printString = printString .. "\n===================堆栈=======================\n" .. debug.traceback("")
     end
     printString = printString .. "\n===================结束=======================\n"
     print(printString)

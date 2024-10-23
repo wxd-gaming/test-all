@@ -2,7 +2,8 @@ package luajava;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import luajava.luac.LuaContext;
+import luajava.luac.LuacContext;
+import luajava.luaj.LuajContext;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.io.Closeable;
@@ -32,6 +33,7 @@ public class LuaRuntime implements Closeable {
     final List<ImmutablePair<Path, byte[]>> extendList;
     final List<ImmutablePair<Path, byte[]>> pathList;
     final ConcurrentHashMap<String, Object> globals = new ConcurrentHashMap<>();
+    volatile ILuaContext luajContext;
     volatile ConcurrentHashMap<Thread, ILuaContext> contexts = new ConcurrentHashMap<>();
 
     public LuaRuntime(LuaType luaType, String name, boolean xpcall, Path[] paths) {
@@ -62,14 +64,16 @@ public class LuaRuntime implements Closeable {
                 .collect(Collectors.toList());
     }
 
-    public ILuaContext newContext() {
-        return new LuaContext(this);
-    }
-
     public ILuaContext context() {
+        if (luaType == LuaType.LUAJ) {
+            if (luajContext == null) {
+                luajContext = new LuajContext(this);
+            }
+            return luajContext;
+        }
         ILuaContext luaContext = contexts.get(Thread.currentThread());
         if (luaContext == null || luaContext.isClosed()) {
-            luaContext = newContext();
+            luaContext = new LuacContext(this);
             contexts.put(Thread.currentThread(), luaContext);
         }
         return luaContext;
@@ -89,6 +93,7 @@ public class LuaRuntime implements Closeable {
     }
 
     public void memory(AtomicLong memory) {
+        if (luajContext != null) memory0(memory, luajContext);
         contexts.values().forEach(luacContext -> memory0(memory, luacContext));
     }
 
@@ -104,6 +109,7 @@ public class LuaRuntime implements Closeable {
 
     public long size() {
         int size = contexts.size();
+        if (luajContext != null) size++;
         return size;
     }
 
