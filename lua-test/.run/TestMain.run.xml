@@ -5,7 +5,7 @@
     <option name="VM_PARAMETERS" value="-javaagent:monitor/target/monitor.jar" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="code.*" />
+        <option name="PATTERN" value=".*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

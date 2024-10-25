@@ -25,6 +25,16 @@ public class LuaTest {
         luaService = LuaService.of(LuaType.LUAJit, false, true, "../lua");
     }
 
+    public void createLUAJ() {
+        luaService = LuaService.of(LuaType.LUAJ, false, true, "../lua");
+    }
+
+
+    @Test
+    public void tLUAJ() {
+        createLUAJ();
+    }
+
     @Test
     public void tLUAJit() {
         createLUAJit();

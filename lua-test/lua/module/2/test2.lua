@@ -5,6 +5,8 @@
 ---
 
 function t3(str)
+    local a =3 & 0xFF
+    print(a)
     local num = 9199999999999999989
     print("lua long - " .. tostring(num))
     print("lua 接收 java 传递参数 - " .. tostring(str))
