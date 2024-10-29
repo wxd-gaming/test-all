@@ -3,8 +3,12 @@ package code;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaService;
 import luajava.LuaType;
+import luajava.luac.LuaFunction;
 import org.junit.After;
 import org.junit.Test;
+import party.iroiro.luajava.Lua;
+
+import java.util.HashMap;
 
 /**
  * 测试
@@ -47,10 +51,26 @@ public class LuaTest {
 
     @After
     public void after() {
-        luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
-        luaService.getRuntime().call("t3", Long.MAX_VALUE);
-        luaService.getRuntime().call("cache_memory");
-        luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+        HashMap<String, Object> value = new HashMap<>();
+        luaService.getRuntime().getGlobals().put("getdata", new LuaFunction() {
+            @Override public Object doAction(Lua L, Object[] args) {
+                return value.get(String.valueOf(args[0]));
+            }
+        });
+
+        luaService.getRuntime().getGlobals().put("setdata", new LuaFunction() {
+            @Override public Object doAction(Lua L, Object[] args) {
+                return value.put(String.valueOf(args[0]), args[1]);
+            }
+        });
+
+        luaService.getRuntime().call("printData");
+        // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+        // luaService.getRuntime().call("t3", Long.MAX_VALUE);
+        // luaService.getRuntime().call("cache_memory");
+        luaService.getRuntime().call("printData");
+
+        // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
     }
 
 }
