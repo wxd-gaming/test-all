@@ -27,7 +27,7 @@ function TestData.Lv(data, change)
 end
 
 function TestData.print2(...)
-    local string = gameDebug.toStrings(" ", "dd", ...)
+    local string = gameDebug.toStrings0(false, false, " ", "dd", ...)
     print(string)
 end
 

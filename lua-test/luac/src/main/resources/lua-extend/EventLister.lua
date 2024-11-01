@@ -26,10 +26,7 @@ EventListerTable = {
     ---@param eventFun function 事件回调函数
     eventLister  = function(self, eventType, eventName, eventFun)
         local em = self:eventMap(eventType)
-        if em[eventName] then
-            _LUA_Error(debug.traceback("存在相同的事件【" .. eventName .. "】注册"))
-            return
-        end
+        gameDebug.assertNotNil(em[eventName], "事件 type = ", eventType, " name = ", eventName, "重复注册")
         em[eventName] = eventFun
         --gameDebug.printType(_VERSION, "注册事件:", self, em, eventType, eventName)
     end,

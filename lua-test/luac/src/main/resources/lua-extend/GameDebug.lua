@@ -111,7 +111,7 @@ function gameDebug.toString(obj, appendYinhao, appendType)
         end
         return str
     elseif typeString == 'table' then
-        local str = gameDebug.toTableJson(obj, appendYinhao, appendType)
+        local str = gameDebug.toTableJson(obj, true, appendType)
         if appendType then
             str = "【" .. typeString .. "】 " .. str
         end
@@ -132,7 +132,7 @@ function gameDebug.toString(obj, appendYinhao, appendType)
         end
         return e
     else
-        local str = gameDebug.toArrayJson(obj, appendYinhao, appendType)
+        local str = gameDebug.toArrayJson(obj, true, appendType)
         if appendType then
             str = "【" .. typeString .. "】 " .. str
         end
@@ -144,14 +144,14 @@ end
 ---@param split string 分隔符
 --- @param ... any 参数
 function gameDebug.toStrings(split, ...)
-    return gameDebug.toStrings0(split, true, false, ...)
+    return gameDebug.toStrings0(false, false, split, ...)
 end
 
 --- 把对象转化成字符串,保护数据类型
 ---@param split string 分隔符
 --- @param ... any 参数
 function gameDebug.toStringsType(split, ...)
-    return gameDebug.toStrings0(split, false, true, ...)
+    return gameDebug.toStrings0(false, true, split, ...)
 end
 
 --- 把对象转化成字符串
@@ -159,7 +159,7 @@ end
 --- @param appendYinhao boolean 是否添加引号
 --- @param appendType boolean 是否添加类型
 --- @param ... any 参数
-function gameDebug.toStrings0(split, appendYinhao, appendType, ...)
+function gameDebug.toStrings0(appendYinhao, appendType, split, ...)
     local printString = ""
     local tmp = { ... }
     local _, _ = pcall(function()
@@ -275,11 +275,18 @@ function gameDebug.assertNil(obj, ...)
     end
 end
 
+--- 断言对象为nil
+function gameDebug.assertNotNil(obj, ...)
+    if obj ~= nil then
+        gameDebug.error(...)
+    end
+end
+
 --- 断言 仅仅只是 print 输出
 ---@param b boolean false 仅仅只是 print 输出
 function gameDebug.assertPrint(b, ...)
     if not b then
-        local msg = gameDebug.toStrings(" ", ...)
+        local msg = gameDebug.toStrings0(false, false, " ", ...)
         _LUA_Print(msg)
     end
 end
@@ -288,7 +295,7 @@ end
 ---@param b boolean false 仅仅只是 print 输出
 function gameDebug.assertPrintTrace(b, ...)
     if not b then
-        local msg = gameDebug.toStrings(" ", ...)
+        local msg = gameDebug.toStrings0(false, false, " ", ...)
         local traceback = debug.traceback(msg)
         _LUA_Print(traceback)
     end
@@ -296,7 +303,7 @@ end
 
 --- 会抛出异常导致程序终止运行
 function gameDebug.error(...)
-    local var = gameDebug.toStrings(" ", ...)
+    local var = gameDebug.toStrings0(false, false, " ", ...)
     var = debug.traceback(var)
     _LUA_Error(var)
 end

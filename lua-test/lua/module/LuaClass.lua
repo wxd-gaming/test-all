@@ -125,3 +125,8 @@ RechargeEventListerTable:eventLister(
         "test.2",
         printData
 )
+RechargeEventListerTable:eventLister(
+        2,
+        "test.2",
+        printData
+)
