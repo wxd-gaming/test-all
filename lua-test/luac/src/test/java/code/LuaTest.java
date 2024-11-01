@@ -68,7 +68,7 @@ public class LuaTest {
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
         // luaService.getRuntime().call("t3", Long.MAX_VALUE);
         // luaService.getRuntime().call("cache_memory");
-        luaService.getRuntime().call("printData");
+        // luaService.getRuntime().call("printData");
 
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
     }

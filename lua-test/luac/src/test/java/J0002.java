@@ -1,10 +1,11 @@
 
 
-public class J0001 {
+public class J0002 {
 
     public static void main(String[] args) {
-        System.out.println("6 4");
-
+        System.out.println(14 / 4);
+        System.out.println(14 - 14 % 4);
+        System.out.println(14 % 4);
     }
 
 }

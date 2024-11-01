@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class J0021 {
