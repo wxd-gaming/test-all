@@ -22,7 +22,7 @@ function testNow(map)
 end
 
 function argsTest(...)
-    gameDebug.assertTrue(1 == 2, "参数异常", ...)
+    Assert.assertTrue(1 == 2, "参数异常", ...)
 end
 
 function ret(obj)

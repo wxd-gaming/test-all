@@ -1,5 +1,6 @@
 package luajava.luac;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaRuntime;
@@ -62,6 +63,7 @@ public class LuacContext implements luajava.ILuaContext {
             }
         }
         if (!error.isEmpty()) {
+            System.out.println("=========================开始重复加载异常的lua脚本=========================");
             for (ImmutablePair<Path, byte[]> immutablePair : error) {
                 load(immutablePair.left, immutablePair.right);
             }
