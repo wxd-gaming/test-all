@@ -4,6 +4,8 @@
 --- DateTime: 2024/11/1 15:06
 ---
 
+require("GameDebug")
+
 local dispatch_tab = {}
 
 --- 调用函数

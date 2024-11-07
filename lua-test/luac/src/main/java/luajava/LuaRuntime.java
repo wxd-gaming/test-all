@@ -4,17 +4,10 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.luac.LuacContext;
 import luajava.luaj.LuajContext;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.io.Closeable;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 /**
  * lua 装载器
@@ -29,39 +22,20 @@ public class LuaRuntime implements Closeable {
     final LuaType luaType;
     final boolean xpcall;
     final String name;
-    /** 系统扩展 */
-    final List<ImmutablePair<Path, byte[]>> extendList;
-    final List<ImmutablePair<Path, byte[]>> pathList;
+
+    final LuaFileRequire luaFileRequire;
+    final LuaFileCache luaFileCache;
+
     final ConcurrentHashMap<String, Object> globals = new ConcurrentHashMap<>();
     volatile ILuaContext luajContext;
     volatile ConcurrentHashMap<Thread, ILuaContext> contexts = new ConcurrentHashMap<>();
 
-    public LuaRuntime(LuaType luaType, String name, boolean xpcall, Path[] paths) {
+    public LuaRuntime(LuaType luaType, String name, boolean xpcall, String dir) {
         this.luaType = luaType;
         this.xpcall = xpcall;
         this.name = name;
-
-        extendList = Utils.resourcesList("lua-extend", new String[]{"lua", "LUA"});
-
-        this.pathList = Arrays.stream(paths)
-                .filter(Files::exists)
-                .flatMap(path -> {
-                    try {
-                        return Files.walk(path, 99).filter(Files::isRegularFile);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .sorted((o1, o2) -> o1.toString().compareToIgnoreCase(o2.toString()))
-                .map(path -> {
-                    try {
-                        byte[] bytes = Files.readAllBytes(path);
-                        return ImmutablePair.of(path, bytes);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toList());
+        luaFileCache = new LuaFileCache(dir);
+        luaFileRequire = new LuaFileRequire(luaFileCache);
     }
 
     public ILuaContext context() {

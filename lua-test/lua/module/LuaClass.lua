@@ -109,24 +109,3 @@ function printData()
     print("==============================")
 end
 
-Recharge = {}
-
-
-
-RechargeEventListerTable = EventListerTable.new()
-
-RechargeEventListerTable:eventLister(
-        "1",
-        "test.1",
-        printData
-)
-RechargeEventListerTable:eventLister(
-        2,
-        "test.2",
-        printData
-)
-RechargeEventListerTable:eventLister(
-        2,
-        "test.2",
-        printData
-)

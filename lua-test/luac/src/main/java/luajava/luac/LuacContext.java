@@ -1,20 +1,17 @@
 package luajava.luac;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaRuntime;
 import luajava.LuaType;
 import luajava.luac.impl.Lua54Impl;
 import luajava.luac.impl.LuaJitImpl;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import party.iroiro.luajava.Consts;
 import party.iroiro.luajava.JuaAPI;
 import party.iroiro.luajava.Lua;
 import party.iroiro.luajava.value.LuaValue;
 
 import java.nio.Buffer;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,44 +39,63 @@ public class LuacContext implements luajava.ILuaContext {
         } else {
             L = new Lua54Impl();
         }
-
         this.name = luacRuntime.getName() + " - " + Thread.currentThread().getName();
         L.openLibraries();
 
-        for (ImmutablePair<Path, byte[]> immutablePair : luacRuntime.getExtendList()) {
-            load(immutablePair.left, immutablePair.right);
+        {
+            // 设置 Lua 文件的搜索路径
+            L.getGlobal("package");
+            L.getField(-1, "path");
+            String currentPath = L.toString(-1);
+            String newPath = luacRuntime.getLuaFileRequire().getLuaPath() + ";" + currentPath;
+            L.pop(1); // 移除当前路径
+            L.push(newPath);
+            L.setField(-2, "path");
+            L.set("paths", luacRuntime.getLuaFileRequire().getLuaPath());
         }
+        // 加载内置资源
+        load(luacRuntime.getLuaFileCache().getExtendList(), 5);
 
         for (Map.Entry<String, Object> entry : luacRuntime.getGlobals().entrySet()) {
             L.set(entry.getKey(), entry.getValue());
         }
 
-        List<ImmutablePair<Path, byte[]>> error = new ArrayList<>();
-        for (ImmutablePair<Path, byte[]> immutablePair : luacRuntime.getPathList()) {
+        ArrayList<String> modules = luacRuntime.getLuaFileRequire().getModules();
+        requireLoad(modules, 5);
+    }
+
+    /**
+     * require 加载文件形式会缓存，只加载一次，dofile 调用一次加载一次，不会缓存，
+     *
+     * @param modules 需要加载模块
+     * @param fortune 加载权重，1为不重试，2为重试一次，3为重试两次，以此类推，默认为1
+     * @author: wxd-gaming(無心道, 15388152619)
+     * @version: 2024-11-07 15:22
+     */
+    void requireLoad(List<String> modules, int fortune) {
+        if (fortune < 1) return;
+        List<String> error = new ArrayList<>();
+        for (String module : modules) {
             try {
-                load(immutablePair.left, immutablePair.right);
+                L.run("require('" + module + "')");
+                log.debug("require load lua {}", module);
             } catch (Exception e) {
-                error.add(immutablePair);
+                if (fortune > 1) {
+                    error.add(module);
+                } else {
+                    throw new RuntimeException(module, e);
+                }
             }
         }
         if (!error.isEmpty()) {
-            System.out.println("=========================开始重复加载异常的lua脚本=========================");
-            for (ImmutablePair<Path, byte[]> immutablePair : error) {
-                load(immutablePair.left, immutablePair.right);
-            }
+            requireLoad(error, fortune - 1);
         }
     }
 
-    @Override public String load(Path filePath, byte[] bytes) {
-        String fileName = filePath.getFileName().toString();
-        return load(fileName, bytes);
-    }
-
-    @Override public String load(String fileName, byte[] bytes) {
-        log.debug("load lua {}", fileName);
+    @Override public void loadFile4Bytes(String fileName, byte[] bytes, int fortune) {
         Buffer flip = JuaAPI.allocateDirect(bytes.length).put(bytes).flip();
         L.run(flip, fileName);
-        return fileName;
+        log.debug("file byte load lua {}", fileName);
     }
 
     @Override public boolean has(String name) {

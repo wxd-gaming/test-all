@@ -3,7 +3,6 @@ package luajava.luaj;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaRuntime;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
@@ -12,10 +11,7 @@ import org.luaj.vm2.lib.jse.CoerceJavaToLua;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -38,45 +34,21 @@ public class LuajContext implements luajava.ILuaContext {
         L = JsePlatform.debugGlobals();
         this.name = luacRuntime.getName() + " - " + Thread.currentThread().getName();
 
-        for (ImmutablePair<Path, byte[]> immutablePair : luacRuntime.getExtendList()) {
-            load(immutablePair.left, immutablePair.right);
-        }
+        load(luacRuntime.getLuaFileCache().getExtendList(), 5);
 
         for (Map.Entry<String, Object> entry : luacRuntime.getGlobals().entrySet()) {
             L.set(entry.getKey(), CoerceJavaToLua.coerce(entry));
         }
 
-        List<ImmutablePair<Path, byte[]>> error = new ArrayList<>();
-        for (ImmutablePair<Path, byte[]> immutablePair : luacRuntime.getPathList()) {
-            try {
-                load(immutablePair.left, immutablePair.right);
-            } catch (Exception e) {
-                error.add(immutablePair);
-            }
-        }
-        if (!error.isEmpty()) {
-            for (ImmutablePair<Path, byte[]> immutablePair : error) {
-                load(immutablePair.left, immutablePair.right);
-            }
-        }
+        load(luacRuntime.getLuaFileCache().getPathList(), 5);
     }
 
-    @Override public String load(Path filePath, byte[] bytes) {
-        String fileName = filePath.getFileName().toString();
-        return load(fileName, bytes);
-    }
-
-    @Override public String load(String fileName, byte[] bytes) {
+    @Override public void loadFile4Bytes(String fileName, byte[] bytes, int fortune) {
         log.debug("load lua {}", fileName);
-        try {
-            String code = new String(bytes, StandardCharsets.UTF_8);
-            LuaValue chunk = L.load(code, fileName);
-            chunk.call();
-            log.info("lua脚本加载完毕，path:{}", fileName);
-        } catch (Throwable e) {
-            log.error("lua脚本文件加载失败，path:{}，msg:{}", fileName, e.getMessage());
-        }
-        return fileName;
+        String code = new String(bytes, StandardCharsets.UTF_8);
+        LuaValue chunk = L.load(code, fileName);
+        chunk.call();
+        log.debug("file byte load lua {}", fileName);
     }
 
     @Override public boolean has(String name) {

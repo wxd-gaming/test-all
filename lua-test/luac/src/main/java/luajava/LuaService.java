@@ -4,10 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Closeable;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -30,39 +26,20 @@ public class LuaService implements AutoCloseable, Closeable {
     }
 
     LuaType luaType;
-    boolean useModule;
     boolean xpcall;
     String paths;
 
     protected LuaService(LuaType luaType, boolean useModule, boolean xpcall, String paths) {
         this.luaType = luaType;
-        this.useModule = useModule;
         this.xpcall = xpcall;
         this.paths = paths;
     }
 
     public void init() {
         HashMap<String, LuaRuntime> tmpRuntimeHashMap = new HashMap<>();
-        if (useModule) {
-            Path util_path = Paths.get(paths + "/util");
-            Path script_path = Paths.get(paths + "/module");
-            try {
-                if (Files.exists(script_path)) throw new RuntimeException("module path not exists");
-                Files.walk(script_path, 1)
-                        .filter(Files::isDirectory)
-                        .forEach(dir -> {
-                            if (dir.equals(script_path)) return;
-                            log.info("load lua module：{} - {}", dir, dir.getFileName());
-                            LuaRuntime luaRuntime = new LuaRuntime(luaType, dir.getFileName().toString(), xpcall, new Path[]{dir, util_path});
-                            tmpRuntimeHashMap.put(luaRuntime.getName(), luaRuntime);
-                        });
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            LuaRuntime luaRuntime = new LuaRuntime(luaType, "root", xpcall, new Path[]{Paths.get(paths)});
-            tmpRuntimeHashMap.put(luaRuntime.getName(), luaRuntime);
-        }
+
+        LuaRuntime luaRuntime = new LuaRuntime(luaType, "root", xpcall, paths);
+        tmpRuntimeHashMap.put(luaRuntime.getName(), luaRuntime);
         HashMap<String, LuaRuntime> tmp = runtimeHashMap;
         runtimeHashMap = tmpRuntimeHashMap;
         if (tmp != null && !tmp.isEmpty()) {
