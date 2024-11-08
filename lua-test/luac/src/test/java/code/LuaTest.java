@@ -1,6 +1,7 @@
 package code;
 
 import lombok.extern.slf4j.Slf4j;
+import luajava.ILuaContext;
 import luajava.LuaService;
 import luajava.LuaType;
 import luajava.luac.LuaFunction;
@@ -50,7 +51,7 @@ public class LuaTest {
     }
 
     @After
-    public void after() {
+    public void after() throws InterruptedException {
         HashMap<String, Object> value = new HashMap<>();
         luaService.getRuntime().getGlobals().put("getdata", new LuaFunction() {
             @Override public Object doAction(Lua L, Object[] args) {
@@ -63,14 +64,15 @@ public class LuaTest {
                 return value.put(String.valueOf(args[0]), args[1]);
             }
         });
-
-        luaService.getRuntime().call("printData");
+        ILuaContext context = luaService.getRuntime().context();
+        // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
         // luaService.getRuntime().call("t3", Long.MAX_VALUE);
         // luaService.getRuntime().call("cache_memory");
         // luaService.getRuntime().call("printData");
 
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
+        Thread.sleep(500);
     }
 
 }

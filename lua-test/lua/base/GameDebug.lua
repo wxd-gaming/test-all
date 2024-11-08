@@ -32,13 +32,16 @@ end
 
 ---获取函数的名字
 function gameDebug.get_function_name(func)
-    local info = debug.getinfo(func, "n")
+    local info = debug.getinfo(func)
+    gameDebug.print(info)
     return info.name or "匿名函数"
 end
 
 ---获取函数所在的文件名
 function gameDebug.getFunctionInfo(func)
-    return gameDebug.get_function_file(func) .. "." .. gameDebug.get_function_name(func)
+    local debugInfo = debug.getinfo(func)
+    --获取不到函数名字，只能又文件名和行数表达了
+    return (debugInfo.source or "匿名文件") .. ":" .. tostring(debugInfo.linedefined)
 end
 
 --- 把 table 数据转化成json字符串

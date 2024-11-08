@@ -46,9 +46,14 @@ end
 
 function test33(o1, o2, o3)
     print("o1", o1, "o2", o2, "o3", o3)
+
+    print(gameDebug.getFunctionInfo(test33))
+    print(gameDebug.getFunctionInfo(function()
+    end))
+    print(gameDebug.getFunctionInfo(TestData.print2))
 end
 
-test33(1, nil, 3)
+--test33(1, nil, 3)
 
 --local var = TestData.new()
 --print(TestData.Lv(var, 33))
