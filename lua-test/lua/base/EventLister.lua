@@ -3,6 +3,8 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 16:54
 
+require("GameDebug")
+
 ---事件注册
 EventListerTable = {}
 
@@ -21,13 +23,13 @@ function EventListerTable.registerType(name, type, playerDbKey, globalDbKey)
 
     if playerDbKey then
         playerDbKey = tostring(playerDbKey)
-        gameDebug.assertNotNil(__Recharge_PlayerDbKey[playerDbKey], "充值玩家数据库key", playerDbKey, "模块", __Recharge_PlayerDbKey[playerDbKey])
+        gameDebug.assertNotNil(__Recharge_PlayerDbKey[playerDbKey], "充值玩家数据库key", playerDbKey, "模块", __Recharge_PlayerDbKey[playerDbKey], "冲突")
         __Recharge_PlayerDbKey[playerDbKey] = name
     end
 
     if globalDbKey then
         globalDbKey = tostring(globalDbKey)
-        gameDebug.assertNotNil(__Recharge_GlobalDbKey[globalDbKey], "充值全局数据库", globalDbKey, "模块", __Recharge_GlobalDbKey[globalDbKey], "冲突")
+        gameDebug.assertNotNil(__Recharge_GlobalDbKey[globalDbKey], "充值全局数据库Key", globalDbKey, "模块", __Recharge_GlobalDbKey[globalDbKey], "冲突")
         __Recharge_GlobalDbKey[globalDbKey] = name
     end
 end
@@ -56,6 +58,7 @@ end
 ---@param eventType any 事件类型
 ---@param eventName string 事件名称
 ---@param eventFun function 事件回调函数
+---@param index number 优先级，越小越靠前，默认9999
 function EventListerTable:eventLister(eventType, eventName, eventFun, index)
     local em = self:eventMap(eventType, eventName)
     local funInfo = gameDebug.getFunctionInfo(eventFun)

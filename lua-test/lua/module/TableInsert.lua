@@ -3,6 +3,9 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/11/1 13:38
 
+require("GameDebug")
+require("EventLister")
+
 tableInsert = {}
 local data = {}
 local dataList = {}
@@ -17,11 +20,11 @@ local function addData(id, name, index)
     --for i = #dataList, __i, -1 do
     --    dataList[i + 1] = dataList[i]
     --end
-    local mapping = { id = id, name = name, weight = (index or 9999) }
+    local mapping = { id = id, name = name, weight = tonumber((index or 9999)) }
     data[id] = mapping
     table.insert(dataList, mapping)
     table.sort(dataList, function(a, b)
-        return tonumber(a.weight) < tonumber(b.weight)
+        return a.weight < b.weight
     end)
 end
 
@@ -30,14 +33,17 @@ addData("s1", "s2")
 addData("dste1", "s2")
 addData("fs11", "我要第10", 10)
 addData("s31", "s2", 998)
-addData("d3", "我要第一", 2)
-addData("d2", "我要第一", 1)
+addData("d31", "我要第一", 2)
+addData("d32", "我要第一", 1)
+addData("d33", "我要第一", 1)
+addData("d34", "我要第一", 1)
+addData("d35", "我要第一", 1)
 table.remove(dataList, 1)
 gameDebug.print("table insert ", data, dataList)
 
 LoginEventListerTable:eventLister("0", "test", function()
     print("test")
-end,999999)
+end, 999999)
 
 LoginEventListerTable:eventLister("0", "test", function()
     print("test9999")
@@ -45,7 +51,7 @@ end, 9999)
 
 LoginEventListerTable:eventLister("0", "test", function()
     print("test100")
-end,100)
+end, 100)
 
 LoginEventListerTable:eventLister("0", "test", function()
     print("test1")
