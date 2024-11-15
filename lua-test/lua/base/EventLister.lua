@@ -3,8 +3,6 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 16:54
 
-require("GameDebug")
-
 ---事件注册
 EventListerTable = {}
 
@@ -18,26 +16,28 @@ local __Recharge_GlobalDbKey = {}
 function EventListerTable.registerType(name, type, playerDbKey, globalDbKey)
     -- gameDebug.assertTrue((playerDbKey ~= nil) or (globalDbKey ~= nil), "充值玩家数据库key或充值全局数据库key不能为空")
     type = tostring(type)
-    gameDebug.assertNotNil(__Recharge_Type[type], "充值类型", type, "模块")
+    gameDebug.assertNotNil(__Recharge_Type[type], "事件类型", type, "模块", name, __Recharge_Type[type], "冲突")
     __Recharge_Type[type] = name
 
     if playerDbKey then
         playerDbKey = tostring(playerDbKey)
-        gameDebug.assertNotNil(__Recharge_PlayerDbKey[playerDbKey], "充值玩家数据库key", playerDbKey, "模块", __Recharge_PlayerDbKey[playerDbKey], "冲突")
+        gameDebug.assertNotNil(__Recharge_PlayerDbKey[playerDbKey], "玩家数据库key", playerDbKey, "模块", __Recharge_PlayerDbKey[playerDbKey], "冲突")
         __Recharge_PlayerDbKey[playerDbKey] = name
     end
 
     if globalDbKey then
         globalDbKey = tostring(globalDbKey)
-        gameDebug.assertNotNil(__Recharge_GlobalDbKey[globalDbKey], "充值全局数据库Key", globalDbKey, "模块", __Recharge_GlobalDbKey[globalDbKey], "冲突")
+        gameDebug.assertNotNil(__Recharge_GlobalDbKey[globalDbKey], "全局数据库Key", globalDbKey, "模块", __Recharge_GlobalDbKey[globalDbKey], "冲突")
         __Recharge_GlobalDbKey[globalDbKey] = name
     end
+    --gameDebug.print(_VERSION, "注册", "事件类型", type, "模块", name)
 end
 
 --- 创建一个事件监听容器
-function EventListerTable.new(name)
+function EventListerTable.new(name, max)
     local var = setmetatable({}, EventListerTable)
     var.name = name
+    var.maxCount = max
     return var
 end
 --- 获取事件容器
@@ -61,8 +61,11 @@ end
 ---@param index number 优先级，越小越靠前，默认9999
 function EventListerTable:eventLister(eventType, eventName, eventFun, index)
     local em = self:eventMap(eventType, eventName)
+    if em.maxCount and em.maxCount <= table.count(em.MappingList) then
+        gameDebug.error(self.name, "事件类型", eventType, "数量超过限制", em.maxCount)
+    end
     local funInfo = gameDebug.getFunctionInfo(eventFun)
-    gameDebug.assertPrintTrace(em.MappingMap[funInfo] == nil, self.name, "存在相同的事件【" .. eventName .. ", " .. funInfo .. "】注册")
+    gameDebug.assertTrue(em.MappingMap[funInfo] == nil, self.name, "存在相同的事件【" .. eventName .. ", " .. funInfo .. "】注册", em.MappingMap[funInfo])
     local funMapping = { name = eventName, fun = eventFun, funInfo = funInfo, weight = tonumber((index or 9999)) }
     em.MappingMap[funInfo] = funMapping
     table.insert(em.MappingList, funMapping)
@@ -74,7 +77,6 @@ end
 
 --- 触发事件
 ---@param eventType any 事件类型
----@param name string 事件名称
 ---@param ... any 事件参数
 function EventListerTable:triggerEvent(eventType, ...)
     local em = self:eventMap(eventType)
@@ -82,9 +84,27 @@ function EventListerTable:triggerEvent(eventType, ...)
         for _, v in pairs(em.MappingList) do
             print(self.name, "触发监听", v.name, v.funInfo)
             local s, e = xpcall(v.fun, debug.traceback, ...)
-            gameDebug.assertPrintTrace(s, "触发事件", v.name, v.funInfo, "调用异常", e, ...)
+            gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
         end
     end
+end
+
+--- 触发事件带返回值，事件只能有一个
+---@param eventType any 事件类型
+---@param ... any 事件参数
+function EventListerTable:triggerResult(eventType, ...)
+    local em = self:eventMap(eventType)
+    if table.notEmpty(em) then
+        gameDebug.assertTrue(table.count(em.MappingList) == 1, self.name, "存在多个事件监听", eventType)
+        local v = em.MappingList[1]
+        print(self.name, "触发监听", v.name, v.funInfo)
+        local s, e = xpcall(v.fun, debug.traceback, ...)
+        gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
+        if s then
+            return e
+        end
+    end
+    return nil
 end
 
 EventListerTable.registerType("默认", "0", "player_db_key", "global_db_key")
@@ -99,3 +119,5 @@ LoginEventListerTable = EventListerTable.new("登录")
 LevelUpEventListerTable = EventListerTable.new("等级提升触发")
 --- 凌晨触发执行
 ZeroEventListerTable = EventListerTable.new("模块凌晨更新")
+
+CheckOpenEventListerTable = EventListerTable.new("检查模块是否开启", 1)

@@ -41,13 +41,16 @@ addData("d35", "我要第一", 1)
 table.remove(dataList, 1)
 gameDebug.print("table insert ", data, dataList)
 
+local this = {}
+function this.t1()
+    print("this method test")
+end
+
 LoginEventListerTable:eventLister("0", "test", function()
     print("test")
 end, 999999)
 
-LoginEventListerTable:eventLister("0", "test", function()
-    print("test9999")
-end, 9999)
+LoginEventListerTable:eventLister("0", "test", this.t1)
 
 LoginEventListerTable:eventLister("0", "test", function()
     print("test100")
@@ -58,3 +61,14 @@ LoginEventListerTable:eventLister("0", "test", function()
 end, 1)
 
 LoginEventListerTable:triggerEvent("0")
+
+local a = 10
+print(a < 20 and a or 20)
+
+gameDebug.debug(function()
+    CheckOpenEventListerTable:eventLister("0", "会员礼包检测", function()
+        return "CheckOpenEventListerTable"
+    end)
+
+    print(CheckOpenEventListerTable:triggerResult("0"))
+end)
