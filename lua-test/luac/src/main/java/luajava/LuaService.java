@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Closeable;
-import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -17,10 +16,10 @@ import java.util.concurrent.atomic.AtomicLong;
 @Getter
 public class LuaService implements AutoCloseable, Closeable {
 
-    private HashMap<String, LuaRuntime> runtimeHashMap = new HashMap<>();
+    LuaRuntime luaRuntime;
 
-    public static LuaService of(LuaType luaType, boolean useModule, boolean xpcall, String paths) {
-        LuaService luaService = new LuaService(luaType, useModule, xpcall, paths);
+    public static LuaService of(LuaType luaType, boolean xpcall, String paths) {
+        LuaService luaService = new LuaService(luaType, xpcall, paths);
         luaService.init();
         return luaService;
     }
@@ -29,24 +28,23 @@ public class LuaService implements AutoCloseable, Closeable {
     boolean xpcall;
     String paths;
 
-    protected LuaService(LuaType luaType, boolean useModule, boolean xpcall, String paths) {
+    protected LuaService(LuaType luaType, boolean xpcall, String paths) {
         this.luaType = luaType;
         this.xpcall = xpcall;
         this.paths = paths;
     }
 
     public void init() {
-        HashMap<String, LuaRuntime> tmpRuntimeHashMap = new HashMap<>();
 
-        LuaRuntime luaRuntime = new LuaRuntime(luaType, "root", xpcall, paths);
-        tmpRuntimeHashMap.put(luaRuntime.getName(), luaRuntime);
-        HashMap<String, LuaRuntime> tmp = runtimeHashMap;
-        runtimeHashMap = tmpRuntimeHashMap;
-        if (tmp != null && !tmp.isEmpty()) {
+        LuaRuntime _luaRuntime = new LuaRuntime(luaType, "root", xpcall, paths);
+        LuaRuntime old = luaRuntime;
+        luaRuntime = _luaRuntime;
+
+        if (old != null) {
             new Thread(() -> {
                 try {
                     Thread.sleep(30_000);
-                    tmp.values().forEach(LuaRuntime::close);
+                    old.close();
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -55,27 +53,21 @@ public class LuaService implements AutoCloseable, Closeable {
     }
 
     public LuaRuntime getRuntime() {
-        return runtimeHashMap.get("root");
-    }
-
-    public LuaRuntime getRuntime(String name) {
-        return runtimeHashMap.get(name);
+        return luaRuntime;
     }
 
     public long memory() {
         AtomicLong atomicLong = new AtomicLong();
-        runtimeHashMap.values().forEach(v -> v.memory(atomicLong));
+        luaRuntime.memory(atomicLong);
         return atomicLong.get();
     }
 
     public long size() {
-        return runtimeHashMap.values().stream().mapToLong(LuaRuntime::size).sum();
+        return luaRuntime.size();
     }
 
     @Override public void close() {
-        for (LuaRuntime runtime : runtimeHashMap.values()) {
-            runtime.close();
-        }
+        luaRuntime.close();
     }
 
 }

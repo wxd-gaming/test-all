@@ -72,3 +72,15 @@ gameDebug.debug(function()
 
     print(CheckOpenEventListerTable:triggerResult("0"))
 end)
+
+local tmpList = {}
+
+for i = 1, 10 do
+    table.insert(tmpList, tostring(i))
+end
+
+gameDebug.print(tmpList)
+
+table.remove(tmpList, 5)
+
+gameDebug.print(tmpList)

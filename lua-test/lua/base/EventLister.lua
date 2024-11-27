@@ -3,6 +3,9 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 16:54
 
+require("gameDebug")
+require("table-extend")
+
 ---事件注册
 EventListerTable = {}
 

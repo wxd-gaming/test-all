@@ -18,15 +18,15 @@ public class LuaThreadTest {
     LuaService luaService;
 
     public void createLUAJ() {
-        luaService = LuaService.of(LuaType.LUAJ, false, true, "../lua");
+        luaService = LuaService.of(LuaType.LUAJ, true, "../lua");
     }
 
     public void createLUA54() {
-        luaService = LuaService.of(LuaType.LUA54, false, true, "../lua");
+        luaService = LuaService.of(LuaType.LUA54, true, "../lua");
     }
 
     public void createLUAJit() {
-        luaService = LuaService.of(LuaType.LUAJit, false, true, "../lua");
+        luaService = LuaService.of(LuaType.LUAJit, true, "../lua");
     }
 
     @Test

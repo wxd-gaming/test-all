@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 测试
+ * lua require 方式加载文件
  *
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-10-21 19:21
