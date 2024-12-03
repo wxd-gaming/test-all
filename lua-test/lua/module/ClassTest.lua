@@ -46,6 +46,12 @@ test:Level(2)
 test2:Name("t2")
 test2:Level(2)
 
+local tmp_number = {}
+print("测试 tonumber ", tonumber(tmp_number["t1"]))
+tmp_number["1"] = 1
+tmp_number["1"] = tmp_number["1"] + "2"
+print("测试 tonumber ", tmp_number["1"])
+
 --TestClass.printName2(test)
 --TestClass.printName2(test2)
 --TestClass.printName2({ level = 1 })
