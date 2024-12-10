@@ -3,6 +3,8 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 19:30
 
+require("LuaProfiler")
+
 gameDebug = {}
 gameDebug.__index = gameDebug
 

@@ -12,9 +12,6 @@ TestClass = {
 }
 TestClass.__index = TestClass
 
-test_map = {}
-table.insert(test_map, os.time())
-print(test_map)
 function TestClass:Name(newName)
     if newName ~= nil then
         self["name"] = newName
@@ -46,11 +43,13 @@ test:Level(2)
 test2:Name("t2")
 test2:Level(2)
 
-local tmp_number = {}
-print("测试 tonumber ", tonumber(tmp_number["t1"]))
-tmp_number["1"] = 1
-tmp_number["1"] = tmp_number["1"] + "2"
-print("测试 tonumber ", tmp_number["1"])
+print("230 - 220 * 0.5", 230 - 220 * 0.5)
+
+--local tmp_number = {}
+--print("测试 tonumber ", tonumber(tmp_number["t1"]))
+--tmp_number["1"] = 1
+--tmp_number["1"] = tmp_number["1"] + "2"
+--print("测试 tonumber ", tmp_number["1"])
 
 --TestClass.printName2(test)
 --TestClass.printName2(test2)

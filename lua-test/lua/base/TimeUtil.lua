@@ -269,9 +269,9 @@ function TimeUtil.addDayEnd(sec, change)
     return os.time(date)
 end
 
-print("dd", TimeUtil.timeFormat(1730540988), TimeUtil.monday(1730540988), TimeUtil.timeFormat(TimeUtil.monday(1730540988)))
-print("dd", TimeUtil.timeFormat(1730600988), TimeUtil.monday(1730600988), TimeUtil.timeFormat(TimeUtil.monday(1730600988)))
-
-print("dd", TimeUtil.timeFormat(os.time()), TimeUtil.monday(os.time()), TimeUtil.timeFormat(TimeUtil.monday(os.time())))
-
-print("dd", TimeUtil.addDayEnd(os.time(), 3), TimeUtil.timeFormat(TimeUtil.addDayEnd(os.time(), 3)))
+--print("dd", TimeUtil.timeFormat(1730540988), TimeUtil.monday(1730540988), TimeUtil.timeFormat(TimeUtil.monday(1730540988)))
+--print("dd", TimeUtil.timeFormat(1730600988), TimeUtil.monday(1730600988), TimeUtil.timeFormat(TimeUtil.monday(1730600988)))
+--
+--print("dd", TimeUtil.timeFormat(os.time()), TimeUtil.monday(os.time()), TimeUtil.timeFormat(TimeUtil.monday(os.time())))
+--
+--print("dd", TimeUtil.addDayEnd(os.time(), 3), TimeUtil.timeFormat(TimeUtil.addDayEnd(os.time(), 3)))

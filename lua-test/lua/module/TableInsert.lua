@@ -39,7 +39,7 @@ addData("d33", "我要第一", 1)
 addData("d34", "我要第一", 1)
 addData("d35", "我要第一", 1)
 table.remove(dataList, 1)
-gameDebug.print("table insert ", data, dataList)
+--gameDebug.print("table insert ", data, dataList)
 
 local this = {}
 function this.t1()
@@ -60,27 +60,27 @@ LoginEventListerTable:eventLister("0", "test", function()
     print("test1")
 end, 1)
 
-LoginEventListerTable:triggerEvent("0")
+--LoginEventListerTable:triggerEvent("0")
 
 local a = 10
 print(a < 20 and a or 20)
 
-gameDebug.debug(function()
-    CheckOpenEventListerTable:eventLister("0", "会员礼包检测", function()
-        return "CheckOpenEventListerTable"
-    end)
-
-    print(CheckOpenEventListerTable:triggerResult("0"))
-end)
-
-local tmpList = {}
-
-for i = 1, 10 do
-    table.insert(tmpList, tostring(i))
-end
-
-gameDebug.print(tmpList)
-
-table.remove(tmpList, 5)
-
-gameDebug.print(tmpList)
+--gameDebug.debug(function()
+--    CheckOpenEventListerTable:eventLister("0", "会员礼包检测", function()
+--        return "CheckOpenEventListerTable"
+--    end)
+--
+--    print(CheckOpenEventListerTable:triggerResult("0"))
+--end)
+--
+--local tmpList = {}
+--
+--for i = 1, 10 do
+--    table.insert(tmpList, tostring(i))
+--end
+--
+--gameDebug.print(tmpList)
+--
+--table.remove(tmpList, 5)
+--
+--gameDebug.print(tmpList)

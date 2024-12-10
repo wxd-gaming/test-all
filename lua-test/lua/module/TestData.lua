@@ -6,15 +6,13 @@
 
 require('GameDebug')
 
-print("Current directory: ", gameDebug.getCurrentDirectory())
-print("Current directory: ", paths)
-
-require('ClassTest')
-require('test1')
-
-print(package.path)
-
-t1("ces")
+--print("Current directory: ", gameDebug.getCurrentDirectory())
+--print("Current directory: ", paths)
+--
+--require('ClassTest')
+--require('test1')
+--
+--print(package.path)
 
 TestData = {}
 TestData.__index = TestData
@@ -45,12 +43,11 @@ function TestData.print2(...)
 end
 
 function test33(o1, o2, o3)
-    print("o1", o1, "o2", o2, "o3", o3)
+    gameDebug.print("o1", o1, "o2", o2, "o3", o3)
+end
 
-    print(gameDebug.getFunctionInfo(test33))
-    print(gameDebug.getFunctionInfo(function()
-    end))
-    print(gameDebug.getFunctionInfo(TestData.print2))
+function testActor(actor)
+    gameDebug.print(actor, actor:getUid(), actor:getName(), actor["lv"])
 end
 
 --test33(1, nil, 3)
@@ -61,3 +58,6 @@ end
 --TestData.print2(var)
 --gameDebug.assertPrintTrace(var.level == 33, "TestData.Lv(data, change) 测试失败")
 --gameDebug.assertTrue(var.level == 33, "TestData.Lv(data, change) 测试失败")
+
+
+return TestData

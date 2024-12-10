@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import luajava.ILuaContext;
 import luajava.LuaService;
 import luajava.LuaType;
+import luajava.bean.LuaActor;
 import luajava.luac.LuaFunction;
 import org.junit.After;
 import org.junit.Test;
@@ -64,7 +65,10 @@ public class LuaTest {
                 return value.put(String.valueOf(args[0]), args[1]);
             }
         });
+
         ILuaContext context = luaService.getRuntime().context();
+        context.call(true, "testActor", new LuaActor(7788L, "7788L"));
+
         // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
         // luaService.getRuntime().call("t3", Long.MAX_VALUE);
