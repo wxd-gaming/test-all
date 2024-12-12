@@ -26,12 +26,12 @@ public class LuaActor {
     }
 
     public Long getUid() {
-        System.out.println("cccccccccccccccccccccccccccccccccccccc");
+        System.out.println("java method getUid");
         return uid;
     }
 
     public String getName() {
-        System.out.println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+        System.out.println("java method getName");
         return name;
     }
 

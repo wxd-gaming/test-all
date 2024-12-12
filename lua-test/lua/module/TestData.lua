@@ -50,6 +50,20 @@ function testActor(actor)
     gameDebug.print(actor, actor:getUid(), actor:getName(), actor["lv"])
 end
 
+local t1 = math.floor(1733760001082 / 1000)
+local t2 = math.floor(1733760000002 / 1000)
+local t3 = math.floor(1733759999999 / 1000)
+print(t1)
+print(t2)
+print(t3)
+print(TimeUtil.isSameDay4Millis(1733760000002, 1733760001082))
+
+print(TimeUtil.timeFormat(t1))
+print(TimeUtil.timeFormat(t2))
+print(TimeUtil.timeFormat(t3))
+local tmp = "4" * 5
+print(type(tmp), tmp)
+
 --test33(1, nil, 3)
 
 --local var = TestData.new()
