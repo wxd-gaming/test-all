@@ -13,9 +13,9 @@ import lombok.Setter;
 @Setter
 public class LuaActor {
 
-    private int lv = 1;
-    private Long uid;
-    private String name;
+    public int lv = 99;
+    public Long uid;
+    public String name;
 
     public LuaActor() {
     }

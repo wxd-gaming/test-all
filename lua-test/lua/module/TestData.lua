@@ -47,7 +47,7 @@ function test33(o1, o2, o3)
 end
 
 function testActor(actor)
-    gameDebug.print(actor, actor:getUid(), actor:getName(), actor["lv"])
+    gameDebug.printType(actor, actor:getUid(), actor:getName(), actor["lv"])
 end
 
 local k1 = "dddd"
