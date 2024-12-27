@@ -69,6 +69,9 @@ public class LuaTest {
         ILuaContext context = luaService.getRuntime().context();
         context.call(true, "testActor", new LuaActor(7788L, "7788L"));
 
+        context.call(true,"forTable0");
+        context.call(true,"onInit");
+
         // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
         // luaService.getRuntime().call("t3", Long.MAX_VALUE);

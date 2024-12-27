@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import luajava.LuaRuntime;
 import luajava.LuaType;
+import luajava.luac.func.JLogDebug;
+import luajava.luac.func.JLogError;
+import luajava.luac.func.JLogInfo;
 import luajava.luac.impl.Lua54Impl;
 import luajava.luac.impl.LuaJitImpl;
 import party.iroiro.luajava.Consts;
@@ -55,6 +58,10 @@ public class LuacContext implements luajava.ILuaContext {
         }
         // 加载内置资源
         load(luacRuntime.getLuaFileCache().getExtendList(), 5);
+
+        L.set("ldebug", new JLogDebug());
+        L.set("linfo", new JLogInfo());
+        L.set("lerror", new JLogError());
 
         for (Map.Entry<String, Object> entry : luacRuntime.getGlobals().entrySet()) {
             L.set(entry.getKey(), entry.getValue());

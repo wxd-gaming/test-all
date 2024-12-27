@@ -54,4 +54,8 @@ local k1 = "dddd"
 gameDebug.print({ k1 = "1" })
 gameDebug.print({ [k1] = "1" })
 
+ldebug("debug", 3)
+linfo("info", 3)
+lerror("error", 3)
+
 return TestData

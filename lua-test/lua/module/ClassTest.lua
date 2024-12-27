@@ -27,6 +27,10 @@ function TestClass:Level(newLv)
     return self["level"]
 end
 
+function TestClass.onLogin()
+    print("onLogin")
+end
+
 function TestClass:printName2()
     print("printName2", self)
 end

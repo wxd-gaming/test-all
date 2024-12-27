@@ -46,6 +46,14 @@ function this.t1()
     print("this method test")
 end
 
+function this.onLogin()
+    print("onLogin")
+end
+
+function tableInsert.onLogin()
+    print("onLogin")
+end
+
 LoginEventListerTable:eventLister("0", "test", function()
     print("test")
 end, 999999)

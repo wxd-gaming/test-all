@@ -3,7 +3,7 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 16:54
 
-require("gameDebug")
+require("GameDebug")
 require("table-extend")
 
 ---事件注册
@@ -75,7 +75,7 @@ function EventListerTable:eventLister(eventType, eventName, eventFun, index)
     table.sort(em.MappingList, function(a, b)
         return a.weight < b.weight
     end)
-    --gameDebug.printType(_VERSION, "注册事件:", self, em, eventType, eventName)
+    EventListerTable.print(self.name, "注册事件:", eventType, eventName, funInfo)
 end
 
 --- 触发事件
@@ -85,7 +85,7 @@ function EventListerTable:triggerEvent(eventType, ...)
     local em = self:eventMap(eventType)
     if em then
         for _, v in pairs(em.MappingList) do
-            print(self.name, "触发监听", v.name, v.funInfo)
+            EventListerTable.print(self.name, "触发监听", v.name, v.funInfo)
             local s, e = xpcall(v.fun, debug.traceback, ...)
             gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
         end
@@ -100,7 +100,7 @@ function EventListerTable:triggerResult(eventType, ...)
     if table.notEmpty(em) then
         gameDebug.assertTrue(table.count(em.MappingList) == 1, self.name, "存在多个事件监听", eventType)
         local v = em.MappingList[1]
-        print(self.name, "触发监听", v.name, v.funInfo)
+        EventListerTable.print(self.name, "触发监听", v.name, v.funInfo)
         local s, e = xpcall(v.fun, debug.traceback, ...)
         gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
         if s then
@@ -108,6 +108,15 @@ function EventListerTable:triggerResult(eventType, ...)
         end
     end
     return nil
+end
+
+local offPrint = false
+function EventListerTable.print(...)
+    if offPrint then
+        return
+    end
+    print("out", gameDebug.toStrings(" ", ...))
+    print("EventListerTable.print")
 end
 
 EventListerTable.registerType("默认", "0", "player_db_key", "global_db_key")

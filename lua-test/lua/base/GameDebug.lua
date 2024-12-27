@@ -29,7 +29,7 @@ end
 ---获取函数所在的文件名
 function gameDebug.get_function_file(func)
     local info = debug.getinfo(func, "S")
-    return info.source or "匿名文件"
+    return info.short_src or "匿名文件"
 end
 
 ---获取函数的名字
@@ -43,7 +43,14 @@ end
 function gameDebug.getFunctionInfo(func)
     local debugInfo = debug.getinfo(func)
     --获取不到函数名字，只能又文件名和行数表达了
-    return (debugInfo.source or "匿名文件") .. ":" .. tostring(debugInfo.linedefined)
+    return (debugInfo.short_src or "匿名文件") .. ":" .. tostring(debugInfo.linedefined)
+end
+
+---获取函数所在文件行号
+function gameDebug.getFunctionLineNumber(func)
+    local debugInfo = debug.getinfo(func)
+    --获取不到函数名字，只能又文件名和行数表达了
+    return debugInfo.linedefined or -1
 end
 
 --- 把 table 数据转化成json字符串

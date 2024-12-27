@@ -5,7 +5,7 @@
 ---
 
 function t3(str)
-    local a =3 & 0xFF
+    local a = 3 & 0xFF
     print(a)
     local num = 9199999999999999989
     print("lua long - " .. tostring(num))
@@ -23,6 +23,10 @@ end
 
 function argsTest(...)
     Assert.assertTrue(1 == 2, "参数异常", ...)
+end
+
+function onLogin()
+    print("onLogin")
 end
 
 function ret(obj)
