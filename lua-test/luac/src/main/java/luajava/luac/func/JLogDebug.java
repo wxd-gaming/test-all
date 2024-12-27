@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @version: 2024-12-26 16:00
  **/
 @Slf4j
-public class JLogDebug implements LuaFunction {
+public class JLogDebug extends LuaFunction {
 
     @Override public Object doAction(Lua L, Object[] args) {
         if (log.isDebugEnabled())

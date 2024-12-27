@@ -6,8 +6,6 @@ import luajava.LuaService;
 import luajava.LuaType;
 import luajava.bean.LuaActor;
 import luajava.luac.LuaFunction;
-import org.junit.After;
-import org.junit.Test;
 import party.iroiro.luajava.Lua;
 
 import java.util.HashMap;
@@ -19,40 +17,11 @@ import java.util.HashMap;
  * @version: 2024-10-21 19:21
  **/
 @Slf4j
-public class LuaTest {
-
-    LuaService luaService;
-
-    public void createLUA54() {
-        luaService = LuaService.of(LuaType.LUA54, true, "../lua");
-    }
-
-    public void createLUAJit() {
-        luaService = LuaService.of(LuaType.LUAJit, true, "../lua");
-    }
-
-    public void createLUAJ() {
-        luaService = LuaService.of(LuaType.LUAJ, true, "../lua");
-    }
+public class LuaTest2 {
 
 
-    @Test
-    public void tLUAJ() {
-        createLUAJ();
-    }
-
-    @Test
-    public void tLUAJit() {
-        createLUAJit();
-    }
-
-    @Test
-    public void tLUA54() {
-        createLUA54();
-    }
-
-    @After
-    public void after() throws InterruptedException {
+    public static void main(String[] args) throws Exception {
+        LuaService luaService = LuaService.of(LuaType.LUA54, true, "lua");
         HashMap<String, Object> value = new HashMap<>();
         luaService.getRuntime().getGlobals().put("getdata", new LuaFunction() {
             @Override public Object doAction(Lua L, Object[] args) {
@@ -68,9 +37,11 @@ public class LuaTest {
 
         ILuaContext context = luaService.getRuntime().context();
         context.call(true, "testActor", new LuaActor(7788L, "7788L"));
-
-        context.call(true,"forTable0");
-        context.call(true,"onInit");
+        // while (true){
+        //     Thread.sleep(3000);
+        //     context.call(true, "forTable0");
+        // }
+        // context.call(true, "onInit");
 
         // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
@@ -79,7 +50,8 @@ public class LuaTest {
         // luaService.getRuntime().call("printData");
 
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
-        Thread.sleep(500000);
+         Thread.sleep(500);
     }
+
 
 }

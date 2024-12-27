@@ -15,6 +15,8 @@ local __Recharge_Type = {}
 local __Recharge_PlayerDbKey = {}
 local __Recharge_GlobalDbKey = {}
 
+local this = {}
+
 ---注册全局key
 function EventListerTable.registerType(name, type, playerDbKey, globalDbKey)
     -- gameDebug.assertTrue((playerDbKey ~= nil) or (globalDbKey ~= nil), "充值玩家数据库key或充值全局数据库key不能为空")
@@ -40,7 +42,7 @@ end
 function EventListerTable.new(name, max)
     local var = setmetatable({}, EventListerTable)
     var.name = name
-    var.maxCount = max
+    var.maxCount = max or 9999
     return var
 end
 --- 获取事件容器
@@ -63,6 +65,7 @@ end
 ---@param eventFun function 事件回调函数
 ---@param index number 优先级，越小越靠前，默认9999
 function EventListerTable:eventLister(eventType, eventName, eventFun, index)
+    gameDebug.assertNil(self, "事件监听器为空 请使用引用方式调用")
     local em = self:eventMap(eventType, eventName)
     if em.maxCount and em.maxCount <= table.count(em.MappingList) then
         gameDebug.error(self.name, "事件类型", eventType, "数量超过限制", em.maxCount)
@@ -75,7 +78,7 @@ function EventListerTable:eventLister(eventType, eventName, eventFun, index)
     table.sort(em.MappingList, function(a, b)
         return a.weight < b.weight
     end)
-    EventListerTable.print(self.name, "注册事件:", eventType, eventName, funInfo)
+    EventListerTable.print(self.name or "未知", "注册事件:", eventType, eventName, funInfo)
 end
 
 --- 触发事件
@@ -85,9 +88,9 @@ function EventListerTable:triggerEvent(eventType, ...)
     local em = self:eventMap(eventType)
     if em then
         for _, v in pairs(em.MappingList) do
-            EventListerTable.print(self.name, "触发监听", v.name, v.funInfo)
+            EventListerTable.print(self.name, "触发监听", v.name, "文件：", v.funInfo)
             local s, e = xpcall(v.fun, debug.traceback, ...)
-            gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
+            gameDebug.assertPrint(s, self.name, "触发事件", v.name, "文件：", v.funInfo, "调用异常", ..., e)
         end
     end
 end
@@ -100,9 +103,9 @@ function EventListerTable:triggerResult(eventType, ...)
     if table.notEmpty(em) then
         gameDebug.assertTrue(table.count(em.MappingList) == 1, self.name, "存在多个事件监听", eventType)
         local v = em.MappingList[1]
-        EventListerTable.print(self.name, "触发监听", v.name, v.funInfo)
+        EventListerTable.print(self.name, "触发监听", v.name, "文件：", v.funInfo)
         local s, e = xpcall(v.fun, debug.traceback, ...)
-        gameDebug.assertPrint(s, "触发事件", v.name, v.funInfo, "调用异常", ..., e)
+        gameDebug.assertPrint(s, self.name, "触发事件", v.name, "文件：", v.funInfo, "调用异常", ..., e)
         if s then
             return e
         end
@@ -110,13 +113,12 @@ function EventListerTable:triggerResult(eventType, ...)
     return nil
 end
 
-local offPrint = false
+local printOff = false
 function EventListerTable.print(...)
-    if offPrint then
+    if printOff then
         return
     end
-    print("out", gameDebug.toStrings(" ", ...))
-    print("EventListerTable.print")
+    print(gameDebug.toStrings(" ", ...))
 end
 
 EventListerTable.registerType("默认", "0", "player_db_key", "global_db_key")
@@ -131,5 +133,9 @@ LoginEventListerTable = EventListerTable.new("登录")
 LevelUpEventListerTable = EventListerTable.new("等级提升触发")
 --- 凌晨触发执行
 ZeroEventListerTable = EventListerTable.new("模块凌晨更新")
-
-CheckOpenEventListerTable = EventListerTable.new("检查模块是否开启", 1)
+--- 检查功能是否有效
+CheckValidEventListerTable = EventListerTable.new("检查模块是否开启", 1)
+---小红点
+RedPointEventListerTable = EventListerTable.new("红点事件")
+--- 运营活动前端通信信息路由监听
+OperationalActivitiesMessageEventListerTable = EventListerTable.new("运营活动消息请求路由")

@@ -1,6 +1,7 @@
 package luajava.luac;
 
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import party.iroiro.luajava.JFunction;
 import party.iroiro.luajava.Lua;
 import party.iroiro.luajava.value.LuaValue;
@@ -11,9 +12,10 @@ import party.iroiro.luajava.value.LuaValue;
  * @author: wxd-gaming(無心道, 15388152619)
  * @version: 2024-08-26 11:01
  */
-public interface LuaFunction extends JFunction {
+@Slf4j
+public abstract class LuaFunction implements JFunction {
 
-    @Override default int __call(Lua L) {
+    @Override public int __call(Lua L) {
         Object[] _args = null;
         try {
             int oldTop = L.getTop();
@@ -34,10 +36,11 @@ public interface LuaFunction extends JFunction {
             try {
                 jsonString = JSON.toJSONString(_args);
             } catch (Exception ignore) {}
+            log.error("call lua function error " + jsonString, e);
             throw new RuntimeException("call lua function error " + jsonString, e);
         }
     }
 
-    Object doAction(Lua L, Object[] args);
+    protected abstract Object doAction(Lua L, Object[] args);
 
 }

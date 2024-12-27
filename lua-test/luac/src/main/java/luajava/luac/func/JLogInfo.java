@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * @version: 2024-12-26 16:00
  **/
 @Slf4j
-public class JLogInfo implements LuaFunction {
+public class JLogInfo extends LuaFunction {
 
     @Override public Object doAction(Lua L, Object[] args) {
         log.info("{}", Arrays.stream(args).map(String::valueOf).collect(Collectors.joining(" ")));

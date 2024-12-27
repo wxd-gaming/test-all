@@ -9,7 +9,7 @@ require("LuaScan")
 require("EventLister")
 
 local this = {}
-local LoginEventListerTable = EventListerTable:new("测试扫描", 9999)
+local LoginEventListerTable = EventListerTable.new("测试扫描", 9999)
 
 function onStart()
 

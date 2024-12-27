@@ -54,19 +54,19 @@ function tableInsert.onLogin()
     print("onLogin")
 end
 
-LoginEventListerTable:eventLister("0", "test", function()
-    print("test")
-end, 999999)
-
-LoginEventListerTable:eventLister("0", "test", this.t1)
-
-LoginEventListerTable:eventLister("0", "test", function()
-    print("test100")
-end, 100)
-
-LoginEventListerTable:eventLister("0", "test", function()
-    print("test1")
-end, 1)
+--LoginEventListerTable:eventLister("0", "test", function()
+--    print("test")
+--end, 999999)
+--
+--LoginEventListerTable:eventLister("0", "test", this.t1)
+--
+--LoginEventListerTable:eventLister("0", "test", function()
+--    print("test100")
+--end, 100)
+--
+--LoginEventListerTable:eventLister("0", "test", function()
+--    print("test1")
+--end, 1)
 
 --LoginEventListerTable:triggerEvent("0")
 

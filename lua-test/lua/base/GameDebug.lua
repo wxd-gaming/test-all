@@ -3,8 +3,6 @@
 --- Created by 無心道(15388152619).
 --- DateTime: 2024/10/31 19:30
 
-require("LuaProfiler")
-
 gameDebug = {}
 gameDebug.__index = gameDebug
 
@@ -28,14 +26,13 @@ end
 
 ---获取函数所在的文件名
 function gameDebug.get_function_file(func)
-    local info = debug.getinfo(func, "S")
+    local info = debug.getinfo(func)
     return info.short_src or "匿名文件"
 end
 
 ---获取函数的名字
 function gameDebug.get_function_name(func)
     local info = debug.getinfo(func)
-    gameDebug.print(info)
     return info.name or "匿名函数"
 end
 
@@ -265,40 +262,16 @@ function gameDebug.print0(isTraceback, appendYinhao, appendType, ...)
     print(printString)
 end
 
---- 辅助调试
---- @param fun function 函数
+--- 辅助调试 不会抛出异常，执行异常会返回 nil
 --- @param ... any 如果调用 函数 异常后打印你需要显示的参数
 function gameDebug.debug(fun, ...)
-    gameDebug.debug0(fun, true, false, ...)
-end
-
---- 辅助调试 输出变量类型
---- @param fun function 函数
---- @param ... any 如果调用 函数 异常后打印你需要显示的参数
-function gameDebug.debugType(fun, ...)
-    gameDebug.debug0(fun, true, true, ...)
-end
-
-function gameDebug.debug0(fun, appendYinhao, appendType, ...)
-    local f_success, f_error = xpcall(fun, debug.traceback, ...)
-    if not f_success then
-        local printString = ""
-        local tmp = { ... }
-        local s, e = pcall(function()
-            for i, v in pairs(tmp) do
-                if not (printString == nil or printString == "") then
-                    printString = printString .. ",\n"
-                end
-                printString = printString .. "  " .. gameDebug.toString(v, appendYinhao, appendType)
-            end
-        end)
-        print("===================参数======================\n"
-                      .. "[\n" .. printString .. "\n]" ..
-                      "\n===================堆栈=======================\n"
-                      .. f_error ..
-                      "\n===================结束=======================\n"
-        )
+    local s, e = xpcall(fun, debug.traceback, ...)
+    if not s then
+        local params = gameDebug.toStrings(" ", ...)
+        print("执行异常", params, "\n", e)--把异常信息反馈java里面
+        return nil
     end
+    return e;
 end
 
 --- 断言对象为nil
@@ -316,14 +289,14 @@ function gameDebug.assertEquals(o1, o2, ...)
     gameDebug.assertTrue(o1 ~= o2, ...)
 end
 
---- 断言对象为nil
+--- 断言对象为 nil 触发异常
 function gameDebug.assertNil(obj, ...)
     if obj == nil then
         gameDebug.error(...)
     end
 end
 
---- 断言对象为nil
+--- 断言对象不是nil 触发异常
 function gameDebug.assertNotNil(obj, ...)
     if obj ~= nil then
         gameDebug.error(...)
@@ -335,7 +308,7 @@ end
 function gameDebug.assertPrint(b, ...)
     if not b then
         local msg = gameDebug.toStrings0(false, false, " ", ...)
-        _LUA_Print(msg)
+        print(msg)--反馈的java里面
     end
 end
 
@@ -345,7 +318,7 @@ function gameDebug.assertPrintTrace(b, ...)
     if not b then
         local msg = gameDebug.toStrings0(false, false, " ", ...)
         local traceback = debug.traceback(msg)
-        _LUA_Print(traceback)
+        print(traceback)--反馈的java里面
     end
 end
 
@@ -353,7 +326,5 @@ end
 function gameDebug.error(...)
     local var = gameDebug.toStrings0(false, false, " ", ...)
     var = debug.traceback(var)
-    _LUA_Error(var)
+    error(var)
 end
-
-return gameDebug

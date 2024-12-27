@@ -35,6 +35,8 @@ public class LuaUtils {
             return map;
         } else if (luaValue.type() == Lua.LuaType.NONE || luaValue.type() == Lua.LuaType.NIL) {
             return null;
+        } else if (luaValue.type() == Lua.LuaType.FUNCTION) {
+            return "lua method";
         }
         return luaValue.toJavaObject();
     }
