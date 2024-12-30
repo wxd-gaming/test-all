@@ -27,8 +27,13 @@ function TestClass:Level(newLv)
     return self["level"]
 end
 
-function TestClass.onLogin()
-    print("onLogin")
+function TestClass.onLogin(player)
+    print("TestClass onLogin", player:toString())
+    error("test")
+end
+
+function TestClass.onEnterMap(map, player)
+    print("TestClass onEnterMap", map:toString(), player:toString())
 end
 
 function TestClass:printName2()

@@ -37,6 +37,14 @@ function TestData.Lv(data, change)
     return data.level or 0
 end
 
+function TestData.onLogin(player)
+    print("TestData onLogin", player:toString())
+end
+
+function TestData.onEnterMap(map, player)
+    print("TestData onEnterMap", map:toString(), player:toString())
+end
+
 function TestData.print2(...)
     local string = gameDebug.toStrings0(false, false, " ", "dd", ...)
     print(string)

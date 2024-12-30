@@ -5,28 +5,22 @@
 ---
 Bootstrap = {}
 
-require("LuaScan")
-require("EventLister")
-
-local this = {}
-local LoginEventListerTable = EventListerTable.new("测试扫描", 9999)
-
 function onStart()
 
 end
 
-function Bootstrap.onLogin(player)
-    print("onLogin", player)
-end
-
-function Bootstrap.onInit()
-    LoginEventListerTable:eventLister("0", "onLogin", Bootstrap.onLogin)
-end
-
 function onInit()
-    local funs = LuaScan.findTableFunc("onInit")
+    local funs = LuaScan.findTwoFunc("onInit")
     for i, f in pairs(funs) do
+        LuaScan.print("扫描初始化调用：", f.info)
         f.fun()
-        --local s, e = xpcall(load(f.fun), debug.traceback)
     end
+end
+
+function onLogin(player)
+    LuaScan.triggerTwoFunc("onLogin", player)
+end
+
+function onEnterMap(...)
+    LuaScan.triggerTwoFunc("onEnterMap", ...)
 end

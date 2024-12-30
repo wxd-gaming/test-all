@@ -25,10 +25,6 @@ function argsTest(...)
     Assert.assertTrue(1 == 2, "参数异常", ...)
 end
 
-function onLogin()
-    print("onLogin")
-end
-
 function ret(obj)
     local success, ret = pcall(function()
         return "dd - " .. obj

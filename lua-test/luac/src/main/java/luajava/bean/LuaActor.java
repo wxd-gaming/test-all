@@ -36,6 +36,10 @@ public class LuaActor {
     }
 
     @Override public String toString() {
-        return uid.toString();
+        return "LuaActor{" +
+               "lv=" + lv +
+               ", uid=" + uid +
+               ", name='" + name + '\'' +
+               '}';
     }
 }

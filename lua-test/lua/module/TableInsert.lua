@@ -50,8 +50,8 @@ function this.onLogin()
     print("onLogin")
 end
 
-function tableInsert.onLogin()
-    print("onLogin")
+function tableInsert.onLogin(player)
+    print("onLogin", player:toString())
 end
 
 --LoginEventListerTable:eventLister("0", "test", function()

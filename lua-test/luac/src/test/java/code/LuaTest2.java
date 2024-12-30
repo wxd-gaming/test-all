@@ -5,6 +5,7 @@ import luajava.ILuaContext;
 import luajava.LuaService;
 import luajava.LuaType;
 import luajava.bean.LuaActor;
+import luajava.bean.LuaMap;
 import luajava.luac.LuaFunction;
 import party.iroiro.luajava.Lua;
 
@@ -39,9 +40,11 @@ public class LuaTest2 {
         context.call(true, "testActor", new LuaActor(7788L, "7788L"));
         // while (true){
         //     Thread.sleep(3000);
-        //     context.call(true, "forTable0");
+        context.call(true, "forTable0");
         // }
-        // context.call(true, "onInit");
+        context.call(true, "onInit");
+        context.call(true, "onLogin", new LuaActor(7788L, "7788L"));
+        context.call(true, "onEnterMap", new LuaMap(9527, 9527), new LuaActor(7788L, "7788L"));
 
         // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
@@ -50,7 +53,7 @@ public class LuaTest2 {
         // luaService.getRuntime().call("printData");
 
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
-         Thread.sleep(500);
+        Thread.sleep(500);
     }
 
 
