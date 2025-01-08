@@ -5,11 +5,13 @@ import luajava.ILuaContext;
 import luajava.LuaService;
 import luajava.LuaType;
 import luajava.bean.LuaActor;
+import luajava.bean.LuaGmVar;
 import luajava.bean.LuaMap;
 import luajava.luac.LuaFunction;
 import party.iroiro.luajava.Lua;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 测试
@@ -24,6 +26,7 @@ public class LuaTest2 {
     public static void main(String[] args) throws Exception {
         LuaService luaService = LuaService.of(LuaType.LUA54, true, "lua");
         HashMap<String, Object> value = new HashMap<>();
+        LuaGmVar localVar = new LuaGmVar();
         luaService.getRuntime().getGlobals().put("getdata", new LuaFunction() {
             @Override public Object doAction(Lua L, Object[] args) {
                 return value.get(String.valueOf(args[0]));
@@ -33,6 +36,32 @@ public class LuaTest2 {
         luaService.getRuntime().getGlobals().put("setdata", new LuaFunction() {
             @Override public Object doAction(Lua L, Object[] args) {
                 return value.put(String.valueOf(args[0]), args[1]);
+            }
+        });
+
+        luaService.getRuntime().getGlobals().put("getvardata", new LuaFunction() {
+            @Override public Object doAction(Lua L, Object[] args) {
+                if (args.length == 2)
+                    return localVar.getVar(String.valueOf(args[0]), args[1]);
+                return localVar.getVar(String.valueOf(args[0]));
+            }
+        });
+
+        luaService.getRuntime().getGlobals().put("setvardata", new LuaFunction() {
+            @Override public Object doAction(Lua L, Object[] args) {
+                if (args.length == 2) {
+                    Object arg = args[1];
+                    if (arg instanceof Map) {
+                        localVar.setVar(String.valueOf(args[0]), (Map) arg);
+                    } else if (arg instanceof Number || arg instanceof String) {
+                        localVar.removeVar(String.valueOf(args[0]), arg);
+                    }
+                } else if (args.length == 1) {
+                    localVar.removeVar(String.valueOf(args[0]));
+                } else {
+                    localVar.setVar(String.valueOf(args[0]), args[1], args[2]);
+                }
+                return null;
             }
         });
 
