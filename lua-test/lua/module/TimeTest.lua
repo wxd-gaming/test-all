@@ -4,7 +4,9 @@
 --- DateTime: 2024/12/27 16:32
 ---
 
-function diffTimeDay()
+DiffTimeDayTest = {}
+
+function DiffTimeDayTest.diffTimeDay()
     local nowSec = os.time()
     local openServerTime = 1730390400
     print(TimeUtil.timeFormat(openServerTime))
@@ -34,10 +36,11 @@ function diffTimeDay()
     return startDayTime, endDayTime, serverOpenDays <= resetDay
 end
 
-diffTimeDay()
+function DiffTimeDayTest.onInit()
+    DiffTimeDayTest.diffTimeDay()
 
-local tableString = "{key1 = 'value1', key2 = 'value2'}"
-local t = load("return " .. tableString)()
-
-gameDebug.print("load string", type(t), t)
-
+    local tableString = "{key1 = 'value1', key2 = 'value2'}"
+    local t = load("return " .. tableString)()
+    --字符串通过load形式加载成table
+    gameDebug.print("load string", type(t), t)
+end
