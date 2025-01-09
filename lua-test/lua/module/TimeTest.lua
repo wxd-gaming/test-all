@@ -35,3 +35,9 @@ function diffTimeDay()
 end
 
 diffTimeDay()
+
+local tableString = "{key1 = 'value1', key2 = 'value2'}"
+local t = load("return " .. tableString)()
+
+gameDebug.print("load string", type(t), t)
+
