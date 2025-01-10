@@ -109,7 +109,7 @@ public class LuacContext implements luajava.ILuaContext {
         return findLuaValue(name) != null;
     }
 
-    public LuaValue findLuaValue(String name) {
+    @Override public LuaValue findLuaValue(String name) {
         return funcCache.computeIfAbsent(name, f -> {
             LuaValue value = L.get(name);
             return value.type() == Lua.LuaType.NIL || value.type() == Lua.LuaType.NONE ? null : value;

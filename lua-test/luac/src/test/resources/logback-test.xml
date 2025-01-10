@@ -69,7 +69,7 @@
         <appender-ref ref="file_error"/>
         <appender-ref ref="file_info"/>
         <!-- 生产环境将请stdout,testfile去掉 -->
-        <appender-ref ref="console"/>
+<!--        <appender-ref ref="console"/>-->
     </root>
 
 </configuration>

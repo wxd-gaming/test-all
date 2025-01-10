@@ -44,6 +44,8 @@ public interface ILuaContext extends Closeable, AutoCloseable {
 
     boolean has(String name);
 
+    Object findLuaValue(String name);
+
     Object call(boolean xpcall, String key, Object... args);
 
     void memory(AtomicLong memory);
