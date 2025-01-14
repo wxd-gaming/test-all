@@ -12,7 +12,6 @@
     <artifactId>gvm.test.a</artifactId>
 
     <build>
-        <finalName>a</finalName>
     </build>
 
 </project>

@@ -102,17 +102,17 @@
     <build>
         <pluginManagement>
             <plugins>
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                    <version>2.22.2</version>-->
-<!--                    <configuration>-->
-<!--                        <skip>true</skip>-->
-<!--                        <testFailureIgnore>true</testFailureIgnore>-->
-<!--                        &lt;!&ndash; 定义文件编码，否则nacos配置文件中存在中文会报错 &ndash;&gt;-->
-<!--                        <argLine>-Dfile.encoding=UTF-8</argLine>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
+                <!--                <plugin>-->
+                <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+                <!--                    <artifactId>maven-surefire-plugin</artifactId>-->
+                <!--                    <version>2.22.2</version>-->
+                <!--                    <configuration>-->
+                <!--                        <skip>true</skip>-->
+                <!--                        <testFailureIgnore>true</testFailureIgnore>-->
+                <!--                        &lt;!&ndash; 定义文件编码，否则nacos配置文件中存在中文会报错 &ndash;&gt;-->
+                <!--                        <argLine>-Dfile.encoding=UTF-8</argLine>-->
+                <!--                    </configuration>-->
+                <!--                </plugin>-->
                 <plugin>
                     <groupId>org.graalvm.buildtools</groupId>
                     <artifactId>native-maven-plugin</artifactId>
@@ -199,9 +199,9 @@
                     <configuration>
                         <password>#</password><!--加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码-->
                         <packages>gvm</packages>
-                        <!--                    <cfgfiles>application.yml</cfgfiles>-->
-                        <!--                    <excludes>org.spring</excludes>-->
-                        <!--                    <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>-->
+                        <cfgfiles>application.yml</cfgfiles>
+                        <excludes>org.spring</excludes>
+                        <libjars>lib/a-1.0-SNAPSHOT.jar,b.jar</libjars>
                     </configuration>
                     <executions>
                         <execution>
@@ -263,8 +263,6 @@
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                                 <useUniqueVersions>false</useUniqueVersions>
-                                <!-- 加载主要运行类 -->
-                                <mainClass>wxdgaming.boot.convert.MainForm</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
@@ -281,10 +279,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--            </plugin>-->
             <plugin>
                 <!-- 指定 JDK 版本 -->
                 <groupId>org.apache.maven.plugins</groupId>

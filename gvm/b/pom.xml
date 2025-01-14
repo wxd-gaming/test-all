@@ -20,8 +20,5 @@
     </dependencies>
 
     <build>
-        <finalName>b</finalName>
-        <plugins>
-        </plugins>
     </build>
 </project>
