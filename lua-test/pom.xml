@@ -16,6 +16,7 @@
         <module>luajit</module>
         <module>luak</module>
         <module>monitor</module>
+        <module>yaml-test</module>
     </modules>
 
     <properties>
