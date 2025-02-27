@@ -45,15 +45,15 @@ function ddd()
 end
 
 function TestClass.onInit()
-    local test = TestClass.new()
-    local test2 = TestClass.new()
-    test:Name("t1")
-    test:Level(2)
-
-    test2:Name("t2")
-    test2:Level(2)
-
-    print("230 - 220 * 0.5", 230 - 220 * 0.5)
+    --local test = TestClass.new()
+    --local test2 = TestClass.new()
+    --test:Name("t1")
+    --test:Level(2)
+    --
+    --test2:Name("t2")
+    --test2:Level(2)
+    --
+    --print("230 - 220 * 0.5", 230 - 220 * 0.5)
 end
 
 --local tmp_number = {}

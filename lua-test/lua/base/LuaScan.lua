@@ -13,17 +13,17 @@ local twoFunCache = {}
 function forTable0()
     local tables = this.GetTable()
     for fileName, v in pairs(tables) do
-        print("所包含的文件", fileName)
+        LuaScan.print("所包含的文件", fileName)
     end
-    print("---------------一级事件-----------------")
-    local onLoginTable = LuaScan.findTopFunc("onLogin")
-    for i, v in pairs(onLoginTable) do
-        print(i, this.toString(v))
+    LuaScan.print("---------------一级事件-----------------")
+    local topLoginTable = LuaScan.findTopFunc("onLogin")
+    for i, v in pairs(topLoginTable) do
+        LuaScan.print(i, this.toString(v))
     end
-    print("---------------二级事件-----------------")
-    local onLoginTable = LuaScan.findTwoFunc("onLogin")
-    for i, v in pairs(onLoginTable) do
-        print(i, this.toString(v))
+    LuaScan.print("---------------二级事件-----------------")
+    local twoLoginTable = LuaScan.findTwoFunc("onLogin")
+    for i, v in pairs(twoLoginTable) do
+        LuaScan.print(i, this.toString(v))
     end
 end
 
@@ -137,7 +137,7 @@ function this.getFunctionLineNumber(func)
     return debugInfo.linedefined or -1
 end
 
-local offPrint = false
+local offPrint = true
 function LuaScan.print(...)
     if offPrint then
         return

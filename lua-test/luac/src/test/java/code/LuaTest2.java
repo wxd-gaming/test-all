@@ -1,5 +1,6 @@
 package code;
 
+import lang.SeedRandom;
 import lombok.extern.slf4j.Slf4j;
 import luajava.ILuaContext;
 import luajava.LuaService;
@@ -14,11 +15,9 @@ import party.iroiro.luajava.Lua;
 
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * 测试
@@ -158,18 +157,19 @@ public class LuaTest2 {
 
     public static void main(String[] args) throws Exception {
 
-        before();
+        // before();
 
         LuaService luaService = LuaService.of(LuaType.LUA54, true, "lua");
         HashMap<String, Object> value = new HashMap<>();
         LuaGmVar localVar = new LuaGmVar();
-
-        luaService.getRuntime().getGlobals().put("print", new LuaFunction() {
-            @Override public Object doAction(Lua L, Object[] args) {
-                System.out.println(Arrays.stream(args).map(v -> String.valueOf(v)).collect(Collectors.joining(" ")));
-                return null;
-            }
-        });
+        //
+        // luaService.getRuntime().getGlobals().put("print", new LuaFunction() {
+        //     @Override public Object doAction(Lua L, Object[] targs) {
+        //         String collect = Arrays.stream(targs).map(v -> String.valueOf(v)).collect(Collectors.joining(" "));
+        //         System.out.println(collect);
+        //         return null;
+        //     }
+        // });
 
         luaService.getRuntime().getGlobals().put("getdata", new LuaFunction() {
             @Override public Object doAction(Lua L, Object[] args) {
@@ -216,9 +216,13 @@ public class LuaTest2 {
         context.call(true, "forTable0");
         // }
         context.call(true, "onInit");
-        context.call(true, "onLogin", new LuaActor(7788L, "7788L"));
-        context.call(true, "onEnterMap", new LuaMap(9527, 9527), new LuaActor(7788L, "7788L"));
-
+        // context.call(true, "onLogin", new LuaActor(7788L, "7788L"));
+        // context.call(true, "onEnterMap", new LuaMap(9527, 9527), new LuaActor(7788L, "7788L"));
+        SeedRandom seedRandom = new SeedRandom(9527003456L);
+        System.out.println("java SeedRandom.onInit");
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i + " " + seedRandom.nextInt(1, 1000));
+        }
         // luaService.getRuntime().call("printData");
         // luaService.getRuntime().call("showmemory", Thread.currentThread().getName());
         // luaService.getRuntime().call("t3", Long.MAX_VALUE);

@@ -59,21 +59,21 @@ function testActor(actor)
 end
 
 function TestData.onInit()
-    local k1 = "dddd"
-    gameDebug.print({ k1 = "1" })
-    gameDebug.print({ [k1] = "1" })
+    --local k1 = "dddd"
+    --gameDebug.print({ k1 = "1" })
+    --gameDebug.print({ [k1] = "1" })
 
-    ldebug("debug", 3)
-    linfo("info", 3)
-    lerror("error", 3)
+    --ldebug("debug", 3)
+    --linfo("info", 3)
+    --lerror("error", 3)
 
-    gameDebug.printType("getvardata", getvardata("key"))
-    setvardata("key", 1, "1")
-    gameDebug.printType("getvardata", getvardata("key", 1))
-    setvardata("key", "1", "1")
-    gameDebug.printType("getvardata", getvardata("key"))
-    setvardata("key", { ["333"] = 1, ["444"] = 2 })
-    gameDebug.printType("getvardata", getvardata("key"))
+    --gameDebug.printType("getvardata", getvardata("key"))
+    --setvardata("key", 1, "1")
+    --gameDebug.printType("getvardata", getvardata("key", 1))
+    --setvardata("key", "1", "1")
+    --gameDebug.printType("getvardata", getvardata("key"))
+    --setvardata("key", { ["333"] = 1, ["444"] = 2 })
+    --gameDebug.printType("getvardata", getvardata("key"))
 end
 
 return TestData

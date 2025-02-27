@@ -37,10 +37,10 @@ function DiffTimeDayTest.diffTimeDay()
 end
 
 function DiffTimeDayTest.onInit()
-    DiffTimeDayTest.diffTimeDay()
-
-    local tableString = "{key1 = 'value1', key2 = 'value2'}"
-    local t = load("return " .. tableString)()
-    --字符串通过load形式加载成table
-    gameDebug.print("load string", type(t), t)
+    --DiffTimeDayTest.diffTimeDay()
+    --
+    --local tableString = "{key1 = 'value1', key2 = 'value2'}"
+    --local t = load("return " .. tableString)()
+    ----字符串通过load形式加载成table
+    --gameDebug.print("load string", type(t), t)
 end
